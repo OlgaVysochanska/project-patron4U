@@ -1,0 +1,18 @@
+.paw {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 999;
+  width: fit-content;
+  animation-name: spin;
+  animation-delay: 0s;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
