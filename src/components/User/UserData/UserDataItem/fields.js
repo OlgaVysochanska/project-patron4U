@@ -3,22 +3,35 @@ const fields = {
       type: 'text',
       name: 'name',
       required: true,
-      label: 'User name',
+      label: 'Name:',
       placeholder: 'User name',
     },
     email: {
       type: 'email',
       name: 'email',
       required: true,
-      label: 'User email',
+      label: 'Email:',
       placeholder: 'User email',
     },
-    password: {
-      type: 'password',
-      name: 'password',
+    birthday: {
+      type: 'birthday',
+      name: 'birthday',
       required: true,
-      label: 'User password',
-      placeholder: 'User password',
+      label: 'Birthday',
+      placeholder: 'User birthday',
+    },
+    phone: {
+      type: 'phone',
+      name: 'phone',
+      required: true,
+      label: 'Phone',
+      placeholder: 'User phone',
+    },  city: {
+      type: 'city',
+      name: 'city',
+      required: true,
+      label: 'city',
+      placeholder: 'User city',
     },
   };
   
