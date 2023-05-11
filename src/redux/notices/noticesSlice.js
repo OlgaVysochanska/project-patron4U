@@ -1,6 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { fetchAllPets, fetchAddPet, fetchDeletePet } from './petsOperations';
+import {
+  fetchAllNotices,
+  fetchAddNotice,
+  fetchDeleteNotice,
+} from './noticesOperations';
 
 const initialState = {
   items: [],
@@ -8,46 +12,46 @@ const initialState = {
   error: null,
 };
 
-const petsSlice = createSlice({
-  name: 'pets',
+const noticesSlice = createSlice({
+  name: 'notices',
   initialState,
   extraReducers: builder => {
     builder
-      .addCase(fetchAllPets.pending, store => {
+      .addCase(fetchAllNotices.pending, store => {
         store.loading = true;
       })
-      .addCase(fetchAllPets.fulfilled, (store, { payload }) => {
+      .addCase(fetchAllNotices.fulfilled, (store, { payload }) => {
         store.loading = false;
         store.items = payload;
       })
-      .addCase(fetchAllPets.rejected, (store, { payload }) => {
+      .addCase(fetchAllNotices.rejected, (store, { payload }) => {
         store.loading = false;
         store.error = payload;
       })
-      .addCase(fetchAddPet.pending, store => {
+      .addCase(fetchAddNotice.pending, store => {
         store.loading = true;
       })
-      .addCase(fetchAddPet.fulfilled, (store, { payload }) => {
+      .addCase(fetchAddNotice.fulfilled, (store, { payload }) => {
         store.loading = false;
         store.items.push(payload);
       })
-      .addCase(fetchAddPet.rejected, (store, { payload }) => {
+      .addCase(fetchAddNotice.rejected, (store, { payload }) => {
         store.loading = false;
         store.error = payload;
       })
-      .addCase(fetchDeletePet.pending, store => {
+      .addCase(fetchDeleteNotice.pending, store => {
         store.loading = true;
       })
-      .addCase(fetchDeletePet.fulfilled, (store, { payload }) => {
+      .addCase(fetchDeleteNotice.fulfilled, (store, { payload }) => {
         store.loading = false;
         const index = store.items.findIndex(item => item.id === payload);
         store.items.splice(index, 1);
       })
-      .addCase(fetchDeletePet.rejected, (store, { payload }) => {
+      .addCase(fetchDeleteNotice.rejected, (store, { payload }) => {
         store.loading = false;
         store.error = payload;
       });
   },
 });
 
-export default petsSlice.reducer;
+export default noticesSlice.reducer;
