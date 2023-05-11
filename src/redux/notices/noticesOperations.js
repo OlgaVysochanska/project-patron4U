@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import * as api from '../../shared/services/pets';
+import * as api from '../../shared/services/notices';
 
-export const fetchAllPets = createAsyncThunk(
-  'pets/fetch-all',
+export const fetchAllNotices = createAsyncThunk(
+  'notice/fetch-all',
   async (_, thunkAPI) => {
     try {
-      const data = await api.getAllPets();
+      const data = await api.getAllNotices();
       return data;
     } catch ({ response }) {
       return thunkAPI.rejectWithValue(response.data);
@@ -14,11 +14,11 @@ export const fetchAllPets = createAsyncThunk(
   }
 );
 
-export const fetchAddPet = createAsyncThunk(
-  'pets/add',
+export const fetchAddNotice = createAsyncThunk(
+  'notice/add',
   async (data, { rejectWithValue }) => {
     try {
-      const result = await api.addPet(data);
+      const result = await api.addNotice(data);
       return result;
     } catch ({ response }) {
       return rejectWithValue(response.data);
@@ -26,11 +26,11 @@ export const fetchAddPet = createAsyncThunk(
   }
 );
 
-export const fetchDeletePet = createAsyncThunk(
-  'pets/delete',
+export const fetchDeleteNotice = createAsyncThunk(
+  'notice/delete',
   async (id, { rejectWithValue }) => {
     try {
-      await api.deletePet(id);
+      await api.deleteNotice(id);
       return id;
     } catch ({ response }) {
       return rejectWithValue(response.data);
