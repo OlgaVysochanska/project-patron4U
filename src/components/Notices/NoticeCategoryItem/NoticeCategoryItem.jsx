@@ -6,6 +6,7 @@ import MaleIcon from 'icons/MaleIcon';
 import FemaleIcon from 'icons/FemaleIcon';
 // import PawprintIcon from 'icons/PawprintIcon';
 import HeartIcon from 'icons/HeartIcon';
+import TrashIcon from 'icons/TrashIcon';
 
 import styles from './NoticeCategoryItem.module.scss';
 import image from '../pet.jpg';
@@ -16,7 +17,7 @@ const {
   avatar,
   topBlock,
   categoryInfo,
-  favoriteBtn,
+  circBtn,
   noticeInfoBlock,
   noticeInfo,
   noticeDesc,
@@ -39,6 +40,7 @@ export const NoticeCategoryItem = ({
   price,
   comments,
   //   image,
+  isMyAds,
 }) => {
   function getAge(dateOfBirth) {
     const ymdArr = dateOfBirth.split('.').map(Number).reverse();
@@ -73,14 +75,24 @@ export const NoticeCategoryItem = ({
         <img className={avatar} src={image} alt="Pet's avatar" width="280" />
         <div className={topBlock}>
           <p className={categoryInfo}>{category}</p>
-          <Button
-            className={favoriteBtn}
-            SVGComponent={() => (
-              <HeartIcon color="#54ADFF" favorite={favorite} />
+          <div>
+            <Button
+              className={circBtn}
+              SVGComponent={() => (
+                <HeartIcon color="#54ADFF" favorite={favorite} />
+              )}
+            >
+              {favorite}
+            </Button>
+            {isMyAds && (
+              <Button
+                className={circBtn}
+                SVGComponent={() => <TrashIcon color="#54ADFF" />}
+              >
+                {favorite}
+              </Button>
             )}
-          >
-            {favorite}
-          </Button>
+          </div>
         </div>
 
         <div className={noticeInfoBlock}>
