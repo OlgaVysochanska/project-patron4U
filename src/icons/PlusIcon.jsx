@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-// color = stroke
-
 function PlusIcon(props) {
   return (
     <svg
@@ -13,7 +11,7 @@ function PlusIcon(props) {
     >
       <path
         d="M12 20v-8m0 0V4m0 8h8m-8 0H4"
-        // stroke="#54ADFF"
+        stroke={props.color}
         strokeWidth={2}
         strokeLinecap="round"
       />
