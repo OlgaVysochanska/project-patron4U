@@ -4,15 +4,18 @@
     height: 561px;
     margin-left: auto;
     margin-right: auto;
+    background-image: url('../../images/bg_320x601\(543\).png');
+    background-repeat: repeat;
     @media screen and (min-width: 768px) {
             width: 768px;
             height: 1125px;
+            background-image: url('../../images/bg_768x1193\(1125\).png');
         }
     @media screen and (min-width: 1280px) {
             width: 1280px;  
             height: 700px;  
-            background-image: url('../../images/bg_768x1193\(1125\).png');
-            background-repeat: repeat;
+            background-image: url('../../images/bg_1280x770\(708\).png');
+            
         }
 }
 
