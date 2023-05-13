@@ -1,34 +1,24 @@
 import { ToggleButton } from 'shared/components/ToggleButton/ToggleButton';
-import defaultAvatar from './default_avatar.svg';
-import { ToggleButtonPhoto } from 'shared/components/ToggleButtonPhoto/ToggleButtonPhoto';
-import { useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import Input from 'shared/components/Input/Input';
+import fields from './fields'
 import styles from './UserDataItem.scss';
-const picSize = '182px';
-let avatar = false;
 
-const UserDataItem = ({ actived, onClick, }) => {
-  if (!avatar) {
-    avatar = defaultAvatar;
-  }
+
+const UserDataItem = ({ clickToglle, isActive }) => {
+  
 
   const id = nanoid();
   const handleEdit = id => {};
 
-  const [isActive, active] = useState(actived);
 
-  const callback = () => {
-    active(!isActive);
-    onClick(!isActive);
-  };
+
   const rO = { readonly: 'disabled' };
   return (
     <div>
-      <img src={avatar} alt="Your look" width={picSize} height={picSize}></img>
-      <ToggleButtonPhoto>Edit photo</ToggleButtonPhoto>
-      <form>
-        {/* <Input /> */}
+ 
+      
+        <Input  props={fields.name} />
         <label>
           Name:
           <input
@@ -42,7 +32,7 @@ const UserDataItem = ({ actived, onClick, }) => {
             className={styles.togle}
             id={id}
             onClick={() => {
-              callback();
+              clickToglle();
             }}
           ></ToggleButton>
         </label>
@@ -76,9 +66,7 @@ const UserDataItem = ({ actived, onClick, }) => {
           <input type="text" name="name" />
         </label>
         <input type="submit" value="Submit" />
-      </form>
 
-      <button>Log Out</button>
     </div>
   );
 };
