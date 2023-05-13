@@ -14,12 +14,12 @@ export const ToggleButton = ({ label, toggled, onClick }) => {
     <>
       {!isToggled ? (
         <span onClick={callback}>
-          <EditIcon stroke="black" />
+          <EditIcon stroke="#54ADFF" />
         </span>
       ) : (
         <>
           <span onClick={callback}>
-            <CheckIcon stroke="black" />
+            <CheckIcon stroke="#00C3AD" />
           </span>
         </>
       )}

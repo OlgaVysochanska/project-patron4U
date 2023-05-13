@@ -3,15 +3,17 @@ import defaultAvatar from './default_avatar.svg';
 import { ToggleButtonPhoto } from 'shared/components/ToggleButtonPhoto/ToggleButtonPhoto';
 import { useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
+import Input from 'shared/components/Input/Input';
+import styles from './UserDataItem.scss';
 const picSize = '182px';
 let avatar = false;
 
-const UserDataItem = ({ actived, onClick }) => {
+const UserDataItem = ({ actived, onClick, }) => {
   if (!avatar) {
     avatar = defaultAvatar;
   }
 
-  const id = nanoid()
+  const id = nanoid();
   const handleEdit = id => {};
 
   const [isActive, active] = useState(actived);
@@ -20,29 +22,29 @@ const UserDataItem = ({ actived, onClick }) => {
     active(!isActive);
     onClick(!isActive);
   };
-
-
+  const rO = { readonly: 'disabled' };
   return (
     <div>
       <img src={avatar} alt="Your look" width={picSize} height={picSize}></img>
       <ToggleButtonPhoto>Edit photo</ToggleButtonPhoto>
       <form>
+        {/* <Input /> */}
         <label>
           Name:
           <input
+            className={styles.input}
             type="text"
             name="name"
-            // style={{disable: isActive ? "block" : "none"}}
-            style={{ backgroundColor: 'white', color: 'black' }}
-            disabled={!isActive}
-            defaultValue="Anna"
-          />{' '}
+            {...(!isActive && { ...rO })}
+            defaultValue="jon"
+          />
           <ToggleButton
+            className={styles.togle}
             id={id}
             onClick={() => {
               callback();
             }}
-          />
+          ></ToggleButton>
         </label>
 
         <label>
@@ -50,25 +52,25 @@ const UserDataItem = ({ actived, onClick }) => {
           <input type="email" name="email" />
         </label>
         <input type="submit" value="Submit" />
-        <p>Email:</p>
+
         <label>
           Birthday:
           <input type="text" name="birthday" />
         </label>
         <input type="submit" value="Submit" />
-        <p>Birthday:</p>
+
         <label>
           Phone:
           <input type="text" name="phone" />
         </label>
         <input type="submit" value="Submit" />
-        <p>Phone:</p>
+
         <label>
           City:
           <input type="text" name="city" />
         </label>
         <input type="submit" value="Submit" />
-        <p>City:</p>
+
         <label>
           Name:
           <input type="text" name="name" />

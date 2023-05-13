@@ -15,17 +15,17 @@ export const ToggleButtonPhoto = ({ label, toggled, onClick }) => {
     <>
       {!isToggled ? (
         <span onClick={callback}>
-          <CameraIcon stroke="black" />
+          <CameraIcon stroke="#54ADFF" />
           Edit photo
         </span>
       ) : (
         <>
           <span onClick={callback}>
-            <CheckIcon stroke="black" />
+            <CheckIcon stroke="#54ADFF" />
             Confirm
           </span>
           <span onClick={callback}>
-            <CrossIcon stroke="black" />
+            <CrossIcon stroke="red" />
             Cancel
           </span>
         </>
