@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/122.c2cbf20f.chunk.js","mappings":"gMAMA,EANmB,WACjB,OACE,0FAEH,C","sources":["pages/AddPetPage/AddPetPage.jsx"],"sourcesContent":["const AddPetPage = () => {\n  return (\n    <div>If components are ready, add them to AddPetPage. /AddPetForm/</div>\n  );\n};\n\nexport default AddPetPage;\n"],"names":[],"sourceRoot":""}

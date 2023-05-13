@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_homework_template=self.webpackChunkreact_homework_template||[]).push([[860],{860:function(e,t,a){a.r(t),a.d(t,{default:function(){return s}});var r=a(184),s=function(){return(0,r.jsx)("div",{children:"If components are ready, add them to UserPage. /UserData, UserDataItem, Logout, PetsData, PetsList, PetsItem, ModalCongrats/"})}}}]);
+//# sourceMappingURL=860.1030d018.chunk.js.map
