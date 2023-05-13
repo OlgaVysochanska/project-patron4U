@@ -13,7 +13,7 @@ function CrossSmallIcon(props) {
     >
       <path
         d="M16 8l-8 8m0-8l8 8"
-        // stroke="#54ADFF"
+        stroke="#54ADFF"
         strokeWidth={1.5}
         strokeLinecap="round"
         strokeLinejoin="round"
