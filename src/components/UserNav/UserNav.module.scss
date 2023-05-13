@@ -1,0 +1,24 @@
+.container {
+    @media screen and (min-width: 768px) {
+        padding: 0 16px;
+    }
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 44px;
+
+    font-family: 'Manrope';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    color: #FFC107;
+    text-decoration: none;
+}
+
+.text {
+    margin: 0;
+}
