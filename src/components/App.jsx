@@ -8,7 +8,7 @@ import { SharedLayout } from './SharedLayout/SharedLayout';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import LoginPage from 'pages/LoginPage/LoginPage';
 
-import { store, persistor } from '../redux/store';
+import { store } from '../redux/store';
 
 const MainPage = lazy(() => import('pages/MainPage'));
 const NoticesPage = lazy(() => import('pages/NoticesPage'));

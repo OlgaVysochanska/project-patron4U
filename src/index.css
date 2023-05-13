@@ -12,6 +12,7 @@ body {
   max-width: 1280px;
   padding-right: 20px;
   padding-left: 20px;
+  font-family: 'Manrope';
 }
 
 code {
@@ -45,10 +46,10 @@ button {
   cursor: pointer;
 }
 
-.list {
+li {
   list-style: none;
 }
 
-.link {
+a {
   text-decoration: none;
 }
