@@ -8,7 +8,7 @@ import styles from './ModalApprovAction.module.scss';
 
 const modalEl = document.querySelector('#modal-root');
 
-function ModalApprovAction({ closeModal, children }) {
+function ModalApproveAction({ closeModal, children }) {
   const closeModalOnClick = useCallback(
     ({ key, target, currentTarget }) => {
       if (key === 'Escape' || target === currentTarget) {
@@ -35,7 +35,7 @@ function ModalApprovAction({ closeModal, children }) {
   );
 }
 
-export default ModalApprovAction;
+export default ModalApproveAction;
 
 // Modal.propTypes = {
 //   closeModal: PropTypes.func.isRequired,

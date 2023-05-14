@@ -3,14 +3,13 @@ import { lazy, Suspense } from 'react';
 
 import { Provider } from 'react-redux';
 
-import { SharedLayout } from './SharedLayout/SharedLayout';
-
-import RegisterPage from '../pages/RegisterPage/RegisterPage';
-import LoginPage from 'pages/LoginPage/LoginPage';
+import SharedLayout from './SharedLayout/SharedLayout';
 
 import { store } from '../redux/store';
 
 const MainPage = lazy(() => import('pages/MainPage'));
+const RegisterPage = lazy(() => import('pages/RegisterPage'));
+const LoginPage = lazy(() => import('pages/LoginPage'));
 const NoticesPage = lazy(() => import('pages/NoticesPage'));
 const NewsPage = lazy(() => import('pages/NewsPage'));
 const OurFriendsPage = lazy(() => import('pages/OurFriendsPage'));
@@ -24,7 +23,7 @@ export const App = () => {
       <Suspense fallback={<p>...Loading</p>}>
         <Routes>
           <Route path="/" element={<SharedLayout />}>
-            <Route index element={<MainPage />} />
+            <Route path="/main" element={<MainPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/notices" element={<NoticesPage />} />

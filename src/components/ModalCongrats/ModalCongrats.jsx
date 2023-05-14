@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import ModalApprovAction from 'shared/components/ModalApprovAction/ModalApprovAction';
-import Button from 'components/Button/Button';
+import ModalApprovAction from 'shared/components/ModalApproveAction/ModalApprovAction';
+import Button from 'shared/components/Button/Button';
 import CrossSmallIcon from 'icons/CrossSmallIcon';
 
 import styles from './ModalCongrats.module.scss';
