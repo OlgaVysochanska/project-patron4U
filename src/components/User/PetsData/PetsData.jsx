@@ -14,9 +14,7 @@ const PetsData = ({ data }) => {
         <Button
           label="Add Pet"
           className={addBtn}
-          SVGComponent={() => (
-            <PlusIcon className={addBtnIcon} color="#FEF9F9" />
-          )}
+          SVGComponent={() => <PlusIcon className={addBtnIcon} />}
         />
       </div>
       <PetsList data={data} />
