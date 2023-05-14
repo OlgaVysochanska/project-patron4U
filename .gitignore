@@ -9,6 +9,8 @@
 /.pnp
 .pnp.js
 /backend/node_modules
+/TestNavbarAuth
+/TestTextField
 
 # testing
 /coverage

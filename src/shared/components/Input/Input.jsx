@@ -10,7 +10,8 @@ const Input = ({
   title,
   value,
   handleChange,
-  isValid, ...props
+  isValid,
+  ...props
 }) => {
   return (
     <div>
