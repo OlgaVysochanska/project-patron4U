@@ -4,7 +4,6 @@ import LocationIcon from 'icons/LocationIcon';
 import ClockIcon from 'icons/ClockIcon';
 import MaleIcon from 'icons/MaleIcon';
 import FemaleIcon from 'icons/FemaleIcon';
-// import PawprintIcon from 'icons/PawprintIcon';
 import HeartIcon from 'icons/HeartIcon';
 import TrashIcon from 'icons/TrashIcon';
 
@@ -16,15 +15,18 @@ const {
   imgThumb,
   avatar,
   topBlock,
+  icons,
+  favoriteIcon,
+  infoIcons,
   categoryInfo,
   circBtn,
   noticeInfoBlock,
   noticeInfo,
+  locationInfo,
   noticeDesc,
-  icon,
+  locationIcon,
   noticeTitle,
   learnBtn,
-  //   learnBtnIcon,
 } = styles;
 
 const NoticeCategoryItem = ({
@@ -79,33 +81,35 @@ const NoticeCategoryItem = ({
             <Button
               className={circBtn}
               SVGComponent={() => (
-                <HeartIcon color="#54ADFF" favorite={favorite.toString()} />
+                <HeartIcon
+                  className={favorite ? `${icons} ${favoriteIcon}` : icons}
+                />
               )}
             />
             {isMyAds && (
               <Button
                 className={circBtn}
-                SVGComponent={() => <TrashIcon color="#54ADFF" />}
+                SVGComponent={() => <TrashIcon className={icons} />}
               />
             )}
           </div>
         </div>
 
         <div className={noticeInfoBlock}>
-          <p className={noticeInfo}>
-            <LocationIcon className={icon} color="#54ADFF" />
+          <p className={locationInfo}>
+            <LocationIcon className={locationIcon} />
             {location}
           </p>
           <p className={noticeInfo}>
-            <ClockIcon className={icon} color="#54ADFF" />
+            <ClockIcon className={infoIcons} />
             {age === 1 ? '1 year' : `${age} years`}
           </p>
           <p className={noticeInfo}>
             {theSex.toLowerCase() === 'male' && (
-              <MaleIcon className={icon} color="#54ADFF" />
+              <MaleIcon className={infoIcons} />
             )}
             {theSex.toLowerCase() === 'female' && (
-              <FemaleIcon className={icon} color="#54ADFF" />
+              <FemaleIcon className={infoIcons} />
             )}
             {theSex}
           </p>
@@ -114,7 +118,6 @@ const NoticeCategoryItem = ({
       <div className={noticeDesc}>
         <h3 className={noticeTitle}>{titleOfAdd}</h3>
         <Button className={learnBtn}>Learn more</Button>
-        {/* <PawprintIcon className={learnBtnIcon} color="red" /> */}
       </div>
     </li>
   );
