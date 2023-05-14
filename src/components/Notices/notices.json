@@ -2,7 +2,7 @@
   {
     "id": 1812,
     "category": "In good hands",
-    "favorite": false,
+    "favorite": true,
     "titleOfAdd": "The best friend",
     "namePet": "Max",
     "dateOfBirth": "08.10.2015",
