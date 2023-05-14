@@ -1,3 +1,11 @@
+.noticesListContainer {
+  margin: 0 auto;
+}
+
+.noticesList {
+  margin-bottom: 36px;
+}
+
 .addPetBtn {
   position: fixed;
   bottom: 20px;
@@ -30,23 +38,31 @@
   margin-bottom: 8px;
 }
 
-.noticesList {
-  //   margin-bottom: 60px;
-  margin-bottom: 36px;
-}
-
 @media screen and (max-width: 767px) {
-  .noticesList {
-    display: flex;
-    flex-direction: column;
+  .noticesListContainer {
+    max-width: 480px;
   }
 }
 
 @media screen and (min-width: 768px) {
+  .noticesListContainer {
+    width: 768px;
+  }
+
   .noticesList {
     display: flex;
     flex-wrap: wrap;
     gap: 32px;
     justify-content: center;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .noticesListContainer {
+    width: 1280px;
+  }
+
+  .noticesList {
+    gap: 32px;
   }
 }
