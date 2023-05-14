@@ -27,7 +27,7 @@ const {
   //   learnBtnIcon,
 } = styles;
 
-export const NoticeCategoryItem = ({
+const NoticeCategoryItem = ({
   id,
   category,
   favorite,
@@ -79,18 +79,14 @@ export const NoticeCategoryItem = ({
             <Button
               className={circBtn}
               SVGComponent={() => (
-                <HeartIcon color="#54ADFF" favorite={favorite} />
+                <HeartIcon color="#54ADFF" favorite={favorite.toString()} />
               )}
-            >
-              {favorite}
-            </Button>
+            />
             {isMyAds && (
               <Button
                 className={circBtn}
                 SVGComponent={() => <TrashIcon color="#54ADFF" />}
-              >
-                {favorite}
-              </Button>
+              />
             )}
           </div>
         </div>
@@ -123,3 +119,5 @@ export const NoticeCategoryItem = ({
     </li>
   );
 };
+
+export default NoticeCategoryItem;
