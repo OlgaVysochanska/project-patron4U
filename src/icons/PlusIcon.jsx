@@ -11,7 +11,7 @@ function PlusIcon(props) {
     >
       <path
         d="M12 20v-8m0 0V4m0 8h8m-8 0H4"
-        stroke={props.color}
+        // stroke=візьме колір з className
         strokeWidth={2}
         strokeLinecap="round"
       />

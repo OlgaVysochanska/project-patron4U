@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 
 import CrossSmallIcon from 'icons/CrossSmallIcon';
 
-import styles from './ModalApprovAction.module.scss';
+import styles from './ModalApproveAction.module.scss';
 
 const modalEl = document.querySelector('#modal-root');
 
@@ -27,7 +27,7 @@ function ModalApproveAction({ closeModal, children }) {
   return createPortal(
     <div className={styles.overlay} onClick={closeModalOnClick}>
       <div className={styles.modal}>
-        <CrossSmallIcon className={styles.close} />
+        <CrossSmallIcon className={styles.close} onClick={closeModal} />
         {children}
       </div>
     </div>,
