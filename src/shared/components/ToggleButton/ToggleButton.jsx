@@ -2,13 +2,17 @@ import EditIcon from 'icons/EditIcon';
 import CheckIcon from 'icons/CheckIcon';
 import { useState } from 'react';
 
-export const ToggleButton = ({ label, toggled, onClick }) => {
+export const ToggleButton = ({ label, toggled, onClick, id, isActive, clickActive }) => {
   const [isToggled, toggle] = useState(toggled);
 
   const callback = () => {
     toggle(!isToggled);
+    clickActive(id)
     onClick(!isToggled);
+
+   
   };
+
 
   return (
     <>
