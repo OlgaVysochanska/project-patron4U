@@ -40,7 +40,7 @@
         color: #FFC107;
     }
 
-    &.active {
+    &:global(.active) {
         color: #FFC107;
     }
 
