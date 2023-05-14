@@ -37,3 +37,10 @@
   display: flex;
   justify-content: center;
 }
+
+.button:first-child {
+  margin-right: 15px;
+  background-color: #fff;
+  border: 2px solid #54adff;
+  color: #54adff;
+}
