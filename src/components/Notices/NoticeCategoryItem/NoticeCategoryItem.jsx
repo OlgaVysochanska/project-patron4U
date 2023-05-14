@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+
 import Button from 'shared/components/Button/Button';
 
 import LocationIcon from 'icons/LocationIcon';
@@ -6,6 +8,8 @@ import MaleIcon from 'icons/MaleIcon';
 import FemaleIcon from 'icons/FemaleIcon';
 import HeartIcon from 'icons/HeartIcon';
 import TrashIcon from 'icons/TrashIcon';
+
+import { isUserLogin } from 'redux/auth/authSelectors';
 
 import styles from './NoticeCategoryItem.module.scss';
 import image from '../pet.jpg';
@@ -44,6 +48,9 @@ const NoticeCategoryItem = ({
   //   image,
   isMyAds,
 }) => {
+  const isLogin = useSelector(isUserLogin);
+  // const isLogin = true;
+
   function getAge(dateOfBirth) {
     const ymdArr = dateOfBirth.split('.').map(Number).reverse();
     //с 0а идут месяца по этому откатываем на 1
