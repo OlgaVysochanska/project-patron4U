@@ -5,8 +5,16 @@ import TrashIcon from 'icons/TrashIcon';
 import styles from './PetsListItem.module.scss';
 import image from '../../../../Notices/pet.jpg';
 
-const { petCard, deleteBtn, imgThumb, avatar, petInfo, infoTitle, infoDesc } =
-  styles;
+const {
+  petCard,
+  deleteBtn,
+  trashIcon,
+  imgThumb,
+  avatar,
+  petInfo,
+  infoTitle,
+  infoDesc,
+} = styles;
 
 const PetsListItem = ({
   id,
@@ -24,7 +32,7 @@ const PetsListItem = ({
       <div className={petInfo}>
         <Button
           className={deleteBtn}
-          SVGComponent={() => <TrashIcon color="#54ADFF" />}
+          SVGComponent={() => <TrashIcon className={trashIcon} />}
         />
         <p className={infoDesc}>
           <span className={infoTitle}>Name: </span>
