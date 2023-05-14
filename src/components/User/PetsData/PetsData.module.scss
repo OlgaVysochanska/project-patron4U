@@ -1,0 +1,64 @@
+.petsDataContainer {
+  padding: 0 20px;
+  margin: 0 auto;
+  font-family: 'Manrope';
+}
+
+.petsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.petsTitle {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.addBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 20px;
+  color: #fef9f9;
+
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.375;
+  letter-spacing: 0.04em;
+  height: 40px;
+  background-color: #54adff;
+  border: none;
+  border-radius: 40px;
+  transition: background-image 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover,
+  &:focus {
+    background-image: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+  }
+}
+
+.addBtnIcon {
+  margin-left: 8px;
+}
+
+@media screen and (min-width: 480px) {
+  .petsDataContainer {
+    width: 480px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .petsDataContainer {
+    width: 663px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .petsDataContainer {
+    width: 781px;
+  }
+}
