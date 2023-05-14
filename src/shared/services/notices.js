@@ -14,3 +14,13 @@ export const deleteNotice = async id => {
   const { data } = await instance.delete(`/notices/${id}`);
   return data;
 };
+
+export const searchNotice = async (q, _page = 1) => {
+  const { data } = await instance.get('/notices', {
+    params: {
+      q,
+      _page,
+    },
+  });
+  return data;
+};
