@@ -9,7 +9,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 
-import rootReducer from './root-reducer';
+import rootReducer from './rootReducer';
 
 export const store = configureStore({
   reducer: rootReducer,

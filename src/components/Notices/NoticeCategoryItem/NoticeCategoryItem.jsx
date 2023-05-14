@@ -1,4 +1,4 @@
-import Button from 'components/Button/Button';
+import Button from 'shared/components/Button/Button';
 
 import LocationIcon from 'icons/LocationIcon';
 import ClockIcon from 'icons/ClockIcon';

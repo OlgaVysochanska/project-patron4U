@@ -1,7 +1,9 @@
 import { useState } from 'react';
+
 import Modal from 'shared/components/Modal/Modal';
 import Button from 'components/Button/Button';
 import PawprintIcon from 'icons/PawprintIcon';
+
 
 import styles from './ModalCongrats.module.scss';
 

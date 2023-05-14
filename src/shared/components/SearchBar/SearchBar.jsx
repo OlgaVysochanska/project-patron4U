@@ -1,4 +1,4 @@
-import Button from 'components/Button/Button';
+import Button from 'shared/components/Button/Button';
 import SearchIcon from '../../../icons/SearchIcon';
 import CrossIcon from 'icons/CrossIcon';
 import useForm from 'shared/hooks/useForm';
