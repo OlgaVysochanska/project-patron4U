@@ -20,9 +20,7 @@ const NoticesCategoriesList = ({ data }) => {
       {screenWidth < 768 && (
         <Button
           className={addPetBtn}
-          SVGComponent={() => (
-            <PlusIcon className={addPetBtnIcon} color="#FFFFFF" />
-          )}
+          SVGComponent={() => <PlusIcon className={addPetBtnIcon} />}
         >
           Add pet
         </Button>
