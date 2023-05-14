@@ -30,7 +30,10 @@ const LoginPage = () => {
       <LoginForm onSubmit={handleLogin} />
       <div>
         <p className={styles.redirectLink}>
-          Don't have an account? <NavLink to="/Register">Register</NavLink>
+          Don't have an account?{' '}
+          <NavLink to="/Register" className={styles.navlink}>
+            Register
+          </NavLink>
         </p>
       </div>
     </div>

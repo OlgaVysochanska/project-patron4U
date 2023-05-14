@@ -37,7 +37,7 @@ const RegisterForm = ({ onSubmit }) => {
         handleChange={handleChange}
         {...fields.confirm}
       /> */}
-      <AuthButton>Register</AuthButton>
+      <AuthButton>Registration</AuthButton>
     </form>
   );
 };

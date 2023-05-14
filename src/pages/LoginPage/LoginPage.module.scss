@@ -8,6 +8,7 @@
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
   border-radius: 40px;
   margin-top: 50px;
+  margin-bottom: 68px;
   margin-right: auto;
   margin-left: auto;
 
@@ -19,6 +20,11 @@
 
   @media screen and (min-width: 768px) {
     width: 608px;
+    margin-bottom: 564px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-bottom: 140px;
   }
 }
 
@@ -35,4 +41,14 @@
   @media screen and (min-width: 768px) {
     margin-top: 20px;
   }
+}
+
+.navlink {
+  font-family: 'Manrope';
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.33;
+  letter-spacing: 0.04em;
+  color: #54adff;
+  text-decoration-line: underline;
 }

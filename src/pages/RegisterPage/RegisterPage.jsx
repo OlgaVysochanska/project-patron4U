@@ -29,7 +29,10 @@ const RegisterPage = () => {
       <RegisterForm onSubmit={handleRegister} />
       <div>
         <p className={styles.redirectLink}>
-          Already have an account? <NavLink to="/login">Login</NavLink>
+          Already have an account?{' '}
+          <NavLink to="/login" className={styles.navlink}>
+            Login
+          </NavLink>
         </p>
       </div>
     </div>
