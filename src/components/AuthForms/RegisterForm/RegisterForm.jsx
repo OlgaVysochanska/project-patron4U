@@ -1,7 +1,7 @@
 import Input from 'shared/components/Input/Input';
 // import TestTextField from 'shared/components/TestTextField/TestTextField';
 
-import TestAuthButton from '../../../shared/components/TestAuthButton/TestAuthButton';
+import AuthButton from '../../../shared/components/AuthButton/AuthButton';
 
 import useForm from 'shared/hooks/useForm';
 
@@ -37,7 +37,7 @@ const RegisterForm = ({ onSubmit }) => {
         handleChange={handleChange}
         {...fields.confirm}
       /> */}
-      <TestAuthButton>Register</TestAuthButton>
+      <AuthButton>Register</AuthButton>
     </form>
   );
 };

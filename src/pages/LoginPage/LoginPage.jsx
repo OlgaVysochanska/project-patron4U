@@ -7,6 +7,9 @@ import { isUserLogin } from 'redux/auth/authSelectors';
 
 import { NavLink } from 'react-router-dom';
 import LoginForm from 'components/AuthForms/LoginForm/LoginForm';
+import AuthTitle from 'shared/components/AuthTitle/AuthTitle';
+
+import styles from './LoginPage.module.scss';
 
 const LoginPage = () => {
   const isLogin = useSelector(isUserLogin);
@@ -22,11 +25,11 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="container">
-      <h2>Login</h2>
+    <div className={styles.container}>
+      <AuthTitle text="Login" />
       <LoginForm onSubmit={handleLogin} />
       <div>
-        <p>
+        <p className={styles.redirectLink}>
           Don't have an account? <NavLink to="/Register">Register</NavLink>
         </p>
       </div>
