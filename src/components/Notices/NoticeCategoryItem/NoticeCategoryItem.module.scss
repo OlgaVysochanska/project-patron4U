@@ -33,6 +33,20 @@
   justify-content: space-between;
 }
 
+.icons {
+  stroke: #54adff;
+}
+
+.favoriteIcon {
+  compose: icons;
+  fill: #54adff;
+}
+
+.infoIcons {
+  composes: icons;
+  margin-right: 4px;
+}
+
 .categoryInfo {
   display: flex;
   align-items: center;
@@ -104,13 +118,30 @@
   }
 }
 
+.locationInfo {
+  composes: noticeInfo;
+  transition: background-color 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover,
+  &:focus {
+    background-color: #54adff;
+  }
+}
+
 .noticeDesc {
   padding: 20px;
   padding-bottom: 24px;
 }
 
-.icon {
+.locationIcon {
   margin-right: 4px;
+  stroke: #54adff;
+  transition: stroke 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  .locationInfo:hover &,
+  .locationInfo:focus & {
+    stroke: #ffffff;
+  }
 }
 
 .noticeTitle {
