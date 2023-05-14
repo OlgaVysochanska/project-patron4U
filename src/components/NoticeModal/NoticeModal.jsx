@@ -1,4 +1,7 @@
 import { useState } from 'react';
+
+import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
+
 import ModalApproveAction from 'shared/components/ModalApproveAction/ModalApprovAction';
 import Button from 'shared/components/Button/Button';
 import CrossSmallIcon from 'icons/CrossSmallIcon';
@@ -23,18 +26,12 @@ const NoticeModal = ({ notice }) => {
     email,
     phone,
   } = notice;
-  const [showModal, setShowModal] = useState(true);
 
-  const openModal = () => {
-    setShowModal(true);
-  };
+  const { isModalOpen, closeModal } = useToggleModalWindow(true);
 
-  const closeModal = () => {
-    setShowModal(false);
-  };
   return (
     <>
-      {showModal && (
+      {isModalOpen && (
         <ModalApproveAction
           closeModal={closeModal}
           className={styles.modalWindow}
