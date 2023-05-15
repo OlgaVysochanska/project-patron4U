@@ -1,18 +1,26 @@
 form {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  input {
-    display: flex;
-    align-items: center;
-    position: relative;
-    // background-color: red;
-  }
-  
-  .togle {
-    position: absolute;
-    right: 5px;
-  }
+  position: relative;
+//   display: inline-block;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input {
+  display: flex;
+  align-items: center;
+  position: relative;
+  // background-color: red;
+}
+
+ .toggle  {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  top: '50%';
+  transform: 'translateY(-50%)';
+  margin-right: '10px';
+  align-items: center;
+
+}
