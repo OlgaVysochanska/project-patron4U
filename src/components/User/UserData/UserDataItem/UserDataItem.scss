@@ -8,11 +8,11 @@ form {
   input {
     display: flex;
     align-items: center;
-    // position: relative;
+    position: relative;
     // background-color: red;
   }
   
-  // .togle {
-  //   // position: absolute;
-  //   right: 5px;
-  // }
+  .togle {
+    position: absolute;
+    right: 5px;
+  }

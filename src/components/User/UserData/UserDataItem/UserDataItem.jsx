@@ -33,7 +33,9 @@ const UserDataItem = ({
         {...(!isActive && { ...rO })}
  
       />
-     <Button label="123"  />
+     <Button 
+     className={styles.togle}
+     label="123"  />
       {/* <ToggleButton
             className={styles.togle}
             id={id}
