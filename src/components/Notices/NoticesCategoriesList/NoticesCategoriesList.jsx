@@ -1,5 +1,5 @@
 import { NoticeCategoryItem } from '../NoticeCategoryItem/NoticeCategoryItem';
-import Button from 'components/Button/Button';
+import Button from 'shared/components/Button/Button';
 import PlusIcon from 'icons/PlusIcon';
 
 import styles from './NoticesCategoriesList.module.scss';
