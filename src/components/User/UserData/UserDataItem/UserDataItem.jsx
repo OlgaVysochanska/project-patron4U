@@ -4,9 +4,18 @@ import Input from 'shared/components/Input/Input';
 // import fields from './fields';
 import styles from './UserDataItem.scss';
 // import {useDispatch} from 'react-redux'
+import Button from 'shared/components/Button/Button';
 
-const UserDataItem = ({ clickToglle, isActive, label, name, value, clickActive, activeItem }) => {
-//  const dispatch = useDispatch()
+const UserDataItem = ({
+  clickToglle,
+  isActive,
+  label,
+  name,
+  value,
+  clickActive,
+  activeItem,
+}) => {
+  //  const dispatch = useDispatch()
   const id = nanoid();
   // const handleEdit = id => {
   //   dispatch(clickToglle(id))
@@ -14,17 +23,18 @@ const UserDataItem = ({ clickToglle, isActive, label, name, value, clickActive, 
 
   const rO = { readonly: 'disabled' };
   return (
-    <div>
+    <form>
       <Input
-      key={id}
-      id={id}
+        key={id}
+        id={id}
         label={label}
         name={name}
         defaultValue={value}
         {...(!isActive && { ...rO })}
-       
+ 
       />
-{/* <ToggleButton
+     <Button label="123"  />
+      {/* <ToggleButton
             className={styles.togle}
             id={id}
        
@@ -79,7 +89,7 @@ const UserDataItem = ({ clickToglle, isActive, label, name, value, clickActive, 
         <input type="text" name="name" />
       </label>
       <input type="submit" value="Submit" /> */}
-    </div>
+    </form>
   );
 };
 

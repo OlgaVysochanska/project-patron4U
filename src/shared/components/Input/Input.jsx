@@ -14,7 +14,7 @@ const Input = ({
   ...props
 }) => {
   return (
-    <div>
+    <>
       <label htmlFor={type}>{label}</label>
       <input
         type={type}
@@ -29,7 +29,7 @@ const Input = ({
         {...props}
       />
       {!isValid && <p className={styles.errorMessage}>{title}</p>}
-    </div>
+    </>
   );
 };
 
