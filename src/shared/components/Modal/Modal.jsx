@@ -2,13 +2,13 @@ import { useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 // import PropTypes from 'prop-types';
 
-import CrossSmallIcon from 'icons/CrossSmallIcon';
+import CrossIcon from 'icons/CrossIcon';
 
-import styles from './ModalApproveAction.module.scss';
+import styles from './Modal.module.scss';
 
 const modalEl = document.querySelector('#modal-root');
 
-function ModalApproveAction({ closeModal, children }) {
+function Modal({ closeModal, children }) {
   const closeModalOnClick = useCallback(
     ({ key, target, currentTarget }) => {
       if (key === 'Escape' || target === currentTarget) {
@@ -27,7 +27,7 @@ function ModalApproveAction({ closeModal, children }) {
   return createPortal(
     <div className={styles.overlay} onClick={closeModalOnClick}>
       <div className={styles.modal}>
-        <CrossSmallIcon className={styles.close} onClick={closeModal} />
+        <CrossIcon className={styles.close} onClick={closeModalOnClick} />
         {children}
       </div>
     </div>,
@@ -35,7 +35,7 @@ function ModalApproveAction({ closeModal, children }) {
   );
 }
 
-export default ModalApproveAction;
+export default Modal;
 
 // Modal.propTypes = {
 //   closeModal: PropTypes.func.isRequired,

@@ -1,0 +1,64 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+}
+
+table tr {
+  display: flex;
+  align-items: center;
+
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
+}
+
+td {
+  width: 81px;
+}
+
+.modalWindow {
+  padding: 24px 20px 16px;
+}
+
+.imgThumb {
+  position: relative;
+  height: 240px;
+  margin-bottom: 12px;
+}
+
+.avatar {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+
+.title {
+  text-align: start;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  margin-bottom: 22px;
+}
+
+.infoTitle {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.info {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+}
+
+.contacts {
+  composes: info;
+  color: #ffc107;
+  text-decoration: underline;
+}

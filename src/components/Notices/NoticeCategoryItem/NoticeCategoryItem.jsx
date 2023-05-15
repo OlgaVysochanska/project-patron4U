@@ -1,12 +1,15 @@
+import { useSelector } from 'react-redux';
+
 import Button from 'shared/components/Button/Button';
 
 import LocationIcon from 'icons/LocationIcon';
 import ClockIcon from 'icons/ClockIcon';
 import MaleIcon from 'icons/MaleIcon';
 import FemaleIcon from 'icons/FemaleIcon';
-// import PawprintIcon from 'icons/PawprintIcon';
 import HeartIcon from 'icons/HeartIcon';
 import TrashIcon from 'icons/TrashIcon';
+
+import { isUserLogin } from 'redux/auth/authSelectors';
 
 import styles from './NoticeCategoryItem.module.scss';
 import image from '../pet.jpg';
@@ -16,18 +19,21 @@ const {
   imgThumb,
   avatar,
   topBlock,
+  icons,
+  favoriteIcon,
+  infoIcons,
   categoryInfo,
   circBtn,
   noticeInfoBlock,
   noticeInfo,
+  locationInfo,
   noticeDesc,
-  icon,
+  locationIcon,
   noticeTitle,
   learnBtn,
-  //   learnBtnIcon,
 } = styles;
 
-export const NoticeCategoryItem = ({
+const NoticeCategoryItem = ({
   id,
   category,
   favorite,
@@ -42,6 +48,9 @@ export const NoticeCategoryItem = ({
   //   image,
   isMyAds,
 }) => {
+  const isLogin = useSelector(isUserLogin);
+  // const isLogin = true;
+
   function getAge(dateOfBirth) {
     const ymdArr = dateOfBirth.split('.').map(Number).reverse();
     //с 0а идут месяца по этому откатываем на 1
@@ -79,37 +88,35 @@ export const NoticeCategoryItem = ({
             <Button
               className={circBtn}
               SVGComponent={() => (
-                <HeartIcon color="#54ADFF" favorite={favorite} />
+                <HeartIcon
+                  className={favorite ? `${icons} ${favoriteIcon}` : icons}
+                />
               )}
-            >
-              {favorite}
-            </Button>
+            />
             {isMyAds && (
               <Button
                 className={circBtn}
-                SVGComponent={() => <TrashIcon color="#54ADFF" />}
-              >
-                {favorite}
-              </Button>
+                SVGComponent={() => <TrashIcon className={icons} />}
+              />
             )}
           </div>
         </div>
 
         <div className={noticeInfoBlock}>
-          <p className={noticeInfo}>
-            <LocationIcon className={icon} color="#54ADFF" />
+          <p className={locationInfo}>
+            <LocationIcon className={locationIcon} />
             {location}
           </p>
           <p className={noticeInfo}>
-            <ClockIcon className={icon} color="#54ADFF" />
+            <ClockIcon className={infoIcons} />
             {age === 1 ? '1 year' : `${age} years`}
           </p>
           <p className={noticeInfo}>
             {theSex.toLowerCase() === 'male' && (
-              <MaleIcon className={icon} color="#54ADFF" />
+              <MaleIcon className={infoIcons} />
             )}
             {theSex.toLowerCase() === 'female' && (
-              <FemaleIcon className={icon} color="#54ADFF" />
+              <FemaleIcon className={infoIcons} />
             )}
             {theSex}
           </p>
@@ -118,8 +125,9 @@ export const NoticeCategoryItem = ({
       <div className={noticeDesc}>
         <h3 className={noticeTitle}>{titleOfAdd}</h3>
         <Button className={learnBtn}>Learn more</Button>
-        {/* <PawprintIcon className={learnBtnIcon} color="red" /> */}
       </div>
     </li>
   );
 };
+
+export default NoticeCategoryItem;

@@ -11,7 +11,7 @@ function MaleIcon(props) {
     >
       <path
         d="M12.758 11a5 5 0 100 10 5 5 0 000-10zm0 0V3m0 0l4 4m-4-4l-4 4"
-        stroke={props.color}
+        // stroke=візьме колір з className
         strokeWidth={1.5}
         strokeLinecap="round"
         strokeLinejoin="round"
