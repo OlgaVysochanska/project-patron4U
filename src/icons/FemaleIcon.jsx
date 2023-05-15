@@ -11,7 +11,7 @@ function FemaleIcon(props) {
     >
       <path
         d="M12.758 13a5 5 0 100-10 5 5 0 000 10zm0 0v8m-3-3h6"
-        stroke={props.color}
+        // stroke=візьме колір з className
         strokeWidth={1.5}
         strokeLinecap="round"
         strokeLinejoin="round"

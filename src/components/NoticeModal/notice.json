@@ -1,0 +1,17 @@
+{
+  "id": 1812,
+  "category": "In good hands",
+  "favorite": false,
+  "titleOfAdd": "The best friend",
+  "namePet": "Max",
+  "dateOfBirth": "08.10.2015",
+  "breed": "Scottish Fold",
+  "theSex": "female",
+  "location": "Dnipro",
+  "price": "",
+  "comments": "The best friend",
+  "image": "../pet.jpg",
+  "isMyAds": false,
+  "email": "diana@gmail.com",
+  "phone": "+380988540785"
+}
