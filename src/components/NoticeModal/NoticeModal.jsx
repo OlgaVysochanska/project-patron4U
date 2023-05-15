@@ -1,42 +1,36 @@
-import { useState } from 'react';
+// import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
 
-import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
-
-import ModalApproveAction from 'shared/components/ModalApproveAction/ModalApprovAction';
-import Button from 'shared/components/Button/Button';
-import CrossSmallIcon from 'icons/CrossSmallIcon';
+// import Modal from 'shared/components/Modal';
+import Contact from './Contact';
+import AddToFavorite from './AddToFavorite';
 
 import styles from './NoticeModal.module.scss';
 import image from '../Notices/pet.jpg';
 
 const NoticeModal = ({ notice }) => {
   const {
-    id,
-    category,
-    favorite,
-    titleOfAdd,
     namePet,
+    category,
     dateOfBirth,
     breed,
     theSex,
     location,
-    price,
     comments,
-    isMyAds,
     email,
+    price,
     phone,
   } = notice;
 
-  const { isModalOpen, closeModal } = useToggleModalWindow(true);
+  //   const { isModalOpen, closeModal } = useToggleModalWindow();
 
   return (
     <>
-      {isModalOpen && (
-        <ModalApproveAction
-          closeModal={closeModal}
-          className={styles.modalWindow}
-        >
+      {/* {isModalOpen && ( */}
+      {/* <Modal closeModal={closeModal}> */}
+      <div className={styles.contentWrapper}>
+        <div className={styles.tabletBox}>
           <div className={styles.imgThumb}>
+            <p className={styles.categoryInfo}>{category}</p>
             <img
               className={styles.avatar}
               src={image}
@@ -69,6 +63,12 @@ const NoticeModal = ({ notice }) => {
                 <td className={styles.infoTitle}>The sex:</td>
                 <td className={styles.info}>{theSex}</td>
               </tr>
+              {price && (
+                <tr>
+                  <td className={styles.infoTitle}>Price:</td>
+                  <td className={styles.info}>{price}</td>
+                </tr>
+              )}
               <tr>
                 <td className={styles.infoTitle}>Email:</td>
                 <td>
@@ -87,8 +87,18 @@ const NoticeModal = ({ notice }) => {
               </tr>
             </tbody>
           </table>
-        </ModalApproveAction>
-      )}
+        </div>
+        <p className={styles.commentsInfo}>
+          <span className={styles.commentsTitle}>Comments: </span>
+          {comments}
+        </p>
+        <div className={styles.btnWrapper}>
+          <Contact phone={phone} />
+          <AddToFavorite />
+        </div>
+      </div>
+      {/* </Modal> */}
+      {/* )} */}
     </>
   );
 };
