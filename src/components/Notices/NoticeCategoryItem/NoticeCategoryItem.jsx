@@ -1,6 +1,9 @@
 import { useSelector } from 'react-redux';
 
+import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
+
 import Button from 'shared/components/Button/Button';
+import NoticeModal from 'components/NoticeModal/NoticeModal';
 
 import LocationIcon from 'icons/LocationIcon';
 import ClockIcon from 'icons/ClockIcon';
@@ -35,6 +38,7 @@ const {
 
 const NoticeCategoryItem = ({
   id,
+  openModal,
   category,
   favorite,
   titleOfAdd,
@@ -124,7 +128,9 @@ const NoticeCategoryItem = ({
       </div>
       <div className={noticeDesc}>
         <h3 className={noticeTitle}>{titleOfAdd}</h3>
-        <Button className={learnBtn}>Learn more</Button>
+        <Button className={learnBtn} onClick={openModal}>
+          Learn more
+        </Button>
       </div>
     </li>
   );
