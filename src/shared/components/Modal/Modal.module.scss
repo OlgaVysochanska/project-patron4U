@@ -1,50 +1,64 @@
-.overlay {
+.backdrop {
   position: fixed;
-  padding: 60px;
+  padding: 0 20;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.8);
+  overflow-y: scroll;
+  background: rgba(97, 97, 97, 0.6);
+  backdrop-filter: blur(4px);
   z-index: 1200;
 }
 
 .modal {
-  padding: 60px 20px;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   border-radius: 40px;
   background-color: #fff;
-  // min-height: 200px;
-  // min-width: 200px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 87.5%;
+  max-width: 420px;
 
-  // max-width: calc(100vw - 48px);
-  // max-height: calc(100vh - 24px);
+  @media screen and (min-height: 800px) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  width: 24px;
+  height: 24px;
+}
+
+.closeIcon {
+  color: #54adff;
+  cursor: pointer;
+
+  .closeBtn:hover &,
+  .closeBtn:focus & {
+    transform: scale(1.25);
+  }
 }
 
 @media screen and (min-width: 768px) {
   .modal {
-    // width: 280px;
-    padding: 60px 105px;
+    max-width: 681px;
   }
-}
 
-// @media screen and (min-width: 1024px) {
-//   .modal {
-//     width: 608px;
-//   }
-// }
-
-.close {
-  color: #54adff;
-  font-size: 24px;
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  cursor: pointer;
+  .closeBtn {
+    top: 24px;
+    right: 24px;
+  }
 }
