@@ -11,8 +11,12 @@ const Input = ({
   value,
   handleChange,
   isValid,
+  inputStyle,
   ...props
 }) => {
+  const inputStyles = {
+    ...inputStyle,
+  };
   return (
     <>
       <label htmlFor={type}>{label}</label>
@@ -26,6 +30,7 @@ const Input = ({
         value={value}
         onChange={handleChange}
         className={`${styles.input} ${!isValid ? styles.invalid : ''}`}
+        style={inputStyles}
         {...props}
       />
       {!isValid && <p className={styles.errorMessage}>{title}</p>}

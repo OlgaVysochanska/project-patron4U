@@ -31,14 +31,13 @@ const UserDataItem = ({
         name={name}
         defaultValue={value}
         {...(!isActive && { ...rO })}
-        style={{position:"relative"}}
-
- 
+        style={{ position: 'relative' }}
       />
-     <Button 
-     className={styles.toggle}
-     style={{position:"absolute"}}
-     label="123"  />
+      <Button
+        className={styles.toggle}
+        buttonStyle={{ backgroundColor: 'red' }}
+        label="123"
+      />
       {/* <ToggleButton
             className={styles.togle}
             id={id}
