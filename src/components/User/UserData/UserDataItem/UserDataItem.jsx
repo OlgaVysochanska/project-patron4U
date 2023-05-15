@@ -21,7 +21,7 @@ const UserDataItem = ({
   //   dispatch(clickToglle(id))
   // };
 
-  const rO = { readonly: 'disabled' };
+  const rO = { readOnly: 'disabled' };
   return (
     <form>
       <Input
@@ -32,10 +32,17 @@ const UserDataItem = ({
         defaultValue={value}
         {...(!isActive && { ...rO })}
         style={{ position: 'relative' }}
-      />
+        isValid={true}
+      ></Input>
       <Button
         className={styles.toggle}
-        buttonStyle={{ backgroundColor: 'red' }}
+        buttonStyle={{
+          backgroundColor: 'red',
+          position: 'absolute',
+          right: '10px',
+        //   top: '50%',
+        //   transform: 'translateY(-50%)',
+        }}
         label="123"
       />
       {/* <ToggleButton
