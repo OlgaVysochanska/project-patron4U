@@ -1,0 +1,19 @@
+.btnLog {
+    display: flex;
+    align-items: center;
+    // width: 24px;
+    // height: 10px;
+  
+    cursor: pointer;
+    background-color: transparent;
+    color: #888888;
+    border: none;
+  
+    & svg {
+      width: 16px;
+      height: 16px;
+      padding-right: 16px;
+      stroke: #54adff;
+    }
+  }
+  
