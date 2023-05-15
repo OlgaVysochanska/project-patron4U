@@ -1,0 +1,37 @@
+.filterButton {
+  width: 129px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 20px 8px 20px;
+  border: 2px solid #54adff;
+  border-radius: 40px;
+  stroke: #54adff;
+  cursor: pointer;
+}
+
+.filterButton.active {
+  background: linear-gradient(#419ef1 0%, #9bd0ff 100%);
+}
+
+.filterIcon {
+  width: 16px;
+  height: 17px;
+  margin-left: 8px;
+  padding-bottom: 8px;
+}
+
+.filterIcon.active {
+  stroke: #fff;
+  fill: #fff;
+}
+
+.label {
+  color: #54adff;
+  font-style: Bold;
+}
+
+.label.active {
+  color: white;
+}

@@ -1,1 +1,3 @@
-// export { default } from './NoticesFilters';
+
+export { default } from './NoticesFilters';
+

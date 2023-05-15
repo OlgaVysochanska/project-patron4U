@@ -11,7 +11,7 @@ function ClockIcon(props) {
     >
       <path
         d="M12.758 7v5l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-        stroke={props.color}
+        // stroke=візьме колір з className
         strokeWidth={1.5}
         strokeLinecap="round"
         strokeLinejoin="round"
