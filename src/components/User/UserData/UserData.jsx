@@ -4,6 +4,8 @@ import useForm from 'shared/hooks/useForm';
 import { useState } from 'react';
 import { ToggleButtonPhoto } from 'shared/components/ToggleButtonPhoto/ToggleButtonPhoto';
 import defaultAvatar from './default_avatar.svg';
+import Button from 'components/Button/Button';
+import LogoutIcon from 'icons/LogoutIcon';
 // import {nanoid} from 'nanoid'
 
 const picSize = '182px';
@@ -33,8 +35,6 @@ const UserData = ({ onClick }) => {
   }
 
   const clickToglle = id => {
-
-
     onClick(!isActive);
 
     console.log(activeItem);
@@ -77,7 +77,7 @@ const UserData = ({ onClick }) => {
           isActive={isActive}
         /> */}
       </form>
-      <button>Log Out</button>
+      <Button label="Log Out" LogoutIcon />
     </div>
   );
 };
