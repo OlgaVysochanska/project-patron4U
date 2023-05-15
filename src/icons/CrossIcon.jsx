@@ -13,7 +13,7 @@ function CrossIcon(props) {
     >
       <path
         d="M19 5L5 19M5 5l14 14"
-        // stroke="#54ADFF"
+        stroke="#54ADFF"
         strokeWidth={1.5}
         strokeLinecap="round"
         strokeLinejoin="round"
