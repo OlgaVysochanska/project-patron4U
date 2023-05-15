@@ -2,8 +2,17 @@ import { useState } from 'react';
 
 const useToggleModalWindow = (initialState = false) => {
   const [isModalOpen, setIsModalOpen] = useState(initialState);
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    document.body.style.overflow = 'scroll';
+  };
+
   const toggleModal = () => setIsModalOpen(isOpen => !isOpen);
 
   return { isModalOpen, openModal, closeModal, toggleModal };
