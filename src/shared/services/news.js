@@ -2,22 +2,19 @@ import axios from 'axios';
 
 const instance = axios.create({
   baseURL: 'http://localhost:5000',
-  params: {
-    _limit: 4,
-  },
 });
 
-// export const searchNews = async (q, _page = 1) => {
-//   const { data } = await instance.get('/', {
-//     params: {
-//       q,
-//       _page,
-//     },
-//   });
-//   return data;
-// };
+export const searchNews = async (search, page = 1) => {
+  console.log(search);
+  const { data } = await instance.get(`?${search}&${page}`);
+  return data;
+};
 
-export const getAllNews = async () => {
-  const { data } = await instance.get('/api/news');
+export const getAllNews = async (page = 1) => {
+  const { data } = await instance.get('/api/news', {
+    params: {
+      page,
+    },
+  });
   return data;
 };
