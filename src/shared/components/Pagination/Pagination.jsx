@@ -54,9 +54,17 @@ const Pagination = ({ totalPages, onPageChange }) => {
       <ul className={style.pagination}>
         <li
           onClick={handlePrevPage}
-          className={currentPage === 1 ? 'disabled' : ''}
+          className={style.listItem}
+          // className={currentPage === 1 ? 'disabled' : ''}
+          // className={currentPage === 1 ? }
         >
-          <span className={style.arrowLeft}>
+          <span
+            className={
+              currentPage === 1
+                ? `${style.arrowLeft__disabled}`
+                : style.arrowLeft
+            }
+          >
             <ArrowLeftIcon />
           </span>
         </li>
@@ -65,7 +73,9 @@ const Pagination = ({ totalPages, onPageChange }) => {
             key={page}
             // className={currentPage === page ? 'active' : 'disabled'}
             className={
-              currentPage === page ? `${style.btn} ${style.active}` : style.btn
+              currentPage === page
+                ? `${style.listItem} ${style.active}`
+                : style.listItem
             }
             onClick={() => handlePageChange(page)}
           >
@@ -73,10 +83,17 @@ const Pagination = ({ totalPages, onPageChange }) => {
           </li>
         ))}
         <li
+          className={style.listItem}
           onClick={handleNextPage}
-          className={currentPage === totalPages ? 'disabled' : ''}
+          // className={currentPage === totalPages ? 'disabled' : ''}
         >
-          <span className={style.arrowRight}>
+          <span
+            className={
+              currentPage === totalPages
+                ? `${style.arrowRight} ${style.arrowRight__disabled}`
+                : style.arrowRight
+            }
+          >
             <ArrowLeftIcon />
           </span>
         </li>
