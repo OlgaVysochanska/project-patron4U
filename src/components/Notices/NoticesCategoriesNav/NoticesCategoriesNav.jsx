@@ -1,3 +1,4 @@
+
 import Button from 'shared/components/Button/Button';
 import style from './NoticesCategoriesNav.module.scss';
 export const NoticesCategoriesNav = () => {
@@ -11,3 +12,4 @@ export const NoticesCategoriesNav = () => {
     </div>
   );
 };
+
