@@ -1,0 +1,26 @@
+.filterButton {
+  position: relative;
+}
+
+.filterOptions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdownContainer {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.shifted {
+  margin-top: 100px;
+}
