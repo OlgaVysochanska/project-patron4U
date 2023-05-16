@@ -1,1 +1,1 @@
-// export { default } from './NoticeCategoryItem';
+export { default } from './NoticeCategoryItem';

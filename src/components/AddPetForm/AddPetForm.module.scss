@@ -1,0 +1,395 @@
+.addPetFormContainer {
+  display: flex;
+  justify-content: center;
+  background-color: #ccc;
+}
+
+.addPetForm {
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  border-radius: 40px;
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    width: 280px;
+    padding: 20px 8px 16px;
+  }
+
+  @media (min-width: 768px) {
+    max-width: 458px;
+    padding: 20px 32px 16px;
+  }
+
+  h2 {
+    font-weight: 500;
+    line-height: 1.35;
+    margin-bottom: 24px;
+    @media (min-width: 320px) and (max-width: 767px) {
+      font-size: 20px;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 28px;
+    }
+  }
+}
+
+.tabButtonsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.formTab,
+.formTabAct {
+  position: relative;
+  border: none;
+  font-weight: 500;
+  background-color: #ffffff;
+  margin-bottom: 16px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  text-align: left;
+  flex: 1;
+  margin-right: 22px;
+  font-size: 16px;
+  line-height: 1.6;
+
+  &:last-child {
+    margin-right: 0px;
+  }
+
+  &:after {
+    content: '';
+    width: 100%;
+    height: 8px;
+    background-color: #ccc;
+    display: block;
+    margin-top: 12px;
+    border-radius: 8px;
+  }
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    font-size: 10px;
+    line-height: 1.4;
+    margin-right: 11px;
+  }
+}
+
+.formTabAct {
+  color: #54adff;
+
+  &:after {
+    background-color: #54adff;
+  }
+}
+
+.formTabValid {
+  color: #00c3ad;
+
+  &:after {
+    background-color: #00c3ad;
+  }
+}
+
+.formTabContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.categoryContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 24px;
+  margin-bottom: 145px;
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    padding-top: 8px;
+    margin-bottom: 90px;
+  }
+}
+
+.category,
+.categoryAct {
+  margin-bottom: 12px;
+  padding: 8px 16px;
+  font-size: 14px;
+  line-height: 1.3;
+  border: none;
+  border-radius: 40px;
+  background-color: #cce4fb;
+  color: #54adff;
+
+  &:last-child {
+    margin-bottom: 0px;
+  }
+}
+
+.categoryAct {
+  background-color: #54adff;
+  color: #fef9f9;
+}
+
+.navigationButtonsContainer {
+  display: flex;
+  justify-content: center;
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    flex-direction: column-reverse;
+  }
+}
+
+.navigationButtonNext {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #54adff;
+  color: #fef9f9;
+  padding: 8px 86px;
+  border: none;
+  border-radius: 40px;
+  font-size: 16px;
+  font-weight: 700;
+
+  & > *:last-child {
+    margin-left: 12px;
+  }
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    margin-bottom: 8px;
+  }
+}
+
+.navigationButtonPrev {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  color: #54adff;
+  padding: 8px 24px;
+  border: none;
+  border-radius: 40px;
+  font-size: 16px;
+  font-weight: 700;
+
+  & > *:last-child {
+    margin-right: 12px;
+  }
+}
+
+.personDetailContainer {
+  margin-bottom: 40px;
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    margin-bottom: 44px;
+  }
+}
+.personDetailNotOwnContainer {
+  margin-bottom: 32px;
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    margin-bottom: 24px;
+  }
+}
+
+.inputContainerValid {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    margin-bottom: 20px;
+  }
+}
+
+.inputContainerInvalid {
+  margin-bottom: 4px;
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    margin-bottom: 4px;
+  }
+}
+
+.label {
+  margin-bottom: 8px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.25;
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    margin-bottom: 4px;
+    font-size: 14px;
+    line-height: 1.35;
+  }
+}
+
+.input {
+  padding: 12px 16px;
+  outline: none;
+  border-radius: 40px;
+  background-color: transparent;
+  border: 1px solid #54adff;
+  color: #888888;
+  font-size: 16px;
+  font-weight: 400;
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    padding: 9px 16px;
+    font-size: 14px;
+  }
+}
+
+.inputInvalid {
+  border-color: #f43f5e;
+}
+
+.datepicker {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.validMessage {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: #f43f5e;
+  margin-bottom: 4px;
+  margin-left: 16px;
+  @media (min-width: 320px) and (max-width: 767px) {
+    font-size: 10px;
+  }
+}
+
+.moreInfoContainer {
+  margin-bottom: 17px;
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    margin-bottom: 24px;
+  }
+}
+.moreInfoNotOwnContainer {
+  margin-bottom: 64px;
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    margin-bottom: 24px;
+  }
+}
+
+.textarea {
+  padding: 12px 16px;
+  outline: none;
+  border-radius: 20px;
+  background-color: transparent;
+  border: 1px solid #54adff;
+  color: #888888;
+  font-size: 16px;
+  font-weight: 400;
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    padding: 9px 16px;
+    font-size: 14px;
+  }
+}
+
+.textareaInvalid {
+  border-color: #f43f5e;
+}
+
+.addPhotoButton {
+  width: 182px;
+  height: 182px;
+  background-color: #cce4fb;
+  border-radius: 40px;
+  border: none;
+  margin-left: 27px;
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    width: 112px;
+    height: 112px;
+    border-radius: 20px;
+  }
+}
+
+.addPhotoNotOwnButton {
+  margin-left: 0px;
+  @media (min-width: 320px) and (max-width: 767px) {
+    margin-left: 27px;
+  }
+}
+
+.addPhotoIcon {
+  @media (min-width: 320px) and (max-width: 767px) {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.addPhotoContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 24px;
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    margin-bottom: 24px;
+  }
+}
+
+.addPhotoNotOwnContainer {
+  margin-bottom: 0px;
+  flex-direction: column;
+  margin-top: 52px;
+  @media (min-width: 320px) and (max-width: 767px) {
+    margin-top: 16px;
+    flex-direction: row;
+    margin-bottom: 16px;
+  }
+}
+
+.genderContainerValid {
+  display: flex;
+  flex-direction: row;
+  width: 182px;
+}
+
+.gender {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888888;
+  background-color: #fff;
+  padding: 5px 23px 5px 0px;
+  font-size: 16px;
+  font-weight: 400;
+  border: none;
+
+  & > *:last-child {
+    margin-right: 19px;
+  }
+
+  &:last-child {
+    margin-right: 0px;
+  }
+}
+
+.genderAct {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00c3ad;
+  background-color: #fff;
+  padding: 5px 23px 5px 0px;
+  font-size: 16px;
+  font-weight: 400;
+  border: none;
+
+  & > *:last-child {
+    margin-right: 19px;
+  }
+
+  &:last-child {
+    margin-right: 0px;
+  }
+}
