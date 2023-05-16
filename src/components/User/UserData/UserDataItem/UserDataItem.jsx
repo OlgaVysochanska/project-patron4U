@@ -5,6 +5,16 @@ import Input from 'shared/components/Input/Input';
 import styles from './UserDataItem.scss';
 // import {useDispatch} from 'react-redux'
 import Button from 'shared/components/Button/Button';
+import CheckIcon from 'icons/CheckIcon';
+import CrossIcon from 'icons/CrossIcon';
+
+const CheckIconTuned = () => {
+    return <CheckIcon  stroke='green' width="16" height="16" viewBox="0 0 22 21" />;
+  };
+  
+  const CrossIconTuned = () => {
+    return <CrossIcon  stroke='red' width="16" height="16" viewBox="0 0 22 21" />;
+  };
 
 const UserDataItem = ({
   clickToglle,
@@ -24,27 +34,45 @@ const UserDataItem = ({
   const rO = { readOnly: 'disabled' };
   return (
     <form>
-      <Input
-        key={id}
-        id={id}
-        label={label}
-        name={name}
-        defaultValue={value}
-        {...(!isActive && { ...rO })}
-        style={{ position: 'relative' }}
-        isValid={true}
-      ></Input>
-      <Button
-        className={styles.toggle}
-        buttonStyle={{
-          backgroundColor: 'red',
-          position: 'absolute',
-          right: '10px',
-        //   top: '50%',
-        //   transform: 'translateY(-50%)',
-        }}
-        label="123"
-      />
+      <div style={{ backgroundColor: 'green', position: 'relative' }}>
+        <Input
+          key={id}
+          id={id}
+          label={label}
+          name={name}
+          defaultValue={value}
+          {...(!isActive && { ...rO })}
+          // inputStyle={{ position: 'relative' }}
+          isValid={true}
+        ></Input>
+        <Button
+        type="button"
+          onClick={clickToglle}
+          className={styles.toggle}
+          buttonStyle={{
+            backgroundColor: 'red',
+            position: 'absolute',
+            right: '10px',
+            top: '10px',
+            //   transform: 'translateY(-50%)',
+          }}
+          SVGComponent={CheckIconTuned}
+        />
+        <Button
+         type="button"
+          onClick={clickToglle}
+          className={styles.toggle}
+          buttonStyle={{
+          
+            position: 'absolute',
+            right: '10px',
+            top: '10px',
+            //     //   transform: 'translateY(-50%)',
+          }}
+          SVGComponent={CrossIconTuned}
+        />
+      </div>
+
       {/* <ToggleButton
             className={styles.togle}
             id={id}

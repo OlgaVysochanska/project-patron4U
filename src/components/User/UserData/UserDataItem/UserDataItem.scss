@@ -1,20 +1,26 @@
 form {
-  position: relative;
-//   display: inline-block;
+  //   position: relative;
+  //   display: inline-block;
   display: flex;
   align-items: center;
   margin-left: auto;
   margin-right: auto;
 }
 
-input {
+.input {
   display: flex;
   align-items: center;
-  position: relative;
-  // background-color: red;
+  //   position: relative;
+  //   background-color: red;
 }
 
- .toggle  {
+.fixPosition {
+  display: flex;
+  position: relative;
+}
+
+.toggle {
+  background-color: 'green';
   position: absolute;
   right: 10px;
   top: 10px;
@@ -22,5 +28,4 @@ input {
   transform: 'translateY(-50%)';
   margin-right: '10px';
   align-items: center;
-
 }
