@@ -1,11 +1,11 @@
 // import { useState, useEffect, useCallback } from 'react';
 // import { useSearchParams } from 'react-router-dom';
 // import { searchNotice } from '../../../shared/services/notices';
-// import {NoticesCategoriesList} from '../NoticesCategoriesList';
+// import NoticesCategoriesList from '../NoticesCategoriesList/NoticesCategoriesList';
 import SearchBar from 'shared/components/SearchBar/SearchBar';
 import style from './NoticesSearch.module.scss';
 
-export const NoticesSearch = () => {
+const NoticesSearch = () => {
   // const [items, setItems] = useState([]);
   // const [loading, setLoading] = useState(false);
   // const [error, setError] = useState(null);
@@ -46,9 +46,11 @@ export const NoticesSearch = () => {
       <div className={style.wrapper}>
         <SearchBar />
       </div>
-      {/* <NoticesCategoriesList items={items}/>
+      {/* <NoticesCategoriesList data={items}/>
       {error && <p>{error}</p>}
       {loading && <p>...Load</p>} */}
     </>
   );
 };
+
+export default NoticesSearch;

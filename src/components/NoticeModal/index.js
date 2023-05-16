@@ -1,1 +1,1 @@
-// export { default } from "./NoticeModal";
+export { default } from './NoticeModal';

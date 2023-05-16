@@ -1,7 +1,7 @@
+import { Link } from 'react-router-dom';
+
 const AddPetPage = () => {
-  return (
-    <div>If components are ready, add them to AddPetPage. /AddPetForm/</div>
-  );
+  return <Link to="/add-pet">add Pet</Link>;
 };
 
 export default AddPetPage;

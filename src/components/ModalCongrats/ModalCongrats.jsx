@@ -1,35 +1,26 @@
-import { useState } from 'react';
+import useToggleModalWindow from '../../shared/hooks/useToggleModalWindow';
 
 import Modal from 'shared/components/Modal/Modal';
-import Button from 'components/Button/Button';
+import Button from '../../shared/components/Button';
 import PawprintIcon from 'icons/PawprintIcon';
-
 
 import styles from './ModalCongrats.module.scss';
 
 function ModalCongrats() {
-  const [showModal, setShowModal] = useState(true);
+  const { isModalOpen, closeModal } = useToggleModalWindow(true);
 
-  const openModal = () => {
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-  };
   return (
     <>
-      {showModal && (
+      {isModalOpen && (
         <Modal closeModal={closeModal}>
-          <p className={styles.title}>Congrats!</p>
-          <p className={styles.text}>Youre registration is success</p>
-          <div className={styles.wrapper}>
-            <Button
-              label="Go to profile"
-              className={styles.button}
-              SVGComponent={PawprintIcon}
-              closeModal={closeModal}
-            ></Button>
+          <div className={styles.contentWrapper}>
+            <p className={styles.title}>Congrats!</p>
+            <p className={styles.text}>Youre registration is success</p>
+            <div className={styles.wrapper}>
+              <Button className={styles.button} closeModal={closeModal}>
+                Go to profile <PawprintIcon className={styles.btnIcon} />
+              </Button>
+            </div>
           </div>
         </Modal>
       )}
