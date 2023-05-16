@@ -2,26 +2,17 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useForm from 'shared/hooks/useForm';
-import validateRulers from 'shared/helpers/validation/validateRulers';
-import Button from 'components/Button/Button';
-import ArrowLeftIcon from 'icons/ArrowLeftIcon';
-import PawprintIcon from 'icons/PawprintIcon';
-import FemaleIcon from 'icons/FemaleIcon';
-import MaleIcon from 'icons/MaleIcon';
-import PlusIcon from 'icons/PlusIcon';
-
-import styles from './AddPetForm.module.scss';
-
 import PersonalDetail from './PersonalDetail/PersonalDetail';
 import MoreInfo from './MoreInfo/MoreInfo';
 
-const tabs = ['Choose  option', 'Personal details', 'More info'];
-const categories = ['your pet', 'sell', 'lost/found', 'in good hands'];
+import Button from 'shared/components/Button/Button';
+import ArrowLeftIcon from 'icons/ArrowLeftIcon';
+import PawprintIcon from 'icons/PawprintIcon';
+import validateRulers from 'shared/helpers/validation/validateRulers';
 
-const gender = [
-  { gender: 'Female', svg: <FemaleIcon stroke="#F43F5E" /> },
-  { gender: 'Male', svg: <MaleIcon stroke="#54ADFF" /> },
-];
+import { gender, categories, tabs } from './InitialData/InitialData';
+
+import styles from './AddPetForm.module.scss';
 
 const initialState = {
   petName: '',
@@ -172,6 +163,7 @@ const AddPetForm = ({ onSubmit }) => {
   const handleFormTabNvigationPrev = () => {
     setActiveTab(activeTab => activeTab - 1);
   };
+
   const handleFormTabNvigationDone = () => {
     const invalidObjects = validateData();
   };
