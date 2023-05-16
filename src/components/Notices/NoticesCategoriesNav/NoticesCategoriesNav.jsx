@@ -1,7 +1,7 @@
 
 import Button from 'shared/components/Button/Button';
 import style from './NoticesCategoriesNav.module.scss';
-export const NoticesCategoriesNav = () => {
+const NoticesCategoriesNav = () => {
   return (
     <div className={style.wrapper}>
       <Button label={'sell'} className={style.btn} />
@@ -12,4 +12,6 @@ export const NoticesCategoriesNav = () => {
     </div>
   );
 };
+
+export default NoticesCategoriesNav;
 

@@ -2,6 +2,7 @@ import { useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 // import PropTypes from 'prop-types';
 
+import Button from '../Button/Button';
 import CrossIcon from 'icons/CrossIcon';
 
 import styles from './Modal.module.scss';
@@ -25,9 +26,12 @@ function Modal({ closeModal, children }) {
   }, [closeModalOnClick]);
 
   return createPortal(
-    <div className={styles.overlay} onClick={closeModalOnClick}>
+    <div className={styles.backdrop} onClick={closeModalOnClick}>
       <div className={styles.modal}>
-        <CrossIcon className={styles.close} onClick={closeModalOnClick} />
+        <Button className={styles.closeBtn} onClick={closeModal}>
+          <CrossIcon className={styles.closeIcon} />
+        </Button>
+
         {children}
       </div>
     </div>,
