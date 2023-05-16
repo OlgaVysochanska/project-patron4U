@@ -1,6 +1,6 @@
 import Spiner from 'components/Spiner/Spiner';
 
-import NewsPageListItem from '../NewsPageListItem/NewsPageListItem';
+import NewsPageListItem from '../NewsPageListItem';
 import style from './NewsPageList.module.scss';
 
 const NewsPageList = ({ items, loading }) => {

@@ -1,51 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import style from './Pagination.module.scss';
 import ArrowLeftIcon from 'icons/ArrowLeftIcon';
 
-const Pagination = ({ totalPages, onPageChange }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [visiblePages, setVisiblePages] = useState([1, 2, 3, 4, 5]);
+const Pagination = ({ totalPages, onPageChange, page }) => {
+  const [visiblePages, setVisiblePages] = useState([]);
+
+  const updateVisiblePages = useCallback(
+    currentPage => {
+      const totalPagesArray = Array.from(
+        { length: totalPages },
+        (_, i) => i + 1
+      );
+      const startIndex = Math.max(currentPage - 2, 1);
+      const endIndex = Math.min(startIndex + 4, totalPages);
+      setVisiblePages(totalPagesArray.slice(startIndex - 1, endIndex));
+    },
+    [totalPages]
+  );
+
+  useEffect(() => {
+    updateVisiblePages(page);
+  }, [page, updateVisiblePages]);
 
   const handlePageChange = pageNumber => {
-    setCurrentPage(pageNumber);
-
-    if (visiblePages.indexOf(pageNumber) === -1) {
-      let newVisiblePages = [...visiblePages];
-      newVisiblePages.pop();
-      newVisiblePages.unshift(pageNumber - 2);
-      setVisiblePages(newVisiblePages);
-    }
-
     onPageChange(pageNumber);
+    updateVisiblePages(pageNumber);
   };
 
   const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-
-      if (visiblePages.indexOf(currentPage - 1) === -1) {
-        let newVisiblePages = [...visiblePages];
-        newVisiblePages.pop();
-        newVisiblePages.unshift(currentPage - 1);
-        setVisiblePages(newVisiblePages);
-      }
-
-      onPageChange(currentPage - 1);
+    if (page > 1) {
+      const prevPage = page - 1;
+      onPageChange(prevPage);
+      updateVisiblePages(prevPage);
     }
   };
 
   const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-
-      if (visiblePages.indexOf(currentPage + 1) === -1) {
-        let newVisiblePages = [...visiblePages];
-        newVisiblePages.shift();
-        newVisiblePages.push(currentPage + 1);
-        setVisiblePages(newVisiblePages);
-      }
-
-      onPageChange(currentPage + 1);
+    if (page < totalPages) {
+      const nextPage = page + 1;
+      onPageChange(nextPage);
+      updateVisiblePages(nextPage);
     }
   };
 
@@ -54,42 +48,38 @@ const Pagination = ({ totalPages, onPageChange }) => {
       <ul className={style.pagination}>
         <li
           onClick={handlePrevPage}
-          className={style.listItem}
-          // className={currentPage === 1 ? 'disabled' : ''}
-          // className={currentPage === 1 ? }
+          className={`${style.listItem} ${page === 1 ? style.disabled : ''}`}
         >
           <span
             className={
-              currentPage === 1
-                ? `${style.arrowLeft__disabled}`
+              page === 1
+                ? `${style.arrowLeft} ${style.arrowLeft__disabled}`
                 : style.arrowLeft
             }
           >
             <ArrowLeftIcon />
           </span>
         </li>
-        {visiblePages.map(page => (
+        {visiblePages.map(pageNumber => (
           <li
-            key={page}
-            // className={currentPage === page ? 'active' : 'disabled'}
-            className={
-              currentPage === page
-                ? `${style.listItem} ${style.active}`
-                : style.listItem
-            }
-            onClick={() => handlePageChange(page)}
+            key={pageNumber}
+            className={`${style.listItem} ${
+              page === pageNumber ? style.active : ''
+            }`}
+            onClick={() => handlePageChange(pageNumber)}
           >
-            {page}
+            {pageNumber}
           </li>
         ))}
         <li
-          className={style.listItem}
           onClick={handleNextPage}
-          // className={currentPage === totalPages ? 'disabled' : ''}
+          className={`${style.listItem} ${
+            page === totalPages ? style.disabled : ''
+          }`}
         >
           <span
             className={
-              currentPage === totalPages
+              page === totalPages
                 ? `${style.arrowRight} ${style.arrowRight__disabled}`
                 : style.arrowRight
             }
