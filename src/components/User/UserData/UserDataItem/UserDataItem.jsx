@@ -6,17 +6,19 @@ import styles from './UserDataItem.scss';
 // import {useDispatch} from 'react-redux'
 import Button from 'shared/components/Button/Button';
 import CheckIcon from 'icons/CheckIcon';
-import CrossIcon from 'icons/CrossIcon';
+import EditIcon from 'icons/EditIcon';
 
 const CheckIconTuned = () => {
-    return <CheckIcon  stroke='green' width="16" height="16" viewBox="0 0 22 21" />;
+    return <CheckIcon  stroke='#00C3AD' width="16" height="16" viewBox="0 0 22 21" />;
   };
   
-  const CrossIconTuned = () => {
-    return <CrossIcon  stroke='red' width="16" height="16" viewBox="0 0 22 21" />;
+  const EditIconTuned = () => {
+    return <EditIcon  stroke='#54ADFF' width="16" height="16" viewBox="0 0 22 21" />;
   };
 
 const UserDataItem = ({
+  // clickEdit,
+  clickSave,
   clickToglle,
   isActive,
   label,
@@ -24,6 +26,9 @@ const UserDataItem = ({
   value,
   clickActive,
   activeItem,
+  isEditing,
+  setActiveItem,
+  setIsEditing,
 }) => {
   //  const dispatch = useDispatch()
   const id = nanoid();
@@ -31,7 +36,15 @@ const UserDataItem = ({
   //   dispatch(clickToglle(id))
   // };
 
-  const rO = { readOnly: 'disabled' };
+  const clickEdit = id => {
+    // onClick(!isActive);
+    setActiveItem(id);
+    setIsEditing(true);
+    console.log(activeItem);
+    console.log(isEditing)
+  };
+
+  const rO =  "readOnly";
   return (
     <form>
       {/* <div style={{ backgroundColor: 'green', position: 'relative' }}> */}
@@ -41,28 +54,29 @@ const UserDataItem = ({
           label={label}
           name={name}
           defaultValue={value}
-          {...(!isActive && { ...rO })}
+          {...(!isActive && isEditing && { rO })}
           // inputStyle={{ position: 'relative' }}
           isValid={true}
         ></Input>
         <Button
         type="button"
-          onClick={clickToglle}
+          onClick={clickEdit}
           className={styles.toggle}
-          // buttonStyle={{
-          //   backgroundColor: 'red',
-          //   position: 'absolute',
-          //   right: '10px',
+          buttonStyle={{
+            backgroundColor: 'transparent',
+            border: 'none',
+            position: 'absolute',
+            right: '10px',
           //   top: '10px',
             //   transform: 'translateY(-50%)',
-          // }}
+          }}
       
-          SVGComponent={CheckIconTuned}
+          SVGComponent={EditIconTuned}
           stroke='red'
         />
         <Button
          type="button"
-          onClick={clickToglle}
+          onClick={clickSave}
           className={styles.toggle}
           // buttonStyle={{
           
@@ -71,7 +85,7 @@ const UserDataItem = ({
           //   top: '10px',
           //   //     //   transform: 'translateY(-50%)',
           // }}
-          SVGComponent={CrossIconTuned}
+          SVGComponent={CheckIconTuned}
         />
       {/* </div> */}
 

@@ -39,6 +39,7 @@ const user = {
 const UserData = ({ onClick }) => {
   const [isEditPhoto, setEditPhoto] = useState(false);
   const [isActive, setActive] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [activeItem, setActiveItem] = useState('');
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
@@ -52,17 +53,19 @@ const UserData = ({ onClick }) => {
     avatar = defaultAvatar;
   }
 
-  const clickToglle = id => {
-    onClick(!isActive);
+  const clickEdit = id => {
+    // onClick(!isActive);
     setActiveItem(id);
+    setIsEditing(true);
     console.log(activeItem);
+    console.log(isEditing)
   };
 
   const clickActive = id => {
     !isActive ? setActiveItem(id) : setActiveItem(false);
   };
 
-  console.log(userMap);
+  // console.log(userMap);
 
   const onEditPhoto = () => {
     setEditPhoto(true);
@@ -78,19 +81,21 @@ const UserData = ({ onClick }) => {
 
   const elements = Object.entries(userMap).map(([key, value]) => {
     console.log(key);
-    // id=nanoid()
+    const id = nanoid();
     return (
       <div key={nanoid()}>
         <UserDataItem
           label={key.charAt(0).toUpperCase() + key.slice(1) + ':'}
           name={key}
           value={value}
-          clickToglle={clickToglle}
+          clickEdit={clickEdit}
           isActive={isActive}
           clickActive={clickActive}
           activeItem={activeItem}
-          id={nanoid()}
+          id={id}
           key={key}
+          setIsEditing={setIsEditing}
+          setActiveItem={setActiveItem}
         />
       </div>
     );
