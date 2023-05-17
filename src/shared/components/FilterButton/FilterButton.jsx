@@ -3,7 +3,7 @@ import FilterIcon from '../../../icons/FilterIcon';
 import PropTypes from 'prop-types';
 
 const FilterButton = ({ onClick, children }) => {
-  const active = false;
+  const active = true;
   return (
     <button
       className={`${styles.filterButton} ${active ? styles.active : ''}`}

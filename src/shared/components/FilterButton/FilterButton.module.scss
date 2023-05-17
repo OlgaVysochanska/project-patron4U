@@ -1,5 +1,5 @@
 .filterButton {
-  width: 129px;
+  width: 152px;
   height: 40px;
   display: flex;
   align-items: center;
@@ -29,9 +29,28 @@
 
 .label {
   color: #54adff;
+  font-size: 16px;
   font-style: Bold;
+
+  @media screen and (max-width: 480px) {
+    /* Застосувати стилі для екранів з шириною до 480px */
+    display: none;
+  }
 }
 
 .label.active {
   color: white;
+}
+
+@media screen and (max-width: 480px) {
+  /* Застосувати стилі для екранів з шириною до 480px */
+  .filterButton {
+    width: 40px;
+  }
+  .filterIcon {
+    margin-left: -9px;
+  }
+  .label {
+    display: none;
+  }
 }
