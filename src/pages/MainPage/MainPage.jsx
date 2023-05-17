@@ -10,7 +10,6 @@ import petsTab1x from '../../images/pets_tab_1x.png';
 import petsTab2x from '../../images/pets_tab_2x.png';
 import petsDes1x from '../../images/pets_des_1x.png';
 import petsDes2x from '../../images/pets_des_2x.png';
-import RegisterForm from '../../components/AuthForms/RegisterForm';
 
 const MainPage = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -71,7 +70,6 @@ const MainPage = () => {
         <img className={scss.pets} src={getImage()} alt="pets" loading="lazy" />
         <h1 className={scss.title}>Take good care of your small pets</h1>
       </div>
-      <RegisterForm />
     </>
   );
 };
