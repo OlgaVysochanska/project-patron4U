@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import Spiner from '../../components/Spiner/Spiner';
 import { getFriends } from '../../shared/services/friends';
 import FriendsItem from './FriendsItem/FriendsItem';
@@ -13,7 +14,6 @@ const OurFriendsList = () => {
     setIsLoading(true);
     getFriends()
       .then(response => {
-        console.log(response);
         setFriends(response);
       })
       .catch(error => setError(error.message))
@@ -54,7 +54,7 @@ const OurFriendsList = () => {
     <>
       {isLoading && <Spiner />}
       {error ? (
-        <p className={scss.error}>{error}</p>
+        <Navigate to="/not-found" />
       ) : (
         <ul className={scss.list}>{elements}</ul>
       )}

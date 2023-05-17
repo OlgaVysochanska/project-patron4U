@@ -54,27 +54,55 @@ const FriendsItem = ({
                     <li className={s.timeDescription}>SU:</li>
                   </ul>
                   <ul>
-                    <li className={s.timeDescription}>
-                      {workDays[0].from}-{workDays[0].to}
-                    </li>
-                    <li className={s.timeDescription}>
-                      {workDays[1].from}-{workDays[1].to}
-                    </li>
-                    <li className={s.timeDescription}>
-                      {workDays[2].from}-{workDays[2].to}
-                    </li>
-                    <li className={s.timeDescription}>
-                      {workDays[3].from}-{workDays[3].to}
-                    </li>
-                    <li className={s.timeDescription}>
-                      {workDays[4].from}-{workDays[4].to}
-                    </li>
-                    <li className={s.timeDescription}>
-                      {workDays[5].from}-{workDays[5].to}
-                    </li>
-                    <li className={s.timeDescription}>
-                      {workDays[5].from}-{workDays[5].to}
-                    </li>
+                    {workDays[0].from && workDays[0].to ? (
+                      <li className={s.timeDescription}>
+                        {workDays[0].from}-{workDays[0].to}
+                      </li>
+                    ) : (
+                      <li className={s.timeDescription}>day off</li>
+                    )}
+                    {workDays[1].from && workDays[1].to ? (
+                      <li className={s.timeDescription}>
+                        {workDays[1].from}-{workDays[1].to}
+                      </li>
+                    ) : (
+                      <li className={s.timeDescription}>day off</li>
+                    )}
+                    {workDays[2].from && workDays[2].to ? (
+                      <li className={s.timeDescription}>
+                        {workDays[2].from}-{workDays[2].to}
+                      </li>
+                    ) : (
+                      <li className={s.timeDescription}>day off</li>
+                    )}
+                    {workDays[3].from && workDays[3].to ? (
+                      <li className={s.timeDescription}>
+                        {workDays[3].from}-{workDays[3].to}
+                      </li>
+                    ) : (
+                      <li className={s.timeDescription}>day off</li>
+                    )}
+                    {workDays[4].from && workDays[4].to ? (
+                      <li className={s.timeDescription}>
+                        {workDays[4].from}-{workDays[4].to}
+                      </li>
+                    ) : (
+                      <li className={s.timeDescription}>day off</li>
+                    )}
+                    {workDays[5].from && workDays[5].to ? (
+                      <li className={s.timeDescription}>
+                        {workDays[5].from}-{workDays[5].to}
+                      </li>
+                    ) : (
+                      <li className={s.timeDescription}>day off</li>
+                    )}
+                    {workDays[6].from && workDays[6].to ? (
+                      <li className={s.timeDescription}>
+                        {workDays[6].from}-{workDays[6].to}
+                      </li>
+                    ) : (
+                      <li className={s.timeDescription}>day off</li>
+                    )}
                   </ul>
                 </div>
               )}
