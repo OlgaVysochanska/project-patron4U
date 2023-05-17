@@ -11,8 +11,6 @@ const Input = ({
   value,
   handleChange,
   isValid,
-  icon,
-  onIconClick,
   ...props
 }) => {
   return (
@@ -30,11 +28,6 @@ const Input = ({
         className={`${styles.input} ${!isValid ? styles.invalid : ''}`}
         {...props}
       />
-      {icon && (
-        <span className={styles.icon} onClick={onIconClick}>
-          {icon}
-        </span>
-      )}
       {!isValid && <p className={styles.errorMessage}>{title}</p>}
     </div>
   );

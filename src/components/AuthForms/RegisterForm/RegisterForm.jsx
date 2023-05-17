@@ -22,7 +22,11 @@ const RegisterForm = ({ onSubmit }) => {
 
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [isValid, setIsValid] = useState(true);
+  const [isValid, setIsValid] = useState({
+    email: true,
+    password: true,
+    confirmPassword: true,
+  });
 
   //перевірка на встановлення властивості disabled для кнопки
   const [agreed, setAgreed] = useState(false);
@@ -52,18 +56,28 @@ const RegisterForm = ({ onSubmit }) => {
       <Input
         id="email"
         value={email}
-        style={{ border: isValid ? '#54ADFF' : '#F43F5E' }}
+        pattern=".{6,}" // Патерн для мінімальної довжини паролю (6 символів)
+        title="Password must be at least 6 characters long" // Підказка для патерну
+        style={{
+          border: isValid ? '1px solid #54adff' : '1px solid #F43F5E',
+        }}
         handleChange={handleChange}
         {...fields.email}
+        isValid={isValid.email}
       />
       <div className={styles.inputWrapper}>
         <Input
           id="password"
           type={showPassword ? 'text' : 'password'}
-          style={{ border: isValid ? '#54ADFF' : '#F43F5E' }}
+          pattern=".{6,}" // Патерн для мінімальної довжини паролю (6 символів)
+          title="Password must be at least 6 characters long" // Підказка для патерну
+          style={{
+            border: isValid ? '1px solid #54adff' : '1px solid #F43F5E',
+          }}
           value={password}
           handleChange={handleChange}
           {...fields.password}
+          isValid={isValid.password}
         />
         <EyeClosedIcon
           className={styles.eyeIcon}
@@ -76,7 +90,9 @@ const RegisterForm = ({ onSubmit }) => {
           id="confirm"
           placeholder="Confirm password"
           type={showPassword ? 'text' : 'password'}
-          style={{ border: isValid ? '#54ADFF' : '#F43F5E' }}
+          style={{
+            border: isValid ? '1px solid #54adff' : '1px solid #F43F5E',
+          }}
           pattern=".{6,}" // Патерн для мінімальної довжини паролю (6 символів)
           title="Password must be at least 6 characters long" // Підказка для патерну
           value={confirmPassword}
