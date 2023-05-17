@@ -1,9 +1,4 @@
-import axios from 'axios';
-// import instance from './instance';
-
-const instance = axios.create({
-  baseURL: 'http://localhost:5000/api',
-});
+import instance from './instance';
 
 export const searchNews = async (search, page = 1) => {
   // console.log(search);

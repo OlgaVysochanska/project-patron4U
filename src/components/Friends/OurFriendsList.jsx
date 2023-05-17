@@ -14,7 +14,7 @@ const OurFriendsList = () => {
     setIsLoading(true);
     getFriends()
       .then(response => {
-        setFriends(response);
+        setFriends(response.data);
       })
       .catch(error => setError(error.message))
       .finally(() => setIsLoading(false));
