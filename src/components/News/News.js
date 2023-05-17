@@ -67,11 +67,13 @@ const News = () => {
     <>
       <SearchBar onSubmit={onSearchNews} />
       <NewsPageList items={items} loading={loading} />
-      <Pagination
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-        page={page}
-      />
+      {!loading && (
+        <Pagination
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+          page={page}
+        />
+      )}
     </>
   );
 };
