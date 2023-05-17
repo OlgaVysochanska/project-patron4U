@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './DropdownSelectors.module.scss';
-import Button from '../../../../shared/components/Button';
+import Button from 'shared/components/Button';
 import ArrowDownIcon from '../../../../icons/ArrowDownIcon';
 
 const AgeFilter = ({

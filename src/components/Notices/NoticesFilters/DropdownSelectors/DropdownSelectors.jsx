@@ -1,9 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 import styles from './DropdownSelectors.module.scss';
-import Button from '../../../../shared/components/Button';
-import FilterButton from 'shared/components/FilterButton/FilterButton';
-import ArrowDownIcon from '../../../../icons/ArrowDownIcon';
-import CrossSmallIcon from '../../../../icons/CrossSmallIcon';
 import SelectedButtons from '../SelectedButton';
 import AgeFilter from './AgeFilter';
 import GenderFilter from './GenderFilter';

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './SelectedButton.module.scss';
-import Button from '../../../../shared/components/Button';
+import Button from 'shared/components/Button';
 import CrossSmallIcon from '../../../../icons/CrossSmallIcon';
 
 const SelectedButtons = ({ buttons, onRemove }) => {
