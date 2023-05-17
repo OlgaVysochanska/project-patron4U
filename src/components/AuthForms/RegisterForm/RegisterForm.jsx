@@ -22,11 +22,9 @@ const RegisterForm = ({ onSubmit }) => {
 
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [isValid, setIsValid] = useState({
-    email: true,
-    password: true,
-    confirmPassword: true,
-  });
+  const [isValidConf, setIsValidConf] = useState(true);
+  const [isValidPass, setIsValidPass] = useState(true);
+  const [isValidEmail, setIsValidEmail] = useState(true);
 
   //перевірка на встановлення властивості disabled для кнопки
   const [agreed, setAgreed] = useState(false);
@@ -34,7 +32,7 @@ const RegisterForm = ({ onSubmit }) => {
   const handleConfirmPasswordChange = event => {
     const confirmValue = event.target.value;
     setConfirmPassword(confirmValue);
-    setIsValid(confirmValue.length >= 6);
+    setIsValidConf(confirmValue.length >= 6);
   };
 
   const toggleShowPassword = () => {
@@ -59,11 +57,14 @@ const RegisterForm = ({ onSubmit }) => {
         pattern=".{6,}" // Патерн для мінімальної довжини паролю (6 символів)
         title="Password must be at least 6 characters long" // Підказка для патерну
         style={{
-          border: isValid ? '1px solid #54adff' : '1px solid #F43F5E',
+          border: isValidEmail ? '1px solid #54adff' : '1px solid #F43F5E',
         }}
-        handleChange={handleChange}
+        handleChange={e => {
+          handleChange(e);
+          setIsValidEmail(email.length >= 6);
+        }}
         {...fields.email}
-        isValid={isValid.email}
+        isValid={isValidEmail}
       />
       <div className={styles.inputWrapper}>
         <Input
@@ -72,12 +73,15 @@ const RegisterForm = ({ onSubmit }) => {
           pattern=".{6,}" // Патерн для мінімальної довжини паролю (6 символів)
           title="Password must be at least 6 characters long" // Підказка для патерну
           style={{
-            border: isValid ? '1px solid #54adff' : '1px solid #F43F5E',
+            border: isValidPass ? '1px solid #54adff' : '1px solid #F43F5E',
           }}
           value={password}
-          handleChange={handleChange}
+          handleChange={e => {
+            handleChange(e);
+            setIsValidPass(password.length >= 6);
+          }}
           {...fields.password}
-          isValid={isValid.password}
+          isValid={isValidPass}
         />
         <EyeClosedIcon
           className={styles.eyeIcon}
@@ -91,13 +95,13 @@ const RegisterForm = ({ onSubmit }) => {
           placeholder="Confirm password"
           type={showPassword ? 'text' : 'password'}
           style={{
-            border: isValid ? '1px solid #54adff' : '1px solid #F43F5E',
+            border: isValidConf ? '1px solid #54adff' : '1px solid #F43F5E',
           }}
           pattern=".{6,}" // Патерн для мінімальної довжини паролю (6 символів)
           title="Password must be at least 6 characters long" // Підказка для патерну
           value={confirmPassword}
           handleChange={handleConfirmPasswordChange}
-          isValid={isValid}
+          isValid={isValidConf}
         />
         <EyeClosedIcon
           className={styles.eyeIcon}
