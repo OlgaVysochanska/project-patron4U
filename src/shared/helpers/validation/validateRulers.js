@@ -30,6 +30,7 @@ const validateRulers = formState => {
         break;
       case 'photoUrl':
         isValid = field.value !== '';
+        message = 'Download photo';
         break;
       case 'sex':
         isValid = field.value !== '';

@@ -16,7 +16,7 @@ const OurFriendsPage = lazy(() => import('pages/OurFriendsPage'));
 const UserPage = lazy(() => import('pages/UserPage'));
 const AddPetPage = lazy(() => import('pages/AddPetPage'));
 const NotFound = lazy(() => import('pages/NotFound'));
-
+const AddPetForm = lazy(() => import('components/AddPetForm/AddPetForm'));
 export const App = () => {
   return (
     <Provider store={store}>
@@ -30,7 +30,7 @@ export const App = () => {
             <Route path="/friends" element={<OurFriendsPage />} />
             <Route path="/news" element={<NewsPage />} />
             <Route path="/user" element={<UserPage />} />
-            <Route path="/add-pet" element={<AddPetPage />} />
+            <Route path="/add-pet" element={<AddPetForm />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

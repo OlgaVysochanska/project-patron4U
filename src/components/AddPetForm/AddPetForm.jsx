@@ -1,10 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useForm from 'shared/hooks/useForm';
 import PersonalDetail from './PersonalDetail/PersonalDetail';
 import MoreInfo from './MoreInfo/MoreInfo';
-
 import Button from 'shared/components/Button/Button';
 import ArrowLeftIcon from 'icons/ArrowLeftIcon';
 import PawprintIcon from 'icons/PawprintIcon';
@@ -15,6 +14,7 @@ import { gender, categories, tabs } from './InitialData/InitialData';
 import styles from './AddPetForm.module.scss';
 
 const initialState = {
+  category: 'my pet',
   petName: '',
   birthDate: null,
   breed: '',
@@ -44,8 +44,10 @@ const AddPetForm = ({ onSubmit }) => {
   const [invalidComments, setInvalidComments] = useState('');
   const [invalidLocation, setInvalidLocation] = useState('');
   const [invalidPrice, setInvalidPrice] = useState('');
+  const [invalidPhotoUrl, setInvalidPhotoUrl] = useState('');
 
   const {
+    category,
     addTitle,
     petName,
     birthDate,
@@ -86,7 +88,10 @@ const AddPetForm = ({ onSubmit }) => {
     if (activeTab === 2) {
       switch (activeCategory) {
         case 0:
-          formData = [{ name: 'comments', value: comments }];
+          formData = [
+            { name: 'comments', value: comments },
+            { name: 'photoUrl', value: photoUrl },
+          ];
           break;
         case 1:
           formData = [
@@ -94,6 +99,7 @@ const AddPetForm = ({ onSubmit }) => {
             { name: 'sex', value: sex },
             { name: 'location', value: location },
             { name: 'price', value: price },
+            { name: 'photoUrl', value: photoUrl },
           ];
           break;
         case 2:
@@ -102,6 +108,7 @@ const AddPetForm = ({ onSubmit }) => {
             { name: 'comments', value: comments },
             { name: 'sex', value: sex },
             { name: 'location', value: location },
+            { name: 'photoUrl', value: photoUrl },
           ];
           break;
         default:
@@ -130,6 +137,7 @@ const AddPetForm = ({ onSubmit }) => {
     setInvalidComments(errorMessages.comments || '');
     setInvalidLocation(errorMessages.location || '');
     setInvalidPrice(errorMessages.price || '');
+    setInvalidPhotoUrl(errorMessages.photoUrl || '');
 
     return validatedData.filter(obj => obj.isValid === false);
   };
@@ -146,6 +154,12 @@ const AddPetForm = ({ onSubmit }) => {
 
   const handleCategoryChange = index => {
     setActiveCategory(index);
+    handleChange({
+      target: {
+        name: 'category',
+        value: categories[index].id,
+      },
+    });
   };
 
   const handleFormTabNvigationCancel = () => {
@@ -166,6 +180,7 @@ const AddPetForm = ({ onSubmit }) => {
 
   const handleFormTabNvigationDone = () => {
     const invalidObjects = validateData();
+    console.log(state);
   };
 
   const formTabsEl = tabs.map((item, index) => (
@@ -178,6 +193,7 @@ const AddPetForm = ({ onSubmit }) => {
         activeTab === index ? styles['formTabAct'] : '',
         activeTab > index ? styles['formTabValid'] : '',
       ].join(' ')}
+      type="button"
     />
   ));
 
@@ -203,6 +219,7 @@ const AddPetForm = ({ onSubmit }) => {
       SVGComponent={() => <ArrowLeftIcon stroke="#54ADFF" />}
       onClick={handleFormTabNvigationPrev}
       className={styles.navigationButtonPrev}
+      type="button"
     />
   );
 
@@ -212,6 +229,7 @@ const AddPetForm = ({ onSubmit }) => {
       SVGComponent={() => <PawprintIcon fill="#FEF9F9" />}
       onClick={handleFormTabNvigationNext}
       className={styles.navigationButtonNext}
+      type="button"
     />
   );
 
@@ -221,6 +239,7 @@ const AddPetForm = ({ onSubmit }) => {
       SVGComponent={() => <PawprintIcon fill="#FEF9F9" />}
       className={styles.navigationButtonNext}
       onClick={handleFormTabNvigationDone}
+      type="button"
     />
   );
 
@@ -231,17 +250,19 @@ const AddPetForm = ({ onSubmit }) => {
       SVGComponent={() => <ArrowLeftIcon stroke="#54ADFF" />}
       onClick={handleFormTabNvigationCancel}
       className={styles.navigationButtonPrev}
+      type="button"
     />
   );
 
   const categoriesEl = categories.map((item, index) => (
     <Button
-      label={item}
+      label={item.category}
       key={index}
       onClick={() => handleCategoryChange(index)}
       className={
         activeCategory === index ? styles.categoryAct : styles.category
       }
+      type="button"
     />
   ));
 
@@ -270,10 +291,12 @@ const AddPetForm = ({ onSubmit }) => {
       location={location}
       price={price}
       comments={comments}
+      photoUrl={photoUrl}
       invalidSex={invalidSex}
       invalidPrice={invalidPrice}
       invalidLocation={invalidLocation}
       invalidComments={invalidComments}
+      invalidPhotoUrl={invalidPhotoUrl}
       handleChange={handleChange}
       handleGenderChange={handleGenderChange}
     />
