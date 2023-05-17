@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import scss from './MainPage.module.scss';
 
@@ -72,7 +71,6 @@ const MainPage = () => {
         <h1 className={scss.title}>Take good care of your small pets</h1>
       </div>
     </>
-
   );
 };
 
