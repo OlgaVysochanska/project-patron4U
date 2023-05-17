@@ -6,17 +6,17 @@ const fields = {
     placeholder: 'Email',
   },
   password: {
-    type: 'password',
+    // type: 'password',
     name: 'password',
     required: true,
     placeholder: 'Password',
   },
-  confirm: {
-    type: 'password',
-    name: 'confirm',
-    required: true,
-    placeholder: 'Confirm password',
-  },
+  // confirm: {
+  //   type: 'password',
+  //   name: 'confirm',
+  //   required: true,
+  //   placeholder: 'Confirm password',
+  // },
 };
 
 export default fields;
