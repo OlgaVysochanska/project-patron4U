@@ -1,6 +1,7 @@
 // import { useState, useEffect, useCallback } from 'react';
 // import { useSearchParams } from 'react-router-dom';
 // import { searchNotice } from '../../../shared/services/notices';
+import Title from 'shared/components/Title/Title';
 // import NoticesCategoriesList from '../NoticesCategoriesList/NoticesCategoriesList';
 import SearchBar from 'shared/components/SearchBar/SearchBar';
 import style from './NoticesSearch.module.scss';
@@ -44,7 +45,8 @@ const NoticesSearch = () => {
   return (
     <>
       <div className={style.wrapper}>
-        <SearchBar />
+        <Title>Find your favorite pet</Title>
+       <SearchBar />
       </div>
       {/* <NoticesCategoriesList data={items}/>
       {error && <p>{error}</p>}

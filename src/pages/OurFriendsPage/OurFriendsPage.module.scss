@@ -1,25 +1,11 @@
-.mainTitle {
-  margin: 0px 0px 28px 0px;
-  text-align: center;
-  font-family: 'Manrope Bold';
-  line-height: 1.37;
-  color: #000000;
-}
-
-@media only screen and (min-width: 768px) {
-  .mainTitle {
-    margin: 47px 0px 45px 0px;
-    font-size: 48px;
-    line-height: 66px;
-  }
-}
-
-@media only screen and (min-width: 992px) {
-  .mainTitle {
-    margin: 18px 0px 60px 0px;
-  }
-}
-
-.loader {
-  margin-top: 300px;
+.container {
+  padding-top: 40px;
+  padding-bottom: 75px;
+    @media screen and (min-width: 768px) {
+      padding-bottom: 200px;
+    }
+    @media screen and (min-width: 1280px) {
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
 }
