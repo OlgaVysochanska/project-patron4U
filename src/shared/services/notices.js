@@ -24,3 +24,8 @@ export const searchNotice = async (q, _page = 1) => {
   });
   return data;
 };
+
+export const getNoticeByCategory = async category => {
+  const { data } = await instance.get(`/notices/${category}`);
+  return data;
+};
