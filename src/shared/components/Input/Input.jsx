@@ -11,6 +11,8 @@ const Input = ({
   value,
   handleChange,
   isValid,
+  icon,
+  onIconClick,
   inputStyle,
   ...props
 }) => {
@@ -18,7 +20,7 @@ const Input = ({
     ...inputStyle,
   };
   return (
-    <>
+    <div className={styles.wrapper}>
       <label htmlFor={type}>{label}</label>
       <input
         type={type}
@@ -33,8 +35,13 @@ const Input = ({
         style={inputStyles}
         {...props}
       />
-      {/* {!isValid && <p className={styles.errorMessage}>{title}</p>} */}
-    </>
+      {icon && (
+        <span className={styles.icon} onClick={onIconClick}>
+          {icon}
+        </span>
+      )}
+      {!isValid && <p className={styles.errorMessage}>{title}</p>}
+    </div>
   );
 };
 
@@ -47,6 +54,6 @@ Input.propTypes = {
   title: PropTypes.string,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func,
+  icon: PropTypes.string,
 };
-
 export default Input;

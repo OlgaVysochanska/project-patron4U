@@ -7,15 +7,17 @@ form {
   margin-right: auto;
 }
 
-.input {
-  display: flex;
-  align-items: center;
+// .input {
+//   display: flex;
+//   align-items: center;
   //   position: relative;
   //   background-color: red;
-}
+// }
 
-.fixPosition {
+label input {
   display: flex;
+    align-items: center;
+
   position: relative;
 }
 

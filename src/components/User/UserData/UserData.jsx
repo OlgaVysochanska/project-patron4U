@@ -10,6 +10,8 @@ import { nanoid } from 'nanoid';
 import CheckIcon from 'icons/CheckIcon';
 import CrossIcon from 'icons/CrossIcon';
 
+import UploadWidget from '../../../shared/components/UploadWidget/UploadWidget';
+
 const CameraIconTuned = () => {
   return <CameraIcon width="16" height="16" viewBox="0 0 22 21" />;
 };
@@ -52,7 +54,7 @@ const UserData = ({ onClick }) => {
 
   const clickToglle = id => {
     onClick(!isActive);
-
+    setActiveItem(id);
     console.log(activeItem);
   };
 
@@ -66,15 +68,19 @@ const UserData = ({ onClick }) => {
     setEditPhoto(true);
   };
 
-  const onSavePhoto = () => {setEditPhoto(false);};
+  const onSavePhoto = () => {
+    setEditPhoto(false);
+  };
 
-  const onCancel = () => {setEditPhoto(false);};
-
+  const onCancel = () => {
+    setEditPhoto(false);
+  };
 
   const elements = Object.entries(userMap).map(([key, value]) => {
     console.log(key);
+    // id=nanoid()
     return (
-      <div>
+      <div key={nanoid()}>
         <UserDataItem
           label={key.charAt(0).toUpperCase() + key.slice(1) + ':'}
           name={key}
@@ -84,7 +90,7 @@ const UserData = ({ onClick }) => {
           clickActive={clickActive}
           activeItem={activeItem}
           id={nanoid()}
-          //   key={id}
+          key={key}
         />
       </div>
     );
@@ -96,35 +102,42 @@ const UserData = ({ onClick }) => {
     <div className={styles.container}>
       <img src={avatar} alt="Your look" width={picSize} height={picSize}></img>
       {!isEditPhoto && (
-        <Button
-          onClick={onEditPhoto}
-          type="button"
-          className={styles.btnPhoto}
-          label="Edit photo"
-          SVGComponent={CameraIconTuned}
-          showLabelFirst={false}
-        />
+        <>
+          <Button
+            onClick={onEditPhoto}
+            type="button"
+            className={styles.btnPhoto}
+            label="Edit photo"
+            SVGComponent={CameraIconTuned}
+            // SVGComponent={UploadWidget}
+            showLabelFirst={false}
+          />
+        </>
       )}
-<div className={styles.div}>      {isEditPhoto && (
-        <Button
-          onClick={onSavePhoto}
-          type="button"
-          className={styles.btnPhoto}
-          label="Confirm"
-          SVGComponent={CheckIconTuned}
-          showLabelFirst={false}
-        />
-      )}
-      {isEditPhoto && (
-        <Button
-          onClick={onCancel}
-          type="button"
-          className={styles.btnPhoto}
-          label="Cancel"
-          SVGComponent={CrossIconTuned}
-          showLabelFirst={false}
-        />
-      )}</div>
+      <div className={styles.div}>
+        {isEditPhoto && (
+          <Button
+            onClick={onSavePhoto}
+            type="button"
+            className={styles.btnPhoto}
+            label="Confirm"
+            SVGComponent={CheckIconTuned}
+            showLabelFirst={false}
+          />
+        )}
+        {isEditPhoto && (
+          <Button
+            onClick={onCancel}
+            type="button"
+            className={styles.btnPhoto}
+            label="Cancel"
+            SVGComponent={CrossIconTuned}
+            showLabelFirst={false}
+          />
+        )}
+      </div>
+
+      {/* <div>{UploadWidget}</div> */}
 
       {/* <ToggleButtonPhoto>Edit photo</ToggleButtonPhoto> */}
 

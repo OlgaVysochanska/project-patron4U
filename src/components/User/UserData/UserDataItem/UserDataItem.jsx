@@ -34,7 +34,7 @@ const UserDataItem = ({
   const rO = { readOnly: 'disabled' };
   return (
     <form>
-      <div style={{ backgroundColor: 'green', position: 'relative' }}>
+      {/* <div style={{ backgroundColor: 'green', position: 'relative' }}> */}
         <Input
           key={id}
           id={id}
@@ -49,29 +49,31 @@ const UserDataItem = ({
         type="button"
           onClick={clickToglle}
           className={styles.toggle}
-          buttonStyle={{
-            backgroundColor: 'red',
-            position: 'absolute',
-            right: '10px',
-            top: '10px',
+          // buttonStyle={{
+          //   backgroundColor: 'red',
+          //   position: 'absolute',
+          //   right: '10px',
+          //   top: '10px',
             //   transform: 'translateY(-50%)',
-          }}
+          // }}
+      
           SVGComponent={CheckIconTuned}
+          stroke='red'
         />
         <Button
          type="button"
           onClick={clickToglle}
           className={styles.toggle}
-          buttonStyle={{
+          // buttonStyle={{
           
-            position: 'absolute',
-            right: '10px',
-            top: '10px',
-            //     //   transform: 'translateY(-50%)',
-          }}
+          //   position: 'absolute',
+          //   right: '10px',
+          //   top: '10px',
+          //   //     //   transform: 'translateY(-50%)',
+          // }}
           SVGComponent={CrossIconTuned}
         />
-      </div>
+      {/* </div> */}
 
       {/* <ToggleButton
             className={styles.togle}
