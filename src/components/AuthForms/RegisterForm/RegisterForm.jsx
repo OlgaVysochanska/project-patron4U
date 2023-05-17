@@ -1,43 +1,111 @@
-import Input from 'shared/components/Input/Input';
-// import TestTextField from 'shared/components/TestTextField/TestTextField';
+import { useState, useEffect } from 'react';
 
-import TestAuthButton from '../../../shared/components/TestAuthButton/TestAuthButton';
+import Input from 'shared/components/Input/Input';
+
+import AuthButton from '../../../shared/components/AuthButton/AuthButton';
 
 import useForm from 'shared/hooks/useForm';
 
 import fields from './fields';
 import initialState from './initialState';
+import EyeOpenIcon from 'icons/EyeOpenIcon';
+import EyeClosedIcon from 'icons/EyeClosedIcon';
 
-// import styles from './RegisterForm.module.scss';
+import styles from './RegisterForm.module.scss';
 
 const RegisterForm = ({ onSubmit }) => {
   const { state, handleChange, handleSubmit } = useForm({
     initialState,
     onSubmit,
   });
-  const { email, password, confirm } = state;
+  const { email, password } = state;
+
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [isValid, setIsValid] = useState({
+    email: true,
+    password: true,
+    confirmPassword: true,
+  });
+
+  //перевірка на встановлення властивості disabled для кнопки
+  const [agreed, setAgreed] = useState(false);
+
+  const handleConfirmPasswordChange = event => {
+    const confirmValue = event.target.value;
+    setConfirmPassword(confirmValue);
+    setIsValid(confirmValue.length >= 6);
+  };
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  useEffect(() => {
+    //перевіряємо чи співпадають паролі і від цього блокуємо/розблоковуємо кнопку реєстрації:
+    if (password === confirmPassword) {
+      setAgreed(false);
+    }
+    if (password !== confirmPassword) {
+      setAgreed(true);
+    }
+  }, [password, confirmPassword, setAgreed]);
 
   return (
     <form onSubmit={handleSubmit} autoComplete="off">
       <Input
         id="email"
         value={email}
+        pattern=".{6,}" // Патерн для мінімальної довжини паролю (6 символів)
+        title="Password must be at least 6 characters long" // Підказка для патерну
+        style={{
+          border: isValid ? '1px solid #54adff' : '1px solid #F43F5E',
+        }}
         handleChange={handleChange}
         {...fields.email}
+        isValid={isValid.email}
       />
-      <Input
-        id="password"
-        value={password}
-        handleChange={handleChange}
-        {...fields.password}
-      />
-      {/* <Input
-        id="confirm"
-        value={confirm}
-        handleChange={handleChange}
-        {...fields.confirm}
-      /> */}
-      <TestAuthButton>Register</TestAuthButton>
+      <div className={styles.inputWrapper}>
+        <Input
+          id="password"
+          type={showPassword ? 'text' : 'password'}
+          pattern=".{6,}" // Патерн для мінімальної довжини паролю (6 символів)
+          title="Password must be at least 6 characters long" // Підказка для патерну
+          style={{
+            border: isValid ? '1px solid #54adff' : '1px solid #F43F5E',
+          }}
+          value={password}
+          handleChange={handleChange}
+          {...fields.password}
+          isValid={isValid.password}
+        />
+        <EyeClosedIcon
+          className={styles.eyeIcon}
+          onClick={toggleShowPassword}
+        />
+      </div>
+
+      <div className={styles.inputWrapper}>
+        <Input
+          id="confirm"
+          placeholder="Confirm password"
+          type={showPassword ? 'text' : 'password'}
+          style={{
+            border: isValid ? '1px solid #54adff' : '1px solid #F43F5E',
+          }}
+          pattern=".{6,}" // Патерн для мінімальної довжини паролю (6 символів)
+          title="Password must be at least 6 characters long" // Підказка для патерну
+          value={confirmPassword}
+          handleChange={handleConfirmPasswordChange}
+          isValid={isValid}
+        />
+        <EyeClosedIcon
+          className={styles.eyeIcon}
+          onClick={toggleShowPassword}
+        />
+      </div>
+
+      <AuthButton disabled={agreed}>Registration</AuthButton>
     </form>
   );
 };

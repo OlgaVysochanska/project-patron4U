@@ -1,14 +1,14 @@
 import Input from 'shared/components/Input/Input';
 // import TestTextField from 'shared/components/TestTextField/TestTextField';
 
-import TestAuthButton from '../../../shared/components/TestAuthButton/TestAuthButton';
+import AuthButton from '../../../shared/components/AuthButton/AuthButton';
 
 import useForm from 'shared/hooks/useForm';
 
 import fields from './fields';
 import initialState from './initialState';
 
-// import styles from './LoginForm.module.scss';
+import styles from './LoginForm.module.scss';
 
 const LoginForm = ({ onSubmit }) => {
   const { state, handleChange, handleSubmit } = useForm({
@@ -18,7 +18,11 @@ const LoginForm = ({ onSubmit }) => {
   const { email, password } = state;
 
   return (
-    <form onSubmit={handleSubmit} autoComplete="off">
+    <form
+      onSubmit={handleSubmit}
+      autoComplete="off"
+      className={styles.formContainer}
+    >
       <Input
         id="email"
         value={email}
@@ -31,7 +35,7 @@ const LoginForm = ({ onSubmit }) => {
         handleChange={handleChange}
         {...fields.password}
       />
-      <TestAuthButton>Login</TestAuthButton>
+      <AuthButton>Login</AuthButton>
     </form>
   );
 };
