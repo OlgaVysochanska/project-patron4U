@@ -1,86 +1,13 @@
-import SearchBar from 'shared/components/SearchBar/SearchBar';
-import Pagination from 'shared/components/Pagination/Pagination';
-import NewsPageList from './NewsPageList/NewsPageList';
-import { useCallback, useState, useEffect } from 'react';
-import { getAllNews, searchNews } from 'shared/services/news';
-import { useSearchParams } from 'react-router-dom';
+import Title from '../../shared/components/Title';
+import News from '../../components/News';
+import style from './NewsPage.module.scss';
 
 const NewsPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [keyword, setKeyword] = useState('');
-  // const [currentPage, setCurrentPage] = useState(1);
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState('');
-
-  const searchRequest = searchParams.get('search');
-
-  useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        setLoading(true);
-
-        if (keyword) {
-          const { data, totalPages } = await searchNews(searchRequest, page);
-          setItems(data);
-          setTotalPages(totalPages);
-          return;
-        }
-
-        const { data, totalPages } = await getAllNews(page);
-        setItems(data);
-        setTotalPages(totalPages);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchNews();
-  }, [
-    setItems,
-    setPage,
-    setError,
-    setLoading,
-    setTotalPages,
-    page,
-    searchRequest,
-    keyword,
-    totalPages,
-  ]);
-
-  const handlePageChange = pageNumber => {
-    setPage(pageNumber);
-  };
-  const onSearchNews = useCallback(
-    ({ search }) => {
-      setKeyword(search);
-      setSearchParams({ search: `${search}` });
-      setItems([]);
-      setPage(1);
-    },
-    [setSearchParams, setKeyword, setItems, setPage]
-  );
-
-  // function onSearchNews({ search }) {
-  //   setSearchParams({ search: `${search}` });
-  // }
-
-  // const totalPages =
-  //   items.length > 0 ? Math.ceil(items.length / itemsPerPage) : 0;
-
   return (
-    <>
-      <SearchBar onSubmit={onSearchNews} />
-      <NewsPageList items={items} loading={loading} />
-      <Pagination
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-        page={page}
-      />
-    </>
+    <div className={style.container}>
+      <Title>News</Title>
+      <News />
+    </div>
   );
 };
 
