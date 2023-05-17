@@ -6,8 +6,11 @@ const SelectedButtons = ({ buttons, onRemove }) => {
   return (
     <ul className={styles.selectedButtons}>
       {buttons.map((buttonLabel, index) => (
-        <li key={index} onClick={() => onRemove(buttonLabel)}>
-          <Button className={styles.selectedButton}>
+        <li key={index}>
+          <Button
+            className={styles.selectedButton}
+            onClick={() => onRemove(buttonLabel)}
+          >
             <span>{buttonLabel}</span>
             <span className={styles.filterIcon}>
               <CrossSmallIcon />
