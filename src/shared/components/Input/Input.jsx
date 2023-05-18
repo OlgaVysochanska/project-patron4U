@@ -11,6 +11,7 @@ const Input = ({
   value,
   handleChange,
   isValid,
+  aditionalClass,
   ...props
 }) => {
   return (
@@ -25,7 +26,9 @@ const Input = ({
         title={title}
         value={value}
         onChange={handleChange}
-        className={`${styles.input} ${!isValid ? styles.invalid : ''}`}
+        className={`${styles.input} ${
+          !isValid ? styles.invalid : ''
+        } ${aditionalClass}`}
         {...props}
       />
       {!isValid && <p className={styles.errorMessage}>{title}</p>}

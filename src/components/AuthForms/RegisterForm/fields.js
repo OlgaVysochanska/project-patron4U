@@ -1,6 +1,6 @@
 const fields = {
   email: {
-    type: 'text',
+    type: 'email',
     name: 'email',
     required: true,
     placeholder: 'Email',

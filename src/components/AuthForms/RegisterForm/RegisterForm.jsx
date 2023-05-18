@@ -8,7 +8,6 @@ import useForm from 'shared/hooks/useForm';
 
 import fields from './fields';
 import initialState from './initialState';
-import EyeOpenIcon from 'icons/EyeOpenIcon';
 import EyeClosedIcon from 'icons/EyeClosedIcon';
 
 import styles from './RegisterForm.module.scss';
@@ -54,14 +53,15 @@ const RegisterForm = ({ onSubmit }) => {
       <Input
         id="email"
         value={email}
-        pattern=".{6,}" // Патерн для мінімальної довжини паролю (6 символів)
-        title="Password must be at least 6 characters long" // Підказка для патерну
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" // Патерн для валідації email
+        title="Please enter a valid email address" // Підказка для патерну
         style={{
           border: isValidEmail ? '1px solid #54adff' : '1px solid #F43F5E',
         }}
+        aditionalClass={styles.inputCustomSettings}
         handleChange={e => {
           handleChange(e);
-          setIsValidEmail(email.length >= 6);
+          setIsValidEmail(e.target.checkValidity());
         }}
         {...fields.email}
         isValid={isValidEmail}
@@ -75,6 +75,7 @@ const RegisterForm = ({ onSubmit }) => {
           style={{
             border: isValidPass ? '1px solid #54adff' : '1px solid #F43F5E',
           }}
+          aditionalClass={styles.inputCustomSettings}
           value={password}
           handleChange={e => {
             handleChange(e);
