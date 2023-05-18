@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/patron4U/static/css/main.3faee319.css",
-    "main.js": "/patron4U/static/js/main.5533aea0.js",
+    "main.js": "/patron4U/static/js/main.8d24fbc7.js",
     "static/css/928.0ae4ef1b.chunk.css": "/patron4U/static/css/928.0ae4ef1b.chunk.css",
     "static/js/928.90e837a1.chunk.js": "/patron4U/static/js/928.90e837a1.chunk.js",
     "static/css/59.c4de520d.chunk.css": "/patron4U/static/css/59.c4de520d.chunk.css",
@@ -36,7 +36,7 @@
     "static/media/spiner_paw.svg": "/patron4U/static/media/spiner_paw.08d378cbd5f336ed2ad73270367aeb4b.svg",
     "index.html": "/patron4U/index.html",
     "main.3faee319.css.map": "/patron4U/static/css/main.3faee319.css.map",
-    "main.5533aea0.js.map": "/patron4U/static/js/main.5533aea0.js.map",
+    "main.8d24fbc7.js.map": "/patron4U/static/js/main.8d24fbc7.js.map",
     "928.0ae4ef1b.chunk.css.map": "/patron4U/static/css/928.0ae4ef1b.chunk.css.map",
     "928.90e837a1.chunk.js.map": "/patron4U/static/js/928.90e837a1.chunk.js.map",
     "59.c4de520d.chunk.css.map": "/patron4U/static/css/59.c4de520d.chunk.css.map",
@@ -56,6 +56,6 @@
   },
   "entrypoints": [
     "static/css/main.3faee319.css",
-    "static/js/main.5533aea0.js"
+    "static/js/main.8d24fbc7.js"
   ]
 }
