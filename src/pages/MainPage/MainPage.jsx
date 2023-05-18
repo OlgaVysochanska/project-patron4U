@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import Background from '../../shared/components/Background/Background';
 import scss from './MainPage.module.scss';
 
-import bgImgMob from '../../images/bg_320x601(543).png';
-import bgImgTab from '../../images/bg_768x1193(1125).png';
-import bgImgDes from '../../images/bg_1280x770(708).png';
 import petsMob1x from '../../images/pets_mob_1x.png';
 import petsMob2x from '../../images/pets_mob_2x.png';
 import petsTab1x from '../../images/pets_tab_1x.png';
@@ -23,16 +21,6 @@ const MainPage = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
-  const getImageBG = () => {
-    if (screenWidth < 768) {
-      return bgImgMob;
-    } else if (screenWidth >= 768 && screenWidth < 1280) {
-      return bgImgTab;
-    } else {
-      return bgImgDes;
-    }
-  };
 
   const getImage = () => {
     if (screenWidth < 768 && window.devicePixelRatio === 1) {
@@ -60,12 +48,7 @@ const MainPage = () => {
 
   return (
     <>
-      <img
-        className={scss.bg}
-        src={getImageBG()}
-        alt="back ground"
-        loading="lazy"
-      />
+      <Background />
       <div className={scss.screen}>
         <img className={scss.pets} src={getImage()} alt="pets" loading="lazy" />
         <h1 className={scss.title}>Take good care of your small pets</h1>

@@ -1,0 +1,9 @@
+.bg {
+    position: absolute;
+    top: 48;
+    width: 100%;
+
+    @media screen and (min-width: 768px) {
+        top: 68px;
+    }
+}

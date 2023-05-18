@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import s from './FriendsItem.module.scss';
+import noImage from '../../../images/no-image.png';
 
 const FriendsItem = ({
   address,
@@ -30,7 +31,7 @@ const FriendsItem = ({
         {imageUrl ? (
           <img src={imageUrl} className={s.icon} alt="Our Friend Icon" />
         ) : (
-          <div className={s.icon}>No image</div>
+          <img src={noImage} className={s.icon} alt="Our Friend Icon" />
         )}
         <ul className={s.descriptionList}>
           <li className={s.descriptionEl}>
@@ -40,7 +41,11 @@ const FriendsItem = ({
               onMouseLeave={handleMouseLeave}
             >
               <p className={s.descriptionTitle}>Time:</p>
-              <p></p>
+              {workDays ? (
+                <p className={s.description}>schedule</p>
+              ) : (
+                <p className={s.description}>online</p>
+              )}
 
               {time && time.length > 0 && (
                 <div className={s.timeOverlay}>
