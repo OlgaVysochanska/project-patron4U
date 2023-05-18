@@ -17,18 +17,24 @@ const News = () => {
   const searchRequest = searchParams.get('search');
 
   useEffect(() => {
+    if (searchParams) {
+      setPage(1);
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
     const fetchNews = async () => {
       try {
         setLoading(true);
-
-        if (keyword) {
-          const { data, totalPages } = await searchNews(searchRequest, page);
+        if (!searchRequest) {
+          const { data, totalPages } = await getAllNews(page);
+          setKeyword('');
           setItems(data);
           setTotalPages(totalPages);
           return;
         }
 
-        const { data, totalPages } = await getAllNews(page);
+        const { data, totalPages } = await searchNews(searchRequest, page);
         setItems(data);
         setTotalPages(totalPages);
       } catch (error) {
@@ -45,6 +51,7 @@ const News = () => {
     errorMsg,
     setLoading,
     setTotalPages,
+    setKeyword,
     page,
     searchRequest,
     keyword,
@@ -58,10 +65,9 @@ const News = () => {
     ({ search }) => {
       setKeyword(search);
       setSearchParams({ search: `${search}` });
-      setItems([]);
       setPage(1);
     },
-    [setSearchParams, setKeyword, setItems, setPage]
+    [setSearchParams, setKeyword, setPage]
   );
 
   return (
