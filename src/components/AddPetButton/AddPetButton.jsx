@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import useScreenWidth from 'shared/hooks/useScreenWidth';
 
@@ -10,31 +10,26 @@ import styles from './AddPetButton.module.scss';
 
 const AddPetButton = () => {
   const screenWidth = useScreenWidth();
+  const navigate = useNavigate();
 
   return (
     <>
       <Button
+        onClick={() => {
+          navigate('/add-pet');
+        }}
         className={
           screenWidth < 768
             ? `${styles.addPetBtn} ${styles.mobile}`
             : `${styles.addPetBtn} ${styles.tablet}`
         }
       >
-        <Link
-          to={'/add-pet'}
-          className={
-            screenWidth < 768
-              ? `${styles.addPetLink} ${styles.addPetLinkMobile}`
-              : `${styles.addPetLink} ${styles.addPetLinkTablet}`
-          }
-        >
-          {screenWidth < 768 ? (
-            <PlusIcon className={styles.addPetBtnIconMobile} />
-          ) : (
-            <PlusSmallIcon className={styles.addPetBtnIconTablet} />
-          )}
-          Add pet
-        </Link>
+        {screenWidth < 768 ? (
+          <PlusIcon className={styles.addPetBtnIconMobile} />
+        ) : (
+          <PlusSmallIcon className={styles.addPetBtnIconTablet} />
+        )}
+        Add pet
       </Button>
     </>
   );
