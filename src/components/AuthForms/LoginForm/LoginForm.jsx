@@ -33,10 +33,7 @@ const LoginForm = ({ onSubmit }) => {
 
   useEffect(() => {
     //перевіряємо чи треба блокувати кнопку логінізації:
-    console.log('isValidEmail :', isValidEmail);
-    console.log('isValidPass :', isValidPass);
-    const total = isValidEmail && isValidPass;
-    console.log('total :', total);
+
     if (isValidEmail && isValidPass) {
       setAgreed(false);
     }
