@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/833.d5ef3f06.chunk.js","mappings":"gMAMA,EANuB,WACrB,OACE,2FAEH,C","sources":["pages/OurFriendsPage/OurFriendsPage.jsx"],"sourcesContent":["const OurFriendsPage = () => {\n  return (\n    <div>If components are ready, add them to OurFriendsPage. /Friends/</div>\n  );\n};\n\nexport default OurFriendsPage;\n"],"names":[],"sourceRoot":""}

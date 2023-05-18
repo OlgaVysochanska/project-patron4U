@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/122.5c5a0868.chunk.js","mappings":"2MAMA,EAJmB,WACjB,OAAO,SAAC,KAAD,CAAMA,GAAG,WAAT,oBACR,C","sources":["pages/AddPetPage/AddPetPage.jsx"],"sourcesContent":["import { Link } from 'react-router-dom';\n\nconst AddPetPage = () => {\n  return <Link to=\"/add-pet\">add Pet</Link>;\n};\n\nexport default AddPetPage;\n"],"names":["to"],"sourceRoot":""}

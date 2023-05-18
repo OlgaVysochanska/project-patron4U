@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/979.a9e90d46.chunk.js","mappings":"gMAMA,EANiB,WACf,OACE,yFAEH,C","sources":["pages/MainPage/MainPage.jsx"],"sourcesContent":["const MainPage = () => {\n  return (\n    <div>If components are ready, add them to MainPage. /h1, img, bg/</div>\n  );\n};\n\nexport default MainPage;\n"],"names":[],"sourceRoot":""}

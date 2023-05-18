@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkreact_homework_template=self.webpackChunkreact_homework_template||[]).push([[369],{369:function(e,t,r){r.r(t),r.d(t,{default:function(){return o}});var c=r(184),o=function(){return(0,c.jsx)("div",{children:"If components are ready, add them to NoticesPage. /NoticesSearch, NoticesCategoriesList, NoticesNav, NoticesFilters, AddPet/"})}}}]);
-//# sourceMappingURL=369.d3362191.chunk.js.map

@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/273.1f842479.chunk.js","mappings":"gMAQA,EARqB,WACnB,OACE,iGAIH,C","sources":["pages/NotFound/NotFound.jsx"],"sourcesContent":["const NotFoundPage = () => {\n  return (\n    <div>\n      If components are ready, add them to NotFoundPage. /h1, img, button/\n    </div>\n  );\n};\n\nexport default NotFoundPage;\n"],"names":[],"sourceRoot":""}
