@@ -46,11 +46,7 @@ const LoginForm = ({ onSubmit }) => {
   }, [email, password, isValidEmail, isValidPass, setAgreed]);
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      autoComplete="off"
-      className={styles.formContainer}
-    >
+    <form onSubmit={handleSubmit} autoComplete="off">
       <Input
         id="email"
         value={email}
