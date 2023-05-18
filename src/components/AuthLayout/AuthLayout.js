@@ -8,8 +8,6 @@ const AuthLayout = ({ children }) => {
 
   useEffect(() => {
     dispatch(current());
-
-    console.log('current', dispatch(current()));
   }, [dispatch]);
 
   return <>{children}</>;
