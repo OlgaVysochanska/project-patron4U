@@ -1,47 +1,48 @@
-import { useNavigate } from 'react-router-dom';
 // import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
+
+import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
+
+import { getAllNotices } from '../../redux/notices/noticesSelecors';
+import { fetchAllNotices } from '../../redux/notices/noticesOperations';
+
 import NoticesSearch from 'components/Notices/NoticesSearch/NoticesSearch';
 import NoticesCategoriesNav from 'components/Notices/NoticesCategoriesNav/NoticesCategoriesNav';
-import AddPetButton from 'components/Notices/AddPetButton/AddPetButton';
-import PlusIcon from 'icons/PlusSmallIcon';
-import Button from 'shared/components/Button';
-//
+import NoticesCategoriesList from '../../components/Notices/NoticesCategoriesList/NoticesCategoriesList';
+import NoticeModal from 'components/NoticeModal/NoticeModal';
+
+import AddPetButton from 'components/AddPetButton/AddPetButton';
+
 import style from './NoticesPage.module.scss';
 
 const NoticesPage = () => {
-  const navigate = useNavigate();
+  const [notice, setNotice] = useState(null);
+  const { isModalOpen, openModal, closeModal } = useToggleModalWindow();
 
-  const userAddPet = () => {
-    navigate('/add-pet');
+  const dispatch = useDispatch();
+  const allNotices = useSelector(getAllNotices);
+
+  useEffect(() => {
+    dispatch(fetchAllNotices());
+  }, [dispatch]);
+
+  const loadMore = notice => {
+    setNotice(notice);
+    openModal();
   };
 
   return (
     <>
-      If components are ready, add them to NoticesPage. /NoticesSearch,
-      NoticesCategoriesList, NoticesNav, NoticesFilters, AddPet/
       <NoticesSearch />
       <div className={style.wrapper}>
         <NoticesCategoriesNav />
         <AddPetButton />
-
-        {/* <Button
-
-        <Button
-          onClick={userAddPet}
-
-          type="button"
-          className={style.addBtn}
-          SVGComponent={PlusIcon}
-          label={'Add Pet'}
-
-        /> */}
       </div>
-
-        />
-      </div>
+      <NoticesCategoriesList notices={allNotices} loadMore={loadMore} />
+      {isModalOpen && <NoticeModal notice={notice} closeModal={closeModal} />}
       <Outlet />
-
     </>
   );
 };
