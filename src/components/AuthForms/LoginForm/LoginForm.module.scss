@@ -1,6 +1,19 @@
-.formContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.inputWrapper {
+  position: relative;
+}
+
+.eyeIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-50%, 40%);
+  cursor: pointer;
+}
+
+.inputCustomSettings {
+  margin-bottom: 24px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 32px;
+  }
 }

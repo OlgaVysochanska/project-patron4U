@@ -6,10 +6,10 @@ import AuthButton from '../../../shared/components/AuthButton/AuthButton';
 
 import useForm from 'shared/hooks/useForm';
 
+import EyeClosedIcon from 'icons/EyeClosedIcon';
+
 import fields from './fields';
 import initialState from './initialState';
-import EyeOpenIcon from 'icons/EyeOpenIcon';
-import EyeClosedIcon from 'icons/EyeClosedIcon';
 
 import styles from './RegisterForm.module.scss';
 
@@ -22,12 +22,12 @@ const RegisterForm = ({ onSubmit }) => {
 
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [isValidConf, setIsValidConf] = useState(true);
-  const [isValidPass, setIsValidPass] = useState(true);
   const [isValidEmail, setIsValidEmail] = useState(true);
+  const [isValidPass, setIsValidPass] = useState(true);
+  const [isValidConf, setIsValidConf] = useState(true);
 
   //перевірка на встановлення властивості disabled для кнопки
-  const [agreed, setAgreed] = useState(false);
+  const [agreed, setAgreed] = useState(true);
 
   const handleConfirmPasswordChange = event => {
     const confirmValue = event.target.value;
@@ -54,14 +54,15 @@ const RegisterForm = ({ onSubmit }) => {
       <Input
         id="email"
         value={email}
-        pattern=".{6,}" // Патерн для мінімальної довжини паролю (6 символів)
-        title="Password must be at least 6 characters long" // Підказка для патерну
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" // Патерн для валідації email
+        title="Enter a valid Email" // Підказка для патерну
         style={{
           border: isValidEmail ? '1px solid #54adff' : '1px solid #F43F5E',
         }}
+        aditionalClass={isValidEmail ? styles.inputCustomSettings : ''}
         handleChange={e => {
           handleChange(e);
-          setIsValidEmail(email.length >= 6);
+          setIsValidEmail(e.target.checkValidity());
         }}
         {...fields.email}
         isValid={isValidEmail}
@@ -75,6 +76,7 @@ const RegisterForm = ({ onSubmit }) => {
           style={{
             border: isValidPass ? '1px solid #54adff' : '1px solid #F43F5E',
           }}
+          aditionalClass={isValidPass ? styles.inputCustomSettings : ''}
           value={password}
           handleChange={e => {
             handleChange(e);
@@ -97,6 +99,7 @@ const RegisterForm = ({ onSubmit }) => {
           style={{
             border: isValidConf ? '1px solid #54adff' : '1px solid #F43F5E',
           }}
+          aditionalClass={isValidConf ? styles.inputCustomSettings : ''}
           pattern=".{6,}" // Патерн для мінімальної довжини паролю (6 символів)
           title="Password must be at least 6 characters long" // Підказка для патерну
           value={confirmPassword}
@@ -107,6 +110,9 @@ const RegisterForm = ({ onSubmit }) => {
           className={styles.eyeIcon}
           onClick={toggleShowPassword}
         />
+        {agreed && (
+          <p className={styles.differentPassords}>Passwords must match</p>
+        )}
       </div>
 
       <AuthButton disabled={agreed}>Registration</AuthButton>
