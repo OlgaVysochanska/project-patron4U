@@ -50,7 +50,13 @@ const RegisterForm = ({ onSubmit }) => {
   }, [password, confirmPassword, setAgreed]);
 
   return (
-    <form onSubmit={handleSubmit} autoComplete="off">
+    <form
+      onSubmit={e => {
+        handleSubmit(e);
+        setConfirmPassword('');
+      }}
+      autoComplete="off"
+    >
       <Input
         id="email"
         value={email}
