@@ -37,3 +37,15 @@ export const fetchDeleteNotice = createAsyncThunk(
     }
   }
 );
+
+export const fetchNoticesByCategory = createAsyncThunk(
+  'notices/category',
+  async ( {categoryName, query}, { rejectWithValue }) => {
+    try {
+      const data = await api.getNoticeByCategory(categoryName, query);
+      return data;
+    } catch ({ response }) {
+      return rejectWithValue(response.data);
+    }
+  }
+);

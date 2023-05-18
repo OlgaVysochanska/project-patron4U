@@ -1,3 +1,7 @@
+.wrapper {
+  position: relative;
+}
+
 .input {
   width: 458px;
   padding: 12px 16px;
@@ -28,7 +32,16 @@
 }
 
 .errorMessage {
-  margin-top: 0.5rem;
+  margin-top: 4px;
+  margin-bottom: 14px;
+  margin-left: 16px;
   color: #f43f5e;
   font-size: 0.8rem;
+}
+
+.icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-50%, 50%);
 }

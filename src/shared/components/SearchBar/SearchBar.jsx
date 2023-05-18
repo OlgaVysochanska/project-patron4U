@@ -36,7 +36,6 @@ const SearchBar = ({ onSubmit }) => {
             required
           />
         </label>
-
         <Button
           type="submit"
           className={buttonClass}

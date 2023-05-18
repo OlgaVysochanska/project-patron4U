@@ -1,0 +1,26 @@
+.selectedButton {
+  width: 80px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border: none;
+  border-radius: 40px;
+  stroke: #54adff;
+  cursor: pointer;
+  background-color: white;
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+}
+.selectedButton > span {
+  color: #54adff;
+  font-size: 12px;
+  font-style: Bold;
+}
+
+.filterIcon {
+  width: 16px;
+  height: 17px;
+  margin-left: 4px;
+  padding-bottom: 8px;
+}

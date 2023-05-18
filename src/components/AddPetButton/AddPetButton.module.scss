@@ -1,0 +1,51 @@
+.addPetBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #54adff;
+  border: none;
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover,
+  &:focus {
+    background-image: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
+  }
+}
+
+.mobile {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  width: 80px;
+  height: 80px;
+  flex-direction: column;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.33;
+  color: #ffffff;
+  border-radius: 50%;
+}
+
+.tablet {
+  flex-direction: row-reverse;
+  width: 129px;
+  height: 40px;
+  color: #fef9f9;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.37;
+  letter-spacing: 0.04em;
+  border-radius: 40px;
+}
+
+.addPetBtnIconMobile {
+  stroke: #ffffff;
+  margin-bottom: 8px;
+}
+
+.addPetBtnIconTablet {
+  stroke: #ffffff;
+  margin-left: 8px;
+}

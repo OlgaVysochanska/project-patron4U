@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import * as api from '../../shared/services/auth';
 
@@ -9,6 +10,7 @@ export const register = createAsyncThunk(
       const result = await api.register(data);
       return result;
     } catch ({ response }) {
+      Notify.failure(response.data.message);
       return rejectWithValue(response);
     }
   }
@@ -21,6 +23,7 @@ export const login = createAsyncThunk(
       const result = await api.login(data);
       return result;
     } catch ({ response }) {
+      Notify.failure(response.data.message);
       return rejectWithValue(response);
     }
   }

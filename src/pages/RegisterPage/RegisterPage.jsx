@@ -7,6 +7,9 @@ import { isUserLogin } from 'redux/auth/authSelectors';
 
 import { NavLink } from 'react-router-dom';
 import RegisterForm from 'components/AuthForms/RegisterForm/RegisterForm';
+import AuthTitle from 'shared/components/AuthTitle/AuthTitle';
+
+import styles from './RegisterPage.module.scss';
 
 const RegisterPage = () => {
   const isLogin = useSelector(isUserLogin);
@@ -21,12 +24,15 @@ const RegisterPage = () => {
   }
 
   return (
-    <div className="container">
-      <h2>Registration</h2>
+    <div className={styles.container}>
+      <AuthTitle text="Registration" />
       <RegisterForm onSubmit={handleRegister} />
       <div>
-        <p>
-          Already have an account? <NavLink to="/login">Login</NavLink>
+        <p className={styles.redirectLink}>
+          Already have an account?{' '}
+          <NavLink to="/login" className={styles.navlink}>
+            Login
+          </NavLink>
         </p>
       </div>
     </div>

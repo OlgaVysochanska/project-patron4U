@@ -11,7 +11,7 @@ export default function Nav() {
           </NavLink>
         </li>
         <li className={styles.item}>
-          <NavLink className={styles.link} to="/notices">
+          <NavLink className={styles.link} to="/notices/sell">
             Find pet
           </NavLink>
         </li>

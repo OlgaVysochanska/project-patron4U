@@ -1,4 +1,4 @@
-li {
+.listItem {
   width: 35px;
   height: 35px;
   border: 1px solid #cce4fb;
@@ -55,4 +55,22 @@ ul {
 
 .arrowRight {
   transform: rotate(180deg);
+}
+
+.arrowRight__disabled {
+  & svg {
+    stroke: #cce4fb;
+  }
+}
+
+.arrowLeft__disabled {
+  & svg {
+    stroke: #cce4fb;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    display: none;
+  }
 }

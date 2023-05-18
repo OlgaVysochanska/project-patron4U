@@ -7,7 +7,7 @@ import HamburgerIcon from 'icons/HamburgerIcon';
 import styles from './Navigation.module.scss';
 
 export default function Navigation({ isDesktop, isTablet, isMobile }) {
-  const userLoggedIn = true; // change to useSelector
+  const userLoggedIn = false; // change to useSelector
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   useEffect(() => {

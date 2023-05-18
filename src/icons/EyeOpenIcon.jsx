@@ -20,7 +20,7 @@ function EyeOpenIcon(props) {
       />
       <path
         d="M12 15a3 3 0 100-6 3 3 0 000 6z"
-        // stroke="#54ADFF"
+        stroke="#54ADFF"
         strokeWidth={1.5}
         strokeLinecap="round"
         strokeLinejoin="round"
