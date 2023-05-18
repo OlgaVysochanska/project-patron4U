@@ -1,5 +1,6 @@
 import NoticesSearch from 'components/Notices/NoticesSearch/NoticesSearch';
 import NoticesCategoriesNav from 'components/Notices/NoticesCategoriesNav/NoticesCategoriesNav';
+import AddPetButton from 'components/Notices/AddPetButton/AddPetButton';
 import PlusIcon from 'icons/PlusSmallIcon';
 import Button from 'shared/components/Button';
 import Title from 'shared/components/Title/Title';
@@ -13,14 +14,15 @@ const NoticesPage = () => {
       <NoticesSearch />
       <div className={style.wrapper}>
         <NoticesCategoriesNav />
+        <AddPetButton />
 
-        <Button
+        {/* <Button
           type="button"
           className={style.addBtn}
           SVGComponent={PlusIcon}
           label={'Add Pet'}
-        />
-      </div>{' '}
+        /> */}
+      </div>
     </>
   );
 };

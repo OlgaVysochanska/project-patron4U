@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {useDispatch  } from 'react-redux';
 
 import useForm from 'shared/hooks/useForm';
+
+import { fetchAddNotice } from '../../redux/notices/noticesOperations';
+
+import ChooseOption from './ChooseOption/ChooseOption';
 import PersonalDetail from './PersonalDetail/PersonalDetail';
 import MoreInfo from './MoreInfo/MoreInfo';
 import Button from 'shared/components/Button/Button';
@@ -31,7 +36,7 @@ const AddPetForm = ({ onSubmit }) => {
   const [activeTab, setActiveTab] = useState(0);
   const [activeGender, setActiveGender] = useState(null);
 
-  const { state, setState, handleChange, handleSubmit } = useForm({
+  const { state, handleChange, handleSubmit } = useForm({
     initialState,
     onSubmit,
   });
@@ -61,8 +66,18 @@ const AddPetForm = ({ onSubmit }) => {
 
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+  //const loading = useSelector(selectLoadingContacts);
+
   const validateData = () => {
     let formData = [];
+    
+    if (activeTab === 0) {
+          formData = [
+            { name: 'category', value: category },
+          ];
+      }
+
     if (activeTab === 1) {
       switch (activeCategory) {
         case 0:
@@ -73,6 +88,8 @@ const AddPetForm = ({ onSubmit }) => {
           ];
           break;
         case 1:
+        case 2:
+        case 3:  
           formData = [
             { name: 'petName', value: petName },
             { name: 'breed', value: breed },
@@ -178,8 +195,16 @@ const AddPetForm = ({ onSubmit }) => {
     setActiveTab(activeTab => activeTab - 1);
   };
 
+  const handleAddNotice = data => {
+    const name = data.petName;
+    const date = data.birthDate;
+    dispatch(fetchAddNotice({ name, date }));
+  };
+
   const handleFormTabNvigationDone = () => {
     const invalidObjects = validateData();
+    if (invalidObjects){handleAddNotice({petName,
+      birthDate,})}
     console.log(state);
   };
 
@@ -254,17 +279,12 @@ const AddPetForm = ({ onSubmit }) => {
     />
   );
 
-  const categoriesEl = categories.map((item, index) => (
-    <Button
-      label={item.category}
-      key={index}
-      onClick={() => handleCategoryChange(index)}
-      className={
-        activeCategory === index ? styles.categoryAct : styles.category
-      }
-      type="button"
+  const categoriesEl = (
+    <ChooseOption
+    activeCategory={activeCategory}
+    handleCategoryChange={handleCategoryChange}
     />
-  ));
+  );
 
   const personDetailEl = (
     <>
@@ -288,6 +308,7 @@ const AddPetForm = ({ onSubmit }) => {
     <MoreInfo
       activeCategory={activeCategory}
       activeGender={activeGender}
+      activeTab={activeTab}
       location={location}
       price={price}
       comments={comments}
@@ -307,7 +328,7 @@ const AddPetForm = ({ onSubmit }) => {
       tab: 0,
       content: (
         <>
-          <div className={styles.categoryContainer}>{categoriesEl}</div>
+          {categoriesEl}
           <div className={styles.navigationButtonsContainer}>
             {cancelBtnEl}
             {nextBtnEl}
@@ -358,8 +379,13 @@ const AddPetForm = ({ onSubmit }) => {
   const activeTabData = tabData.find(data => data.tab === activeTab);
 
   return (
-    <div className={styles.addPetFormContainer}>
-      <form onSubmit={handleSubmit} className={styles.addPetForm}>
+    <div  className={[
+      styles.addPetFormContainer,
+    ].join(' ')} >
+      <form onSubmit={handleSubmit} className={[
+      styles.addPetForm,
+      (activeCategory !==0 && activeTab===2) ? styles['addPetFormNotOwn'] : '',
+    ].join(' ')} >
         {titleEl(activeCategory)}
         <div className={styles.tabButtonsContainer}>{formTabsEl}</div>
 
@@ -370,3 +396,13 @@ const AddPetForm = ({ onSubmit }) => {
 };
 
 export default AddPetForm;
+
+
+
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(fetchAllNotices());
+  // }, [dispatch]);
+
+  // const allNotices = useSelector(getAllNotices);
+  // console.log(allNotices);
