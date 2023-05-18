@@ -10,7 +10,7 @@ const News = () => {
   const [keyword, setKeyword] = useState('');
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState('');
 
@@ -32,7 +32,8 @@ const News = () => {
         setItems(data);
         setTotalPages(totalPages);
       } catch (error) {
-        setError(error.message);
+        setErrorMsg(error.message);
+        console.log(errorMsg);
       } finally {
         setLoading(false);
       }
@@ -41,7 +42,7 @@ const News = () => {
   }, [
     setItems,
     setPage,
-    setError,
+    errorMsg,
     setLoading,
     setTotalPages,
     page,
