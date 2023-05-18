@@ -1,14 +1,29 @@
 .wrapper {
-    display: flex;
-    justify-content: space-around;
-    align-items: baseline;
-    margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 24px;
+  margin: 0 auto;
 }
+
+@media screen and (max-width: 767px) {
+  .wrapper {
+    max-width: 480px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .wrapper {
+    width: 704px;
+  }
+}
+
 @media screen and (min-width: 1280px) {
-        .wrapper {
-          margin-bottom: 42px;
-        }
-      }
+  .wrapper {
+    width: 1248px;
+    margin-bottom: 42px;
+  }
+}
 
 // .title {
 //   text-align: center;
@@ -58,7 +73,7 @@
 }
 
 @media screen and (max-width: 767px) {
-    .addBtn {
-      display: none;
-    }
+  .addBtn {
+    display: none;
   }
+}

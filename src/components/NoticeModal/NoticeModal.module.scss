@@ -1,3 +1,68 @@
+.backdrop {
+  position: fixed;
+  padding: 0 20;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+  background: rgba(97, 97, 97, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1200;
+}
+
+.modal {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 40px;
+  background-color: #fff;
+  width: 87.5%;
+  max-width: 420px;
+
+  @media screen and (min-height: 800px) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  width: 24px;
+  height: 24px;
+}
+
+.closeIcon {
+  color: #54adff;
+  cursor: pointer;
+
+  .closeBtn:hover &,
+  .closeBtn:focus & {
+    transform: scale(1.25);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .modal {
+    max-width: 681px;
+  }
+
+  .closeBtn {
+    top: 24px;
+    right: 24px;
+  }
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
