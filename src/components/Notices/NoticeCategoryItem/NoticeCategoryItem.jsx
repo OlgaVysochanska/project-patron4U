@@ -1,9 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
-
 import Button from 'shared/components/Button/Button';
-import NoticeModal from 'components/NoticeModal/NoticeModal';
 
 import LocationIcon from 'icons/LocationIcon';
 import ClockIcon from 'icons/ClockIcon';
@@ -15,7 +12,6 @@ import TrashIcon from 'icons/TrashIcon';
 import { isUserLogin } from 'redux/auth/authSelectors';
 
 import styles from './NoticeCategoryItem.module.scss';
-import image from '../pet.jpg';
 
 const {
   noticeCard,
@@ -36,27 +32,29 @@ const {
   learnBtn,
 } = styles;
 
-const NoticeCategoryItem = ({
-  id,
-  openModal,
-  category,
-  favorite,
-  titleOfAdd,
-  namePet,
-  dateOfBirth,
-  breed,
-  theSex,
-  location,
-  price,
-  comments,
-  //   image,
-  isMyAds,
-}) => {
+const NoticeCategoryItem = ({ notice, loadMore }) => {
+  const {
+    _id,
+    openModal,
+    category,
+    favorite,
+    title,
+    name,
+    date,
+    breed,
+    sex,
+    location,
+    price,
+    comments,
+    petURL,
+    isMyAds,
+  } = notice;
+
   const isLogin = useSelector(isUserLogin);
   // const isLogin = true;
 
-  function getAge(dateOfBirth) {
-    const ymdArr = dateOfBirth.split('.').map(Number).reverse();
+  function getAge(date) {
+    const ymdArr = date.split('.').map(Number).reverse();
     //с 0а идут месяца по этому откатываем на 1
     ymdArr[1]--;
     const bornDate = new Date(...ymdArr);
@@ -80,12 +78,12 @@ const NoticeCategoryItem = ({
     return age;
   }
 
-  const age = getAge(dateOfBirth);
+  const age = getAge(date.replaceAll('-', '.'));
 
   return (
     <li className={noticeCard}>
       <div className={imgThumb}>
-        <img className={avatar} src={image} alt="Pet's avatar" width="280" />
+        <img className={avatar} src={petURL} alt="Pet's avatar" width="280" />
         <div className={topBlock}>
           <p className={categoryInfo}>{category}</p>
           <div>
@@ -113,22 +111,20 @@ const NoticeCategoryItem = ({
           </p>
           <p className={noticeInfo}>
             <ClockIcon className={infoIcons} />
-            {age === 1 ? '1 year' : `${age} years`}
+            {age === 1 || age === 0 ? '1 year' : `${age} years`}
           </p>
           <p className={noticeInfo}>
-            {theSex.toLowerCase() === 'male' && (
-              <MaleIcon className={infoIcons} />
-            )}
-            {theSex.toLowerCase() === 'female' && (
+            {sex.toLowerCase() === 'male' && <MaleIcon className={infoIcons} />}
+            {sex.toLowerCase() === 'female' && (
               <FemaleIcon className={infoIcons} />
             )}
-            {theSex}
+            {sex}
           </p>
         </div>
       </div>
       <div className={noticeDesc}>
-        <h3 className={noticeTitle}>{titleOfAdd}</h3>
-        <Button className={learnBtn} onClick={openModal}>
+        <h3 className={noticeTitle}>{title}</h3>
+        <Button className={learnBtn} onClick={() => loadMore(notice)}>
           Learn more
         </Button>
       </div>
