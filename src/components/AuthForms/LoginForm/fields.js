@@ -6,7 +6,7 @@ const fields = {
     placeholder: 'Email',
   },
   password: {
-    type: 'password',
+    // type: 'password',
     name: 'password',
     required: true,
     placeholder: 'Password',

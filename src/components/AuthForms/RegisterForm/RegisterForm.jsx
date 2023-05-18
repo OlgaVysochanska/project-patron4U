@@ -6,9 +6,10 @@ import AuthButton from '../../../shared/components/AuthButton/AuthButton';
 
 import useForm from 'shared/hooks/useForm';
 
+import EyeClosedIcon from 'icons/EyeClosedIcon';
+
 import fields from './fields';
 import initialState from './initialState';
-import EyeClosedIcon from 'icons/EyeClosedIcon';
 
 import styles from './RegisterForm.module.scss';
 
@@ -26,7 +27,7 @@ const RegisterForm = ({ onSubmit }) => {
   const [isValidConf, setIsValidConf] = useState(true);
 
   //перевірка на встановлення властивості disabled для кнопки
-  const [agreed, setAgreed] = useState(false);
+  const [agreed, setAgreed] = useState(true);
 
   const handleConfirmPasswordChange = event => {
     const confirmValue = event.target.value;
