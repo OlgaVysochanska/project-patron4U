@@ -34,6 +34,12 @@
   }
 }
 
+.addPetFormNotOwn{ 
+  @media (min-width: 768px) {
+  max-width: 704px;
+}}
+
+
 .tabButtonsContainer {
   display: flex;
   flex-direction: row;
@@ -277,6 +283,32 @@
   }
 }
 
+.moreInfoSubContaiter {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  @media (min-width: 320px) and (max-width: 767px) {
+    flex-direction: column;
+  }
+}
+
+.moreInfoSubContaiterColum1{
+  margin-right: 63px;
+
+  &:last-child {
+    margin-right: 0px;
+  }
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    margin-right: 0px;
+  }
+}
+
+.moreInfoSubContaiterColum2{
+width: 100%;
+}
+
+
 .textarea {
   padding: 12px 16px;
   outline: none;
@@ -297,14 +329,34 @@
   border-color: #f43f5e;
 }
 
-.addPhotoButton {
+.loadPhotoGroup {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 27px;
+}
+
+.loadPhotoGroupOwnContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  @media (min-width: 320px) and (max-width: 767px) {
+    flex-direction: row;
+    align-items: center;
+    gap: 27px;
+  }
+}
+
+.photoContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.photoContainer img {
+  display: block;
   width: 182px;
   height: 182px;
-  background-color: #cce4fb;
   border-radius: 40px;
-  border: none;
-  margin-left: 27px;
-
   @media (min-width: 320px) and (max-width: 767px) {
     width: 112px;
     height: 112px;
@@ -312,11 +364,11 @@
   }
 }
 
-.addPhotoNotOwnButton {
-  margin-left: 0px;
-  @media (min-width: 320px) and (max-width: 767px) {
-    margin-left: 27px;
-  }
+.photoContainer button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .addPhotoIcon {
@@ -326,32 +378,21 @@
   }
 }
 
-.addPhotoContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 24px;
-
-  @media (min-width: 320px) and (max-width: 767px) {
-    margin-bottom: 24px;
-  }
-}
-
-.addPhotoNotOwnContainer {
-  margin-bottom: 0px;
-  flex-direction: column;
-  margin-top: 52px;
-  @media (min-width: 320px) and (max-width: 767px) {
-    margin-top: 16px;
-    flex-direction: row;
-    margin-bottom: 16px;
-  }
-}
-
 .genderContainerValid {
   display: flex;
   flex-direction: row;
   width: 182px;
+}
+.genderContainerRow{
+ margin-bottom: 48px;
+
+ @media (min-width: 320px) and (max-width: 767px) {
+  margin-bottom: 0px;
+}
+
+  &:last-child {
+    margin-bottom: 0px;
+  }
 }
 
 .gender {
@@ -392,4 +433,17 @@
   &:last-child {
     margin-right: 0px;
   }
+}
+
+.genderRow{
+  padding: 5px 16px 5px 0px;
+
+  & > *:last-child {
+    margin-right: 12px;
+  }
+
+  &:last-child {
+    margin-right: 0px;
+  }
+
 }

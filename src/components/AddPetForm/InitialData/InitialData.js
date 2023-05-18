@@ -7,4 +7,10 @@ export const gender = [
 ];
 
 export const tabs = ['Choose  option', 'Personal details', 'More info'];
-export const categories = ['your pet', 'sell', 'lost/found', 'in good hands'];
+
+export const categories = [
+  { id: 'my pet', category: 'your pet' },
+  { id: 'sell', category: 'sell' },
+  { id: 'lost-found', category: 'lost/found' },
+  { id: 'for-free', category: 'in good hands' },
+];

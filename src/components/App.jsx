@@ -12,7 +12,6 @@ const OurFriendsPage = lazy(() => import('pages/OurFriendsPage'));
 const UserPage = lazy(() => import('pages/UserPage'));
 const AddPetPage = lazy(() => import('pages/AddPetPage'));
 const NotFound = lazy(() => import('pages/NotFound'));
-
 export const App = () => {
   return (
     <Suspense fallback={<p>...Loading</p>}>

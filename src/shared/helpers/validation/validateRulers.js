@@ -6,6 +6,10 @@ const validateRulers = formState => {
     let message = '';
 
     switch (field.name) {
+      case 'category':
+        isValid = field.value !== '';
+        message = 'Choose category';
+        break;
       case 'addTitle':
         isValid = /^.{2,30}$/.test(field.value);
         message = 'Text between 2 and 30 characters long';
@@ -30,6 +34,7 @@ const validateRulers = formState => {
         break;
       case 'photoUrl':
         isValid = field.value !== '';
+        message = 'Download photo';
         break;
       case 'sex':
         isValid = field.value !== '';
