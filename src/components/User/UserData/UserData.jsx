@@ -1,7 +1,7 @@
 import styles from './UserData.module.scss';
 import UserDataItem from './UserDataItem/UserDataItem';
 import useForm from 'shared/hooks/useForm';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // import { ToggleButtonPhoto } from 'shared/components/ToggleButtonPhoto/ToggleButtonPhoto';
 import defaultAvatar from './default_avatar.svg';
 import Button from '../../../shared/components/Button/Button';
@@ -9,6 +9,7 @@ import CameraIcon from 'icons/CameraIcon';
 import { nanoid } from 'nanoid';
 import CheckIcon from 'icons/CheckIcon';
 import CrossIcon from 'icons/CrossIcon';
+import { getCurrent } from '../../../shared/services/auth';
 
 import UploadWidget from '../../../shared/components/UploadWidget/UploadWidget';
 
@@ -37,6 +38,9 @@ const user = {
 };
 
 const UserData = ({ onClick }) => {
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [isEditPhoto, setEditPhoto] = useState(false);
   const [isActive, setActive] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -47,6 +51,23 @@ const UserData = ({ onClick }) => {
   const [phone, setPhone] = useState(user.phone);
   const [city, setCity] = useState(user.city);
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        setLoading(true);
+        const data = await getCurrent();
+        setItems(prevItems => [...prevItems, data]);
+        console.log(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUser();
+  }, [activeItem]);
+
+  console.log(items);
   const userMap = { name, email, birthday, phone, city };
 
   if (!avatar) {
@@ -58,7 +79,8 @@ const UserData = ({ onClick }) => {
     setActiveItem(id);
     setIsEditing(true);
     console.log(activeItem);
-    console.log(isEditing)
+    console.log(isEditing);
+    console.log(items);
   };
 
   const clickActive = id => {
@@ -82,19 +104,41 @@ const UserData = ({ onClick }) => {
   const elements = Object.entries(userMap).map(([key, value]) => {
     console.log(key);
     const id = nanoid();
+    let type = '';
+    switch (key) {
+      case 'name':
+        type = 'text';
+        break;
+      case 'email':
+        type = 'email';
+        break;
+      case 'birthday':
+        type = 'date';
+        break;
+      case 'phone':
+        type = 'tel';
+        break;
+      case 'city':
+        type = 'text';
+        break;
+      default:
+        break;
+    }
+
     return (
       <div key={nanoid()}>
         <UserDataItem
+        type={type}
           label={key.charAt(0).toUpperCase() + key.slice(1) + ':'}
           name={key}
           value={value}
-          clickEdit={clickEdit}
+          defaultValue={value}
           isActive={isActive}
           clickActive={clickActive}
           activeItem={activeItem}
           id={id}
           key={key}
-          setIsEditing={setIsEditing}
+          // setIsEditing={setIsEditing}
           setActiveItem={setActiveItem}
         />
       </div>

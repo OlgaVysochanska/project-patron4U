@@ -14,6 +14,7 @@ const Input = ({
   icon,
   onIconClick,
   inputStyle,
+  readonly,
   ...props
 }) => {
   const inputStyles = {
@@ -33,6 +34,7 @@ const Input = ({
         onChange={handleChange}
         className={`${styles.input} ${!isValid ? styles.invalid : ''}`}
         style={inputStyles}
+        readOnly={readonly}
         {...props}
       />
       {icon && (
