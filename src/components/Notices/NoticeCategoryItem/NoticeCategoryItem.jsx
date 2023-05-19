@@ -13,25 +13,6 @@ import { isUserLogin } from 'redux/auth/authSelectors';
 
 import styles from './NoticeCategoryItem.module.scss';
 
-const {
-  noticeCard,
-  imgThumb,
-  avatar,
-  topBlock,
-  icons,
-  favoriteIcon,
-  infoIcons,
-  categoryInfo,
-  circBtn,
-  noticeInfoBlock,
-  noticeInfo,
-  locationInfo,
-  noticeDesc,
-  locationIcon,
-  noticeTitle,
-  learnBtn,
-} = styles;
-
 const NoticeCategoryItem = ({ notice, loadMore }) => {
   const {
     _id,
@@ -81,50 +62,61 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
   const age = getAge(date.replaceAll('-', '.'));
 
   return (
-    <li className={noticeCard}>
-      <div className={imgThumb}>
-        <img className={avatar} src={petURL} alt="Pet's avatar" width="280" />
-        <div className={topBlock}>
-          <p className={categoryInfo}>{category}</p>
+    <li className={styles.noticeCard}>
+      <div className={styles.imgThumb}>
+        <img
+          className={styles.avatar}
+          src={petURL}
+          alt="Pet's avatar"
+          width="280"
+        />
+        <div className={styles.topBlock}>
+          <p className={styles.categoryInfo}>{category}</p>
           <div>
             <Button
-              className={circBtn}
+              className={styles.circBtn}
               SVGComponent={() => (
                 <HeartIcon
-                  className={favorite ? `${icons} ${favoriteIcon}` : icons}
+                  className={
+                    styles.favorite
+                      ? `${styles.icons} ${styles.favoriteIcon}`
+                      : styles.icons
+                  }
                 />
               )}
             />
             {isMyAds && (
               <Button
-                className={circBtn}
-                SVGComponent={() => <TrashIcon className={icons} />}
+                className={styles.circBtn}
+                SVGComponent={() => <TrashIcon className={styles.icons} />}
               />
             )}
           </div>
         </div>
 
-        <div className={noticeInfoBlock}>
-          <p className={locationInfo}>
-            <LocationIcon className={locationIcon} />
+        <div className={styles.noticeInfoBlock}>
+          <p className={styles.locationInfo}>
+            <LocationIcon className={styles.locationIcon} />
             {location}
           </p>
-          <p className={noticeInfo}>
-            <ClockIcon className={infoIcons} />
+          <p className={styles.noticeInfo}>
+            <ClockIcon className={styles.infoIcons} />
             {age === 1 || age === 0 ? '1 year' : `${age} years`}
           </p>
-          <p className={noticeInfo}>
-            {sex.toLowerCase() === 'male' && <MaleIcon className={infoIcons} />}
+          <p className={styles.noticeInfo}>
+            {sex.toLowerCase() === 'male' && (
+              <MaleIcon className={styles.infoIcons} />
+            )}
             {sex.toLowerCase() === 'female' && (
-              <FemaleIcon className={infoIcons} />
+              <FemaleIcon className={styles.infoIcons} />
             )}
             {sex}
           </p>
         </div>
       </div>
-      <div className={noticeDesc}>
-        <h3 className={noticeTitle}>{title}</h3>
-        <Button className={learnBtn} onClick={() => loadMore(notice)}>
+      <div className={styles.noticeDesc}>
+        <h3 className={styles.noticeTitle}>{title}</h3>
+        <Button className={styles.learnBtn} onClick={() => loadMore(notice)}>
           Learn more
         </Button>
       </div>

@@ -63,9 +63,7 @@ const NoticeModal = ({ notice, closeModal }) => {
                 />
               </div>
               <table>
-                <caption className={styles.title}>
-                  Сute dog looking for a home
-                </caption>
+                <caption className={styles.title}>{title}</caption>
                 <tbody>
                   <tr>
                     <td className={styles.infoTitle}>Name:</td>

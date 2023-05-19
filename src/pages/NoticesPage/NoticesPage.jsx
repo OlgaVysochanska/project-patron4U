@@ -1,4 +1,3 @@
-// import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
@@ -12,7 +11,6 @@ import NoticesSearch from 'components/Notices/NoticesSearch/NoticesSearch';
 import NoticesCategoriesNav from 'components/Notices/NoticesCategoriesNav/NoticesCategoriesNav';
 import NoticesCategoriesList from '../../components/Notices/NoticesCategoriesList/NoticesCategoriesList';
 import NoticeModal from 'components/NoticeModal/NoticeModal';
-
 import AddPetButton from 'components/AddPetButton/AddPetButton';
 
 import style from './NoticesPage.module.scss';
@@ -35,13 +33,15 @@ const NoticesPage = () => {
 
   return (
     <>
-      <NoticesSearch />
-      <div className={style.wrapper}>
-        <NoticesCategoriesNav />
-        <AddPetButton />
+      <div className={style.noticePageContainer}>
+        <NoticesSearch />
+        <div className={style.wrapper}>
+          <NoticesCategoriesNav />
+          <AddPetButton />
+        </div>
+        <NoticesCategoriesList notices={allNotices} loadMore={loadMore} />
+        {isModalOpen && <NoticeModal notice={notice} closeModal={closeModal} />}
       </div>
-      <NoticesCategoriesList notices={allNotices} loadMore={loadMore} />
-      {isModalOpen && <NoticeModal notice={notice} closeModal={closeModal} />}
       <Outlet />
     </>
   );
