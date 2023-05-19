@@ -1,9 +1,14 @@
 import instance from './instance';
 
-export const getAllNotices = async (q, _page = 1) => {
+export const getAllNotices = async (
+  search = '',
+  category = 'sell',
+  _page = 1
+) => {
   const { data } = await instance.get('/notices/category', {
     params: {
-      q,
+      search,
+      category,
       _page,
     },
   });
