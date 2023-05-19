@@ -36,7 +36,7 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
 
   const isLogin = useSelector(isUserLogin);
   // const isLogin = true;
-  const isMyAds = true;
+  // const isMyAds = true;
 
   function getAge(date) {
     const ymdArr = date.split('.').map(Number).reverse();
@@ -69,6 +69,7 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
 
   const handleDeleteNotice = id => {
     dispatch(fetchDeleteNotice(id));
+    closeModal();
   };
 
   return (
