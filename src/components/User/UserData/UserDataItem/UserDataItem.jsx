@@ -9,6 +9,7 @@ import CheckIcon from 'icons/CheckIcon';
 import EditIcon from 'icons/EditIcon';
 import { useState } from 'react';
 import useForm from '../../../../shared/hooks/useForm';
+
 const CheckIconTuned = () => {
   return (
     <CheckIcon stroke="#00C3AD" width="16" height="16" viewBox="0 0 22 21" />
@@ -28,7 +29,7 @@ const UserDataItem = ({
   isActive,
   label,
   name,
-  value,
+  // value,
   defaultValue,
   clickActive,
   activeItem,
@@ -36,8 +37,13 @@ const UserDataItem = ({
   setActiveItem,
   // setIsEditing,
   onSubmit,
+  type,
 }) => {
-  const { state, handleChange, handleSubmit } = useForm({ initialState, onSubmit });
+  const initialState = defaultValue;
+  const { state, handleChange, handleSubmit } = useForm({
+    initialState,
+    onSubmit,
+  });
   const [isEditing, setIsEditing] = useState(true);
   //  const dispatch = useDispatch()
   const id = nanoid();
@@ -62,11 +68,12 @@ const UserDataItem = ({
     <form>
       {/* <div style={{ backgroundColor: 'green', position: 'relative' }}> */}
       <Input
+        type={type}
         key={id}
         id={id}
         label={label}
         name={name}
-        value={value}
+        // value={value}
         defaultValue={defaultValue}
         // {...(!isActive && isEditing && { rO })}
         // inputStyle={{ position: 'relative' }}

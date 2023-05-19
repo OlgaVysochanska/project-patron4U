@@ -32,7 +32,7 @@ let avatar = false;
 const user = {
   name: 'Anna',
   email: 'anna00@gmail.com',
-  birthday: '00.00.0000',
+  birthday: '01.01.0101',
   phone: '+38000000000',
   city: 'Kiev',
 };
@@ -131,7 +131,7 @@ const UserData = ({ onClick }) => {
         type={type}
           label={key.charAt(0).toUpperCase() + key.slice(1) + ':'}
           name={key}
-          value={value}
+          // value={value}
           defaultValue={value}
           isActive={isActive}
           clickActive={clickActive}

@@ -31,10 +31,10 @@ const Input = ({
         pattern={pattern}
         title={title}
         value={value}
+        readOnly={readonly}
         onChange={handleChange}
         className={`${styles.input} ${!isValid ? styles.invalid : ''}`}
         style={inputStyles}
-        readOnly={readonly}
         {...props}
       />
       {icon && (
