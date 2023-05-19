@@ -36,7 +36,7 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
 
   const isLogin = useSelector(isUserLogin);
   // const isLogin = true;
-  // const isMyAds = true;
+  const isMyAds = false;
 
   function getAge(date) {
     const ymdArr = date.split('.').map(Number).reverse();
