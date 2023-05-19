@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 
 import PrivateRoute from './PrivateRoute/PrivateRoute';
@@ -20,6 +21,7 @@ export const App = () => {
     <Suspense fallback={<p>...Loading</p>}>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
+          <Route path="" element={<Navigate to="/main" replace />} />
           <Route path="/main" element={<MainPage />} />
           <Route element={<PublicRoute />}>
             <Route path="/register" element={<RegisterPage />} />

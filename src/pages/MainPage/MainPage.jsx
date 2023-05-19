@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Background from '../../shared/components/Background/Background';
 import scss from './MainPage.module.scss';
+import Logout from 'components/User/Logout';
 
 import petsMob1x from '../../images/pets_mob_1x.png';
 import petsMob2x from '../../images/pets_mob_2x.png';
@@ -50,6 +51,7 @@ const MainPage = () => {
     <>
       <Background />
       <div className={scss.screen}>
+        <Logout />
         <img className={scss.pets} src={getImage()} alt="pets" loading="lazy" />
         <h1 className={scss.title}>Take good care of your small pets</h1>
       </div>
