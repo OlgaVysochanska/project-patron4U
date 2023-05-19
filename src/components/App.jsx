@@ -1,6 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 
+import PrivateRoute from './PrivateRoute/PrivateRoute';
+import PublicRoute from './PublicRoute/PublicRoute';
+
 import SharedLayout from './SharedLayout/SharedLayout';
 
 const MainPage = lazy(() => import('pages/MainPage'));
@@ -18,13 +21,19 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route path="/main" element={<MainPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route element={<PublicRoute />}>
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/login" element={<LoginPage />} />
+          </Route>
+          <Route path="/news" element={<NewsPage />} />
           <Route path="/notices/:category" element={<NoticesPage />} />
           <Route path="/friends" element={<OurFriendsPage />} />
-          <Route path="/news" element={<NewsPage />} />
-          <Route path="/user" element={<UserPage />} />
-          <Route path="/add-pet" element={<AddPetPage />} />
+
+          <Route element={<PrivateRoute />}>
+            <Route path="/add-pet" element={<AddPetPage />} />
+            <Route path="/user" element={<UserPage />} />
+          </Route>
+
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
