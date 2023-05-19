@@ -1,11 +1,11 @@
-import { NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { isUserLogin } from 'redux/auth/authSelectors';
 
 import style from './NoticesCategoriesNav.module.scss';
 import { nanoid } from 'nanoid';
 
-const navBtn = [
+const btns = [
   {
     id: nanoid(),
     text: 'sell',
@@ -19,50 +19,34 @@ const navBtn = [
   {
     id: nanoid(),
     text: 'in good hands',
-    link: '/fo-free',
+    link: '/for-free',
   },
-
+  {
+    id: nanoid(),
+    text: 'favorite ads',
+    link: '/favorite',
+    private: true,
+  },
+  {
+    id: nanoid(),
+    text: 'my ads',
+    link: '/own',
+    private: true,
+  },
 ];
-
-const navAuthBtn = [{
-  id: nanoid(),
-  text: 'favorite ads',
-  link: '/favorite',
-},
-{
-  id: nanoid(),
-  text: 'my ads',
-  link: '/own',
-},
-]
 const NoticesCategoriesNav = () => {
-const isLogin = useSelector(isUserLogin);
-const btn = navBtn.map(({id, text, link}) => <li key={id}>
-<NavLink to={'/notices' + link} className={style.btn}>
-  {text}
-</NavLink></li>);
-
-const authBtn = navAuthBtn.map(({id, text, link}) => <li key={id}>
-  <NavLink to={'/notices'+ link} className ={style.btn}>
-    {text}
-  </NavLink>
-</li>);
-
-  return (
-    <ul className={style.wrapper}>
-    {btn} 
-    {isLogin && {authBtn}}
-     
-      {/* <NavLink to="favorite" className={style.btn}>
-      favorite ads
+  const isLogin = useSelector(isUserLogin);
+  console.log(isLogin);
+  const filteredBtns = !isLogin ? btns.filter(btn => !btn.private) : btns;
+  const navBtns = filteredBtns.map(({ id, text, link }) => (
+    <li key={id}>
+      <NavLink to={'/notices' + link} className={style.btn}>
+        {text}
       </NavLink>
-      <NavLink to="own" className={style.btn}>
-      my ads
-      </NavLink> */}
-    
-    </ul>
+    </li>
+  ));
 
-  );
+  return <ul className={style.wrapper}>{navBtns}</ul>;
 };
 
 export default NoticesCategoriesNav;
