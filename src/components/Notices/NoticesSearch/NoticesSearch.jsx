@@ -42,11 +42,15 @@ const NoticesSearch = () => {
   //   [setSearchParams]
   // );
 
+  const clickOnSearch = () => {
+    console.log('i can dispatch notices there');
+  };
+
   return (
     <>
       <div className={style.wrapper}>
         <Title>Find your favorite pet</Title>
-       <SearchBar />
+        <SearchBar onSubmit={clickOnSearch} />
       </div>
       {/* <NoticesCategoriesList data={items}/>
       {error && <p>{error}</p>}

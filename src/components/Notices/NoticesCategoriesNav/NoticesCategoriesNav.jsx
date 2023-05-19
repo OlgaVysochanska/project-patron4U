@@ -34,6 +34,7 @@ const btns = [
     private: true,
   },
 ];
+
 const NoticesCategoriesNav = () => {
   const isLogin = useSelector(isUserLogin);
   console.log(isLogin);
@@ -47,6 +48,7 @@ const NoticesCategoriesNav = () => {
   ));
 
   return <ul className={style.wrapper}>{navBtns}</ul>;
+
 };
 
 export default NoticesCategoriesNav;
