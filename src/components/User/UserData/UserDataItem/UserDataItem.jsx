@@ -1,5 +1,5 @@
 // import { ToggleButton } from 'shared/components/ToggleButton/ToggleButton';
-import { nanoid } from '@reduxjs/toolkit';
+// import { nanoid } from '@reduxjs/toolkit';
 import Input from 'shared/components/Input/Input';
 // import fields from './fields';
 import styles from './UserDataItem.scss';
@@ -7,8 +7,9 @@ import styles from './UserDataItem.scss';
 import Button from 'shared/components/Button/Button';
 import CheckIcon from 'icons/CheckIcon';
 import EditIcon from 'icons/EditIcon';
-import { useState } from 'react';
+// import { useState } from 'react';
 import useForm from '../../../../shared/hooks/useForm';
+import {useState} from 'react'
 
 const CheckIconTuned = () => {
   return (
@@ -34,7 +35,7 @@ const UserDataItem = ({
   clickActive,
   activeItem,
   // isEditing,
-  setActiveItem,
+  // setActiveItem,
   // setIsEditing,
   onSubmit,
   type,
@@ -46,15 +47,15 @@ const UserDataItem = ({
   });
   const [isEditing, setIsEditing] = useState(true);
   //  const dispatch = useDispatch()
-  const id = nanoid();
+  // const id = nanoid();
   // const handleEdit = id => {
   //   dispatch(clickToglle(id))
   // };
 
   const clickEdit = id => {
     // onClick(!isActive);
-    setActiveItem(id);
-    setIsEditing(false);
+    // setActiveItem(id);
+    setIsEditing(!isEditing);
     console.log(activeItem);
     console.log(isEditing);
   };
@@ -69,50 +70,71 @@ const UserDataItem = ({
       {/* <div style={{ backgroundColor: 'green', position: 'relative' }}> */}
       <Input
         type={type}
-        key={id}
-        id={id}
+        // key={id}
+        id={name}
         label={label}
         name={name}
-        // value={value}
-        defaultValue={defaultValue}
+        value={defaultValue}
+        // defaultValue={defaultValue}
         // {...(!isActive && isEditing && { rO })}
         // inputStyle={{ position: 'relative' }}
-        isValid={true}
+        // isValid={true}
         readonly={isEditing}
         handleChange={handleChange}
       ></Input>
-      <Button
-        type="button"
-        onClick={() => {
-          clickEdit();
-        }}
-        className={styles.toggle}
-        buttonStyle={{
-          backgroundColor: 'transparent',
-          border: 'none',
-          position: 'absolute',
-          right: '10px',
+      {isActive ? (
+        <Button
+          // type="button"
+          className={`${styles.toggle} ${styles.active}`}
+          onClick={clickActive}
+          // buttonStyle={{
+          //   backgroundColor: 'transparent',
+          //   border: 'none',
+          //   position: 'absolute',
+          //   right: '10px',
           //   top: '10px',
           //   transform: 'translateY(-50%)',
-        }}
-        SVGComponent={EditIconTuned}
-        stroke="red"
-      />
+          // }
+          // SVGComponent={EditIconTuned}
+          // stroke="red"
+        >
+          {activeItem}
+        </Button>
+      ) : (
+        <Button className={styles.button} onClick={clickActive}>
+          {activeItem}
+        </Button>
+      )}
+      {isEditing ? (
+        <Button
+          type="button"
+          className={styles.toggle}
+          onClick={clickEdit}
+          icon={<EditIconTuned />}
+        >
+          Edit
+        </Button>
+      ) : (
+        <Button
+          className={styles.button}
+          onClick={clickSave}
+          icon={<CheckIconTuned />}
+        >
+          Save
+        </Button>
+      )}
       <Button
-        type="button"
-        onClick={clickSave}
-        className={styles.toggle}
-        // buttonStyle={{
-
-        //   position: 'absolute',
-        //   right: '10px',
-        //   top: '10px',
-        //   //     //   transform: 'translateY(-50%)',
-        // }}
-        SVGComponent={CheckIconTuned}
-      />
+        type="submit"
+        className={`${styles.button} ${styles.submit}`}
+        onClick={onSubmit}
+      >
+        Submit
+      </Button>
+      // buttonStyle= // position: 'absolute', // right: '10px', // top: '10px',
+      // // // transform: 'translateY(-50%)', // // SVGComponent=
+      {/* {CheckIconTuned}
+      /> */}
       {/* </div> */}
-
       {/* <ToggleButton
             className={styles.togle}
             id={id}
