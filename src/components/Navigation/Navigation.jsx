@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { isUserLogin } from '../../redux/auth/authSelectors.js';
 import Nav from 'components/Nav/Nav';
 import UserNav from 'components/UserNav/UserNav';
 import AuthNav from 'components/AuthNav/AuthNav';
@@ -7,7 +9,7 @@ import HamburgerIcon from 'icons/HamburgerIcon';
 import styles from './Navigation.module.scss';
 
 export default function Navigation({ isDesktop, isTablet, isMobile }) {
-  const userLoggedIn = false; // change to useSelector
+  const userLoggedIn = useSelector(isUserLogin);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   useEffect(() => {
