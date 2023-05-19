@@ -1,6 +1,8 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
 
 import Button from 'shared/components/Button/Button';
+import ModalApproveAction from 'shared/components/ModalApproveAction/ModalApprovAction';
 
 import LocationIcon from 'icons/LocationIcon';
 import ClockIcon from 'icons/ClockIcon';
@@ -10,13 +12,13 @@ import HeartIcon from 'icons/HeartIcon';
 import TrashIcon from 'icons/TrashIcon';
 
 import { isUserLogin } from 'redux/auth/authSelectors';
+import { fetchDeleteNotice } from 'redux/notices/noticesOperations';
 
 import styles from './NoticeCategoryItem.module.scss';
 
 const NoticeCategoryItem = ({ notice, loadMore }) => {
   const {
     _id,
-    openModal,
     category,
     favorite,
     title,
@@ -28,11 +30,13 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
     price,
     comments,
     petURL,
-    isMyAds,
   } = notice;
+
+  const { isModalOpen, openModal, closeModal } = useToggleModalWindow();
 
   const isLogin = useSelector(isUserLogin);
   // const isLogin = true;
+  const isMyAds = true;
 
   function getAge(date) {
     const ymdArr = date.split('.').map(Number).reverse();
@@ -61,6 +65,12 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
 
   const age = getAge(date.replaceAll('-', '.'));
 
+  const dispatch = useDispatch();
+
+  const handleDeleteNotice = id => {
+    dispatch(fetchDeleteNotice(id));
+  };
+
   return (
     <li className={styles.noticeCard}>
       <div className={styles.imgThumb}>
@@ -87,6 +97,7 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
             />
             {isMyAds && (
               <Button
+                onClick={() => openModal()}
                 className={styles.circBtn}
                 SVGComponent={() => <TrashIcon className={styles.icons} />}
               />
@@ -120,6 +131,20 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
           Learn more
         </Button>
       </div>
+      {isModalOpen && (
+        <ModalApproveAction
+          fn={() => handleDeleteNotice(_id)}
+          closeModal={closeModal}
+          icon={() => <TrashIcon className={styles.modalIcon} />}
+        >
+          <h3 className={styles.modalTitle}>Delete adverstiment?</h3>
+          <p className={styles.modalText}>
+            Are you sure you want to delete
+            <span className={styles.modalTextSpan}> “{title}”</span>? <br /> You
+            can't undo this action.
+          </p>
+        </ModalApproveAction>
+      )}
     </li>
   );
 };

@@ -32,7 +32,7 @@ function ModalApproveAction({ closeModal, children, fn, icon }) {
           <CrossSmallIcon className={styles.closeIcon} />
         </Button>
         {children}
-        <div className={styles.wrapper}>
+        <div className={styles.btnWrapper}>
           <Button
             label="Cancel"
             className={styles.button}
