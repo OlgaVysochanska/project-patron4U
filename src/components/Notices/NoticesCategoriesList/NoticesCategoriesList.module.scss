@@ -1,22 +1,8 @@
-.noticesListContainer {
-  margin: 0 auto;
-}
-
 .noticesList {
   margin-bottom: 36px;
 }
 
-@media screen and (max-width: 767px) {
-  .noticesListContainer {
-    max-width: 480px;
-  }
-}
-
 @media screen and (min-width: 768px) {
-  .noticesListContainer {
-    width: 704px;
-  }
-
   .noticesList {
     display: flex;
     flex-wrap: wrap;
@@ -26,10 +12,6 @@
 }
 
 @media screen and (min-width: 1280px) {
-  .noticesListContainer {
-    width: 1248px;
-  }
-
   .noticesList {
     gap: 32px;
   }
