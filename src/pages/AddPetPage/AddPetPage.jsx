@@ -1,7 +1,14 @@
-import { Link } from 'react-router-dom';
+import AddPetForm from '../../components/AddPetForm/AddPetForm';
+import Background from 'shared/components/Background/Background';
 
+//додати контейнер з фоновим зображенням
 const AddPetPage = () => {
-  return <Link to="/add-pet">add Pet</Link>;
+  return (
+    <>
+      <Background />
+      <AddPetForm />
+    </>
+  );
 };
 
 export default AddPetPage;

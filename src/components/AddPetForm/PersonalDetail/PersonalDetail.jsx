@@ -8,12 +8,12 @@ import 'react-datepicker/dist/react-datepicker.css';
 const PersonalDetail = ({
   activeTab,
   activeCategory,
-  addTitle,
-  petName,
+  title,
+  name,
   birthDate,
   breed,
-  invalidAddTitle,
-  invalidPetName,
+  invalidtitle,
+  invalidname,
   invalidBirthDate,
   invalidPetBreed,
   handleChange,
@@ -39,40 +39,39 @@ const PersonalDetail = ({
     });
   };
 
-  return (
+  const titleEl = (
     <>
-      {activeCategory !== 0 && (
-        <>
-          <label
-            className={[
-              styles.inputContainerValid,
-              invalidAddTitle ? styles['inputContainerInvalid'] : '',
-            ].join(' ')}
-          >
-            <p className={styles.label}>Title of add</p>
-            <input
-              ref={inputTitleRef}
-              className={[
-                styles.input,
-                invalidAddTitle ? styles['inputInvalid'] : '',
-              ].join(' ')}
-              type="text"
-              name="addTitle"
-              value={addTitle}
-              onChange={handleChange}
-              placeholder="Type title of add"
-              required
-            />
-          </label>
-          {invalidAddTitle && (
-            <p className={styles.validMessage}>{invalidAddTitle}</p>
-          )}
-        </>
-      )}
       <label
         className={[
           styles.inputContainerValid,
-          invalidPetName ? styles['inputContainerInvalid'] : '',
+          invalidtitle ? styles['inputContainerInvalid'] : '',
+        ].join(' ')}
+      >
+        <p className={styles.label}>Title of add</p>
+        <input
+          ref={inputTitleRef}
+          className={[
+            styles.input,
+            invalidtitle ? styles['inputInvalid'] : '',
+          ].join(' ')}
+          type="text"
+          name="title"
+          value={title}
+          onChange={handleChange}
+          placeholder="Type title of add"
+          required
+        />
+      </label>
+      {invalidtitle && <p className={styles.validMessage}>{invalidtitle}</p>}
+    </>
+  );
+
+  const nameEl = (
+    <>
+      <label
+        className={[
+          styles.inputContainerValid,
+          invalidname ? styles['inputContainerInvalid'] : '',
         ].join(' ')}
       >
         <p className={styles.label}>Name pet</p>
@@ -80,19 +79,22 @@ const PersonalDetail = ({
           ref={inputNameRef}
           className={[
             styles.input,
-            invalidPetName ? styles['inputInvalid'] : '',
+            invalidname ? styles['inputInvalid'] : '',
           ].join(' ')}
           type="text"
-          name="petName"
-          value={petName}
+          name="name"
+          value={name}
           onChange={handleChange}
           placeholder="Type name pet"
           required
         />
       </label>
-      {invalidPetName && (
-        <p className={styles.validMessage}>{invalidPetName}</p>
-      )}
+      {invalidname && <p className={styles.validMessage}>{invalidname}</p>}
+    </>
+  );
+
+  const dateBirthEl = (
+    <>
       <label
         className={[
           styles.inputContainerValid,
@@ -120,6 +122,11 @@ const PersonalDetail = ({
       {invalidBirthDate && (
         <p className={styles.validMessage}>{invalidBirthDate}</p>
       )}
+    </>
+  );
+
+  const breedEl = (
+    <>
       <label
         className={[
           styles.inputContainerValid,
@@ -145,6 +152,46 @@ const PersonalDetail = ({
       )}
     </>
   );
+
+  const commonContent = (
+    <>
+      {titleEl}
+      {nameEl}
+      {dateBirthEl}
+      {breedEl}
+    </>
+  );
+
+  const categoryData = [
+    {
+      category: 0,
+      content: (
+        <>
+          {nameEl}
+          {dateBirthEl}
+          {breedEl}
+        </>
+      ),
+    },
+    {
+      category: 1,
+      content: <>{commonContent}</>,
+    },
+    {
+      category: 2,
+      content: <>{commonContent}</>,
+    },
+    {
+      category: 3,
+      content: <>{commonContent}</>,
+    },
+  ];
+
+  const activeCategoryData = categoryData.find(
+    data => data.category === activeCategory
+  );
+
+  return <div>{activeCategoryData.content}</div>;
 };
 
 export default PersonalDetail;

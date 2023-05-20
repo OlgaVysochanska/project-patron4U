@@ -2,6 +2,7 @@ import Button from 'shared/components/Button/Button';
 import SearchIcon from '../../../icons/SearchIcon';
 import CrossIcon from 'icons/CrossIcon';
 import useForm from 'shared/hooks/useForm';
+import PropTypes from 'prop-types';
 import initialState from './initialState';
 
 import style from './SearchBar.module.scss';
@@ -36,7 +37,6 @@ const SearchBar = ({ onSubmit }) => {
             required
           />
         </label>
-
         <Button
           type="submit"
           className={buttonClass}
@@ -57,3 +57,7 @@ const SearchBar = ({ onSubmit }) => {
 };
 
 export default SearchBar;
+
+SearchBar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};

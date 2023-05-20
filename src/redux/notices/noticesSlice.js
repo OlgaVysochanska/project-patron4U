@@ -4,6 +4,7 @@ import {
   fetchAllNotices,
   fetchAddNotice,
   fetchDeleteNotice,
+  fetchNoticesByCategory,
 } from './noticesOperations';
 
 const initialState = {
@@ -20,9 +21,9 @@ const noticesSlice = createSlice({
       .addCase(fetchAllNotices.pending, store => {
         store.loading = true;
       })
-      .addCase(fetchAllNotices.fulfilled, (store, { payload }) => {
-        store.loading = false;
-        store.items = payload;
+      .addCase(fetchAllNotices.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.items = payload;
       })
       .addCase(fetchAllNotices.rejected, (store, { payload }) => {
         store.loading = false;
@@ -30,6 +31,7 @@ const noticesSlice = createSlice({
       })
       .addCase(fetchAddNotice.pending, store => {
         store.loading = true;
+        store.error = null;
       })
       .addCase(fetchAddNotice.fulfilled, (store, { payload }) => {
         store.loading = false;
@@ -50,8 +52,27 @@ const noticesSlice = createSlice({
       .addCase(fetchDeleteNotice.rejected, (store, { payload }) => {
         store.loading = false;
         store.error = payload;
+      })
+      .addCase(fetchNoticesByCategory.pending, store => {
+        store.loading = true;
+        store.items = [];
+      })
+      .addCase(fetchNoticesByCategory.fulfilled, (store, { payload }) => {
+        store.loading = false;
+        store.items = [...payload];
+        store.category = payload.category
+      })
+      .addCase(fetchNoticesByCategory.rejected, (store, { payload }) => {
+        store.loading = false;
+        store.error = payload;
       });
+  },
+  reducers: {
+    addFilteredNotices(state, action) {
+      state.items = action.payload;
+    },
   },
 });
 
+export const { addFilteredNotices } = noticesSlice.actions;
 export default noticesSlice.reducer;

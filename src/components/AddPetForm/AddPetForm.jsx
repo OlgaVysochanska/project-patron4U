@@ -1,30 +1,34 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { format } from 'date-fns';
 
 import useForm from 'shared/hooks/useForm';
+
+import { fetchAddNotice } from '../../redux/notices/noticesOperations';
+import {
+  getLoadingNotices,
+  getNoticesError,
+} from '../../redux/notices/noticesSelecors';
+
+import ChooseOption from './ChooseOption/ChooseOption';
 import PersonalDetail from './PersonalDetail/PersonalDetail';
 import MoreInfo from './MoreInfo/MoreInfo';
-
 import Button from 'shared/components/Button/Button';
 import ArrowLeftIcon from 'icons/ArrowLeftIcon';
 import PawprintIcon from 'icons/PawprintIcon';
+import Spiner from 'components/Spiner/Spiner';
+import NotiflixMessage from 'shared/components/NotiflixMessage/NotiflixMessage';
 import validateRulers from 'shared/helpers/validation/validateRulers';
 
-import { gender, categories, tabs } from './InitialData/InitialData';
+import {
+  gender,
+  categories,
+  tabs,
+  initialState,
+} from './InitialData/InitialData';
 
 import styles from './AddPetForm.module.scss';
-
-const initialState = {
-  petName: '',
-  birthDate: null,
-  breed: '',
-  sex: '',
-  photoUrl: '',
-  comments: '',
-  addTitle: '',
-  location: '',
-  price: '',
-};
 
 const AddPetForm = ({ onSubmit }) => {
   const [activeCategory, setActiveCategory] = useState(0);
@@ -36,22 +40,24 @@ const AddPetForm = ({ onSubmit }) => {
     onSubmit,
   });
 
-  const [invalidPetName, setInvalidPetName] = useState('');
+  const [invalidname, setInvalidname] = useState('');
   const [invalidPetBreed, setInvalidBreed] = useState('');
-  const [invalidAddTitle, setInvalidAddTitle] = useState('');
+  const [invalidtitle, setInvalidtitle] = useState('');
   const [invalidBirthDate, setInvalidBirthDate] = useState('');
   const [invalidSex, setInvalidSex] = useState('');
   const [invalidComments, setInvalidComments] = useState('');
   const [invalidLocation, setInvalidLocation] = useState('');
   const [invalidPrice, setInvalidPrice] = useState('');
+  const [invalidpetURL, setInvalidpetURL] = useState('');
 
   const {
-    addTitle,
-    petName,
+    category,
+    title,
+    name,
     birthDate,
     breed,
     sex,
-    photoUrl,
+    petURL,
     comments,
     location,
     price,
@@ -59,23 +65,35 @@ const AddPetForm = ({ onSubmit }) => {
 
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+
+  const loading = useSelector(getLoadingNotices);
+  const error = useSelector(getNoticesError);
+
   const validateData = () => {
     let formData = [];
+
+    if (activeTab === 0) {
+      formData = [{ name: 'category', value: category }];
+    }
+
     if (activeTab === 1) {
       switch (activeCategory) {
         case 0:
           formData = [
-            { name: 'petName', value: petName },
+            { name: 'name', value: name },
             { name: 'breed', value: breed },
             { name: 'birthDate', value: birthDate },
           ];
           break;
         case 1:
+        case 2:
+        case 3:
           formData = [
-            { name: 'petName', value: petName },
+            { name: 'name', value: name },
             { name: 'breed', value: breed },
             { name: 'birthDate', value: birthDate },
-            { name: 'addTitle', value: addTitle },
+            { name: 'title', value: title },
           ];
           break;
         default:
@@ -86,7 +104,10 @@ const AddPetForm = ({ onSubmit }) => {
     if (activeTab === 2) {
       switch (activeCategory) {
         case 0:
-          formData = [{ name: 'comments', value: comments }];
+          formData = [
+            { name: 'comments', value: comments },
+            { name: 'petURL', value: petURL },
+          ];
           break;
         case 1:
           formData = [
@@ -94,6 +115,7 @@ const AddPetForm = ({ onSubmit }) => {
             { name: 'sex', value: sex },
             { name: 'location', value: location },
             { name: 'price', value: price },
+            { name: 'petURL', value: petURL },
           ];
           break;
         case 2:
@@ -102,6 +124,7 @@ const AddPetForm = ({ onSubmit }) => {
             { name: 'comments', value: comments },
             { name: 'sex', value: sex },
             { name: 'location', value: location },
+            { name: 'petURL', value: petURL },
           ];
           break;
         default:
@@ -110,7 +133,7 @@ const AddPetForm = ({ onSubmit }) => {
     }
 
     const validatedData = validateRulers(formData);
-    console.log(validatedData);
+    //console.log(validatedData);
 
     const errorMessages = validatedData.reduce(
       (errors, { name, message, isValid }) => {
@@ -122,14 +145,15 @@ const AddPetForm = ({ onSubmit }) => {
       {}
     );
 
-    setInvalidPetName(errorMessages.petName || '');
+    setInvalidname(errorMessages.name || '');
     setInvalidBreed(errorMessages.breed || '');
-    setInvalidAddTitle(errorMessages.addTitle || '');
+    setInvalidtitle(errorMessages.title || '');
     setInvalidBirthDate(errorMessages.birthDate || '');
     setInvalidSex(errorMessages.sex || '');
     setInvalidComments(errorMessages.comments || '');
     setInvalidLocation(errorMessages.location || '');
     setInvalidPrice(errorMessages.price || '');
+    setInvalidpetURL(errorMessages.petURL || '');
 
     return validatedData.filter(obj => obj.isValid === false);
   };
@@ -146,6 +170,12 @@ const AddPetForm = ({ onSubmit }) => {
 
   const handleCategoryChange = index => {
     setActiveCategory(index);
+    handleChange({
+      target: {
+        name: 'category',
+        value: categories[index].id,
+      },
+    });
   };
 
   const handleFormTabNvigationCancel = () => {
@@ -164,8 +194,48 @@ const AddPetForm = ({ onSubmit }) => {
     setActiveTab(activeTab => activeTab - 1);
   };
 
+  const handleDataFetch = async () => {
+    try {
+      const date = format(birthDate, 'dd.MM.yyyy');
+      const invalidObjects = validateData();
+      if (!invalidObjects.length) {
+        if (activeCategory !== 0) {
+          await dispatch(
+            fetchAddNotice({
+              title,
+              name,
+              date,
+              breed,
+              location,
+              petURL,
+              sex,
+              comments,
+              price,
+              category,
+            })
+          );
+        } else {
+          //тут додамо петсів
+        }
+      }
+    } catch (error) {
+      NotiflixMessage({ type: 'info', data: error.message });
+    }
+  };
+
   const handleFormTabNvigationDone = () => {
-    const invalidObjects = validateData();
+    handleDataFetch();
+
+    if (error) {
+      NotiflixMessage({ type: 'info', data: error.message });
+      return;
+    }
+    if (activeCategory !== 0) {
+      navigate('/notices/sell');
+    } else {
+      navigate('/user');
+    }
+    setState(initialState);
   };
 
   const formTabsEl = tabs.map((item, index) => (
@@ -178,6 +248,7 @@ const AddPetForm = ({ onSubmit }) => {
         activeTab === index ? styles['formTabAct'] : '',
         activeTab > index ? styles['formTabValid'] : '',
       ].join(' ')}
+      type="button"
     />
   ));
 
@@ -203,6 +274,7 @@ const AddPetForm = ({ onSubmit }) => {
       SVGComponent={() => <ArrowLeftIcon stroke="#54ADFF" />}
       onClick={handleFormTabNvigationPrev}
       className={styles.navigationButtonPrev}
+      type="button"
     />
   );
 
@@ -212,6 +284,7 @@ const AddPetForm = ({ onSubmit }) => {
       SVGComponent={() => <PawprintIcon fill="#FEF9F9" />}
       onClick={handleFormTabNvigationNext}
       className={styles.navigationButtonNext}
+      type="button"
     />
   );
 
@@ -221,6 +294,7 @@ const AddPetForm = ({ onSubmit }) => {
       SVGComponent={() => <PawprintIcon fill="#FEF9F9" />}
       className={styles.navigationButtonNext}
       onClick={handleFormTabNvigationDone}
+      type="button"
     />
   );
 
@@ -231,31 +305,28 @@ const AddPetForm = ({ onSubmit }) => {
       SVGComponent={() => <ArrowLeftIcon stroke="#54ADFF" />}
       onClick={handleFormTabNvigationCancel}
       className={styles.navigationButtonPrev}
+      type="button"
     />
   );
 
-  const categoriesEl = categories.map((item, index) => (
-    <Button
-      label={item}
-      key={index}
-      onClick={() => handleCategoryChange(index)}
-      className={
-        activeCategory === index ? styles.categoryAct : styles.category
-      }
+  const categoriesEl = (
+    <ChooseOption
+      activeCategory={activeCategory}
+      handleCategoryChange={handleCategoryChange}
     />
-  ));
+  );
 
   const personDetailEl = (
     <>
       <PersonalDetail
         activeTab={activeTab}
         activeCategory={activeCategory}
-        addTitle={addTitle}
-        petName={petName}
+        title={title}
+        name={name}
         breed={breed}
         birthDate={birthDate}
-        invalidPetName={invalidPetName}
-        invalidAddTitle={invalidAddTitle}
+        invalidname={invalidname}
+        invalidtitle={invalidtitle}
         invalidBirthDate={invalidBirthDate}
         invalidPetBreed={invalidPetBreed}
         handleChange={handleChange}
@@ -267,13 +338,16 @@ const AddPetForm = ({ onSubmit }) => {
     <MoreInfo
       activeCategory={activeCategory}
       activeGender={activeGender}
+      activeTab={activeTab}
       location={location}
       price={price}
       comments={comments}
+      petURL={petURL}
       invalidSex={invalidSex}
       invalidPrice={invalidPrice}
       invalidLocation={invalidLocation}
       invalidComments={invalidComments}
+      invalidpetURL={invalidpetURL}
       handleChange={handleChange}
       handleGenderChange={handleGenderChange}
     />
@@ -284,7 +358,7 @@ const AddPetForm = ({ onSubmit }) => {
       tab: 0,
       content: (
         <>
-          <div className={styles.categoryContainer}>{categoriesEl}</div>
+          {categoriesEl}
           <div className={styles.navigationButtonsContainer}>
             {cancelBtnEl}
             {nextBtnEl}
@@ -335,12 +409,21 @@ const AddPetForm = ({ onSubmit }) => {
   const activeTabData = tabData.find(data => data.tab === activeTab);
 
   return (
-    <div className={styles.addPetFormContainer}>
-      <form onSubmit={handleSubmit} className={styles.addPetForm}>
+    <div className={[styles.addPetFormContainer].join(' ')}>
+      <form
+        onSubmit={handleSubmit}
+        className={[
+          styles.addPetForm,
+          activeCategory !== 0 && activeTab === 2
+            ? styles['addPetFormNotOwn']
+            : '',
+        ].join(' ')}
+      >
         {titleEl(activeCategory)}
         <div className={styles.tabButtonsContainer}>{formTabsEl}</div>
 
         <div className={styles.formTabContainer}>{activeTabData.content}</div>
+        {loading && <Spiner />}
       </form>
     </div>
   );

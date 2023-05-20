@@ -1,6 +1,13 @@
+import Title from '../../shared/components/Title';
+import News from '../../components/News';
+import style from './NewsPage.module.scss';
+
 const NewsPage = () => {
   return (
-    <div>If components are ready, add them to AddPetPage. /AddPetForm/</div>
+    <div className={style.container}>
+      <Title>News</Title>
+      <News />
+    </div>
   );
 };
 

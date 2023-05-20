@@ -1,12 +1,12 @@
 const fields = {
   email: {
-    type: 'text',
+    type: 'email',
     name: 'email',
     required: true,
     placeholder: 'Email',
   },
   password: {
-    type: 'password',
+    // type: 'password',
     name: 'password',
     required: true,
     placeholder: 'Password',

@@ -1,9 +1,8 @@
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
 import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
 
 import Button from 'shared/components/Button/Button';
-import NoticeModal from 'components/NoticeModal/NoticeModal';
+import ModalApproveAction from 'shared/components/ModalApproveAction/ModalApprovAction';
 
 import LocationIcon from 'icons/LocationIcon';
 import ClockIcon from 'icons/ClockIcon';
@@ -13,50 +12,34 @@ import HeartIcon from 'icons/HeartIcon';
 import TrashIcon from 'icons/TrashIcon';
 
 import { isUserLogin } from 'redux/auth/authSelectors';
+import { fetchDeleteNotice } from 'redux/notices/noticesOperations';
 
 import styles from './NoticeCategoryItem.module.scss';
-import image from '../pet.jpg';
 
-const {
-  noticeCard,
-  imgThumb,
-  avatar,
-  topBlock,
-  icons,
-  favoriteIcon,
-  infoIcons,
-  categoryInfo,
-  circBtn,
-  noticeInfoBlock,
-  noticeInfo,
-  locationInfo,
-  noticeDesc,
-  locationIcon,
-  noticeTitle,
-  learnBtn,
-} = styles;
+const NoticeCategoryItem = ({ notice, loadMore }) => {
+  const {
+    _id,
+    category,
+    favorite,
+    title,
+    name,
+    date,
+    breed,
+    sex,
+    location,
+    price,
+    comments,
+    petURL,
+  } = notice;
 
-const NoticeCategoryItem = ({
-  id,
-  openModal,
-  category,
-  favorite,
-  titleOfAdd,
-  namePet,
-  dateOfBirth,
-  breed,
-  theSex,
-  location,
-  price,
-  comments,
-  //   image,
-  isMyAds,
-}) => {
+  const { isModalOpen, openModal, closeModal } = useToggleModalWindow();
+
   const isLogin = useSelector(isUserLogin);
   // const isLogin = true;
+  const isMyAds = false;
 
-  function getAge(dateOfBirth) {
-    const ymdArr = dateOfBirth.split('.').map(Number).reverse();
+  function getAge(date) {
+    const ymdArr = date.split('.').map(Number).reverse();
     //с 0а идут месяца по этому откатываем на 1
     ymdArr[1]--;
     const bornDate = new Date(...ymdArr);
@@ -80,58 +63,89 @@ const NoticeCategoryItem = ({
     return age;
   }
 
-  const age = getAge(dateOfBirth);
+  const age = getAge(date.replaceAll('-', '.'));
+
+  const dispatch = useDispatch();
+
+  const handleDeleteNotice = id => {
+    dispatch(fetchDeleteNotice(id));
+    closeModal();
+  };
 
   return (
-    <li className={noticeCard}>
-      <div className={imgThumb}>
-        <img className={avatar} src={image} alt="Pet's avatar" width="280" />
-        <div className={topBlock}>
-          <p className={categoryInfo}>{category}</p>
+    <li className={styles.noticeCard}>
+      <div className={styles.imgThumb}>
+        <img
+          className={styles.avatar}
+          src={petURL}
+          alt="Pet's avatar"
+          width="280"
+        />
+        <div className={styles.topBlock}>
+          <p className={styles.categoryInfo}>{category}</p>
           <div>
             <Button
-              className={circBtn}
+              className={styles.circBtn}
               SVGComponent={() => (
                 <HeartIcon
-                  className={favorite ? `${icons} ${favoriteIcon}` : icons}
+                  className={
+                    styles.favorite
+                      ? `${styles.icons} ${styles.favoriteIcon}`
+                      : styles.icons
+                  }
                 />
               )}
             />
             {isMyAds && (
               <Button
-                className={circBtn}
-                SVGComponent={() => <TrashIcon className={icons} />}
+                onClick={() => openModal()}
+                className={styles.circBtn}
+                SVGComponent={() => <TrashIcon className={styles.icons} />}
               />
             )}
           </div>
         </div>
 
-        <div className={noticeInfoBlock}>
-          <p className={locationInfo}>
-            <LocationIcon className={locationIcon} />
+        <div className={styles.noticeInfoBlock}>
+          <p className={styles.locationInfo}>
+            <LocationIcon className={styles.locationIcon} />
             {location}
           </p>
-          <p className={noticeInfo}>
-            <ClockIcon className={infoIcons} />
-            {age === 1 ? '1 year' : `${age} years`}
+          <p className={styles.noticeInfo}>
+            <ClockIcon className={styles.infoIcons} />
+            {age === 1 || age === 0 ? '1 year' : `${age} years`}
           </p>
-          <p className={noticeInfo}>
-            {theSex.toLowerCase() === 'male' && (
-              <MaleIcon className={infoIcons} />
+          <p className={styles.noticeInfo}>
+            {sex.toLowerCase() === 'male' && (
+              <MaleIcon className={styles.infoIcons} />
             )}
-            {theSex.toLowerCase() === 'female' && (
-              <FemaleIcon className={infoIcons} />
+            {sex.toLowerCase() === 'female' && (
+              <FemaleIcon className={styles.infoIcons} />
             )}
-            {theSex}
+            {sex}
           </p>
         </div>
       </div>
-      <div className={noticeDesc}>
-        <h3 className={noticeTitle}>{titleOfAdd}</h3>
-        <Button className={learnBtn} onClick={openModal}>
+      <div className={styles.noticeDesc}>
+        <h3 className={styles.noticeTitle}>{title}</h3>
+        <Button className={styles.learnBtn} onClick={() => loadMore(notice)}>
           Learn more
         </Button>
       </div>
+      {isModalOpen && (
+        <ModalApproveAction
+          fn={() => handleDeleteNotice(_id)}
+          closeModal={closeModal}
+          icon={() => <TrashIcon className={styles.modalIcon} />}
+        >
+          <h3 className={styles.modalTitle}>Delete adverstiment?</h3>
+          <p className={styles.modalText}>
+            Are you sure you want to delete
+            <span className={styles.modalTextSpan}> “{title}”</span>? <br /> You
+            can't undo this action.
+          </p>
+        </ModalApproveAction>
+      )}
     </li>
   );
 };

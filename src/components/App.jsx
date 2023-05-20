@@ -1,11 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 
-import { Provider } from 'react-redux';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
+import PublicRoute from './PublicRoute/PublicRoute';
 
 import SharedLayout from './SharedLayout/SharedLayout';
-
-import { store } from '../redux/store';
 
 const MainPage = lazy(() => import('pages/MainPage'));
 const RegisterPage = lazy(() => import('pages/RegisterPage'));
@@ -16,25 +16,29 @@ const OurFriendsPage = lazy(() => import('pages/OurFriendsPage'));
 const UserPage = lazy(() => import('pages/UserPage'));
 const AddPetPage = lazy(() => import('pages/AddPetPage'));
 const NotFound = lazy(() => import('pages/NotFound'));
-
 export const App = () => {
   return (
-    <Provider store={store}>
-      <Suspense fallback={<p>...Loading</p>}>
-        <Routes>
-          <Route path="/" element={<SharedLayout />}>
-            <Route path="/main" element={<MainPage />} />
+    <Suspense fallback={<p>...Loading</p>}>
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route path="" element={<Navigate to="/main" replace />} />
+          <Route path="/main" element={<MainPage />} />
+          <Route element={<PublicRoute />}>
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/notices" element={<NoticesPage />} />
-            <Route path="/friends" element={<OurFriendsPage />} />
-            <Route path="/news" element={<NewsPage />} />
-            <Route path="/user" element={<UserPage />} />
-            <Route path="/add-pet" element={<AddPetPage />} />
-            <Route path="*" element={<NotFound />} />
           </Route>
-        </Routes>
-      </Suspense>
-    </Provider>
+          <Route path="/news" element={<NewsPage />} />
+          <Route path="/notices/:category" element={<NoticesPage />} />
+          <Route path="/friends" element={<OurFriendsPage />} />
+
+          <Route element={<PrivateRoute />}>
+            <Route path="/add-pet" element={<AddPetPage />} />
+            <Route path="/user" element={<UserPage />} />
+          </Route>
+
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 };

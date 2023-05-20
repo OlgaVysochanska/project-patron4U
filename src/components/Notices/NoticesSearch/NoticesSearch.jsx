@@ -1,56 +1,31 @@
-// import { useState, useEffect, useCallback } from 'react';
-// import { useSearchParams } from 'react-router-dom';
-// import { searchNotice } from '../../../shared/services/notices';
-// import NoticesCategoriesList from '../NoticesCategoriesList/NoticesCategoriesList';
+import { useSelector, useDispatch } from 'react-redux';
+import { addFilteredNotices } from 'redux/notices/noticesSlice';
+import { getAllNotices } from 'redux/notices/noticesSelecors';
+
 import SearchBar from 'shared/components/SearchBar/SearchBar';
 import style from './NoticesSearch.module.scss';
 
-const NoticesSearch = () => {
-  // const [items, setItems] = useState([]);
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(null);
+const NoticeSearch = () => {
+  const allNoticesData = useSelector(getAllNotices);
+  console.log('allNoticesData:', allNoticesData);
 
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const search = searchParams.get('search');
-  // const page = searchParams.get('page');
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   if (!search) {
-  //     return;
-  //   }
-
-  //   const fetchNotices = async () => {
-  //     try {
-  //       setLoading(true);
-  //       const { data } = await searchNotice(search, page);
-  //       setItems(prevItems => [...prevItems, ...data]);
-  //     } catch (error) {
-  //       setError(error.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchNotices();
-  // }, [search, page, setLoading, setItems, setError]);
-
-  // const onSearchNotice = useCallback(
-  //   ({ search }) => {
-  //     setSearchParams({ search, page: 1 });
-  //     setItems([]);
-  //   },
-  //   [setSearchParams]
-  // );
+  const clickOnSearch = ({ search }) => {
+    const filteredNotices = allNoticesData.filter(notice =>
+      notice.comments.toLowerCase().includes(search.toLowerCase())
+    );
+    console.log('filteredNotices:', filteredNotices);
+    dispatch(addFilteredNotices(filteredNotices));
+  };
 
   return (
     <>
       <div className={style.wrapper}>
-        <SearchBar />
+        <SearchBar onSubmit={clickOnSearch} />
       </div>
-      {/* <NoticesCategoriesList data={items}/>
-      {error && <p>{error}</p>}
-      {loading && <p>...Load</p>} */}
     </>
   );
 };
 
-export default NoticesSearch;
+export default NoticeSearch;

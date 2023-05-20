@@ -1,6 +1,6 @@
 .noticeCard {
   list-style: none;
-  max-width: 450px;
+  max-width: 440px;
   padding: 0;
   margin: 0;
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
@@ -38,7 +38,7 @@
 }
 
 .favoriteIcon {
-  compose: icons;
+  composes: icons;
   fill: #54adff;
 }
 
@@ -188,6 +188,32 @@
   }
 }
 
+.modalTitle {
+  margin-bottom: 24px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.37;
+  letter-spacing: 0.04em;
+}
+
+.modalText {
+  margin-bottom: 40px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.37;
+  letter-spacing: 0.04em;
+}
+
+.modalTextSpan {
+  composes: modalText;
+  font-weight: 700;
+}
+
+.modalIcon {
+  margin-left: 8px;
+  stroke: #fef9f9;
+}
+
 @media screen and (max-width: 767px) {
   .noticeCard {
     margin-bottom: 24px;
@@ -205,6 +231,8 @@
     flex-direction: column;
     flex-grow: 1;
     text-align: center;
+    min-height: 126px;
+    justify-content: space-between;
   }
 
   .noticeTitle {
@@ -214,6 +242,26 @@
   .learnBtn {
     // width: 248px;
     margin: 0 auto;
+  }
+
+  .modalTitle {
+    margin-bottom: 40px;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+
+  .modalText {
+    margin-bottom: 48px;
+    font-size: 16px;
+    line-height: 1.37;
+    letter-spacing: -0.01em;
+  }
+
+  .modalTextSpan {
+    composes: modalText;
+    font-weight: 700;
   }
 }
 

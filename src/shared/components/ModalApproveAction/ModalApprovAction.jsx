@@ -1,6 +1,7 @@
 import { useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
-// import PropTypes from 'prop-types';
+
+import Button from '../Button';
 
 import CrossSmallIcon from 'icons/CrossSmallIcon';
 
@@ -8,7 +9,7 @@ import styles from './ModalApproveAction.module.scss';
 
 const modalEl = document.querySelector('#modal-root');
 
-function ModalApproveAction({ closeModal, children }) {
+function ModalApproveAction({ closeModal, children, fn, icon }) {
   const closeModalOnClick = useCallback(
     ({ key, target, currentTarget }) => {
       if (key === 'Escape' || target === currentTarget) {
@@ -25,10 +26,25 @@ function ModalApproveAction({ closeModal, children }) {
   }, [closeModalOnClick]);
 
   return createPortal(
-    <div className={styles.overlay} onClick={closeModalOnClick}>
+    <div className={styles.backdrop} onClick={closeModalOnClick}>
       <div className={styles.modal}>
-        <CrossSmallIcon className={styles.close} onClick={closeModal} />
+        <Button className={styles.closeBtn} onClick={closeModal}>
+          <CrossSmallIcon className={styles.closeIcon} />
+        </Button>
         {children}
+        <div className={styles.btnWrapper}>
+          <Button
+            label="Cancel"
+            className={styles.button}
+            onClick={closeModal}
+          ></Button>
+          <Button
+            label="Yes"
+            className={styles.button}
+            SVGComponent={icon}
+            onClick={fn}
+          ></Button>
+        </div>
       </div>
     </div>,
     modalEl
@@ -36,7 +52,3 @@ function ModalApproveAction({ closeModal, children }) {
 }
 
 export default ModalApproveAction;
-
-// Modal.propTypes = {
-//   closeModal: PropTypes.func.isRequired,
-// };

@@ -1,7 +1,17 @@
 import instance from './instance';
 
-export const getAllNotices = async () => {
-  const { data } = await instance.get('/notices');
+export const getAllNotices = async (
+  search = '',
+  category = 'sell',
+  _page = 1
+) => {
+  const { data } = await instance.get('/notices/category', {
+    params: {
+      search,
+      category,
+      _page,
+    },
+  });
   return data;
 };
 
@@ -16,9 +26,22 @@ export const deleteNotice = async id => {
 };
 
 export const searchNotice = async (q, _page = 1) => {
-  const { data } = await instance.get('/notices', {
+  const { data } = await instance.get('/notices/', {
     params: {
       q,
+      _page,
+    },
+  });
+  return data;
+};
+
+export const getNoticesByCategory = async (
+  category = "sell",
+  _page = 1
+) => {
+  const { data } = await instance.get(`/notices/category`, {
+    params: {
+     category,
       _page,
     },
   });
