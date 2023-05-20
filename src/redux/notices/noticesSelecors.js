@@ -1,6 +1,6 @@
 export const getAllNotices = ({ notices }) => notices.items;
 
-export const getNoticesByCategory = store => store.notices.category;
+export const getNoticesByCategory = ({notices}) => notices.category;
 
 export const getLoadingNotices = ({ notices }) => notices.isLoading;
 

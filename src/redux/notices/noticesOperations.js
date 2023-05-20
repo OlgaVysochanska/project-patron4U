@@ -40,9 +40,9 @@ export const fetchDeleteNotice = createAsyncThunk(
 
 export const fetchNoticesByCategory = createAsyncThunk(
   'notices/category',
-  async ({ categoryName, query }, { rejectWithValue }) => {
+  async ( categoryName, { rejectWithValue }) => {
     try {
-      const data = await api.getNoticeByCategory(categoryName, query);
+      const data = await api.getNoticesByCategory(categoryName);
       return data;
     } catch ({ response }) {
       return rejectWithValue(response.data);

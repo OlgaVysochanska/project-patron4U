@@ -11,7 +11,7 @@ import NoticesCategoriesNav from 'components/Notices/NoticesCategoriesNav/Notice
 import NoticesCategoriesList from '../../components/Notices/NoticesCategoriesList/NoticesCategoriesList';
 import NoticeModal from 'components/NoticeModal/NoticeModal';
 import AddPetButton from 'components/AddPetButton/AddPetButton';
-import { getNoticeByCategory } from 'shared/services/notices'; 
+import { getNoticesByCategory } from 'shared/services/notices'; 
 
 import style from './NoticesPage.module.scss';
 
@@ -41,7 +41,7 @@ const {category} = useParams();
 
 useEffect(() => {
   const fetchNotices = async() => {
-    try {const result = await getNoticeByCategory(category);
+    try {const result = await getNoticesByCategory(category);
       console.log(result);
       
     } catch ({response}) {
