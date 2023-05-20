@@ -7,12 +7,12 @@ form {
   margin-right: auto;
 }
 
-// .input {
-//   display: flex;
-//   align-items: center;
-  //   position: relative;
-  //   background-color: red;
-// }
+.input {
+  display: flex;
+  align-items: center;
+    position: relative;
+    background-color: red;
+}
 
 label input {
   display: flex;
@@ -26,8 +26,8 @@ label input {
   position: absolute;
   right: 10px;
   top: 10px;
-  top: '50%';
-  transform: 'translateY(-50%)';
+  // top: '50%';
+  // transform: 'translateY(-50%)';
   margin-right: '10px';
   align-items: center;
 }

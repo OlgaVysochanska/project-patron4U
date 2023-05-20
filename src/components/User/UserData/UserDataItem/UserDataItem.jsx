@@ -23,7 +23,7 @@ const EditIconTuned = () => {
   );
 };
 
-const UserDataItem = ({
+ const UserDataItem = ({
   // clickEdit,
   // clickSave,
   clickToglle,
@@ -66,15 +66,15 @@ const UserDataItem = ({
 
   // const readonly =  false;
   return (
-    <form>
-      {/* <div style={{ backgroundColor: 'green', position: 'relative' }}> */}
+    <form onSubmit={onSubmit} autoComplete="on">
+      <div style={{ backgroundColor: 'green', position: 'relative' }}>
       <Input
         type={type}
         // key={id}
         id={name}
         label={label}
         name={name}
-        value={defaultValue}
+        defaultValue={defaultValue}
         // defaultValue={defaultValue}
         // {...(!isActive && isEditing && { rO })}
         // inputStyle={{ position: 'relative' }}
@@ -82,24 +82,32 @@ const UserDataItem = ({
         readonly={isEditing}
         handleChange={handleChange}
       ></Input>
-      {isActive ? (
+
+
+
+
+
+
+
+      {/* {!isActive ? (
         <Button
-          // type="button"
-          className={`${styles.toggle} ${styles.active}`}
+          type="button"
+          // className={`${styles.toggle} ${styles.active}`}
           onClick={clickActive}
-          // buttonStyle={{
-          //   backgroundColor: 'transparent',
-          //   border: 'none',
-          //   position: 'absolute',
-          //   right: '10px',
-          //   top: '10px',
-          //   transform: 'translateY(-50%)',
-          // }
-          // SVGComponent={EditIconTuned}
-          // stroke="red"
-        >
-          {activeItem}
-        </Button>
+          buttonStyle={{
+            // backgroundColor: 'transparent',
+            border: 'none',
+            position: 'absolute',
+            right: '10px',
+            top: '10px',
+            transform: 'translateY(-50%)',
+          }}
+          SVGComponent={EditIconTuned}
+          stroke="red"
+          />
+        // >
+        //   {activeItem}
+        // </Button>
       ) : (
         <Button className={styles.button} onClick={clickActive}>
           {activeItem}
@@ -126,15 +134,21 @@ const UserDataItem = ({
       <Button
         type="submit"
         className={`${styles.button} ${styles.submit}`}
-        onClick={onSubmit}
+        onClick={handleSubmit}
       >
         Submit
-      </Button>
-      // buttonStyle= // position: 'absolute', // right: '10px', // top: '10px',
-      // // // transform: 'translateY(-50%)', // // SVGComponent=
+      </Button> */}
+      {/* // buttonStyle= // position: 'absolute', // right: '10px', // top: '10px',
+      // // // transform: 'translateY(-50%)', // // SVGComponent= */}
       {/* {CheckIconTuned}
       /> */}
-      {/* </div> */}
+
+
+
+
+
+
+      </div>
       {/* <ToggleButton
             className={styles.togle}
             id={id}

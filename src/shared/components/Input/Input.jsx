@@ -22,30 +22,35 @@ const Input = ({
     ...inputStyle,
   };
   return (
-    <div className={styles.wrapper}>
-      <label htmlFor={type}>{label}</label>
-      <input
-        type={type}
-        name={type}
-        id={id}
-        placeholder={placeholder}
-        pattern={pattern}
-        title={title}
-        value={value}
-        readOnly={readonly}
-        onChange={handleChange}
-        className={`${styles.input} ${
-          !isValid ? styles.invalid : ''
-        } ${aditionalClass}`}
-        {...props}
-      />
-      {icon && (
-        <span className={styles.icon} onClick={onIconClick}>
-          {icon}
-        </span>
-      )}
-      {!isValid && <p className={styles.errorMessage}>{title}</p>}
-    </div>
+    <>
+      //{' '}
+      <div className={styles.wrapper}>
+        <label htmlFor={type}>{label}</label>
+        <input
+          type={type}
+          name={type}
+          id={id}
+          placeholder={placeholder}
+          pattern={pattern}
+          title={title}
+          value={value}
+          readOnly={readonly}
+          onChange={handleChange}
+          className={`${styles.input} ${
+            !isValid ? styles.invalid : ''
+          } ${aditionalClass}`}
+          style={inputStyles}
+          {...props}
+        />
+        {icon && (
+          <span className={styles.icon} onClick={onIconClick}>
+            {icon}
+          </span>
+        )}
+        {!isValid && <p className={styles.errorMessage}>{title}</p>}
+        //{' '}
+      </div>
+    </>
   );
 };
 

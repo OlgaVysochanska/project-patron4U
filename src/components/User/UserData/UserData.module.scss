@@ -1,7 +1,11 @@
 .container {
-  margin-left: 32px;
-  margin-right: 32px;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 20px 8px 25px 8px;
   text-align: center;
+  background: #ffffff;
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  border-radius: 20px;
 }
 
 img {
@@ -11,6 +15,9 @@ img {
   margin-right: auto;
 }
 
+.input {
+  background-color: red;
+}
 
 .div {
   display: flex;
