@@ -1,5 +1,5 @@
 .listItem {
-  min-width: 280px;
+  width: 280px;
   height: 100%;
   margin-bottom: 36px;
 }
@@ -67,17 +67,17 @@
   font-weight: 500;
 }
 
-@media (max-width: 768px) {
-  .listItem {
-    width: 400px;
-  }
-}
+// @media (min-width: 768px) {
+//   .listItem {
+//     width: 400px;
+//   }
+// }
 
-@media (max-width: 480px) {
-  .listItem {
-    width: 280px;
-  }
-}
+// @media (min-width: 480px) {
+//   .listItem {
+//     width: 280px;
+//   }
+// }
 
 @media (min-width: 768px) {
   .listItem {
