@@ -6,14 +6,16 @@ import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
 
 import { getAllNotices } from '../../redux/notices/noticesSelecors';
 import { fetchAllNotices } from '../../redux/notices/noticesOperations';
-
 import NoticesSearch from 'components/Notices/NoticesSearch/NoticesSearch';
 import NoticesCategoriesNav from 'components/Notices/NoticesCategoriesNav/NoticesCategoriesNav';
 import NoticesCategoriesList from '../../components/Notices/NoticesCategoriesList/NoticesCategoriesList';
 import NoticeModal from 'components/NoticeModal/NoticeModal';
 import AddPetButton from 'components/AddPetButton/AddPetButton';
+import { getNoticesByCategory } from 'shared/services/notices'; 
 
 import style from './NoticesPage.module.scss';
+
+import { useParams } from '../../../node_modules/react-router-dom/dist/index';
 
 const NoticesPage = () => {
   const [notice, setNotice] = useState(null);
@@ -31,6 +33,24 @@ const NoticesPage = () => {
     openModal();
   };
 
+
+  
+const {category} = useParams();
+
+
+
+useEffect(() => {
+  const fetchNotices = async() => {
+    try {const result = await getNoticesByCategory(category);
+      console.log(result);
+      
+    } catch ({response}) {
+      console.log(response.data.message)
+    }
+  }
+  fetchNotices()
+}, [category])
+
   return (
     <>
       <div className={style.noticePageContainer}>
@@ -43,6 +63,7 @@ const NoticesPage = () => {
         {isModalOpen && <NoticeModal notice={notice} closeModal={closeModal} />}
       </div>
       <Outlet />
+      
     </>
   );
 };
