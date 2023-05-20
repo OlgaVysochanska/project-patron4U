@@ -5,4 +5,4 @@ export const getAuth = ({ auth }) => {
 };
 export const getUser = ({ auth }) => auth.user;
 
-export const getIsModalShown = ({ auth }) => auth.isModalShown;
+// export const getIsModalShown = ({ auth }) => auth.isModalShown;

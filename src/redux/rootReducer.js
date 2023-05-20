@@ -6,6 +6,7 @@ import authReducer from './auth/authSlice';
 import petsReducer from './pets/petsSlice';
 import noticesReducer from './notices/noticesSlice';
 import filterReducer from './filter/filterSlice';
+import modalReducer from './modal/modalSlice';
 
 const persistConfig = {
   key: 'root',
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   pets: petsReducer,
   notices: noticesReducer,
   filter: filterReducer,
+  modal: modalReducer,
 });
 
 export default rootReducer;

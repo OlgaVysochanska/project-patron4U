@@ -58,23 +58,26 @@ const RegisterForm = ({ onSubmit }) => {
         setConfirmPassword('');
       }}
       autoComplete="off"
+      className={styles.form}
     >
-      <Input
-        id="email"
-        value={email}
-        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" // Патерн для валідації email
-        title="Enter a valid Email" // Підказка для патерну
-        style={{
-          border: isValidEmail ? '1px solid #54adff' : '1px solid #F43F5E',
-        }}
-        aditionalClass={isValidEmail ? styles.inputCustomSettings : ''}
-        handleChange={e => {
-          handleChange(e);
-          setIsValidEmail(e.target.checkValidity());
-        }}
-        {...fields.email}
-        isValid={isValidEmail}
-      />
+      <div className={styles.inputWrapper}>
+        <Input
+          id="email"
+          value={email}
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" // Патерн для валідації email
+          title="Enter a valid Email" // Підказка для патерну
+          style={{
+            border: isValidEmail ? '1px solid #54adff' : '1px solid #F43F5E',
+          }}
+          aditionalClass={isValidEmail ? styles.inputCustomSettings : ''}
+          handleChange={e => {
+            handleChange(e);
+            setIsValidEmail(e.target.checkValidity());
+          }}
+          {...fields.email}
+          isValid={isValidEmail}
+        />
+      </div>
       <div className={styles.inputWrapper}>
         <Input
           id="password"

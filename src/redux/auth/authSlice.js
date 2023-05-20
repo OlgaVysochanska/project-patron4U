@@ -7,7 +7,7 @@ const initialState = {
   token: '',
   isLogin: false,
   loading: false,
-  isModalShown: false,
+  // isModalShown: false,
   error: null,
 };
 

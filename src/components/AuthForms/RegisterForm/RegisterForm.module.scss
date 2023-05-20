@@ -1,5 +1,11 @@
+.form {
+  width: 100%;
+}
+
 .inputWrapper {
   position: relative;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .eyeIcon {
@@ -23,6 +29,8 @@
 }
 
 .differentPassords {
+  display: block;
+  width: 100%;
   margin-top: 4px;
   margin-bottom: 14px;
   margin-left: 16px;

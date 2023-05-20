@@ -1,5 +1,11 @@
+.form {
+  width: 100%;
+}
+
 .inputWrapper {
   position: relative;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .eyeIcon {

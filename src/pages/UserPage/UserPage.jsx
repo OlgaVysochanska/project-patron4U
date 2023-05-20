@@ -2,10 +2,11 @@ import { useSelector } from 'react-redux';
 
 import ModalCongrats from 'components/ModalCongrats/ModalCongrats';
 
-import { getIsModalShown } from 'redux/auth/authSelectors';
+// import { getIsModalShown } from 'redux/auth/authSelectors';
+import { getModalVisibility } from 'redux/modal/modalSelectors';
 
 const UserPage = () => {
-  const isModalCongratsShown = useSelector(getIsModalShown);
+  const isModalCongratsShown = useSelector(getModalVisibility);
 
   return (
     <>
