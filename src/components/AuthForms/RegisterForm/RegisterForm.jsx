@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+import PropTypes from 'prop-types';
+
 import Input from 'shared/components/Input/Input';
 
 import AuthButton from '../../../shared/components/AuthButton/AuthButton';
@@ -32,7 +34,7 @@ const RegisterForm = ({ onSubmit }) => {
   const handleConfirmPasswordChange = event => {
     const confirmValue = event.target.value;
     setConfirmPassword(confirmValue);
-    setIsValidConf(confirmValue.length >= 6);
+    // setIsValidConf(confirmValue.length > 6);
   };
 
   const toggleShowPassword = () => {
@@ -86,7 +88,8 @@ const RegisterForm = ({ onSubmit }) => {
           value={password}
           handleChange={e => {
             handleChange(e);
-            setIsValidPass(password.length >= 6);
+            // setIsValidPass(password.length > 6);
+            setIsValidPass(e.target.checkValidity());
           }}
           {...fields.password}
           isValid={isValidPass}
@@ -109,7 +112,10 @@ const RegisterForm = ({ onSubmit }) => {
           pattern=".{6,}" // Патерн для мінімальної довжини паролю (6 символів)
           title="Password must be at least 6 characters long" // Підказка для патерну
           value={confirmPassword}
-          handleChange={handleConfirmPasswordChange}
+          handleChange={e => {
+            handleConfirmPasswordChange(e);
+            setIsValidConf(e.target.checkValidity());
+          }}
           isValid={isValidConf}
         />
         <EyeClosedIcon
@@ -127,3 +133,7 @@ const RegisterForm = ({ onSubmit }) => {
 };
 
 export default RegisterForm;
+
+RegisterForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};

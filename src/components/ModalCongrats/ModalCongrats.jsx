@@ -11,19 +11,17 @@ function ModalCongrats() {
 
   return (
     <>
-      {isModalOpen && (
-        <Modal closeModal={closeModal}>
-          <div className={styles.contentWrapper}>
-            <p className={styles.title}>Congrats!</p>
-            <p className={styles.text}>Youre registration is success</p>
-            <div className={styles.wrapper}>
-              <Button className={styles.button} closeModal={closeModal}>
-                Go to profile <PawprintIcon className={styles.btnIcon} />
-              </Button>
-            </div>
+      <Modal closeModal={closeModal}>
+        <div className={styles.contentWrapper}>
+          <p className={styles.title}>Congrats!</p>
+          <p className={styles.text}>Youre registration is success</p>
+          <div className={styles.wrapper}>
+            <Button className={styles.button} closeModal={closeModal}>
+              Go to profile <PawprintIcon className={styles.btnIcon} />
+            </Button>
           </div>
-        </Modal>
-      )}
+        </div>
+      </Modal>
     </>
   );
 }

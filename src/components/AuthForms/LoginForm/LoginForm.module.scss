@@ -8,6 +8,11 @@
   right: 0;
   transform: translate(-50%, 40%);
   cursor: pointer;
+
+  &:hover {
+    border-radius: 50%;
+    scale: 1.2;
+  }
 }
 
 .inputCustomSettings {

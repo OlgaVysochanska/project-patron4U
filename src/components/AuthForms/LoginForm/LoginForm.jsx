@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+import PropTypes from 'prop-types';
+
 import Input from 'shared/components/Input/Input';
 
 import AuthButton from '../../../shared/components/AuthButton/AuthButton';
@@ -74,7 +76,7 @@ const LoginForm = ({ onSubmit }) => {
           aditionalClass={isValidPass ? styles.inputCustomSettings : ''}
           handleChange={e => {
             handleChange(e);
-            setIsValidPass(password.length >= 6);
+            setIsValidPass(e.target.checkValidity());
           }}
           {...fields.password}
           isValid={isValidPass}
@@ -91,3 +93,7 @@ const LoginForm = ({ onSubmit }) => {
 };
 
 export default LoginForm;
+
+LoginForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
