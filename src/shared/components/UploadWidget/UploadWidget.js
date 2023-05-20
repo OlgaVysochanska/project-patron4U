@@ -25,6 +25,7 @@ const UploadWidget = ({ uriI, children }) => {
   }, [uriI]);
   return (
     <button
+      type="button"
       style={{
         cursor: 'pointer',
         outline: 'none',

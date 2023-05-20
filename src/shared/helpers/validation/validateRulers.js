@@ -10,7 +10,7 @@ const validateRulers = formState => {
         isValid = field.value !== '';
         message = 'Choose category';
         break;
-      case 'addTitle':
+      case 'title':
         isValid = /^.{2,30}$/.test(field.value);
         message = 'Text between 2 and 30 characters long';
         break;

@@ -1,18 +1,20 @@
 .addPetFormContainer {
   display: flex;
   justify-content: center;
-  background-color: #ccc;
 }
 
 .addPetForm {
+  z-index: 100;
   width: 100%;
   background-color: #ffffff;
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
   border-radius: 40px;
+  margin-top: 40px;
 
   @media (min-width: 320px) and (max-width: 767px) {
     width: 280px;
     padding: 20px 8px 16px;
+    margin-top: 0px;
   }
 
   @media (min-width: 768px) {
@@ -34,11 +36,11 @@
   }
 }
 
-.addPetFormNotOwn{ 
+.addPetFormNotOwn {
   @media (min-width: 768px) {
-  max-width: 704px;
-}}
-
+    max-width: 704px;
+  }
+}
 
 .tabButtonsContainer {
   display: flex;
@@ -292,7 +294,7 @@
   }
 }
 
-.moreInfoSubContaiterColum1{
+.moreInfoSubContaiterColum1 {
   margin-right: 63px;
 
   &:last-child {
@@ -304,10 +306,9 @@
   }
 }
 
-.moreInfoSubContaiterColum2{
-width: 100%;
+.moreInfoSubContaiterColum2 {
+  width: 100%;
 }
-
 
 .textarea {
   padding: 12px 16px;
@@ -383,12 +384,12 @@ width: 100%;
   flex-direction: row;
   width: 182px;
 }
-.genderContainerRow{
- margin-bottom: 48px;
+.genderContainerRow {
+  margin-bottom: 48px;
 
- @media (min-width: 320px) and (max-width: 767px) {
-  margin-bottom: 0px;
-}
+  @media (min-width: 320px) and (max-width: 767px) {
+    margin-bottom: 0px;
+  }
 
   &:last-child {
     margin-bottom: 0px;
@@ -435,7 +436,7 @@ width: 100%;
   }
 }
 
-.genderRow{
+.genderRow {
   padding: 5px 16px 5px 0px;
 
   & > *:last-child {
@@ -445,5 +446,4 @@ width: 100%;
   &:last-child {
     margin-right: 0px;
   }
-
 }

@@ -14,21 +14,21 @@ const MoreInfo = ({
   location,
   price,
   comments,
-  photoUrl,
+  petURL,
   invalidSex,
   invalidLocation,
   invalidPrice,
   invalidComments,
-  invalidPhotoUrl,
+  invalidpetURL,
   handleGenderChange,
   handleChange,
 }) => {
 
-  const handlePhotoUrl = photoUrl => {
+  const handlepetURL = petURL => {
     handleChange({
       target: {
-        name: 'photoUrl',
-        value: photoUrl,
+        name: 'petURL',
+        value: petURL,
       },
     });
   };
@@ -81,8 +81,8 @@ const MoreInfo = ({
         >
           <p className={styles.label}>Add photo</p>
           <div className={styles.photoContainer}>
-            <img src={photoUrl ? photoUrl : defaultImage} alt="" />
-            <UploadWidget uriI={handlePhotoUrl}>
+            <img src={petURL ? petURL : defaultImage} alt="" />
+            <UploadWidget uriI={handlepetURL}>
               <PlusIcon
                 stroke="#54ADFF"
                 width="48"
@@ -93,8 +93,8 @@ const MoreInfo = ({
             </UploadWidget>
           </div>
         </div>
-        {invalidPhotoUrl && (
-          <p className={styles.validMessage}>{invalidPhotoUrl}</p>
+        {invalidpetURL && (
+          <p className={styles.validMessage}>{invalidpetURL}</p>
         )}
       </div>
     </>
