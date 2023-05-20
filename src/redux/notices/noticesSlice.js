@@ -21,9 +21,9 @@ const noticesSlice = createSlice({
       .addCase(fetchAllNotices.pending, store => {
         store.loading = true;
       })
-      .addCase(fetchAllNotices.fulfilled, (store, { payload }) => {
-        store.loading = false;
-        store.items = payload;
+      .addCase(fetchAllNotices.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.items = payload;
       })
       .addCase(fetchAllNotices.rejected, (store, { payload }) => {
         store.loading = false;
@@ -67,6 +67,12 @@ const noticesSlice = createSlice({
         store.error = payload;
       });
   },
+  reducers: {
+    addFilteredNotices(state, action) {
+      state.items = action.payload;
+    },
+  },
 });
 
+export const { addFilteredNotices } = noticesSlice.actions;
 export default noticesSlice.reducer;
