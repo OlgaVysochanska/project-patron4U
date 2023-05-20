@@ -196,7 +196,7 @@ const AddPetForm = ({ onSubmit }) => {
 
   const handleDataFetch = async () => {
     try {
-      const date = format(birthDate, 'dd-MM-yyyy');
+      const date = format(birthDate, 'dd.MM.yyyy');
       const invalidObjects = validateData();
       if (!invalidObjects.length) {
         if (activeCategory !== 0) {
@@ -430,11 +430,3 @@ const AddPetForm = ({ onSubmit }) => {
 };
 
 export default AddPetForm;
-
-// const dispatch = useDispatch();
-// useEffect(() => {
-//   dispatch(fetchAllNotices());
-// }, [dispatch]);
-
-// const allNotices = useSelector(getAllNotices);
-// console.log(allNotices);
