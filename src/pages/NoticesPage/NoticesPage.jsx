@@ -3,21 +3,23 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
 import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
+import { getNoticesByCategory } from 'shared/services/notices';
 
 import { getAllNotices } from '../../redux/notices/noticesSelecors';
-import { fetchAllNotices } from '../../redux/notices/noticesOperations';
+import { fetchAllNotices, fetchNoticesByCategory } from '../../redux/notices/noticesOperations';
 import NoticesSearch from 'components/Notices/NoticesSearch/NoticesSearch';
 import NoticesCategoriesNav from 'components/Notices/NoticesCategoriesNav/NoticesCategoriesNav';
 import NoticesCategoriesList from '../../components/Notices/NoticesCategoriesList/NoticesCategoriesList';
 import NoticeModal from 'components/NoticeModal/NoticeModal';
 import AddPetButton from 'components/AddPetButton/AddPetButton';
-import { getNoticesByCategory } from 'shared/services/notices'; 
+
 
 import style from './NoticesPage.module.scss';
 
 import { useParams } from '../../../node_modules/react-router-dom/dist/index';
 
 const NoticesPage = () => {
+  const {category} = useParams();
   const [notice, setNotice] = useState(null);
   const { isModalOpen, openModal, closeModal } = useToggleModalWindow();
 
@@ -25,8 +27,8 @@ const NoticesPage = () => {
   const allNotices = useSelector(getAllNotices);
 
   useEffect(() => {
-    dispatch(fetchAllNotices());
-  }, [dispatch]);
+    dispatch(fetchNoticesByCategory(category));
+  }, [dispatch], category);
 
   const loadMore = notice => {
     setNotice(notice);
@@ -35,7 +37,7 @@ const NoticesPage = () => {
 
 
   
-const {category} = useParams();
+
 
 
 

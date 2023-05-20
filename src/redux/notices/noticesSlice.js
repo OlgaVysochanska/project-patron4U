@@ -58,6 +58,7 @@ const noticesSlice = createSlice({
         store.items = [];
       })
       .addCase(fetchNoticesByCategory.fulfilled, (store, { payload }) => {
+        console.log("payload:", payload);
         store.loading = false;
         store.items = [...payload];
         store.category = payload.category

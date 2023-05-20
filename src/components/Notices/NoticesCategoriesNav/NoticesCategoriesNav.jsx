@@ -37,7 +37,12 @@ const btns = [
 
 const NoticesCategoriesNav = () => {
   const isLogin = useSelector(isUserLogin);
-  console.log(isLogin);
+  // const {category} = useParams();
+  //  const dispatch = useDispatch();
+  //  const onCategoryClick = () => {
+  //   dispatch(fetchNoticesByCategory(category));
+  // };
+
   const filteredBtns = !isLogin ? btns.filter(btn => !btn.private) : btns;
   const navBtns = filteredBtns.map(({ id, text, link }) => (
     <li key={id}>
@@ -48,7 +53,6 @@ const NoticesCategoriesNav = () => {
   ));
 
   return <ul className={style.wrapper}>{navBtns}</ul>;
-
 };
 
 export default NoticesCategoriesNav;
