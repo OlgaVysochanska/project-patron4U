@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import style from './NewsPageListItem.module.scss';
 
 const NewsPageListItem = ({ imgUrl, title, text, formattedDate, url }) => {
@@ -21,3 +22,7 @@ const NewsPageListItem = ({ imgUrl, title, text, formattedDate, url }) => {
 };
 
 export default NewsPageListItem;
+
+NewsPageListItem.propTypes = {
+  formattedDate: PropTypes.string.isRequired,
+};
