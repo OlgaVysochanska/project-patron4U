@@ -1,23 +1,17 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { addFilteredNotices } from 'redux/notices/noticesSlice';
-import { getAllNotices } from 'redux/notices/noticesSelecors';
+import { setFilter } from 'redux/filter/filterSlice';
+import { getFilter } from 'redux/filter/filterSelectors';
 
 import SearchBar from 'shared/components/SearchBar/SearchBar';
 import style from './NoticesSearch.module.scss';
 
 const NoticeSearch = () => {
-  const allNoticesData = useSelector(getAllNotices);
-  console.log('allNoticesData:', allNoticesData);
-
+  const filter = useSelector(getFilter);
   const dispatch = useDispatch();
+  console.log('filter:', filter);
 
-  const clickOnSearch = ({ search }) => {
-    const filteredNotices = allNoticesData.filter(notice =>
-      notice.comments.toLowerCase().includes(search.toLowerCase())
-    );
-    console.log('filteredNotices:', filteredNotices);
-    dispatch(addFilteredNotices(filteredNotices));
-  };
+  const clickOnSearch = ({ search }) => dispatch(setFilter(search));
+  // console.log('search:', search);
 
   return (
     <>
