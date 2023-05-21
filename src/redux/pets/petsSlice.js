@@ -26,6 +26,7 @@ const petsSlice = createSlice({
       })
       .addCase(fetchAddPet.pending, store => {
         store.loading = true;
+        store.error = null;
       })
       .addCase(fetchAddPet.fulfilled, (store, { payload }) => {
         store.loading = false;

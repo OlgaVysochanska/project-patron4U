@@ -1,6 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { register, login, current, logout } from './authOperations';
+import {
+  register,
+  login,
+  current,
+  logout,
+  addUserPets,
+} from './authOperations';
 
 const initialState = {
   user: {},
@@ -74,6 +80,19 @@ const authSlice = createSlice({
         state.isLogin = false;
       })
       .addCase(logout.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      })
+      .addCase(addUserPets.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addUserPets.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.user.myPets = payload;
+        state.isLogin = true;
+      })
+      .addCase(addUserPets.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
       });
