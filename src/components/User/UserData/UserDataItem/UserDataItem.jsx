@@ -30,7 +30,7 @@ const EditIconTuned = () => {
   isActive,
   label,
   name,
-  // value,
+  value,
   defaultValue,
   clickActive,
   activeItem,
@@ -45,7 +45,7 @@ const EditIconTuned = () => {
     initialState,
     onSubmit,
   });
-  const [isEditing, setIsEditing] = useState(true);
+  const [isNotEditing, setIsNotEditing] = useState(true);
   //  const dispatch = useDispatch()
   // const id = nanoid();
   // const handleEdit = id => {
@@ -55,34 +55,68 @@ const EditIconTuned = () => {
   const clickEdit = id => {
     // onClick(!isActive);
     // setActiveItem(id);
-    setIsEditing(!isEditing);
-    console.log(activeItem);
-    console.log(isEditing);
+    setIsNotEditing(false);
+    // console.log(activeItem);
+    console.log(isNotEditing);
   };
 
   const clickSave = () => {
-    setIsEditing(true);
+    setIsNotEditing(true);
+    console.log(state)
   };
 
   // const readonly =  false;
   return (
-    <form onSubmit={onSubmit} autoComplete="on">
-      <div style={{ backgroundColor: 'green', position: 'relative' }}>
+    <form onSubmit={handleSubmit} autoComplete="on">
+      <div style={{ backgroundColor: 'green',  
+      //  position: 'relative' 
+   }} className={styles.inputWrapper}>
       <Input
+      // inputStyle={{position: 'relative'}}
         type={type}
         // key={id}
         id={name}
         label={label}
         name={name}
+        value={value}
+
         defaultValue={defaultValue}
         // defaultValue={defaultValue}
         // {...(!isActive && isEditing && { rO })}
         // inputStyle={{ position: 'relative' }}
         // isValid={true}
-        readonly={isEditing}
+        readonly={isNotEditing}
         handleChange={handleChange}
+        isValid='true'
       ></Input>
+{isNotEditing ? (
+<Button type='button'
+onClick={clickEdit}
+// buttonStyle={
+//   {backgroundColor: 'transparent',
+// border: 'none',
+// // position: 'absolute',
+// right:'10px'
+// }
+// }
+className={styles.toggle}
+SVGComponent={EditIconTuned}
+// stroke='#54ADFF'
+/>
+) : (
+  <Button type='button'
+  className={styles.toggle}
 
+onClick={clickSave}
+// buttonStyle={{backgroundColor: 'transparent',
+// border: 'none',
+// // position: 'absolute',
+// right:'10px'}}
+SVGComponent={CheckIconTuned}
+// stroke='#54ADFF'
+/>
+)
+}
 
 
 
@@ -148,7 +182,7 @@ const EditIconTuned = () => {
 
 
 
-      </div>
+
       {/* <ToggleButton
             className={styles.togle}
             id={id}
@@ -204,6 +238,7 @@ const EditIconTuned = () => {
         <input type="text" name="name" />
       </label>
       <input type="submit" value="Submit" /> */}
+            </div>
     </form>
   );
 };

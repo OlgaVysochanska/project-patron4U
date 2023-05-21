@@ -1,28 +1,28 @@
-form {
-  //   position: relative;
-  //   display: inline-block;
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-}
+// .form {
+//   //   position: relative;
+//   //   display: inline-block;
+//   display: flex;
+//   align-items: center;
+//   margin-left: auto;
+//   margin-right: auto;
+// }
 
-.input {
-  display: flex;
-  align-items: center;
-    position: relative;
-    background-color: red;
-}
+// .input {
+//   display: flex;
+//   align-items: center;
+//     position: relative;
+//     background-color: red;
+// }
 
-label input {
-  display: flex;
-    align-items: center;
+// label input {
+//   display: flex;
+//     align-items: center;
 
-  position: relative;
-}
+//   position: relative;
+// }
 
 .toggle {
-  background-color: 'green';
+  background-color: transparent;
   position: absolute;
   right: 10px;
   top: 10px;
@@ -30,4 +30,13 @@ label input {
   // transform: 'translateY(-50%)';
   margin-right: '10px';
   align-items: center;
+}
+
+// .button {
+//   background-color: red;
+// }
+
+
+.inputWrapper {
+  position: relative;
 }

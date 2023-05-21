@@ -9,9 +9,10 @@ import CameraIcon from 'icons/CameraIcon';
 import { nanoid } from 'nanoid';
 import CheckIcon from 'icons/CheckIcon';
 import CrossIcon from 'icons/CrossIcon';
-import { getCurrent } from '../../../shared/services/auth';
-
+import { getUser } from '../../../redux/auth/authSelectors';
+import { editCurrent } from '../../../redux/auth/authOperations';
 import UploadWidget from '../../../shared/components/UploadWidget/UploadWidget';
+import { useDispatch } from '../../../../node_modules/react-redux/es/exports';
 
 const CameraIconTuned = () => {
   return <CameraIcon width="16" height="16" viewBox="0 0 22 21" />;
@@ -32,7 +33,7 @@ let avatar = false;
 const user = {
   name: 'Anna',
   email: 'anna00@gmail.com',
-  birthday: '01.01.0101',
+  birthday: '01.01.2001',
   phone: '+38000000000',
   city: 'Kiev',
 };
@@ -50,12 +51,15 @@ const UserData = ({ onClick }) => {
   const [birthday, setBirthday] = useState(user.birthday);
   const [phone, setPhone] = useState(user.phone);
   const [city, setCity] = useState(user.city);
+const dispatch = useDispatch()
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
         setLoading(true);
-        const data = await getCurrent();
+        const data = await getUser();
+        console.log(data);
+
         setItems(prevItems => [...prevItems, data]);
         console.log(data);
       } catch (error) {
@@ -65,10 +69,20 @@ const UserData = ({ onClick }) => {
       }
     };
     fetchUser();
+    console.log(items);
+
   }, [activeItem]);
 
-  console.log(items);
+
+
   const userMap = { name, email, birthday, phone, city };
+
+const handleEditUser = data=> {
+  dispatch(editCurrent(data))
+
+}
+
+  // const userMap = {{items}}
 
   if (!avatar) {
     avatar = defaultAvatar;
@@ -140,12 +154,13 @@ const UserData = ({ onClick }) => {
           key={key}
           // setIsEditing={setIsEditing}
           setActiveItem={setActiveItem}
+          onSubmit={handleEditUser}
         />
       </div>
     );
   });
 
-  console.log(elements);
+  // console.log(elements);
 
   return (
     <div className={styles.container}>
