@@ -26,7 +26,7 @@ const authSlice = createSlice({
         state.user = user;
         state.token = token;
         state.isLogin = true;
-        state.isModalShown = true;
+        // state.isModalShown = true;
       })
       .addCase(register.rejected, (state, { payload }) => {
         state.loading = false;

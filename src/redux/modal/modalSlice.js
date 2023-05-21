@@ -8,9 +8,12 @@ const modalSlice = createSlice({
   name: 'modal',
   initialState,
   reducers: {
-    setModal: (_, { payload }) => payload,
+    toggleModal(state, action) {
+      console.log('Викликали toggleModal');
+      state.modal.isModalShown = action.payload;
+    },
   },
 });
 
-export const { setModal } = modalSlice.actions;
+export const { toggleModal } = modalSlice.actions;
 export default modalSlice.reducer;

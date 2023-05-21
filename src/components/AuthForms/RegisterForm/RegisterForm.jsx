@@ -34,7 +34,6 @@ const RegisterForm = ({ onSubmit }) => {
   const handleConfirmPasswordChange = event => {
     const confirmValue = event.target.value;
     setConfirmPassword(confirmValue);
-    // setIsValidConf(confirmValue.length > 6);
   };
 
   const toggleShowPassword = () => {
@@ -91,7 +90,6 @@ const RegisterForm = ({ onSubmit }) => {
           value={password}
           handleChange={e => {
             handleChange(e);
-            // setIsValidPass(password.length > 6);
             setIsValidPass(e.target.checkValidity());
           }}
           {...fields.password}
