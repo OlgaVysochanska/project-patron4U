@@ -1,6 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { register, login, current, logout } from './authOperations';
+import {
+  register,
+  login,
+  current,
+  logout,
+  fetchToggleFavoriteNotice,
+} from './authOperations';
 
 const initialState = {
   user: {},
@@ -74,6 +80,18 @@ const authSlice = createSlice({
         state.isLogin = false;
       })
       .addCase(logout.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      })
+      .addCase(fetchToggleFavoriteNotice.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchToggleFavoriteNotice.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.user.favoriteAbs.push(payload);
+      })
+      .addCase(fetchToggleFavoriteNotice.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
       });

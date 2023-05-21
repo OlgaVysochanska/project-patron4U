@@ -60,3 +60,15 @@ export const logout = createAsyncThunk(
     }
   }
 );
+
+export const fetchToggleFavoriteNotice = createAsyncThunk(
+  'notices/toggle-favorite',
+  async (data, { rejectWithValue }) => {
+    try {
+      const result = await api.toggleFavoriteNotice(data);
+      return result;
+    } catch ({ response }) {
+      return rejectWithValue(response.data);
+    }
+  }
+);
