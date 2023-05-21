@@ -9,6 +9,7 @@ import {
 
 const initialState = {
   items: [],
+  filteredItems: [],
   loading: false,
   error: null,
 };
@@ -60,7 +61,7 @@ const noticesSlice = createSlice({
       .addCase(fetchNoticesByCategory.fulfilled, (store, { payload }) => {
         store.loading = false;
         store.items = [...payload];
-        store.category = payload.category
+        store.category = payload.category;
       })
       .addCase(fetchNoticesByCategory.rejected, (store, { payload }) => {
         store.loading = false;
@@ -69,7 +70,7 @@ const noticesSlice = createSlice({
   },
   reducers: {
     addFilteredNotices(state, action) {
-      state.items = action.payload;
+      state.filteredItems = action.payload;
     },
   },
 });
