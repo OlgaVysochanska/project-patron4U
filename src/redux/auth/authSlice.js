@@ -7,6 +7,7 @@ const initialState = {
   token: '',
   isLogin: false,
   loading: false,
+  // isModalShown: false,
   error: null,
 };
 
@@ -25,6 +26,7 @@ const authSlice = createSlice({
         state.user = user;
         state.token = token;
         state.isLogin = true;
+        // state.isModalShown = true;
       })
       .addCase(register.rejected, (state, { payload }) => {
         state.loading = false;

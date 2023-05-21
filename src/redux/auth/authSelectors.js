@@ -4,3 +4,5 @@ export const getAuth = ({ auth }) => {
   return { isLogin, token };
 };
 export const getUser = ({ auth }) => auth.user;
+
+export const getIsModalShown = ({ auth }) => auth.isModalShown;

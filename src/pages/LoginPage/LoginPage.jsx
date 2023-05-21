@@ -6,6 +6,7 @@ import { login } from '../../redux/auth/authOperations';
 import { isUserLogin } from 'redux/auth/authSelectors';
 
 import { NavLink } from 'react-router-dom';
+import Background from 'shared/components/Background/Background';
 import LoginForm from 'components/AuthForms/LoginForm/LoginForm';
 import AuthTitle from 'shared/components/AuthTitle/AuthTitle';
 
@@ -25,18 +26,21 @@ const LoginPage = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <AuthTitle text="Login" />
-      <LoginForm onSubmit={handleLogin} />
-      <div>
-        <p className={styles.redirectLink}>
-          Don't have an account?{' '}
-          <NavLink to="/Register" className={styles.navlink}>
-            Register
-          </NavLink>
-        </p>
+    <>
+      <Background />
+      <div className={styles.container}>
+        <AuthTitle text="Login" />
+        <LoginForm onSubmit={handleLogin} />
+        <div>
+          <p className={styles.redirectLink}>
+            Don't have an account?{' '}
+            <NavLink to="/Register" className={styles.navlink}>
+              Register
+            </NavLink>
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

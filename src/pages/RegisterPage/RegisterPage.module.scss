@@ -1,24 +1,22 @@
 .container {
+  width: 280px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  background-color: yellow;
+  background-color: #ffffff;
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
   border-radius: 40px;
   margin-top: 50px;
   margin-right: auto;
   margin-left: auto;
 
-  padding: 60px 75px;
-
-  @media screen and (min-width: 480px) {
-    width: 280px;
-  }
+  padding: 40px 12px;
 
   @media screen and (min-width: 768px) {
     width: 608px;
+    padding: 60px 75px;
   }
 }
 

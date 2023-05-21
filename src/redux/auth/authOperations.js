@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
 import * as api from '../../shared/services/auth';
 
 export const register = createAsyncThunk(
