@@ -1,14 +1,48 @@
-import { useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 
 import Contact from './Contact';
-import AddToFavorite from './AddToFavorite';
+import AddToFavorite from './AddToFavorite/AddToFavorite';
 
 import Button from 'shared/components/Button/Button';
 import CrossIcon from 'icons/CrossIcon';
 
+import {
+  isUserLogin,
+  getUser,
+  getFavoriteNotices,
+} from 'redux/auth/authSelectors';
+
 import styles from './NoticeModal.module.scss';
 
 const NoticeModal = ({ notice, closeModal }) => {
+  const [favoriteArr, setFavoriteArr] = useState([]);
+
+  const { email, phone } = useSelector(getUser);
+  const currentUser = useSelector(isUserLogin);
+  const favoriteNotices = useSelector(getFavoriteNotices);
+
+  if (currentUser) {
+    setFavoriteArr(favoriteNotices);
+  }
+
+  const {
+    _id,
+    category,
+    title,
+    name,
+    date,
+    breed,
+    sex,
+    location,
+    price,
+    comments,
+    petURL,
+  } = notice;
+
+  // const isMyAds =
+  const myFavoriteNotice = favoriteArr.includes(_id);
+
   const closeModalOnClick = useCallback(
     ({ key, target, currentTarget }) => {
       if (key === 'Escape' || target === currentTarget) {
@@ -20,29 +54,8 @@ const NoticeModal = ({ notice, closeModal }) => {
 
   useEffect(() => {
     document.addEventListener('keydown', closeModalOnClick);
-
     return () => document.removeEventListener('keydown', closeModalOnClick);
   }, [closeModalOnClick]);
-
-  const {
-    _id,
-    openModal,
-    category,
-    favorite,
-    title,
-    name,
-    date,
-    breed,
-    sex,
-    location,
-    price,
-    comments,
-    petURL,
-    isMyAds,
-  } = notice;
-
-  const email = 'diana@gmail.com';
-  const phone = '+380988540785';
 
   return (
     <>
@@ -116,7 +129,7 @@ const NoticeModal = ({ notice, closeModal }) => {
             </p>
             <div className={styles.btnWrapper}>
               <Contact phone={phone} />
-              <AddToFavorite />
+              <AddToFavorite myFavoriteNotice={myFavoriteNotice} _id={_id} />
             </div>
           </div>
         </div>

@@ -35,3 +35,8 @@ export const logout = async () => {
   setToken();
   return data;
 };
+
+export const toggleFavoriteNotice = async id => {
+  const { data } = await instance.patch('/auth', { favoriteNotice: id });
+  return data;
+};
