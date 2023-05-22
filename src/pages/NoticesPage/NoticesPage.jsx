@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
@@ -34,7 +34,7 @@ const NoticesPage = () => {
     openModal();
   };
 
-  const getVisibleNotices = () => {
+  const getVisibleNotices = useCallback(() => {
     if (!filter) {
       return allNotices;
     }
@@ -44,9 +44,15 @@ const NoticesPage = () => {
     );
     console.log('filteredNotices:', result);
     return result;
-  };
+  }, [allNotices, filter]);
   console.log('filtered is set :', getVisibleNotices());
   console.log('allNotices :', allNotices);
+
+  useEffect(() => {
+    if (filter) {
+      getVisibleNotices();
+    }
+  }, [getVisibleNotices, filter]);
 
   return (
     <>
@@ -59,10 +65,7 @@ const NoticesPage = () => {
             <AddPetButton />
           </div>
         </div>
-        <NoticesCategoriesList
-          notices={getVisibleNotices()}
-          loadMore={loadMore}
-        />
+        <NoticesCategoriesList notices={allNotices} loadMore={loadMore} />
         {isModalOpen && <NoticeModal notice={notice} closeModal={closeModal} />}
       </div>
       <Outlet />

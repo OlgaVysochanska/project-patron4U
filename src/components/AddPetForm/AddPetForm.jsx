@@ -38,7 +38,7 @@ const AddPetForm = ({ onSubmit }) => {
   const [activeTab, setActiveTab] = useState(0);
   const [activeGender, setActiveGender] = useState(null);
 
-  const { state, setState, handleChange, handleSubmit } = useForm({
+  const { state, handleChange, handleSubmit } = useForm({
     initialState,
     onSubmit,
   });
