@@ -14,13 +14,19 @@ const initialState = {
   token: '',
   isLogin: false,
   loading: false,
-  // isModalShown: false,
+  pets:{},
+  isRegistered: false,
   error: null,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
+  reducers: {
+    setRegistered(state, { payload }) {
+      state.isRegistered = payload;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(register.pending, state => {
@@ -44,11 +50,12 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(login.fulfilled, (state, { payload }) => {
-        const { user, token } = payload;
+        const { user, token, pets } = payload;
         state.loading = false;
         state.user = user;
         state.token = token;
         state.isLogin = true;
+       state.pets=pets;
       })
       .addCase(login.rejected, (state, { payload }) => {
         state.loading = false;
@@ -59,11 +66,12 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(current.fulfilled, (state, { payload }) => {
-        const { user, token } = payload;
+        const { user, token, pets } = payload;
         state.loading = false;
         state.user = user;
         state.token = token;
         state.isLogin = true;
+        state.pets=pets;
       })
       .addCase(current.rejected, (state, { payload }) => {
         state.loading = false;
@@ -79,6 +87,8 @@ const authSlice = createSlice({
         state.user = {};
         state.token = '';
         state.isLogin = false;
+        state.isRegistered: false;
+        state.pets:{},
       })
       .addCase(logout.rejected, (state, { payload }) => {
         state.loading = false;
@@ -112,4 +122,5 @@ const authSlice = createSlice({
   },
 });
 
+export const { setRegistered } = authSlice.actions;
 export default authSlice.reducer;
