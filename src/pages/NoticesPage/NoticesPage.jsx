@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 
 import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
 
@@ -24,13 +24,11 @@ import { getUser } from 'redux/auth/authSelectors';
 
 import NoticesFilters from 'components/Notices/NoticesFilters/NoticesFilters';
 
-
 import style from './NoticesPage.module.scss';
 
 import { getFilter } from 'redux/filter/filterSelectors';
 
 const NoticesPage = () => {
-
   const { _id } = useSelector(getUser);
   const { category } = useParams();
 
@@ -95,7 +93,6 @@ const NoticesPage = () => {
       <div className={style.noticePageContainer}>
         <NoticesSearch />
         <div className={style.wrapper}>
-
           <NoticesCategoriesNav
             onClickOwn={onClickOwn}
             onClearnData={onClearnData}
@@ -108,7 +105,6 @@ const NoticesPage = () => {
             <NoticesFilters />
             <AddPetButton />
           </div>
-
         </div>
         {!dataNotices && (
           <NoticesCategoriesList notices={allNotices} loadMore={loadMore} />

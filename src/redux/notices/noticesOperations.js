@@ -40,26 +40,24 @@ export const fetchDeleteNotice = createAsyncThunk(
 
 export const fetchNoticesByCategory = createAsyncThunk(
   'notices/category',
-  async ( category, { rejectWithValue }) => {
-
-  async (categoryName, { rejectWithValue }) => {
+  async (category, { rejectWithValue }) => {
     try {
       const data = await api.getNoticesByCategory(category);
       console.log(data);
       return data;
-      
     } catch ({ response }) {
       return rejectWithValue(response.data);
     }
   }
 );
+
 // export const fetchNoticesByUser = createAsyncThunk(
 //   'notices/own',
 //   async ( id, { rejectWithValue }) => {
 //     try {
 //       const data = await api.getUserNotices(id);
 //       return data;
-      
+
 //     } catch ({ response }) {
 //       return rejectWithValue(response.data);
 //     }
@@ -72,7 +70,7 @@ export const fetchNoticesByCategory = createAsyncThunk(
 //     try {
 //       const data = await api.getUserFavoriteNotices(id);
 //       return data;
-      
+
 //     } catch ({ response }) {
 //       return rejectWithValue(response.data);
 //     }
