@@ -40,10 +40,19 @@ const RegisterPage = () => {
             Already have an account?{' '}
             <NavLink to="/login" className={styles.navlink} >
               Login
+
             </NavLink>
             <NavLink to="/user" className={styles.navlink} >
             user
-            </NavLink>
+
+            </NavLink>{' '}
+            or use{' '}
+            <a
+              href="https://patron-back.onrender.com/api/auth/google"
+              className={styles.navlink}
+            >
+              Google authenticate
+            </a>
           </p>
         </div>
       </div>
