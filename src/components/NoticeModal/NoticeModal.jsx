@@ -16,15 +16,9 @@ import {
 import styles from './NoticeModal.module.scss';
 
 const NoticeModal = ({ notice, closeModal }) => {
-  const [favoriteArr, setFavoriteArr] = useState([]);
-
   const { email, phone } = useSelector(getUser);
   const currentUser = useSelector(isUserLogin);
   const favoriteNotices = useSelector(getFavoriteNotices);
-
-  if (currentUser) {
-    setFavoriteArr(favoriteNotices);
-  }
 
   const {
     _id,
@@ -40,8 +34,13 @@ const NoticeModal = ({ notice, closeModal }) => {
     petURL,
   } = notice;
 
+  let myFavoriteNotice = false;
+
+  if (favoriteNotices) {
+    myFavoriteNotice = favoriteNotices.includes(_id);
+  }
+
   // const isMyAds =
-  const myFavoriteNotice = favoriteArr.includes(_id);
 
   const closeModalOnClick = useCallback(
     ({ key, target, currentTarget }) => {

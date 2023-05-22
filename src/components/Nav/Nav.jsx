@@ -3,6 +3,7 @@ import useLang from 'shared/hooks/useLang';
 import locale from './locale.json';
 import styles from './Nav.module.scss';
 
+
 export default function Nav({ onClick }) {
   const { lang } = useLang();
 
@@ -18,12 +19,15 @@ export default function Nav({ onClick }) {
             {news}
           </NavLink>
         </li>
+
         <li className={styles.item} onClick={onClick}>
+
           <NavLink className={styles.link} to="/notices/sell">
             {findPets}
           </NavLink>
         </li>
         <li className={styles.item} onClick={onClick}>
+
           <NavLink className={styles.link} to="/friends">
             {ourFriends}
           </NavLink>

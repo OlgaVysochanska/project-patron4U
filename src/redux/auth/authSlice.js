@@ -26,6 +26,14 @@ const authSlice = createSlice({
     setRegistered(state, { payload }) {
       state.isRegistered = payload;
     },
+    togglePayload(state, { payload }) {
+      const index = state.user.favoriteNotice.indexOf(payload);
+      if (index !== -1) {
+        state.user.favoriteNotice.splice(index, 1);
+      } else {
+        state.user.favoriteNotice.push(payload);
+      }
+    },
   },
   extraReducers: builder => {
     builder
@@ -39,7 +47,6 @@ const authSlice = createSlice({
         state.user = user;
         state.token = token;
         state.isLogin = true;
-        // state.isModalShown = true;
       })
       .addCase(register.rejected, (state, { payload }) => {
         state.loading = false;
@@ -113,7 +120,7 @@ const authSlice = createSlice({
       })
       .addCase(fetchToggleFavoriteNotice.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.user.favoriteAbs.push(payload);
+        authSlice.caseReducers.togglePayload(state, { payload });
       })
       .addCase(fetchToggleFavoriteNotice.rejected, (state, { payload }) => {
         state.loading = false;
