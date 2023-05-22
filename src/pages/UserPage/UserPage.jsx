@@ -1,21 +1,21 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import ModalCongrats from 'components/ModalCongrats/ModalCongrats';
 
-// import { getIsModalShown } from 'redux/auth/authSelectors';
-import { getModalVisibility } from 'redux/modal/modalSelectors';
-// import { setModal } from 'redux/modal/modalSlice';
+import { selectIsRegistered } from '../../redux/auth/authSelectors';
+import { setRegistered } from '../../redux/auth/authSlice';
 
 const UserPage = () => {
-  const isModalCongratsShown = useSelector(getModalVisibility);
-
-  // const handleClose = e => {
-  //   dispatch(setModal(false));
-  // };
+  const isRegistered = useSelector(selectIsRegistered);
+ 
+  const dispatch = useDispatch();
+  const handleClose = e => {
+    dispatch(setRegistered(false));
+  };
 
   return (
     <>
-      {isModalCongratsShown && <ModalCongrats />}
+      {isRegistered && <ModalCongrats onClose={handleClose}/>}
       <div>
         If components are ready, add them to UserPage. /UserData, UserDataItem,
         Logout, PetsData, PetsList, PetsItem, ModalCongrats/
