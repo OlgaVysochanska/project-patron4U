@@ -113,7 +113,7 @@ const authSlice = createSlice({
       })
       .addCase(fetchToggleFavoriteNotice.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.user.favoriteAbs.push(payload);
+        state.user.favoriteNotice.push(payload);
       })
       .addCase(fetchToggleFavoriteNotice.rejected, (state, { payload }) => {
         state.loading = false;
