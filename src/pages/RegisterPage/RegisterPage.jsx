@@ -1,11 +1,11 @@
+import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-//імпортуємо компонент для переадресації користувача після успішної реєстрації
-import { Navigate } from 'react-router-dom';
+import { Navigate   } from 'react-router-dom';
 
 import { register } from '../../redux/auth/authOperations';
 import { isUserLogin } from 'redux/auth/authSelectors';
+import { setRegistered } from '../../redux/auth/authSlice';
 
-import { NavLink } from 'react-router-dom';
 import Background from 'shared/components/Background/Background';
 import RegisterForm from 'components/AuthForms/RegisterForm/RegisterForm';
 import AuthTitle from 'shared/components/AuthTitle/AuthTitle';
@@ -14,9 +14,15 @@ import styles from './RegisterPage.module.scss';
 
 const RegisterPage = () => {
   const isLogin = useSelector(isUserLogin);
+  
   const dispatch = useDispatch();
+  dispatch(setRegistered(false));
+
   const handleRegister = data => {
-    dispatch(register(data));
+   dispatch(register(data)).then(() => {
+    dispatch(setRegistered(true));
+  });
+
   };
 
   if (isLogin) {
@@ -32,8 +38,13 @@ const RegisterPage = () => {
         <div>
           <p className={styles.redirectLink}>
             Already have an account?{' '}
-            <NavLink to="/login" className={styles.navlink}>
+            <NavLink to="/login" className={styles.navlink} >
               Login
+
+            </NavLink>
+            <NavLink to="/user" className={styles.navlink} >
+            user
+
             </NavLink>{' '}
             or use{' '}
             <a
