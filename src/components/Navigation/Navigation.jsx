@@ -7,6 +7,7 @@ import AuthNav from 'components/AuthNav/AuthNav';
 import MobileMenu from 'components/MobileMenu/MobileMenu';
 import HamburgerIcon from 'icons/HamburgerIcon';
 import styles from './Navigation.module.scss';
+import LanguageSwitcher from 'components/LanguageSwitcher/LanguageSwitcher';
 
 export default function Navigation({ isDesktop, isTablet, isMobile }) {
   const userLoggedIn = useSelector(isUserLogin);
@@ -41,10 +42,13 @@ export default function Navigation({ isDesktop, isTablet, isMobile }) {
       {showMobileMenu && (
         <MobileMenu onClick={toggleMobileMenu} isMobile={isMobile}>
           {userLoggedIn && isMobile && (
-            <UserNav style={{ marginTop: 40, marginBottom: 84 }} />
+            <UserNav
+              style={{ marginTop: 40, marginBottom: 84 }}
+              onClick={toggleMobileMenu}
+            />
           )}
-          {!userLoggedIn && isMobile && <AuthNav />}
-          <Nav />
+          {!userLoggedIn && isMobile && <AuthNav onClick={toggleMobileMenu} />}
+          <Nav onClick={toggleMobileMenu} />
         </MobileMenu>
       )}
     </div>

@@ -1,9 +1,8 @@
 import React from 'react';
-
-import Spiner from 'components/Spiner/Spiner';
-
 import NewsPageListItem from '../NewsPageListItem';
 import style from './NewsPageList.module.scss';
+import Spiner from 'components/Spiner/Spiner';
+import PropTypes from 'prop-types';
 
 const NewsPageList = ({ items, loading }) => {
   return (
@@ -34,3 +33,17 @@ const NewsPageList = ({ items, loading }) => {
 };
 
 export default NewsPageList;
+
+NewsPageList.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      imgUrl: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
+  loading: PropTypes.bool,
+};

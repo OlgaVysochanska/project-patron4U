@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
 import * as api from '../../shared/services/auth';
 
 export const register = createAsyncThunk(
@@ -58,6 +57,30 @@ export const logout = createAsyncThunk(
       return data;
     } catch ({ response }) {
       return rejectWithValue(response);
+    }
+  }
+);
+
+export const addUserPets = createAsyncThunk(
+  'auth/addUserPets',
+  async (data, { rejectWithValue }) => {
+    try {
+      const result = await api.addUserPets(data);
+      return result;
+    } catch ({ response }) {
+      return rejectWithValue(response);
+    }
+  }
+);
+
+export const fetchToggleFavoriteNotice = createAsyncThunk(
+  'auth/toggle-favorite',
+  async (data, { rejectWithValue }) => {
+    try {
+      const result = await api.toggleFavoriteNotice(data);
+      return result;
+    } catch ({ response }) {
+      return rejectWithValue(response.data);
     }
   }
 );

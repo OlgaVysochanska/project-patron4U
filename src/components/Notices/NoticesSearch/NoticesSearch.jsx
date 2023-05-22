@@ -1,62 +1,25 @@
-// import { useState, useEffect, useCallback } from 'react';
-// import { useSearchParams } from 'react-router-dom';
-// import { searchNotice } from '../../../shared/services/notices';
-import Title from 'shared/components/Title/Title';
-// import NoticesCategoriesList from '../NoticesCategoriesList/NoticesCategoriesList';
+import { useSelector, useDispatch } from 'react-redux';
+import { setFilter } from 'redux/filter/filterSlice';
+import { getFilter } from 'redux/filter/filterSelectors';
+
 import SearchBar from 'shared/components/SearchBar/SearchBar';
 import style from './NoticesSearch.module.scss';
 
-const NoticesSearch = () => {
-  // const [items, setItems] = useState([]);
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(null);
+const NoticeSearch = () => {
+  const filter = useSelector(getFilter);
+  const dispatch = useDispatch();
+  console.log('filter:', filter);
 
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const search = searchParams.get('search');
-  // const page = searchParams.get('page');
-
-  // useEffect(() => {
-  //   if (!search) {
-  //     return;
-  //   }
-
-  //   const fetchNotices = async () => {
-  //     try {
-  //       setLoading(true);
-  //       const { data } = await searchNotice(search, page);
-  //       setItems(prevItems => [...prevItems, ...data]);
-  //     } catch (error) {
-  //       setError(error.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchNotices();
-  // }, [search, page, setLoading, setItems, setError]);
-
-  // const onSearchNotice = useCallback(
-  //   ({ search }) => {
-  //     setSearchParams({ search, page: 1 });
-  //     setItems([]);
-  //   },
-  //   [setSearchParams]
-  // );
-
-  const clickOnSearch = () => {
-    console.log('i can dispatch notices there');
-  };
+  const clickOnSearch = ({ search }) => dispatch(setFilter(search));
+  // console.log('search:', search);
 
   return (
     <>
       <div className={style.wrapper}>
-        <Title>Find your favorite pet</Title>
         <SearchBar onSubmit={clickOnSearch} />
       </div>
-      {/* <NoticesCategoriesList data={items}/>
-      {error && <p>{error}</p>}
-      {loading && <p>...Load</p>} */}
     </>
   );
 };
 
-export default NoticesSearch;
+export default NoticeSearch;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import Button from '../../shared/components/Button';
 import PawprintIcon from '../../icons/PawprintIcon';
 import styles from './NotFound.module.scss';
@@ -97,7 +98,9 @@ const NotFoundPage = () => {
         <h2 className={styles.title}>Ooops! This page not found :(</h2>
         <img className={styles.img} src={getImage()} alt="cat" loading="lazy" />
         <Button className={styles.button}>
-          To main page
+          <NavLink to="/main" className={styles.navlink}>
+            To main page
+          </NavLink>
           <PawprintIcon className={styles.btnIcon} />
         </Button>
       </div>

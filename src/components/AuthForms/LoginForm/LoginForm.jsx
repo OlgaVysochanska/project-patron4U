@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+import PropTypes from 'prop-types';
+
 import Input from 'shared/components/Input/Input';
 
 import AuthButton from '../../../shared/components/AuthButton/AuthButton';
@@ -43,23 +45,25 @@ const LoginForm = ({ onSubmit }) => {
   }, [email, password, isValidEmail, isValidPass, setAgreed]);
 
   return (
-    <form onSubmit={handleSubmit} autoComplete="off">
-      <Input
-        id="email"
-        value={email}
-        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" // Патерн для валідації email
-        title="Enter a valid Email" // Підказка для патерну
-        style={{
-          border: isValidEmail ? '1px solid #54adff' : '1px solid #F43F5E',
-        }}
-        aditionalClass={isValidEmail ? styles.inputCustomSettings : ''}
-        handleChange={e => {
-          handleChange(e);
-          setIsValidEmail(e.target.checkValidity());
-        }}
-        {...fields.email}
-        isValid={isValidEmail}
-      />
+    <form onSubmit={handleSubmit} autoComplete="off" className={styles.form}>
+      <div className={styles.inputWrapper}>
+        <Input
+          id="email"
+          value={email}
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" // Патерн для валідації email
+          title="Enter a valid Email" // Підказка для патерну
+          style={{
+            border: isValidEmail ? '1px solid #54adff' : '1px solid #F43F5E',
+          }}
+          aditionalClass={isValidEmail ? styles.inputCustomSettings : ''}
+          handleChange={e => {
+            handleChange(e);
+            setIsValidEmail(e.target.checkValidity());
+          }}
+          {...fields.email}
+          isValid={isValidEmail}
+        />
+      </div>
 
       <div className={styles.inputWrapper}>
         <Input
@@ -74,7 +78,7 @@ const LoginForm = ({ onSubmit }) => {
           aditionalClass={isValidPass ? styles.inputCustomSettings : ''}
           handleChange={e => {
             handleChange(e);
-            setIsValidPass(password.length >= 6);
+            setIsValidPass(e.target.checkValidity());
           }}
           {...fields.password}
           isValid={isValidPass}
@@ -91,3 +95,7 @@ const LoginForm = ({ onSubmit }) => {
 };
 
 export default LoginForm;
+
+LoginForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};

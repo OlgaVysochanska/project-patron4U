@@ -6,10 +6,13 @@ import { format } from 'date-fns';
 import useForm from 'shared/hooks/useForm';
 
 import { fetchAddNotice } from '../../redux/notices/noticesOperations';
-import {
-  getLoadingNotices,
-  getNoticesError,
-} from '../../redux/notices/noticesSelecors';
+import { fetchAddPet } from '../../redux/pets/petsOperations';
+
+import { getLoadingNotices } from '../../redux/notices/noticesSelecors';
+
+import { getUser } from '../../redux/auth/authSelectors';
+
+import { addUserPets } from '../../redux/auth/authOperations';
 
 import ChooseOption from './ChooseOption/ChooseOption';
 import PersonalDetail from './PersonalDetail/PersonalDetail';
@@ -35,7 +38,7 @@ const AddPetForm = ({ onSubmit }) => {
   const [activeTab, setActiveTab] = useState(0);
   const [activeGender, setActiveGender] = useState(null);
 
-  const { state, setState, handleChange, handleSubmit } = useForm({
+  const { state, handleChange, handleSubmit } = useForm({
     initialState,
     onSubmit,
   });
@@ -68,7 +71,7 @@ const AddPetForm = ({ onSubmit }) => {
   const dispatch = useDispatch();
 
   const loading = useSelector(getLoadingNotices);
-  const error = useSelector(getNoticesError);
+  const currentUser = useSelector(getUser);
 
   const validateData = () => {
     let formData = [];
@@ -133,7 +136,6 @@ const AddPetForm = ({ onSubmit }) => {
     }
 
     const validatedData = validateRulers(formData);
-    //console.log(validatedData);
 
     const errorMessages = validatedData.reduce(
       (errors, { name, message, isValid }) => {
@@ -194,48 +196,116 @@ const AddPetForm = ({ onSubmit }) => {
     setActiveTab(activeTab => activeTab - 1);
   };
 
-  const handleDataFetch = async () => {
+  const handleUserDataFetch = async id => {
     try {
-      const date = format(birthDate, 'dd.MM.yyyy');
-      const invalidObjects = validateData();
-      if (!invalidObjects.length) {
-        if (activeCategory !== 0) {
-          await dispatch(
-            fetchAddNotice({
-              title,
-              name,
-              date,
-              breed,
-              location,
-              petURL,
-              sex,
-              comments,
-              price,
-              category,
-            })
-          );
-        } else {
-          //тут додамо петсів
-        }
-      }
+      await dispatch(addUserPets([...currentUser.myPets, id]));
     } catch (error) {
       NotiflixMessage({ type: 'info', data: error.message });
     }
   };
 
-  const handleFormTabNvigationDone = () => {
-    handleDataFetch();
+  const handleDataFetch = async () => {
+    const date = format(birthDate, 'dd.MM.yyyy');
+    const category = categories[activeCategory].category;
+    const invalidObjects = validateData();
 
-    if (error) {
-      NotiflixMessage({ type: 'info', data: error.message });
-      return;
+    if (!invalidObjects.length && activeCategory === 1) {
+      try {
+        await dispatch(
+          fetchAddNotice({
+            title,
+            name,
+            date,
+            breed,
+            location,
+            petURL,
+            sex,
+            comments,
+            price,
+            category,
+          })
+        );
+      } catch (error) {
+        NotiflixMessage({ type: 'info', data: error.message });
+      }
+    } else if (!invalidObjects.length && activeCategory === 2) {
+      try {
+        await dispatch(
+          fetchAddNotice({
+            title,
+            name,
+            date,
+            breed,
+            location,
+            petURL,
+            sex,
+            comments,
+            category,
+          })
+        );
+      } catch (error) {
+        NotiflixMessage({ type: 'info', data: error.message });
+      }
+    } else if (!invalidObjects.length && activeCategory === 3) {
+      try {
+        await dispatch(
+          fetchAddNotice({
+            title,
+            name,
+            date,
+            breed,
+            location,
+            petURL,
+            sex,
+            comments,
+            category,
+          })
+        );
+      } catch (error) {
+        NotiflixMessage({ type: 'info', data: error.message });
+      }
+    } else if (!invalidObjects.length && activeCategory === 0) {
+      try {
+        const result = await dispatch(
+          fetchAddPet({
+            name,
+            date,
+            breed,
+            petURL,
+            comments,
+            category,
+          })
+        );
+        if (result) {
+          handleUserDataFetch(result.payload._id);
+        } else {
+          NotiflixMessage({
+            type: 'info',
+            data: "your pet wasn't added, repeat please",
+          });
+        }
+      } catch (error) {
+        NotiflixMessage({ type: 'info', data: error.message });
+      }
     }
-    if (activeCategory !== 0) {
-      navigate('/notices/sell');
-    } else {
+  };
+
+  const handleFormTabNvigationDone = async () => {
+    await handleDataFetch();
+
+    if (activeCategory === 0) {
       navigate('/user');
     }
-    setState(initialState);
+
+    if (activeCategory === 1) {
+      navigate('/notices/sell');
+    }
+    if (activeCategory === 2) {
+      navigate('/notices/lost-found');
+    }
+    if (activeCategory === 3) {
+      navigate('/notices/for-free');
+    }
   };
 
   const formTabsEl = tabs.map((item, index) => (

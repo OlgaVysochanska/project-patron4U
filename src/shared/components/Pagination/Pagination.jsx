@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import style from './Pagination.module.scss';
 import ArrowLeftIcon from 'icons/ArrowLeftIcon';
+import PropTypes from 'prop-types';
 
 const Pagination = ({ totalPages, onPageChange, page }) => {
   const [visiblePages, setVisiblePages] = useState([]);
@@ -93,3 +94,9 @@ const Pagination = ({ totalPages, onPageChange, page }) => {
 };
 
 export default Pagination;
+
+Pagination.propTypes = {
+  onPageChange: PropTypes.func.isRequired,
+  page: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired,
+};
