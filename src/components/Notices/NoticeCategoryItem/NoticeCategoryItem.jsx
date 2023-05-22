@@ -1,8 +1,10 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
 
 import Button from 'shared/components/Button/Button';
 import ModalApproveAction from 'shared/components/ModalApproveAction/ModalApprovAction';
+import NotiflixMessage from 'shared/components/NotiflixMessage/NotiflixMessage';
 
 import LocationIcon from 'icons/LocationIcon';
 import ClockIcon from 'icons/ClockIcon';
@@ -11,31 +13,46 @@ import FemaleIcon from 'icons/FemaleIcon';
 import HeartIcon from 'icons/HeartIcon';
 import TrashIcon from 'icons/TrashIcon';
 
-import { isUserLogin } from 'redux/auth/authSelectors';
+import { fetchToggleFavoriteNotice } from 'redux/auth/authOperations';
 import { fetchDeleteNotice } from 'redux/notices/noticesOperations';
 
 import styles from './NoticeCategoryItem.module.scss';
 
-const NoticeCategoryItem = ({ notice, loadMore }) => {
-  const {
-    _id,
-    category,
-    favorite,
-    title,
-    name,
-    date,
-    breed,
-    sex,
-    location,
-    price,
-    comments,
-    petURL,
-  } = notice;
-
+const NoticeCategoryItem = ({
+  currentUser,
+  notice,
+  loadMore,
+  myFavoriteNotice,
+}) => {
+  const [isFavorite, setIsFavorite] = useState(myFavoriteNotice);
   const { isModalOpen, openModal, closeModal } = useToggleModalWindow();
 
-  const isLogin = useSelector(isUserLogin);
-  // const isLogin = true;
+  const dispatch = useDispatch();
+
+  const { _id, category, title, date, sex, location, petURL } = notice;
+
+  const handleClickFavoriteBtn = id => {
+    if (!currentUser) {
+      NotiflixMessage({ type: 'info', data: 'Register or login, please!' });
+      return;
+    }
+    try {
+      dispatch(fetchToggleFavoriteNotice(id));
+      setIsFavorite(!isFavorite);
+      NotiflixMessage({
+        type: 'success',
+        data: !isFavorite
+          ? 'Notice added to favorite successfully!'
+          : 'Notice deleted from favorite successfully!',
+      });
+    } catch (error) {
+      NotiflixMessage({
+        type: 'failure',
+        data: error.message,
+      });
+    }
+  };
+
   const isMyAds = false;
 
   function getAge(date) {
@@ -65,8 +82,6 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
 
   const age = getAge(date.replaceAll('-', '.'));
 
-  const dispatch = useDispatch();
-
   const handleDeleteNotice = id => {
     dispatch(fetchDeleteNotice(id));
     closeModal();
@@ -85,11 +100,12 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
           <p className={styles.categoryInfo}>{category}</p>
           <div>
             <Button
+              onClick={() => handleClickFavoriteBtn(_id)}
               className={styles.circBtn}
               SVGComponent={() => (
                 <HeartIcon
                   className={
-                    styles.favorite
+                    isFavorite
                       ? `${styles.icons} ${styles.favoriteIcon}`
                       : styles.icons
                   }

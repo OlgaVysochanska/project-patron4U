@@ -5,7 +5,11 @@ import {
   login,
   current,
   logout,
+
   addUserPets,
+
+  fetchToggleFavoriteNotice,
+
 } from './authOperations';
 
 const initialState = {
@@ -83,6 +87,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = payload;
       })
+
       .addCase(addUserPets.pending, state => {
         state.loading = true;
         state.error = null;
@@ -93,6 +98,18 @@ const authSlice = createSlice({
         state.isLogin = true;
       })
       .addCase(addUserPets.rejected, (state, { payload }) => {
+  state.loading = false;
+        state.error = payload;
+      })
+      .addCase(fetchToggleFavoriteNotice.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchToggleFavoriteNotice.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.user.favoriteAbs.push(payload);
+      })
+      .addCase(fetchToggleFavoriteNotice.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
       });

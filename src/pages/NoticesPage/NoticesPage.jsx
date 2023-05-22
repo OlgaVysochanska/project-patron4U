@@ -11,18 +11,19 @@ import NoticesCategoriesNav from 'components/Notices/NoticesCategoriesNav/Notice
 import NoticesCategoriesList from '../../components/Notices/NoticesCategoriesList/NoticesCategoriesList';
 import NoticeModal from 'components/NoticeModal/NoticeModal';
 import AddPetButton from 'components/AddPetButton/AddPetButton';
-import { getNoticesByCategory } from 'shared/services/notices'; 
+import NoticesFilters from 'components/Notices/NoticesFilters/NoticesFilters';
 
 import style from './NoticesPage.module.scss';
 
-import { useParams } from '../../../node_modules/react-router-dom/dist/index';
+import { getFilter } from 'redux/filter/filterSelectors';
 
 const NoticesPage = () => {
+  const allNotices = useSelector(getAllNotices);
   const [notice, setNotice] = useState(null);
   const { isModalOpen, openModal, closeModal } = useToggleModalWindow();
+  const filter = useSelector(getFilter);
 
   const dispatch = useDispatch();
-  const allNotices = useSelector(getAllNotices);
 
   useEffect(() => {
     dispatch(fetchAllNotices());
@@ -33,23 +34,19 @@ const NoticesPage = () => {
     openModal();
   };
 
-
-  
-const {category} = useParams();
-
-
-
-useEffect(() => {
-  const fetchNotices = async() => {
-    try {const result = await getNoticesByCategory(category);
-      console.log(result);
-      
-    } catch ({response}) {
-      console.log(response.data.message)
+  const getVisibleNotices = () => {
+    if (!filter) {
+      return allNotices;
     }
-  }
-  fetchNotices()
-}, [category])
+    const normalizedFilter = filter.toLowerCase();
+    const result = allNotices.filter(notice =>
+      notice.comments.toLowerCase().includes(normalizedFilter)
+    );
+    console.log('filteredNotices:', result);
+    return result;
+  };
+  console.log('filtered is set :', getVisibleNotices());
+  console.log('allNotices :', allNotices);
 
   return (
     <>
@@ -57,13 +54,18 @@ useEffect(() => {
         <NoticesSearch />
         <div className={style.wrapper}>
           <NoticesCategoriesNav />
-          <AddPetButton />
+          <div className={style.wrapperRightButton}>
+            <NoticesFilters />
+            <AddPetButton />
+          </div>
         </div>
-        <NoticesCategoriesList notices={allNotices} loadMore={loadMore} />
+        <NoticesCategoriesList
+          notices={getVisibleNotices()}
+          loadMore={loadMore}
+        />
         {isModalOpen && <NoticeModal notice={notice} closeModal={closeModal} />}
       </div>
       <Outlet />
-      
     </>
   );
 };
