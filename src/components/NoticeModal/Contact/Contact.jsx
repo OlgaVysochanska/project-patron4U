@@ -1,10 +1,10 @@
 import Button from 'shared/components/Button/Button';
 import styles from './Contact.module.scss';
 
-const Contact = ({ phone }) => {
+const Contact = ({ email }) => {
   return (
     <Button className={styles.contact}>
-      <a href={`tel:${phone}`} className={styles.contactLink}>
+      <a href={`mailto:${email}`} className={styles.contactLink}>
         Contact
       </a>
     </Button>
