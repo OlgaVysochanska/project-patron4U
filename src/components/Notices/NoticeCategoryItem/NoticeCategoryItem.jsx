@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import moment from 'moment';
+
 import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
 
 import Button from 'shared/components/Button/Button';
@@ -30,6 +32,8 @@ const NoticeCategoryItem = ({
   const dispatch = useDispatch();
 
   const { _id, category, title, date, sex, location, petURL } = notice;
+  const formattedLocation =
+    location.length >= 10 ? location.slice(0, 5) + ' ...' : location;
 
   const handleClickFavoriteBtn = id => {
     if (!currentUser) {
@@ -55,32 +59,37 @@ const NoticeCategoryItem = ({
 
   const isMyAds = false;
 
-  function getAge(date) {
-    const ymdArr = date.split('.').map(Number).reverse();
-    //с 0а идут месяца по этому откатываем на 1
-    ymdArr[1]--;
-    const bornDate = new Date(...ymdArr);
+  const getAge = bd => {
+    const birthDate = moment(bd, 'DD-MM-YYYY');
+    const currentDate = moment();
 
-    const now = new Date();
+    const yearsDiff = currentDate.diff(birthDate, 'years');
+    const monthsDiff = currentDate.diff(birthDate, 'month') % 12;
+    const totalMonths = yearsDiff * 12 + monthsDiff;
+    const daysDiff = currentDate.diff(birthDate, 'days') % 31;
 
-    const leapYears = (now.getFullYear() - ymdArr[0]) / 4;
+    if (totalMonths === 1) {
+      return `${totalMonths} month`;
+    }
 
-    now.setDate(now.getDate() - Math.floor(leapYears));
+    if (totalMonths !== 0 && totalMonths < 12) {
+      return `${totalMonths} months`;
+    }
 
-    const nowAsTimestamp = now.getTime();
-    const bornDateAsTimestamp = bornDate.getTime();
+    if (totalMonths >= 12 && totalMonths < 24) {
+      return `1 year`;
+    }
 
-    const ageAsTimestamp = nowAsTimestamp - bornDateAsTimestamp;
+    if (totalMonths === 0 && daysDiff === 1) {
+      return `1 day`;
+    }
 
-    //взял с браузера
-    const oneYearInMs = 3.17098e-11;
+    if (totalMonths === 0 && daysDiff > 1) {
+      return `${daysDiff} days`;
+    }
 
-    const age = Math.floor(ageAsTimestamp * oneYearInMs);
-    // console.log(age);
-    return age;
-  }
-
-  const age = getAge(date.replaceAll('-', '.'));
+    return `${yearsDiff} years`;
+  };
 
   const handleDeleteNotice = id => {
     dispatch(fetchDeleteNotice(id));
@@ -123,13 +132,16 @@ const NoticeCategoryItem = ({
         </div>
 
         <div className={styles.noticeInfoBlock}>
-          <p className={styles.locationInfo}>
-            <LocationIcon className={styles.locationIcon} />
-            {location}
-          </p>
+          <div className={styles.tooltip}>
+            <span className={styles.tooltiptext}>{location}</span>
+            <p className={styles.locationInfo}>
+              <LocationIcon className={styles.locationIcon} />
+              {formattedLocation}
+            </p>
+          </div>
           <p className={styles.noticeInfo}>
             <ClockIcon className={styles.infoIcons} />
-            {age === 1 || age === 0 ? '1 year' : `${age} years`}
+            {getAge(date)}
           </p>
           <p className={styles.noticeInfo}>
             {sex.toLowerCase() === 'male' && (
