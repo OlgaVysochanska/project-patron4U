@@ -1,21 +1,19 @@
+import { useSelector } from 'react-redux';
+
 import PetsListItem from './PetsListItem/PetsListItem';
 
-// import styles from './NoticesCategoriesList.module.scss';
+import { getUserPets } from 'redux/auth/authSelectors';
 
-// const { noticesList, addPetBtn, addPetBtnIcon } = styles;
+const PetsList = () => {
+  const userPets = useSelector(getUserPets);
 
-const PetsList = ({ data }) => {
-  const petsItem = data.map(({ id, ...props }) => (
+  const petsItem = userPets.map(({ id, ...props }) => (
     <PetsListItem key={id} {...props} />
   ));
 
   return (
     <>
-      <ul
-      //    className={petsList}
-      >
-        {petsItem}
-      </ul>
+      <ul>{petsItem}</ul>
     </>
   );
 };
