@@ -61,6 +61,19 @@ export const logout = createAsyncThunk(
   }
 );
 
+
+export const addUserPets = createAsyncThunk(
+  'auth/addUserPets',
+  async (data, { rejectWithValue }) => {
+    try {
+      const result = await api.addUserPets(data);
+      return result;
+    } catch ({ response }) {
+      return rejectWithValue(response);
+    }
+  }
+  );
+
 export const fetchToggleFavoriteNotice = createAsyncThunk(
   'notices/toggle-favorite',
   async (data, { rejectWithValue }) => {
@@ -69,6 +82,7 @@ export const fetchToggleFavoriteNotice = createAsyncThunk(
       return result;
     } catch ({ response }) {
       return rejectWithValue(response.data);
+
     }
   }
 );
