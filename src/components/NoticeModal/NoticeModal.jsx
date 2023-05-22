@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
 import Contact from './Contact';
@@ -7,17 +7,12 @@ import AddToFavorite from './AddToFavorite/AddToFavorite';
 import Button from 'shared/components/Button/Button';
 import CrossIcon from 'icons/CrossIcon';
 
-import {
-  isUserLogin,
-  getUser,
-  getFavoriteNotices,
-} from 'redux/auth/authSelectors';
+import { getUser, getFavoriteNotices } from 'redux/auth/authSelectors';
 
 import styles from './NoticeModal.module.scss';
 
 const NoticeModal = ({ notice, closeModal }) => {
   const { email, phone } = useSelector(getUser);
-  const currentUser = useSelector(isUserLogin);
   const favoriteNotices = useSelector(getFavoriteNotices);
 
   const {
@@ -39,8 +34,6 @@ const NoticeModal = ({ notice, closeModal }) => {
   if (favoriteNotices) {
     myFavoriteNotice = favoriteNotices.includes(_id);
   }
-
-  // const isMyAds =
 
   const closeModalOnClick = useCallback(
     ({ key, target, currentTarget }) => {
@@ -114,9 +107,13 @@ const NoticeModal = ({ notice, closeModal }) => {
                   <tr>
                     <td className={styles.infoTitle}>Phone:</td>
                     <td>
-                      <a href={`tel:${phone}`} className={styles.contacts}>
-                        {phone}
-                      </a>
+                      {phone ? (
+                        <a href={`tel:${phone}`} className={styles.contacts}>
+                          {phone}
+                        </a>
+                      ) : (
+                        <p className={styles.info}>no phone</p>
+                      )}
                     </td>
                   </tr>
                 </tbody>
@@ -127,7 +124,7 @@ const NoticeModal = ({ notice, closeModal }) => {
               {comments}
             </p>
             <div className={styles.btnWrapper}>
-              <Contact phone={phone} />
+              <Contact email={email} />
               <AddToFavorite myFavoriteNotice={myFavoriteNotice} _id={_id} />
             </div>
           </div>
