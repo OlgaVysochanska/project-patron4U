@@ -7,6 +7,7 @@ import AuthNav from 'components/AuthNav/AuthNav';
 import MobileMenu from 'components/MobileMenu/MobileMenu';
 import HamburgerIcon from 'icons/HamburgerIcon';
 import styles from './Navigation.module.scss';
+import LanguageSwitcher from 'components/LanguageSwitcher/LanguageSwitcher';
 
 export default function Navigation({ isDesktop, isTablet, isMobile }) {
   const userLoggedIn = useSelector(isUserLogin);

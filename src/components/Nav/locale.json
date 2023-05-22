@@ -1,0 +1,16 @@
+{
+  "news": {
+    "eng": "News",
+    "ua": "Новини"
+  },
+
+  "findPets": {
+    "eng": "Find pet",
+    "ua": "Пошук улюбленця"
+  },
+
+  "friends": {
+    "eng": "Our friends",
+    "ua": "Спонсори"
+  }
+}

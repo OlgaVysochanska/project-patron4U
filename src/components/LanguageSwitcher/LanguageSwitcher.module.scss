@@ -1,0 +1,91 @@
+.sl_nav {
+  display: inline;
+}
+.sl_nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  display: inline-block;
+}
+.sl_nav li {
+  cursor: pointer;
+}
+.sl_nav li ul {
+  display: none;
+}
+.sl_nav li:hover ul {
+  position: absolute;
+  top: 29px;
+  right: -15px;
+  display: block;
+  background: #fff;
+  width: 120px;
+  padding-top: 0px;
+  z-index: 1;
+  border-radius: 5px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+.sl_nav li:hover .triangle {
+  position: absolute;
+  top: 15px;
+  right: -10px;
+  z-index: 10;
+  height: 14px;
+  overflow: hidden;
+  width: 30px;
+  background: transparent;
+}
+.sl_nav li:hover .triangle:after {
+  content: '';
+  display: block;
+  z-index: 20;
+  width: 15px;
+  transform: rotate(45deg) translateY(0px) translatex(10px);
+  height: 15px;
+  background: #fff;
+  border-radius: 2px 0px 0px 0px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+.sl_nav li ul li {
+  position: relative;
+  text-align: left;
+  background: transparent;
+  padding: 15px 20px;
+  padding-bottom: 0;
+  z-index: 2;
+  font-size: 15px;
+  color: #3c3c3c;
+}
+.sl_nav li ul li:last-of-type {
+  padding-bottom: 15px;
+}
+.sl_nav li ul li span {
+  padding-left: 5px;
+}
+.sl_nav li ul li span:hover,
+.sl_nav li ul li span.active {
+  color: #146c78;
+}
+
+.wrapperIcon {
+  width: 32px;
+  height: 32px;
+}
+
+.container {
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  left: -15px;
+  width: 16px;
+  height: 16px;
+}
+
+@media (min-width: 1280px) {
+  .wrapperIcon {
+    margin-left: 20px;
+  }
+}
