@@ -14,7 +14,7 @@ const initialState = {
   token: '',
   isLogin: false,
   loading: false,
-  pets:{},
+  pets: {},
   isRegistered: false,
   error: null,
 };
@@ -55,7 +55,7 @@ const authSlice = createSlice({
         state.user = user;
         state.token = token;
         state.isLogin = true;
-       state.pets=pets;
+        state.pets = pets;
       })
       .addCase(login.rejected, (state, { payload }) => {
         state.loading = false;
@@ -71,7 +71,7 @@ const authSlice = createSlice({
         state.user = user;
         state.token = token;
         state.isLogin = true;
-        state.pets=pets;
+        state.pets = pets;
       })
       .addCase(current.rejected, (state, { payload }) => {
         state.loading = false;
@@ -87,8 +87,8 @@ const authSlice = createSlice({
         state.user = {};
         state.token = '';
         state.isLogin = false;
-        state.isRegistered: false;
-        state.pets:{},
+        state.isRegistered = false;
+        state.pets = {};
       })
       .addCase(logout.rejected, (state, { payload }) => {
         state.loading = false;

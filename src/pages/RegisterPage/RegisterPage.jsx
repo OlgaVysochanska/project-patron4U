@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate   } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import { register } from '../../redux/auth/authOperations';
 import { isUserLogin } from 'redux/auth/authSelectors';
@@ -14,15 +14,14 @@ import styles from './RegisterPage.module.scss';
 
 const RegisterPage = () => {
   const isLogin = useSelector(isUserLogin);
-  
+
   const dispatch = useDispatch();
   dispatch(setRegistered(false));
 
   const handleRegister = data => {
-   dispatch(register(data)).then(() => {
-    dispatch(setRegistered(true));
-  });
-
+    dispatch(register(data)).then(() => {
+      dispatch(setRegistered(true));
+    });
   };
 
   if (isLogin) {
@@ -38,13 +37,11 @@ const RegisterPage = () => {
         <div>
           <p className={styles.redirectLink}>
             Already have an account?{' '}
-            <NavLink to="/login" className={styles.navlink} >
-              Login
-
+            <NavLink to="/login" className={styles.navlink}>
+              Login{' '}
             </NavLink>
-            <NavLink to="/user" className={styles.navlink} >
-            user
-
+            <NavLink to="/user" className={styles.navlink}>
+              user
             </NavLink>{' '}
             or use{' '}
             <a
