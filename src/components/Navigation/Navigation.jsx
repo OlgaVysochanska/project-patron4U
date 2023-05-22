@@ -41,10 +41,13 @@ export default function Navigation({ isDesktop, isTablet, isMobile }) {
       {showMobileMenu && (
         <MobileMenu onClick={toggleMobileMenu} isMobile={isMobile}>
           {userLoggedIn && isMobile && (
-            <UserNav style={{ marginTop: 40, marginBottom: 84 }} />
+            <UserNav
+              style={{ marginTop: 40, marginBottom: 84 }}
+              onClick={toggleMobileMenu}
+            />
           )}
-          {!userLoggedIn && isMobile && <AuthNav />}
-          <Nav />
+          {!userLoggedIn && isMobile && <AuthNav onClick={toggleMobileMenu} />}
+          <Nav onClick={toggleMobileMenu} />
         </MobileMenu>
       )}
     </div>
