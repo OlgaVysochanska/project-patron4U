@@ -6,6 +6,7 @@ import { register } from '../../redux/auth/authOperations';
 import { isUserLogin } from 'redux/auth/authSelectors';
 
 import { NavLink } from 'react-router-dom';
+import Background from 'shared/components/Background/Background';
 import RegisterForm from 'components/AuthForms/RegisterForm/RegisterForm';
 import AuthTitle from 'shared/components/AuthTitle/AuthTitle';
 
@@ -19,23 +20,25 @@ const RegisterPage = () => {
   };
 
   if (isLogin) {
-    return <Navigate to="/" />;
-    //Необхідно буде вказати замість "/" іншу сторінку на котру треба буде перекидувати користувача
+    return <Navigate to="/user" />;
   }
 
   return (
-    <div className={styles.container}>
-      <AuthTitle text="Registration" />
-      <RegisterForm onSubmit={handleRegister} />
-      <div>
-        <p className={styles.redirectLink}>
-          Already have an account?{' '}
-          <NavLink to="/login" className={styles.navlink}>
-            Login
-          </NavLink>
-        </p>
+    <>
+      <Background />
+      <div className={styles.container}>
+        <AuthTitle text="Registration" />
+        <RegisterForm onSubmit={handleRegister} />
+        <div>
+          <p className={styles.redirectLink}>
+            Already have an account?{' '}
+            <NavLink to="/login" className={styles.navlink}>
+              Login
+            </NavLink>
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

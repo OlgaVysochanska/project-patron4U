@@ -35,3 +35,14 @@ export const logout = async () => {
   setToken();
   return data;
 };
+
+export const addUserPets = async data => {
+  const response = await instance.patch('/auth', { myPets: data });
+  const { myPets } = response.data;
+  return myPets;
+};
+
+export const toggleFavoriteNotice = async id => {
+  const { data } = await instance.patch('/auth', { favoriteNotice: id });
+  return data;
+};
