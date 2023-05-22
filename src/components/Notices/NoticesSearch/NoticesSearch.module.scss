@@ -1,3 +1,10 @@
 .wrapper {
-    margin-bottom: 42px;
+  margin-bottom: 42px;
+  margin-top: 20px;
+}
+
+@media (min-width: 480px) {
+  .wrapper {
+    margin-top: 57px;
+  }
 }

@@ -25,24 +25,32 @@ export const deleteNotice = async id => {
   return data;
 };
 
-export const searchNotice = async (q, _page = 1) => {
-  const { data } = await instance.get('/notices/', {
+
+export const getNoticesByCategory = async (category = 'sell', _page = 1) => {
+  const { data } = await instance.get(`/notices/category`, {
     params: {
-      q,
+      category,
       _page,
     },
   });
   return data;
 };
 
-export const getNoticesByCategory = async (
-  category = "sell",
-  _page = 1
-) => {
-  const { data } = await instance.get(`/notices/category`, {
+export const getUserNotices = async (id, _page = 1) => {
+  const { data } = await instance.get(`/notices/current/`, {
     params: {
-     category,
-      _page,
+      id,
+      _page
+    },
+  });
+  return data;
+};
+
+export const getUserFavoriteNotices = async (id, _page = 1) => {
+  const { data } = await instance.get(`/notices/favorite/`, {
+    params: {
+      id,
+      _page
     },
   });
   return data;
