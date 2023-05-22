@@ -90,7 +90,46 @@
   transform: translateX(-50%);
   display: flex;
   justify-content: space-around;
-  width: 280px;
+  width: 100%;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: #cce4fb;
+  color: #000000;
+  text-align: center;
+  padding: 5px 12px;
+  border-radius: 16px;
+
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #cce4fb transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }
 
 .noticeInfo {
@@ -98,7 +137,6 @@
   align-items: center;
   justify-content: center;
   height: 28px;
-  max-width: 80px;
   padding: 2px;
   padding-left: 4px;
   padding-right: 8px;
@@ -108,10 +146,6 @@
   letter-spacing: 0.04em;
   background-color: #cce4fb;
   border-radius: 16px;
-
-  &:nth-child(even) {
-    min-width: 84px;
-  }
 }
 
 .locationInfo {
@@ -121,6 +155,7 @@
   &:hover,
   &:focus {
     background-color: #54adff;
+    color: #fef9f9;
   }
 }
 

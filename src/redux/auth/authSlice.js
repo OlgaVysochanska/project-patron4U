@@ -1,19 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { register, login, current, logout } from './authOperations';
+import {
+  register,
+  login,
+  current,
+  logout,
+  addUserPets,
+  fetchToggleFavoriteNotice,
+} from './authOperations';
 
 const initialState = {
   user: {},
   token: '',
   isLogin: false,
   loading: false,
-  // isModalShown: false,
+  pets: {},
+  isRegistered: false,
   error: null,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
+  reducers: {
+    setRegistered(state, { payload }) {
+      state.isRegistered = payload;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(register.pending, state => {
@@ -37,11 +50,12 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(login.fulfilled, (state, { payload }) => {
-        const { user, token } = payload;
+        const { user, token, pets } = payload;
         state.loading = false;
         state.user = user;
         state.token = token;
         state.isLogin = true;
+        state.pets = pets;
       })
       .addCase(login.rejected, (state, { payload }) => {
         state.loading = false;
@@ -52,11 +66,12 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(current.fulfilled, (state, { payload }) => {
-        const { user, token } = payload;
+        const { user, token, pets } = payload;
         state.loading = false;
         state.user = user;
         state.token = token;
         state.isLogin = true;
+        state.pets = pets;
       })
       .addCase(current.rejected, (state, { payload }) => {
         state.loading = false;
@@ -72,12 +87,40 @@ const authSlice = createSlice({
         state.user = {};
         state.token = '';
         state.isLogin = false;
+        state.isRegistered = false;
+        state.pets = {};
       })
       .addCase(logout.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      })
+      .addCase(addUserPets.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addUserPets.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.user.myPets = payload;
+        state.isLogin = true;
+      })
+      .addCase(addUserPets.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      })
+      .addCase(fetchToggleFavoriteNotice.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchToggleFavoriteNotice.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.user.favoriteAbs.push(payload);
+      })
+      .addCase(fetchToggleFavoriteNotice.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
       });
   },
 });
 
+export const { setRegistered } = authSlice.actions;
 export default authSlice.reducer;

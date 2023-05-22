@@ -14,7 +14,7 @@ const validateRulers = formState => {
         isValid = /^.{2,30}$/.test(field.value);
         message = 'Text between 2 and 30 characters long';
         break;
-      case 'petName':
+      case 'name':
         isValid = /[a-zA-Zа-яА-ЯҐґІіЇїЄєЪъЫыЭэ]{2,16}$/u.test(field.value);
         message = 'Text between 2 and 16 charact. (only letters)';
         break;
@@ -32,7 +32,7 @@ const validateRulers = formState => {
         isValid = /[a-zA-Zа-яА-ЯҐґІіЇїЄєЪъЫыЭэ]{2,16}$/u.test(field.value);
         message = 'Text between 2 and 16 charact. (only letters)';
         break;
-      case 'photoUrl':
+      case 'petURL':
         isValid = field.value !== '';
         message = 'Download photo';
         break;
@@ -45,7 +45,7 @@ const validateRulers = formState => {
         message = 'Text between 8 and 120 characters long';
         break;
       case 'location':
-        isValid = /^[A-Za-z\s-]+$/.test(field.value);
+        isValid = /^[a-zA-Zа-яА-ЯҐґІіЇїЄєЪъЫыЭэ]+$/.test(field.value);
         message = 'City';
         break;
       case 'price':

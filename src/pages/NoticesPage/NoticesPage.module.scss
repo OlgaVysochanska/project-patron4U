@@ -10,6 +10,12 @@
   margin-bottom: 24px;
 }
 
+.wrapperRightButton {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
 @media screen and (max-width: 767px) {
   .noticePageContainer {
     max-width: 440px;
