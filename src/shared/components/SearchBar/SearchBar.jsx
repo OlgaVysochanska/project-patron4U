@@ -4,6 +4,8 @@ import CrossIcon from 'icons/CrossIcon';
 import useForm from 'shared/hooks/useForm';
 import PropTypes from 'prop-types';
 import initialState from './initialState';
+import useLang from 'shared/hooks/useLang';
+import locale from './locale.json';
 
 import style from './SearchBar.module.scss';
 
@@ -12,7 +14,10 @@ const SearchBar = ({ onSubmit }) => {
     initialState,
     onSubmit,
   });
-  console.log('Render form');
+
+  const { lang } = useLang();
+  const title = locale.title[lang];
+
   const { search } = state;
 
   const buttonClass = search ? style.active : style.disabled;
@@ -33,7 +38,7 @@ const SearchBar = ({ onSubmit }) => {
             name="search"
             value={search}
             onChange={handleChange}
-            placeholder="Search"
+            placeholder={title}
             required
           />
         </label>
