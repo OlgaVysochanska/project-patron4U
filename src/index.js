@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <AuthLayout>
-          <BrowserRouter basename="/">
+          <BrowserRouter basename="https://project-patron4-u.vercel.app/">
             <LangContext>
               <App />
             </LangContext>
