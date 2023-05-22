@@ -11,8 +11,3 @@ export const getUserPets = ({ auth }) => auth.pets;
 export const selectIsRegistered =  ({ auth }) => auth.isRegistered;
 
 export const getFavoriteNotices = ({ auth }) => auth.user.favoriteNotice;
-
-
-
-
-
