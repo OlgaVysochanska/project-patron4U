@@ -6,7 +6,6 @@ import {
   current,
   logout,
   addUserPets,
-  fetchToggleFavoriteNotice,
 } from './authOperations';
 
 const initialState = {
@@ -14,13 +13,19 @@ const initialState = {
   token: '',
   isLogin: false,
   loading: false,
-  // isModalShown: false,
   error: null,
+  pets:{},
+  isRegistered: false,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
+  reducers: {
+    setRegistered(state, { payload }) {
+      state.isRegistered = payload;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(register.pending, state => {
@@ -33,7 +38,6 @@ const authSlice = createSlice({
         state.user = user;
         state.token = token;
         state.isLogin = true;
-        // state.isModalShown = true;
       })
       .addCase(register.rejected, (state, { payload }) => {
         state.loading = false;
@@ -44,11 +48,12 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(login.fulfilled, (state, { payload }) => {
-        const { user, token } = payload;
+        const { user, token, pets } = payload;
         state.loading = false;
         state.user = user;
         state.token = token;
         state.isLogin = true;
+        state.pets=pets;
       })
       .addCase(login.rejected, (state, { payload }) => {
         state.loading = false;
@@ -59,11 +64,12 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(current.fulfilled, (state, { payload }) => {
-        const { user, token } = payload;
+        const { user, token, pets } = payload;
         state.loading = false;
         state.user = user;
         state.token = token;
         state.isLogin = true;
+        state.pets=pets;
       })
       .addCase(current.rejected, (state, { payload }) => {
         state.loading = false;
@@ -96,20 +102,9 @@ const authSlice = createSlice({
       .addCase(addUserPets.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
-      })
-      .addCase(fetchToggleFavoriteNotice.pending, state => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(fetchToggleFavoriteNotice.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.user.favoriteAbs.push(payload);
-      })
-      .addCase(fetchToggleFavoriteNotice.rejected, (state, { payload }) => {
-        state.loading = false;
-        state.error = payload;
       });
   },
 });
 
+export const { setRegistered } = authSlice.actions;
 export default authSlice.reducer;
