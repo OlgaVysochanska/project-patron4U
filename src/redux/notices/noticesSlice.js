@@ -5,10 +5,13 @@ import {
   fetchAddNotice,
   fetchDeleteNotice,
   fetchNoticesByCategory,
+  // fetchNoticesByUser,
+  // fetchFavoriteNoticesByUser,
 } from './noticesOperations';
 
 const initialState = {
   items: [],
+  filteredItems: [],
   loading: false,
   error: null,
 };
@@ -60,16 +63,29 @@ const noticesSlice = createSlice({
       .addCase(fetchNoticesByCategory.fulfilled, (store, { payload }) => {
         store.loading = false;
         store.items = [...payload];
-        store.category = payload.category
+        store.category = payload.category;
       })
       .addCase(fetchNoticesByCategory.rejected, (store, { payload }) => {
         store.loading = false;
         store.error = payload;
-      });
+      })
+           // .addCase(fetchFavoriteNoticesByUser.pending, store => {
+      //   store.loading = true;
+      //   store.items = [];
+      // })
+      // .addCase(fetchFavoriteNoticesByUser.fulfilled, (store, { payload }) => {
+      //   store.loading = false;
+      //   store.items = [payload];
+      
+      // })
+      // .addCase(fetchFavoriteNoticesByUser.rejected, (store, { payload }) => {
+      //   store.loading = false;
+      //   store.error = payload;
+      // });
   },
   reducers: {
     addFilteredNotices(state, action) {
-      state.items = action.payload;
+      state.filteredItems = action.payload;
     },
   },
 });

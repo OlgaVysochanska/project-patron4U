@@ -1,40 +1,20 @@
+import React, { useCallback, useState, useEffect } from 'react';
 import SearchBar from 'shared/components/SearchBar/SearchBar';
 import Pagination from 'shared/components/Pagination/Pagination';
 import NewsPageList from './NewsPageList/NewsPageList';
 import Spiner from 'components/Spiner/Spiner';
 import LoadMore from '../../shared/components/LoadMore';
-import { useCallback, useState, useEffect, useRef } from 'react';
 import { getAllNews, searchNews } from 'shared/services/news';
 
 const News = () => {
   const [search, setSearch] = useState('');
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
-  const newsContainerRef = useRef(null);
 
-  useEffect(() => {
-    fetchNews();
-  }, [page, search]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 768) {
-        setPage(1);
-      }
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    window.addEventListener('resize', handleResize);
-    handleResize();
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const fetchNews = async () => {
+  const fetchNews = useCallback(async () => {
     try {
       setLoading(true);
 
@@ -53,31 +33,50 @@ const News = () => {
       if (!isMobile) {
         setItems(newData);
       } else {
-        setItems(prevItems => [...prevItems, ...newData]);
+        setItems(prevItems => {
+          const updatedItems = [...prevItems, ...newData];
+          const uniqueItems = Array.from(
+            new Set(updatedItems.map(item => item.id))
+          ).map(id => updatedItems.find(item => item.id === id));
+          return uniqueItems;
+        });
       }
     } catch (error) {
-      setError(error.message);
+      console.log(error.message);
     } finally {
       setLoading(false);
     }
-  };
+  }, [search, page, isMobile]);
+
+  useEffect(() => {
+    fetchNews();
+  }, [search, fetchNews]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      setPage(1);
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handlePageChange = pageNumber => {
     setPage(pageNumber);
   };
 
-  const onSearchNews = useCallback(
-    ({ search }) => {
-      setSearch(search);
-      setPage(1);
-      setItems([]);
-    },
-    [setSearch, setPage]
-  );
+  const onSearchNews = useCallback(({ search }) => {
+    setSearch(search);
+    setPage(1);
+    setItems([]);
+  }, []);
 
-  const handleLoadMore = () => {
+  const handleLoadMore = useCallback(() => {
     setPage(prevPage => prevPage + 1);
-  };
+  }, []);
 
   if (isMobile) {
     return (

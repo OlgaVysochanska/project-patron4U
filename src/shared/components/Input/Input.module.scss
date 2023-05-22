@@ -3,7 +3,7 @@
 }
 
 .input {
-  width: 458px;
+  width: 100%;
   padding: 12px 16px;
   border: 1px solid #54adff;
   border-radius: 40px;
@@ -22,7 +22,7 @@
 
   @media screen and (max-width: 480px) {
     /* Застосувати стилі для екранів з шириною до 480px */
-    width: 256px;
+    // width: 256px;
     font-size: 0.8rem;
   }
 }

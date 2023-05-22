@@ -24,6 +24,7 @@ const Input = ({
   return (
     <>
       {/* <div className={styles.wrapper}> */}
+
       <label htmlFor={type}>{label}</label>
       <input
         type={type}
@@ -47,6 +48,7 @@ const Input = ({
         </span>
       )}
       {!isValid && <p className={styles.errorMessage}>{title}</p>}
+
       {/* </div> */}
     </>
   );

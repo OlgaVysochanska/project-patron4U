@@ -1,39 +1,56 @@
-.wrapper {
+.navList {
   display: flex;
-  gap: 8px;
   flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
 }
-
-@media screen and (min-width: 768px) {
-  .wrapper {
+@media (min-width: 768px) {
+  .navList {
+    margin-top: 40px;
     gap: 12px;
   }
 }
-
-.btn {
-  display: inline-flex;
-  padding: 8px 16px;
+.navLink {
   border-radius: 40px;
-  border: none;
-  font: inherit;
-  cursor: pointer;
-  background-color: #cce4fb;
+  padding: 8px 16px;
+  font-family: 'Manrope';
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+  background: #cce4fb;
   color: #54adff;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-.btn.isSelected {
-  background-color: #54adff;
+.navLink.active {
+  background: #54adff;
   color: #fef9f9;
 }
 
-.btn:hover {
-  background-color: #54adff;
+.navLink:hover,
+.navLink:focus {
+  background: #54adff;
   color: #fef9f9;
 }
 
-.btn:focus {
-  background-color: #54adff;
-  color: #fef9f9;
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.btnContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .btnContainer {
+    margin-top: 40px;
+    position: sticky;
+    top: 0;
+  }
+}
+.btn {
+  display: none;
 }

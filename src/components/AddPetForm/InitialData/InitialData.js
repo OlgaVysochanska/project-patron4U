@@ -11,8 +11,8 @@ export const tabs = ['Choose  option', 'Personal details', 'More info'];
 export const categories = [
   { id: 'my pet', category: 'your pet' },
   { id: 'sell', category: 'sell' },
-  { id: 'lost-found', category: 'lost/found' },
-  { id: 'for-free', category: 'in good hands' },
+  { id: 'lost/found', category: 'lost-found' },
+  { id: 'in good hands', category: 'for-free' },
 ];
 
 export const initialState = {
