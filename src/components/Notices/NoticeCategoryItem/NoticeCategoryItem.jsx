@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 
 import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
@@ -17,21 +17,27 @@ import TrashIcon from 'icons/TrashIcon';
 
 import { fetchToggleFavoriteNotice } from 'redux/auth/authOperations';
 import { fetchDeleteNotice } from 'redux/notices/noticesOperations';
+import { isUserLogin, getFavoriteNotices } from 'redux/auth/authSelectors';
 
 import styles from './NoticeCategoryItem.module.scss';
 
-const NoticeCategoryItem = ({
-  currentUser,
-  notice,
-  loadMore,
-  myFavoriteNotice,
-}) => {
-  const [isFavorite, setIsFavorite] = useState(myFavoriteNotice);
+const NoticeCategoryItem = ({ notice, loadMore }) => {
+  const currentUser = useSelector(isUserLogin);
+
   const { isModalOpen, openModal, closeModal } = useToggleModalWindow();
 
   const dispatch = useDispatch();
 
   const { _id, category, title, date, sex, location, petURL } = notice;
+
+  const favoriteNotices = useSelector(getFavoriteNotices);
+
+  let myFavoriteNotice = false;
+
+  if (favoriteNotices) {
+    myFavoriteNotice = favoriteNotices.includes(_id);
+  }
+
   const formattedLocation =
     location.length >= 10 ? location.slice(0, 5) + ' ...' : location;
 
@@ -42,10 +48,10 @@ const NoticeCategoryItem = ({
     }
     try {
       dispatch(fetchToggleFavoriteNotice(id));
-      setIsFavorite(!isFavorite);
+      // setIsFavorite(!isFavorite);
       NotiflixMessage({
         type: 'success',
-        data: !isFavorite
+        data: !myFavoriteNotice
           ? 'Notice added to favorite successfully!'
           : 'Notice deleted from favorite successfully!',
       });
@@ -114,7 +120,7 @@ const NoticeCategoryItem = ({
               SVGComponent={() => (
                 <HeartIcon
                   className={
-                    isFavorite
+                    myFavoriteNotice
                       ? `${styles.icons} ${styles.favoriteIcon}`
                       : styles.icons
                   }
