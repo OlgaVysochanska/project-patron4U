@@ -18,7 +18,8 @@ export default function Navigation({ isDesktop, isTablet, isMobile }) {
     }
   }, [isDesktop]);
 
-  const toggleMobileMenu = () => {
+  const toggleMobileMenu = e => {
+    e.preventDefault();
     setShowMobileMenu(showMobileMenu => !showMobileMenu);
   };
 
