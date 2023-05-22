@@ -11,11 +11,11 @@ const NoticesCategoriesList = ({ notices, loadMore }) => {
   const [favoriteArr, setFavoriteArr] = useState([]);
 
   const currentUser = useSelector(isUserLogin);
-  const favoriteNotices = useSelector(getFavoriteNotices);
+  // const favoriteNotices = useSelector(getFavoriteNotices);
 
-  if (currentUser) {
-    setFavoriteArr(favoriteNotices);
-  }
+  // if (currentUser) {
+  //   setFavoriteArr(favoriteNotices);
+  // }
 
   const noticesItem = notices.map(notice => {
     const myFavoriteNotice = favoriteArr.includes(notice._id);
@@ -25,7 +25,7 @@ const NoticesCategoriesList = ({ notices, loadMore }) => {
         loadMore={loadMore}
         notice={notice}
         currentUser={currentUser}
-        myFavoriteNotice={myFavoriteNotice}
+        // myFavoriteNotice={myFavoriteNotice}
       />
     );
   });
