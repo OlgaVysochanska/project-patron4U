@@ -7,6 +7,8 @@ import Input from 'shared/components/Input/Input';
 import AuthButton from '../../../shared/components/AuthButton/AuthButton';
 
 import useForm from 'shared/hooks/useForm';
+import useLang from 'shared/hooks/useLang';
+import locale from '../locale.json';
 
 import EyeClosedIcon from 'icons/EyeClosedIcon';
 import EyeOpenIcon from 'icons/EyeOpenIcon';
@@ -17,6 +19,8 @@ import initialState from './initialState';
 import styles from './RegisterForm.module.scss';
 
 const RegisterForm = ({ onSubmit }) => {
+  const { lang } = useLang();
+
   const { state, handleChange, handleSubmit } = useForm({
     initialState,
     onSubmit,
@@ -29,6 +33,13 @@ const RegisterForm = ({ onSubmit }) => {
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidPass, setIsValidPass] = useState(true);
   const [isValidConf, setIsValidConf] = useState(true);
+
+  const registrationLang = locale.registration[lang];
+  const emailLang = locale.email[lang];
+  const passwordLang = locale.password[lang];
+  const confirmPasswordLang = locale.confirmPassword[lang];
+  const validEmailLang = locale.validEmail[lang];
+  const titleLang = locale.title[lang];
 
   //перевірка на встановлення властивості disabled для кнопки
   const [agreed, setAgreed] = useState(true);
@@ -69,8 +80,9 @@ const RegisterForm = ({ onSubmit }) => {
         <Input
           id="email"
           value={email}
+          placeholder={emailLang}
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" // Патерн для валідації email
-          title="Enter a valid Email" // Підказка для патерну
+          title={validEmailLang} // Підказка для патерну
           style={{
             border: isValidEmail ? '1px solid #54adff' : '1px solid #F43F5E',
           }}
@@ -87,8 +99,9 @@ const RegisterForm = ({ onSubmit }) => {
         <Input
           id="password"
           type={showPassword ? 'text' : 'password'}
+          placeholder={passwordLang}
           pattern=".{6,}" // Патерн для мінімальної довжини паролю (6 символів)
-          title="Password must be at least 6 characters long" // Підказка для патерну
+          title={titleLang} // Підказка для патерну
           style={{
             border: isValidPass ? '1px solid #54adff' : '1px solid #F43F5E',
           }}
@@ -117,8 +130,8 @@ const RegisterForm = ({ onSubmit }) => {
       <div className={styles.inputWrapper}>
         <Input
           id="confirm"
-          placeholder="Confirm password"
           type={showConfirmPassword ? 'text' : 'password'}
+          placeholder={confirmPasswordLang}
           style={{
             border: isValidConf ? '1px solid #54adff' : '1px solid #F43F5E',
           }}
@@ -148,7 +161,7 @@ const RegisterForm = ({ onSubmit }) => {
         )}
       </div>
 
-      <AuthButton disabled={agreed}>Registration</AuthButton>
+      <AuthButton disabled={agreed}>{registrationLang}</AuthButton>
     </form>
   );
 };
