@@ -1,9 +1,10 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Outlet, useParams } from 'react-router-dom';
 
 import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
 
+import { getFilter } from 'redux/filter/filterSelectors';
 import { getAllNotices } from 'redux/notices/noticesSelecors';
 import {
   fetchNoticesByCategory,
@@ -25,12 +26,13 @@ import { getUser } from 'redux/auth/authSelectors';
 import NoticesFilters from 'components/Notices/NoticesFilters/NoticesFilters';
 
 import style from './NoticesPage.module.scss';
-
-import { getFilter } from 'redux/filter/filterSelectors';
+import { setFilter } from 'redux/filter/filterSlice';
 
 const NoticesPage = () => {
   const { _id } = useSelector(getUser);
   const { category } = useParams();
+
+  const filter = useSelector(getFilter);
 
   const allNotices = useSelector(getAllNotices);
 
@@ -38,11 +40,10 @@ const NoticesPage = () => {
   const [dataNotices, setDataNotices] = useState(null);
   const { isModalOpen, openModal, closeModal } = useToggleModalWindow();
 
-  const filter = useSelector(getFilter);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(setFilter(''));
     dispatch(fetchNoticesByCategory(category));
   }, [dispatch, category]);
 
@@ -57,6 +58,7 @@ const NoticesPage = () => {
   };
 
   const onClearnData = () => {
+    dispatch(setFilter(''));
     setDataNotices(null);
   };
 
@@ -64,26 +66,6 @@ const NoticesPage = () => {
     setNotice(notice);
     openModal();
   };
-
-  const getVisibleNotices = useCallback(() => {
-    if (!filter) {
-      return allNotices;
-    }
-    const normalizedFilter = filter.toLowerCase();
-    const result = allNotices.filter(notice =>
-      notice.comments.toLowerCase().includes(normalizedFilter)
-    );
-    console.log('filteredNotices:', result);
-    return result;
-  }, [allNotices, filter]);
-  console.log('filtered is set :', getVisibleNotices());
-  console.log('allNotices :', allNotices);
-
-  useEffect(() => {
-    if (filter) {
-      getVisibleNotices();
-    }
-  }, [getVisibleNotices, filter]);
 
   return (
     <>
@@ -100,11 +82,14 @@ const NoticesPage = () => {
             <AddPetButton />
           </div>
         </div>
-        {!dataNotices && (
+        {!dataNotices && !filter && (
           <NoticesCategoriesList notices={allNotices} loadMore={loadMore} />
         )}
-        {dataNotices && (
+        {dataNotices && !filter && (
           <NoticesCategoriesList notices={dataNotices} loadMore={loadMore} />
+        )}
+        {filter && (
+          <NoticesCategoriesList notices={filter} loadMore={loadMore} />
         )}
         {isModalOpen && <NoticeModal notice={notice} closeModal={closeModal} />}
       </div>
