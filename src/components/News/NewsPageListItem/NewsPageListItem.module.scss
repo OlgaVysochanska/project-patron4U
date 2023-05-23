@@ -76,11 +76,19 @@
   .wrapper {
     margin-top: auto;
   }
+
+  .image {
+    height: 270px;
+  }
 }
 
 @media (min-width: 1280px) {
   .listItem {
     width: 395px;
     height: auto;
+  }
+
+  .image {
+    height: 340px;
   }
 }
