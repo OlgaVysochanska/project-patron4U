@@ -49,7 +49,7 @@ const UserDataItem = ({
   const dispatch = useDispatch();
 
   const handleEditUser = (data) => {
-    console.log(data)
+    // console.log(data)
     dispatch(editCurrent(data));
   };
 
@@ -66,7 +66,7 @@ const UserDataItem = ({
 
 
   const handleUser = ([key, value]) => {
-    console.log(key, value);
+    // console.log(key, value);
     handleChange({
       target: {
         name: {key},

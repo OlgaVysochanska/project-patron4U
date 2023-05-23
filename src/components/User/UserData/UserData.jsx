@@ -55,7 +55,7 @@ const UserData = () => {
 
   const handleEditUser = data => {
     dispatch(editCurrent(data));
-    console.log(data);
+    // console.log(data);
   };
 
   const {
