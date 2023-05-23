@@ -9,6 +9,7 @@ import AuthButton from '../../../shared/components/AuthButton/AuthButton';
 import useForm from 'shared/hooks/useForm';
 
 import EyeClosedIcon from 'icons/EyeClosedIcon';
+import EyeOpenIcon from 'icons/EyeOpenIcon';
 
 import fields from './fields';
 import initialState from './initialState';
@@ -83,10 +84,17 @@ const LoginForm = ({ onSubmit }) => {
           {...fields.password}
           isValid={isValidPass}
         />
-        <EyeClosedIcon
-          className={styles.eyeIcon}
-          onClick={toggleShowPassword}
-        />
+        {showPassword ? (
+          <EyeClosedIcon
+            className={styles.eyeIcon}
+            onClick={toggleShowPassword}
+          />
+        ) : (
+          <EyeOpenIcon
+            className={styles.eyeIcon}
+            onClick={toggleShowPassword}
+          />
+        )}
       </div>
 
       <AuthButton disabled={agreed}>Login</AuthButton>
