@@ -6,10 +6,20 @@ const Button = props => {
     type,
     SVGComponent,
     showLabelFirst = true,
+    buttonStyle,
+    disabled = false,
   } = props;
-
+  const buttonStyles = {
+    ...buttonStyle,
+  };
   return (
-    <button onClick={onClick} className={className} type={type}>
+    <button
+      onClick={onClick}
+      className={className}
+      type={type}
+      style={buttonStyles}
+      disabled={disabled}
+    >
       {showLabelFirst && label}
       {SVGComponent && <SVGComponent />}
       {!showLabelFirst && label}

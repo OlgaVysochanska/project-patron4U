@@ -49,6 +49,18 @@ export const current = createAsyncThunk(
   }
 );
 
+export const editCurrent = createAsyncThunk(
+  'auth',
+  async (data, { rejectWithValue }) => {
+    try {
+      const result = await api.patchCurrent(data);
+      return result;
+    } catch ({ response }) {
+      return rejectWithValue(response.data);
+    }
+  }
+);
+
 export const logout = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {

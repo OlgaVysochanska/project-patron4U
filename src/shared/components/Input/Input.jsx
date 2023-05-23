@@ -11,13 +11,24 @@ const Input = ({
   value,
   handleChange,
   isValid,
+  icon,
+  onIconClick,
+  inputStyle,
+  readonly,
   aditionalClass,
-  ...props
+  labelClass = styles.label,
+    ...props
 }) => {
+  const inputStyles = {
+    ...inputStyle,
+  };
+
+
   return (
-    // <div className={styles.wrapper}>
     <>
-      <label htmlFor={type}>{label}</label>
+      {/* <div className={styles.wrapper}> */}
+
+      <label className={labelClass} htmlFor={type}>{label}</label>
       <input
         type={type}
         name={type}
@@ -26,15 +37,23 @@ const Input = ({
         pattern={pattern}
         title={title}
         value={value}
+        readOnly={readonly}
         onChange={handleChange}
         className={`${styles.input} ${
           !isValid ? styles.invalid : ''
         } ${aditionalClass}`}
+        style={inputStyles}
         {...props}
       />
+      {icon && (
+        <span className={styles.icon} onClick={onIconClick}>
+          {icon}
+        </span>
+      )}
       {!isValid && <p className={styles.errorMessage}>{title}</p>}
+
+      {/* </div> */}
     </>
-    // </div>
   );
 };
 
@@ -49,7 +68,6 @@ Input.propTypes = {
   onChange: PropTypes.func,
   icon: PropTypes.string,
 };
-
 export default Input;
 
 // import PropTypes from 'prop-types';

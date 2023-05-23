@@ -3,13 +3,13 @@ const fields = {
     type: 'email',
     name: 'email',
     required: true,
-    placeholder: 'Email',
+    // placeholder: 'Email',
   },
   password: {
     // type: 'password',
     name: 'password',
     required: true,
-    placeholder: 'Password',
+    // placeholder: 'Password',
   },
   // confirm: {
   //   type: 'password',

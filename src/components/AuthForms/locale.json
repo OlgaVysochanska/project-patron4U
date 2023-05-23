@@ -1,0 +1,36 @@
+{
+  "registration": {
+    "eng": "Registration",
+    "ua": "Зареєструватись"
+  },
+
+  "login": {
+    "eng": "Login",
+    "ua": "Увійти"
+  },
+
+  "email": {
+    "eng": "Email",
+    "ua": " Електронна пошта"
+  },
+
+  "password": {
+    "eng": "Password",
+    "ua": "Пароль"
+  },
+
+  "confirmPassword": {
+    "eng": "Confirm password",
+    "ua": "Підтвердити пароль"
+  },
+
+  "validEmail": {
+    "eng": "Enter a valid Email",
+    "ua": "Введіть валідну адресу електронної пошти"
+  },
+
+  "title": {
+    "eng": "Password must be at least 6 characters long",
+    "ua": "Пароль повинен містити щонайменше 6 симолів"
+  }
+}
