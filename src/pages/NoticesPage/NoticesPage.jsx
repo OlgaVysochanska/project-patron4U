@@ -47,16 +47,13 @@ const NoticesPage = () => {
   }, [dispatch, category]);
 
   const onClickOwn = async () => {
-    // setDataNotices(myAbs);
     const data = await getUserNotices(_id);
-    console.log(data);
     setDataNotices(data);
   };
 
   const onClickFavorite = async () => {
     const data = await getUserFavoriteNotices(_id);
-    console.log(data);
-    // setDataNotices(data);
+    setDataNotices(data);
   };
 
   const onClearnData = () => {
