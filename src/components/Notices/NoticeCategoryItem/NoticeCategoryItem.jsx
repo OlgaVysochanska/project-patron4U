@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 
@@ -17,20 +16,31 @@ import TrashIcon from 'icons/TrashIcon';
 
 import { fetchToggleFavoriteNotice } from 'redux/auth/authOperations';
 import { fetchDeleteNotice } from 'redux/notices/noticesOperations';
-import { isUserLogin, getFavoriteNotices } from 'redux/auth/authSelectors';
+import {
+  isUserLogin,
+  getUser,
+  getFavoriteNotices,
+} from 'redux/auth/authSelectors';
 
 import styles from './NoticeCategoryItem.module.scss';
 
 const NoticeCategoryItem = ({ notice, loadMore }) => {
   const currentUser = useSelector(isUserLogin);
+  const user = useSelector(getUser);
 
   const { isModalOpen, openModal, closeModal } = useToggleModalWindow();
 
   const dispatch = useDispatch();
 
-  const { _id, category, title, date, sex, location, petURL } = notice;
+  const { _id, category, title, date, sex, location, petURL, owner } = notice;
 
   const favoriteNotices = useSelector(getFavoriteNotices);
+
+  let isMyAds = false;
+
+  if (owner === user._id) {
+    isMyAds = true;
+  }
 
   let myFavoriteNotice = false;
 
@@ -48,7 +58,6 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
     }
     try {
       dispatch(fetchToggleFavoriteNotice(id));
-      // setIsFavorite(!isFavorite);
       NotiflixMessage({
         type: 'success',
         data: !myFavoriteNotice
@@ -62,8 +71,6 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
       });
     }
   };
-
-  const isMyAds = false;
 
   const getAge = bd => {
     const birthDate = moment(bd, 'DD-MM-YYYY');
