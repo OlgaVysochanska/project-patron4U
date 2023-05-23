@@ -16,7 +16,7 @@ const Input = ({
   inputStyle,
   readonly,
   aditionalClass,
-  ...props
+    ...props
 }) => {
   const inputStyles = {
     ...inputStyle,
@@ -25,7 +25,7 @@ const Input = ({
     <>
       {/* <div className={styles.wrapper}> */}
 
-      <label htmlFor={type}>{label}</label>
+      <label className={styles.label} htmlFor={type}>{label}</label>
       <input
         type={type}
         name={type}

@@ -1,4 +1,5 @@
 .container {
+  width: 280px;
   margin-left: 20px;
   margin-right: 20px;
   padding: 20px 8px 25px 8px;
@@ -6,23 +7,34 @@
   background: #ffffff;
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
   border-radius: 20px;
+  @media screen and (min-width: 768px) {
+    display: flex;
+flex-direction: row-reverse;
+justify-content: space-around;
+padding: 20px;
+width: 704px;
+  }
 }
-
+.awatarWrapper {
+  @media screen and (min-width: 768px) {
+    margin-bottom: 32px;display: flex;
+  }
+}
 .avatar {
   width: 182px;
   height: 182px;
-  // border-radius: 40px;
-}
-
-img {
+  border-radius: 40px; 
   display: block;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
-.inputWrapper {
-  position: relative;
+
+.img {
+ 
 }
+.inputWrapper {
+width: 280px;}
 
 .input {
   background-color: red;

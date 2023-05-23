@@ -10,6 +10,8 @@ import EditIcon from 'icons/EditIcon';
 // import { useState } from 'react';
 import useForm from '../../../../shared/hooks/useForm';
 import { useState } from 'react';
+import { editCurrent } from 'redux/auth/authOperations';
+import { useDispatch } from '../../../../../node_modules/react-redux/es/exports';
 
 const CheckIconTuned = () => {
   return (
@@ -27,12 +29,12 @@ const UserDataItem = ({
   // clickEdit,
   // clickSave,
   clickToglle,
-  isActive,
+ 
   label,
   name,
   value,
   defaultValue,
-  clickActive,
+  
   activeItem,
   isBlocked,
   blockButtons,
@@ -40,20 +42,38 @@ const UserDataItem = ({
   // isEditing,
   // setActiveItem,
   // setIsEditing,
-  onSubmit,
   type,
+  // handleEditUser,
 }) => {
   const initialState = value;
+  const dispatch = useDispatch();
+
+  const handleEditUser = (data) => {
+    console.log(data)
+    dispatch(editCurrent(data));
+  };
+
   const { state, handleChange, handleSubmit } = useForm({
     initialState,
-    onSubmit,
+    onSubmit: handleEditUser,
   });
   const [isNotEditing, setIsNotEditing] = useState(true);
-  //  const dispatch = useDispatch()
   // const id = nanoid();
   // const handleEdit = id => {
   //   dispatch(clickToglle(id))
   // };
+
+
+
+  const handleUser = ([key, value]) => {
+    console.log(key, value);
+    handleChange({
+      target: {
+        name: {key},
+        value: {value},
+      },
+    });
+  };
 
   const clickEdit = id => {
     // onClick(!isActive);
@@ -69,14 +89,14 @@ const UserDataItem = ({
     setIsNotEditing(true);
     unblockButtons();
     console.log(state);
+    handleEditUser(state)
+    handleUser(state)
   };
 
-  // const readonly =  false;
   return (
     <form onSubmit={handleSubmit} autoComplete="on" className={styles.form}>
       <div className={styles.inputWrapper}>
         <Input
-          // className={styles.input}
           type={type}
           // key={id}
           id={name}
@@ -88,7 +108,9 @@ const UserDataItem = ({
           readonly={isNotEditing}
           handleChange={handleChange}
           isValid="true"
-        ></Input>      
+          // inputStyles={{padding: "4px 12px"}}
+          aditionalClass={styles.input}
+        ></Input>
         {isNotEditing ? (
           <Button
             type="button"
@@ -104,117 +126,7 @@ const UserDataItem = ({
             onClick={clickSave}
             SVGComponent={CheckIconTuned}
           />
-        )}
-
-        {/* {!isActive ? (
-        <Button
-          type="button"
-          // className={`${styles.toggle} ${styles.active}`}
-          onClick={clickActive}
-          buttonStyle={{
-            // backgroundColor: 'transparent',
-            border: 'none',
-            position: 'absolute',
-            right: '10px',
-            top: '10px',
-            transform: 'translateY(-50%)',
-          }}
-          SVGComponent={EditIconTuned}
-          stroke="red"
-          />
-        // >
-        //   {activeItem}
-        // </Button>
-      ) : (
-        <Button className={styles.button} onClick={clickActive}>
-          {activeItem}
-        </Button>
-      )}
-      {isEditing ? (
-        <Button
-          type="button"
-          className={styles.toggle}
-          onClick={clickEdit}
-          icon={<EditIconTuned />}
-        >
-          Edit
-        </Button>
-      ) : (
-        <Button
-          className={styles.button}
-          onClick={clickSave}
-          icon={<CheckIconTuned />}
-        >
-          Save
-        </Button>
-      )}
-      <Button
-        type="submit"
-        className={`${styles.button} ${styles.submit}`}
-        onClick={handleSubmit}
-      >
-        Submit
-      </Button> */}
-        {/* // buttonStyle= // position: 'absolute', // right: '10px', // top: '10px',
-      // // // transform: 'translateY(-50%)', // // SVGComponent= */}
-        {/* {CheckIconTuned}
-      /> */}
-
-        {/* <ToggleButton
-            className={styles.togle}
-            id={id}
-       
-           {...id === activeItem && {
-            clickToglle}}
-            isActive={isActive}
-            clickActive={clickActive}
-          /> */}
-        {/* <label>
-        Name:
-        <input
-          className={styles.input}
-          type="text"
-          name="name"
-          defaultValue="jon"
-        />
-        <ToggleButton
-          className={styles.togle}
-          id={id}
-          onClick={() => {
-            clickToglle();
-          }}
-        ></ToggleButton>
-      </label>
-
-      <label>
-        Email:
-        <input type="email" name="email" />
-      </label>
-      <input type="submit" value="Submit" />
-
-      <label>
-        Birthday:
-        <input type="text" name="birthday" />
-      </label>
-      <input type="submit" value="Submit" />
-
-      <label>
-        Phone:
-        <input type="text" name="phone" />
-      </label>
-      <input type="submit" value="Submit" />
-
-      <label>
-        City:
-        <input type="text" name="city" />
-      </label>
-      <input type="submit" value="Submit" />
-
-      <label>
-        Name:
-        <input type="text" name="name" />
-      </label>
-      <input type="submit" value="Submit" /> */}
+        )}       
       </div>
     </form>
   );

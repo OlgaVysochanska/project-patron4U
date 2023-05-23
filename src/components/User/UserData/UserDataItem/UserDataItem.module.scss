@@ -1,29 +1,50 @@
 .inputWrapper {
   position: relative;
   display: flex;
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-around;
+margin-bottom: 12px;
+  text-align: center;
   // background-color: red;
+  font-style: normal;
+  font-family: 'Manrope';
+  margin-left: auto ;
+margin-right: auto ;
+font-weight: 600;
+font-size: 14px;
+line-height: 19px;
+align-items: center;
+letter-spacing: 0.04em;
 }
 
 .form {
   display: flex;
   align-items: center;
+  width: 264px;
+  // justify-content: space-between;
   // margin-left: auto;
   // margin-right: auto;
   // background-color: red;
 }
 
-// input {
-//   display: flex;
-//   align-items: center;
-//   position: relative;
-// }
+.input {
+  width: 190px;
+  font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+display: flex;
+align-items: center;
+letter-spacing: 0.04em;
+  padding: 4px 12px;
+  width: 190px;
+  margin-right: auto;
+}
 
 // label input {
 //   display: flex;
-//     align-items: center;
-
-//   position: relative;
+//   align-items: center;
 // }
 
 .toggle {
@@ -32,7 +53,7 @@
   position: absolute;
   right: 10px;
   top: 50%;
-  // transform: translateY(-50%);
+  transform: translateY(-50%);
   margin-right: 10px;
   align-items: center;
   border: none;
