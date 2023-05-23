@@ -12,7 +12,7 @@
 .searchInput {
   font-family: 'Inter';
   outline: none;
-  width: 280px;
+  width: 260px;
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
   border-radius: 24px;
   height: 42px;
@@ -21,11 +21,12 @@
   color: #888888;
   font-size: 20px;
   padding: 0;
-}
-
-.searchInput::placeholder {
   padding-left: 20px;
 }
+
+// .searchInput::placeholder {
+//   padding-left: 20px;
+// }
 
 .disabled {
   position: absolute;
@@ -92,6 +93,6 @@
 
 @media (min-width: 768px) {
   .searchInput {
-    width: 608px;
+    width: 588px;
   }
 }

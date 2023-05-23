@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Background from '../../shared/components/Background/Background';
 import scss from './MainPage.module.scss';
 import Logout from 'components/User/Logout';
+import useLang from 'shared/hooks/useLang';
+import locale from './locale.json';
 
 import petsMob1x from '../../images/pets_mob_1x.png';
 import petsMob2x from '../../images/pets_mob_2x.png';
@@ -12,6 +14,9 @@ import petsDes2x from '../../images/pets_des_2x.png';
 
 const MainPage = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const { lang } = useLang();
+
+  const title = locale.title[lang];
 
   useEffect(() => {
     function handleResize() {
@@ -53,7 +58,7 @@ const MainPage = () => {
       <div className={scss.screen}>
         <Logout />
         <img className={scss.pets} src={getImage()} alt="pets" loading="lazy" />
-        <h1 className={scss.title}>Take good care of your small pets</h1>
+        <h1 className={scss.title}>{title}</h1>
       </div>
     </>
   );
