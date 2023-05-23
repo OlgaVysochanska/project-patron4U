@@ -9,6 +9,7 @@ import AuthButton from '../../../shared/components/AuthButton/AuthButton';
 import useForm from 'shared/hooks/useForm';
 
 import EyeClosedIcon from 'icons/EyeClosedIcon';
+import EyeOpenIcon from 'icons/EyeOpenIcon';
 
 import fields from './fields';
 import initialState from './initialState';
@@ -24,6 +25,7 @@ const RegisterForm = ({ onSubmit }) => {
 
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidPass, setIsValidPass] = useState(true);
   const [isValidConf, setIsValidConf] = useState(true);
@@ -38,6 +40,10 @@ const RegisterForm = ({ onSubmit }) => {
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
+  };
+
+  const toggleShowConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
   };
 
   useEffect(() => {
@@ -95,17 +101,24 @@ const RegisterForm = ({ onSubmit }) => {
           {...fields.password}
           isValid={isValidPass}
         />
-        <EyeClosedIcon
-          className={styles.eyeIcon}
-          onClick={toggleShowPassword}
-        />
+        {showPassword ? (
+          <EyeClosedIcon
+            className={styles.eyeIcon}
+            onClick={toggleShowPassword}
+          />
+        ) : (
+          <EyeOpenIcon
+            className={styles.eyeIcon}
+            onClick={toggleShowPassword}
+          />
+        )}
       </div>
 
       <div className={styles.inputWrapper}>
         <Input
           id="confirm"
           placeholder="Confirm password"
-          type={showPassword ? 'text' : 'password'}
+          type={showConfirmPassword ? 'text' : 'password'}
           style={{
             border: isValidConf ? '1px solid #54adff' : '1px solid #F43F5E',
           }}
@@ -119,10 +132,17 @@ const RegisterForm = ({ onSubmit }) => {
           }}
           isValid={isValidConf}
         />
-        <EyeClosedIcon
-          className={styles.eyeIcon}
-          onClick={toggleShowPassword}
-        />
+        {showConfirmPassword ? (
+          <EyeClosedIcon
+            className={styles.eyeIcon}
+            onClick={toggleShowConfirmPassword}
+          />
+        ) : (
+          <EyeOpenIcon
+            className={styles.eyeIcon}
+            onClick={toggleShowConfirmPassword}
+          />
+        )}
         {agreed && (
           <p className={styles.differentPassords}>Passwords must match</p>
         )}
