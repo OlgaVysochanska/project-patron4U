@@ -54,8 +54,6 @@ export const editCurrent = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const result = await api.patchCurrent(data);
-      console.log(result)
-
       return result;
     } catch ({ response }) {
       return rejectWithValue(response.data);

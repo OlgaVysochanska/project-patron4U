@@ -110,6 +110,7 @@ const UserDataItem = ({
           isValid="true"
           // inputStyles={{padding: "4px 12px"}}
           aditionalClass={styles.input}
+          labelClass={styles.label}
         ></Input>
         {isNotEditing ? (
           <Button

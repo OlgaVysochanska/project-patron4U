@@ -21,7 +21,7 @@ letter-spacing: 0.04em;
 .form {
   display: flex;
   align-items: center;
-  width: 264px;
+  width: 100%;
   // justify-content: space-between;
   // margin-left: auto;
   // margin-right: auto;
@@ -42,10 +42,15 @@ letter-spacing: 0.04em;
   margin-right: auto;
 }
 
-// label input {
-//   display: flex;
-//   align-items: center;
-// }
+.label {
+  width: 84px;
+  text-align: start;
+font-style: normal;
+font-weight: 600;
+font-size: 18px;
+line-height: 25px;
+letter-spacing: 0.04em;
+}
 
 .toggle {
   display: block;

@@ -16,16 +16,19 @@ const Input = ({
   inputStyle,
   readonly,
   aditionalClass,
+  labelClass = styles.label,
     ...props
 }) => {
   const inputStyles = {
     ...inputStyle,
   };
+
+
   return (
     <>
       {/* <div className={styles.wrapper}> */}
 
-      <label className={styles.label} htmlFor={type}>{label}</label>
+      <label className={labelClass} htmlFor={type}>{label}</label>
       <input
         type={type}
         name={type}

@@ -5,8 +5,8 @@ import defaultAvatar from './default_avatar.svg';
 import Button from '../../../shared/components/Button/Button';
 import CameraIcon from 'icons/CameraIcon';
 import { nanoid } from 'nanoid';
-import CheckIcon from 'icons/CheckIcon';
-import CrossIcon from 'icons/CrossIcon';
+// import CheckIcon from 'icons/CheckIcon';
+// import CrossIcon from 'icons/CrossIcon';
 import { getUser } from '../../../redux/auth/authSelectors';
 import { editCurrent } from '../../../redux/auth/authOperations';
 import UploadWidget from '../../../shared/components/UploadWidget/UploadWidget';
@@ -17,18 +17,19 @@ import {
 import useForm from 'shared/hooks/useForm';
 
 import { initialState } from './initialState';
+import Logout from '../Logout/Logout';
 
 const CameraIconTuned = () => {
   return <CameraIcon width="16" height="16" viewBox="0 0 22 21" />;
 };
 
-const CheckIconTuned = () => {
-  return <CheckIcon width="16" height="16" viewBox="0 0 22 21" />;
-};
+// const CheckIconTuned = () => {
+//   return <CheckIcon width="16" height="16" viewBox="0 0 22 21" />;
+// };
 
-const CrossIconTuned = () => {
-  return <CrossIcon width="16" height="16" viewBox="0 0 22 21" />;
-};
+// const CrossIconTuned = () => {
+//   return <CrossIcon width="16" height="16" viewBox="0 0 22 21" />;
+// };
 
 const picSize = '182px';
 
@@ -45,26 +46,29 @@ const UserData = () => {
   // const [items, setItems] = useState([]);
   // const [loading, setLoading] = useState(false);
   // const [error, setError] = useState(null);
-  const [isEditPhoto, setEditPhoto] = useState(false);
+  // const [isEditPhoto, setEditPhoto] = useState(false);
   // const [isEditing, setIsEditing] = useState(true);
   const [isBlocked, setIsBlocked] = useState(false);
-  const [activeItem, setActiveItem] = useState('');
+  // const [activeItem, setActiveItem] = useState('');
 
   const dispatch = useDispatch();
 
   const handleEditUser = data => {
     dispatch(editCurrent(data));
-    console.log(data)
+    console.log(data);
   };
 
-  const { state, handleChange, handleSubmit } = useForm({
+  const {
+    // state,
+    handleChange,
+    handleSubmit,
+  } = useForm({
     initialState,
     onSubmit: handleEditUser,
   });
 
   const { name, email, birthday, phone, city, avatarURL } =
     useSelector(getUser);
-  console.log('avatarURL',avatarURL);
 
   const blockButtons = () => {
     setIsBlocked(true);
@@ -74,17 +78,17 @@ const UserData = () => {
     setIsBlocked(false);
   };
 
-  const onEditPhoto = () => {
-    setEditPhoto(true);
-  };
+  // const onEditPhoto = () => {
+  //   setEditPhoto(true);
+  // };
 
-  const onSavePhoto = () => {
-    setEditPhoto(false);
-  };
+  // const onSavePhoto = () => {
+  //   setEditPhoto(false);
+  // };
 
-  const onCancel = () => {
-    setEditPhoto(false);
-  };
+  // const onCancel = () => {
+  //   setEditPhoto(false);
+  // };
 
   const handleUserURL = avatarURL => {
     console.log(avatarURL);
@@ -128,7 +132,7 @@ const UserData = () => {
           name={key}
           value={value}
           defaultValue={value}
-          activeItem={activeItem === id}
+          // activeItem={activeItem === id}
           id={id}
           key={key}
           handleEditUser={handleEditUser}
@@ -145,24 +149,29 @@ const UserData = () => {
 
   return (
     <div className={styles.container}>
-    <div className={styles.avatarWrapper}>  <img
-        className={styles.avatar}
-        src={avatarURL || defaultAvatar}
-        alt="Your look"
-        width={picSize}
-        height={picSize}
-      ></img>
-    <UploadWidget uriI={handleUserURL}>
-            <Button
-              onClick={onEditPhoto}
-              type="button"
-              className={styles.btnPhoto}
-              label="Edit photo"
-              SVGComponent={CameraIconTuned}
-              showLabelFirst={false}
-            />
-          </UploadWidget></div>
-      <div className={styles.inputWrapper}>{elements}</div>
+      <div className={styles.avatarWrapper}>
+        {' '}
+        <img
+          className={styles.avatar}
+          src={avatarURL || defaultAvatar}
+          alt="Your look"
+          width={picSize}
+          height={picSize}
+        ></img>
+        <UploadWidget uriI={handleUserURL}>
+          <Button
+            // onClick={onEditPhoto}
+            type="button"
+            className={styles.btnPhoto}
+            label="Edit photo"
+            SVGComponent={CameraIconTuned}
+            showLabelFirst={false}
+          />
+        </UploadWidget>
+      </div>
+      <div className={styles.inputWrapper}>
+        {elements} <Logout />
+      </div>
     </div>
   );
 };
