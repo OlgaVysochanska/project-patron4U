@@ -6,6 +6,10 @@ import { login } from '../../redux/auth/authOperations';
 import { isUserLogin } from 'redux/auth/authSelectors';
 
 import { NavLink } from 'react-router-dom';
+
+import useLang from 'shared/hooks/useLang';
+import locale from './locale.json';
+
 import Background from 'shared/components/Background/Background';
 import LoginForm from 'components/AuthForms/LoginForm/LoginForm';
 import AuthTitle from 'shared/components/AuthTitle/AuthTitle';
@@ -13,8 +17,15 @@ import AuthTitle from 'shared/components/AuthTitle/AuthTitle';
 import styles from './LoginPage.module.scss';
 
 const LoginPage = () => {
+  const { lang } = useLang();
   const isLogin = useSelector(isUserLogin);
   const dispatch = useDispatch();
+
+  const loginLang = locale.login[lang];
+  const dontHaveAccountLang = locale.dontHaveAccount[lang];
+  const registerLang = locale.register[lang];
+  const orUseLang = locale.orUse[lang];
+  const googleLang = locale.google[lang];
 
   const handleLogin = data => {
     dispatch(login(data));
@@ -29,20 +40,20 @@ const LoginPage = () => {
     <>
       <Background />
       <div className={styles.container}>
-        <AuthTitle text="Login" />
+        <AuthTitle text={loginLang} />
         <LoginForm onSubmit={handleLogin} />
         <div>
           <p className={styles.redirectLink}>
-            Don't have an account?{' '}
+            {dontHaveAccountLang}{' '}
             <NavLink to="/Register" className={styles.navlink}>
-              Register
+              {registerLang}
             </NavLink>{' '}
-            or use{' '}
+            {orUseLang}{' '}
             <a
               href="https://patron-back.onrender.com/api/auth/google"
               className={styles.navlink}
             >
-              Google authenticate
+              {googleLang}
             </a>
           </p>
         </div>

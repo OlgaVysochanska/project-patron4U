@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 
+import useLang from 'shared/hooks/useLang';
+import locale from '../locale.json';
+
 import Input from 'shared/components/Input/Input';
 
 import AuthButton from '../../../shared/components/AuthButton/AuthButton';
@@ -17,6 +20,8 @@ import initialState from './initialState';
 import styles from './LoginForm.module.scss';
 
 const LoginForm = ({ onSubmit }) => {
+  const { lang } = useLang();
+
   const { state, handleChange, handleSubmit } = useForm({
     initialState,
     onSubmit,
@@ -26,6 +31,12 @@ const LoginForm = ({ onSubmit }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidPass, setIsValidPass] = useState(true);
+
+  const emailLang = locale.email[lang];
+  const passwordLang = locale.password[lang];
+  const validEmailLang = locale.validEmail[lang];
+  const titleLang = locale.title[lang];
+  const loginLang = locale.login[lang];
 
   //перевірка на встановлення властивості disabled для кнопки
   const [agreed, setAgreed] = useState(true);
@@ -51,8 +62,9 @@ const LoginForm = ({ onSubmit }) => {
         <Input
           id="email"
           value={email}
+          placeholder={emailLang}
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" // Патерн для валідації email
-          title="Enter a valid Email" // Підказка для патерну
+          title={validEmailLang} // Підказка для патерну
           style={{
             border: isValidEmail ? '1px solid #54adff' : '1px solid #F43F5E',
           }}
@@ -70,9 +82,10 @@ const LoginForm = ({ onSubmit }) => {
         <Input
           id="password"
           value={password}
+          placeholder={passwordLang}
           type={showPassword ? 'text' : 'password'}
           pattern=".{6,}" // Патерн для мінімальної довжини паролю (6 символів)
-          title="Password must be at least 6 characters long" // Підказка для патерну
+          title={titleLang} // Підказка для патерну
           style={{
             border: isValidPass ? '1px solid #54adff' : '1px solid #F43F5E',
           }}
@@ -97,7 +110,7 @@ const LoginForm = ({ onSubmit }) => {
         )}
       </div>
 
-      <AuthButton disabled={agreed}>Login</AuthButton>
+      <AuthButton disabled={agreed}>{loginLang}</AuthButton>
     </form>
   );
 };
