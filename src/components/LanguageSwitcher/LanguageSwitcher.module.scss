@@ -84,8 +84,20 @@
   height: 16px;
 }
 
-@media (min-width: 1280px) {
-  .wrapperIcon {
+@media (max-width: 1280px) {
+  .nav_wrapper {
     margin-left: 20px;
   }
 }
+
+@media (min-width: 1280px) {
+  .nav_wrapper {
+    margin-left: 10px;
+  }
+}
+
+// @media (min-width: 1280px) {
+//   .wrapperIcon {
+//     margin-left: 20px;
+//   }
+// }

@@ -3,6 +3,7 @@ import Logo from 'components/Logo/Logo';
 import Navigation from 'components/Navigation/Navigation';
 import styles from './Header.module.scss';
 import LanguageSwitcher from 'components/LanguageSwitcher/LanguageSwitcher';
+import ThemeSwitcher from 'components/ThemeSwitcher/ThemeSwitcher';
 
 export default function Header() {
   // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -28,7 +29,9 @@ export default function Header() {
   return (
     <header className={styles.container}>
       <Logo isMobile={isMobile} />
-      {!isTablet && !isMobile && <LanguageSwitcher />}
+      {!isMobile && <LanguageSwitcher />}
+      {!isMobile && <ThemeSwitcher />}
+      {/* {!isTablet && isMobile && <ThemeSwitcher />} */}
       <Navigation
         isDesktop={isDesktop}
         isTablet={isTablet}
