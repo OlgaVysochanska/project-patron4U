@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styles from './NoticesFilters.module.scss';
-import PropTypes from 'prop-types';
 import FilterButton from 'shared/components/FilterButton/FilterButton';
 import DropdownSelectors from './DropdownSelectors';
 
