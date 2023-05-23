@@ -2,14 +2,14 @@
 // import { nanoid } from '@reduxjs/toolkit';
 import Input from 'shared/components/Input/Input';
 // import fields from './fields';
-import styles from './UserDataItem.scss';
+import styles from './UserDataItem.module.scss';
 // import {useDispatch} from 'react-redux'
 import Button from 'shared/components/Button/Button';
 import CheckIcon from 'icons/CheckIcon';
 import EditIcon from 'icons/EditIcon';
 // import { useState } from 'react';
 import useForm from '../../../../shared/hooks/useForm';
-import {useState} from 'react'
+import { useState } from 'react';
 
 const CheckIconTuned = () => {
   return (
@@ -23,7 +23,7 @@ const EditIconTuned = () => {
   );
 };
 
- const UserDataItem = ({
+const UserDataItem = ({
   // clickEdit,
   // clickSave,
   clickToglle,
@@ -34,13 +34,16 @@ const EditIconTuned = () => {
   defaultValue,
   clickActive,
   activeItem,
+  isBlocked,
+  blockButtons,
+  unblockButtons,
   // isEditing,
   // setActiveItem,
   // setIsEditing,
   onSubmit,
   type,
 }) => {
-  const initialState = defaultValue;
+  const initialState = value;
   const { state, handleChange, handleSubmit } = useForm({
     initialState,
     onSubmit,
@@ -55,75 +58,55 @@ const EditIconTuned = () => {
   const clickEdit = id => {
     // onClick(!isActive);
     // setActiveItem(id);
-    setIsNotEditing(false);
+
+    setIsNotEditing(prevState => !prevState);
+    blockButtons();
     // console.log(activeItem);
-    console.log(isNotEditing);
+    // console.log(isNotEditing);
   };
 
   const clickSave = () => {
     setIsNotEditing(true);
-    console.log(state)
+    unblockButtons();
+    console.log(state);
   };
 
   // const readonly =  false;
   return (
-    <form onSubmit={handleSubmit} autoComplete="on">
-      <div style={{ backgroundColor: 'green',  
-      //  position: 'relative' 
-   }} className={styles.inputWrapper}>
-      <Input
-      // inputStyle={{position: 'relative'}}
-        type={type}
-        // key={id}
-        id={name}
-        label={label}
-        name={name}
-        value={value}
+    <form onSubmit={handleSubmit} autoComplete="on" className={styles.form}>
+      <div className={styles.inputWrapper}>
+        <Input
+          // className={styles.input}
+          type={type}
+          // key={id}
+          id={name}
+          label={label}
+          name={name}
+          // value={value}
+          defaultValue={defaultValue}
+          // value={defaultValue}
+          readonly={isNotEditing}
+          handleChange={handleChange}
+          isValid="true"
+        ></Input>      
+        {isNotEditing ? (
+          <Button
+            type="button"
+            onClick={clickEdit}
+            disabled={isBlocked}
+            className={styles.toggle}
+            SVGComponent={EditIconTuned}
+          />
+        ) : (
+          <Button
+            type="button"
+            className={styles.toggle}
+            onClick={clickSave}
+            SVGComponent={CheckIconTuned}
+          />
+        )}
 
-        defaultValue={defaultValue}
-        // defaultValue={defaultValue}
-        // {...(!isActive && isEditing && { rO })}
-        // inputStyle={{ position: 'relative' }}
-        // isValid={true}
-        readonly={isNotEditing}
-        handleChange={handleChange}
-        isValid='true'
-      ></Input>
-{isNotEditing ? (
-<Button type='button'
-onClick={clickEdit}
-// buttonStyle={
-//   {backgroundColor: 'transparent',
-// border: 'none',
-// // position: 'absolute',
-// right:'10px'
-// }
-// }
-className={styles.toggle}
-SVGComponent={EditIconTuned}
-// stroke='#54ADFF'
-/>
-) : (
-  <Button type='button'
-  className={styles.toggle}
-
-onClick={clickSave}
-// buttonStyle={{backgroundColor: 'transparent',
-// border: 'none',
-// // position: 'absolute',
-// right:'10px'}}
-SVGComponent={CheckIconTuned}
-// stroke='#54ADFF'
-/>
-)
-}
-
-
-
-
-
-
-      {/* {!isActive ? (
+        {/* {!isActive ? (
         <Button
           type="button"
           // className={`${styles.toggle} ${styles.active}`}
@@ -172,18 +155,12 @@ SVGComponent={CheckIconTuned}
       >
         Submit
       </Button> */}
-      {/* // buttonStyle= // position: 'absolute', // right: '10px', // top: '10px',
+        {/* // buttonStyle= // position: 'absolute', // right: '10px', // top: '10px',
       // // // transform: 'translateY(-50%)', // // SVGComponent= */}
-      {/* {CheckIconTuned}
+        {/* {CheckIconTuned}
       /> */}
 
-
-
-
-
-
-
-      {/* <ToggleButton
+        {/* <ToggleButton
             className={styles.togle}
             id={id}
        
@@ -192,7 +169,7 @@ SVGComponent={CheckIconTuned}
             isActive={isActive}
             clickActive={clickActive}
           /> */}
-      {/* <label>
+        {/* <label>
         Name:
         <input
           className={styles.input}
@@ -238,7 +215,7 @@ SVGComponent={CheckIconTuned}
         <input type="text" name="name" />
       </label>
       <input type="submit" value="Submit" /> */}
-            </div>
+      </div>
     </form>
   );
 };

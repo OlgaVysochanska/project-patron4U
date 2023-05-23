@@ -1,8 +1,6 @@
 import styles from './UserData.module.scss';
 import UserDataItem from './UserDataItem/UserDataItem';
-import useForm from 'shared/hooks/useForm';
 import { useState, useEffect } from 'react';
-// import { ToggleButtonPhoto } from 'shared/components/ToggleButtonPhoto/ToggleButtonPhoto';
 import defaultAvatar from './default_avatar.svg';
 import Button from '../../../shared/components/Button/Button';
 import CameraIcon from 'icons/CameraIcon';
@@ -12,7 +10,13 @@ import CrossIcon from 'icons/CrossIcon';
 import { getUser } from '../../../redux/auth/authSelectors';
 import { editCurrent } from '../../../redux/auth/authOperations';
 import UploadWidget from '../../../shared/components/UploadWidget/UploadWidget';
-import { useDispatch } from '../../../../node_modules/react-redux/es/exports';
+import {
+  useDispatch,
+  useSelector,
+} from '../../../../node_modules/react-redux/es/exports';
+import useForm from 'shared/hooks/useForm';
+
+import { initialState } from './initialState';
 
 const CameraIconTuned = () => {
   return <CameraIcon width="16" height="16" viewBox="0 0 22 21" />;
@@ -28,7 +32,7 @@ const CrossIconTuned = () => {
 
 const picSize = '182px';
 
-let avatar = false;
+// let avatar = false;
 
 const user = {
   name: 'Anna',
@@ -36,22 +40,38 @@ const user = {
   birthday: '01.01.2001',
   phone: '+38000000000',
   city: 'Kiev',
+  avatarURL: false,
 };
 
-const UserData = ({ onClick }) => {
+const UserData = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isEditPhoto, setEditPhoto] = useState(false);
-  const [isActive, setActive] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
+  // const [isActive, setActive] = useState(false);
+  const [isEditing, setIsEditing] = useState(true);
+  const [isBlocked, setIsBlocked] = useState(false);
   const [activeItem, setActiveItem] = useState('');
-  const [name, setName] = useState(user.name);
-  const [email, setEmail] = useState(user.email);
-  const [birthday, setBirthday] = useState(user.birthday);
-  const [phone, setPhone] = useState(user.phone);
-  const [city, setCity] = useState(user.city);
-const dispatch = useDispatch()
+  // const [name, setName] = useState(user.name);
+  // const [email, setEmail] = useState(user.email);
+  // const [birthday, setBirthday] = useState(user.birthday);
+  // const [phone, setPhone] = useState(user.phone);
+  // const [city, setCity] = useState(user.city);
+  // const [userURL, setUserURL] = useState(user.userURL)
+  const dispatch = useDispatch();
+
+  const handleEditUser = data => {
+    dispatch(editCurrent(data));
+  };
+
+  const { state, handleChange, handleSubmit } = useForm({
+    initialState,
+    onSubmit: handleEditUser,
+  });
+
+  const { name, email, birthday, phone, city, avatarURL } =
+    useSelector(getUser);
+  console.log(avatarURL)
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -69,37 +89,41 @@ const dispatch = useDispatch()
       }
     };
     fetchUser();
-    console.log(items);
-
+    // console.log(items);
   }, [activeItem]);
 
+  // const userMap = { name, email, birthday, phone, city };
 
-
-  const userMap = { name, email, birthday, phone, city };
-
-const handleEditUser = data=> {
-  dispatch(editCurrent(data))
-
-}
+  
 
   // const userMap = {{items}}
 
-  if (!avatar) {
-    avatar = defaultAvatar;
-  }
+  // if (!avatar) {
+  //   avatar = defaultAvatar;
+  // }
 
-  const clickEdit = id => {
-    // onClick(!isActive);
-    setActiveItem(id);
-    setIsEditing(true);
-    console.log(activeItem);
-    console.log(isEditing);
-    console.log(items);
+  const blockButtons = () => {
+    setIsBlocked(true);
   };
 
-  const clickActive = id => {
-    !isActive ? setActiveItem(id) : setActiveItem(false);
+  const unblockButtons = () => {
+    setIsBlocked(false);
   };
+
+  // const clickSave = () => {
+  //   // setIsNotEditing(true);
+  //   unblockButtons();
+  //   console.log(state);
+  // };
+
+  // const clickEdit = id => {
+  //   // onClick(!isActive);
+  //   setActiveItem(id);
+  // };
+
+  // const clickActive = id => {
+  //   setActiveItem(prevActiveItem => (prevActiveItem === id ? '' : id));
+  // };
 
   // console.log(userMap);
 
@@ -115,67 +139,118 @@ const handleEditUser = data=> {
     setEditPhoto(false);
   };
 
-  const elements = Object.entries(userMap).map(([key, value]) => {
-    console.log(key);
-    const id = nanoid();
-    let type = '';
-    switch (key) {
-      case 'name':
-        type = 'text';
-        break;
-      case 'email':
-        type = 'email';
-        break;
-      case 'birthday':
-        type = 'date';
-        break;
-      case 'phone':
-        type = 'tel';
-        break;
-      case 'city':
-        type = 'text';
-        break;
-      default:
-        break;
-    }
+  const handleUserURL = avatarURL => {
+    console.log(avatarURL)
+    handleChange({
+      target: {
+        name: 'avatarURL',
+        value: avatarURL,
+      },
+    });
+  };
 
-    return (
-      <div key={nanoid()}>
-        <UserDataItem
-        type={type}
-          label={key.charAt(0).toUpperCase() + key.slice(1) + ':'}
-          name={key}
-          // value={value}
-          defaultValue={value}
-          isActive={isActive}
-          clickActive={clickActive}
-          activeItem={activeItem}
-          id={id}
-          key={key}
-          // setIsEditing={setIsEditing}
-          setActiveItem={setActiveItem}
-          onSubmit={handleEditUser}
-        />
-      </div>
-    );
-  });
+  const elements = Object.entries({name, email, birthday, phone, city}).map(
+    ([key, value]) => {
+      const id = nanoid();
+      let type = '';
+      switch (key) {
+        case 'name':
+          type = 'text';
+          break;
+        case 'email':
+          type = 'email';
+          break;
+        case 'birthday':
+          type = 'date';
+          break;
+        case 'phone':
+          type = 'tel';
+          break;
+        case 'city':
+          type = 'text';
+          break;
+        default:
+          type = 'text';
+          break;
+      }
+
+      return (
+        // <div key={nanoid()}>
+          <UserDataItem
+            type={type}
+            label={key.charAt(0).toUpperCase() + key.slice(1) + ':'}
+            name={key}
+            value={value}
+            defaultValue={value}
+            // isActive={isActive}
+            // clickActive={clickActive}
+            activeItem={activeItem === id}
+            id={id}
+            key={key}
+            // setIsEditing={setIsEditing}
+            setActiveItem={setActiveItem}
+            onSubmit={handleEditUser}
+            isBlocked={isBlocked}
+            blockButtons={blockButtons}
+            unblockButtons={unblockButtons}
+            // handleClick={handleClick}
+            handleSubmit={handleSubmit}
+            // handleCancel={handleCancel}
+          />
+        // </div>
+      );
+    }
+  );
 
   // console.log(elements);
 
   return (
     <div className={styles.container}>
-      <img src={avatar} alt="Your look" width={picSize} height={picSize}></img>
+      <img
+      className={styles.avatar}
+        src={avatarURL || defaultAvatar}
+        alt="Your look"
+        width={picSize}
+        height={picSize}
+      ></img>
       {!isEditPhoto && (
+        // <>
+        //   <Button
+        //     onClick={onEditPhoto}
+        //     type="button"
+        //     className={styles.btnPhoto}
+        //     label="Edit photo"
+        //     SVGComponent={CameraIconTuned}
+        //     // SVGComponent={UploadWidget}
+        //     showLabelFirst={false}
+        //   />
+        //   <UploadWidget uriI={handleUserURL}>
+        //     {/* <CameraIconTuned /> */}
+        //     <CameraIcon
+        //    stroke="#54ADFF" width="16" height="16" viewBox="0 0 22 21" />
+        //   </UploadWidget>
+        // </>
         <>
-          <Button
-            onClick={onEditPhoto}
-            type="button"
-            className={styles.btnPhoto}
-            label="Edit photo"
-            SVGComponent={CameraIconTuned}
-            // SVGComponent={UploadWidget}
-            showLabelFirst={false}
-          />
+          {/* <Button
+          onClick={onEditPhoto}
+          type="button"
+          className={styles.btnPhoto}
+          label="Edit photo"
+          SVGComponent={CameraIconTuned}
+          // SVGComponent={UploadWidget}
+          showLabelFirst={false}
+        /> */}
+          <UploadWidget uriI={handleUserURL}>
+            <Button
+              onClick={onEditPhoto}
+              type="button"
+              className={styles.btnPhoto}
+              label="Edit photo"
+              SVGComponent={CameraIconTuned}
+              // SVGComponent={UploadWidget}
+              showLabelFirst={false}
+            />
+          </UploadWidget>
         </>
       )}
       <div className={styles.div}>
@@ -200,11 +275,6 @@ const handleEditUser = data=> {
           />
         )}
       </div>
-
-      {/* <div>{UploadWidget}</div> */}
-
-      {/* <ToggleButtonPhoto>Edit photo</ToggleButtonPhoto> */}
-
       {elements}
     </div>
   );

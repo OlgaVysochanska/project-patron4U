@@ -7,6 +7,7 @@ const Button = props => {
     SVGComponent,
     showLabelFirst = true,
     buttonStyle,
+    disabled = false,
   } = props;
   const buttonStyles = {
     ...buttonStyle,
@@ -17,6 +18,7 @@ const Button = props => {
       className={className}
       type={type}
       style={buttonStyles}
+      disabled={disabled}
     >
       {showLabelFirst && label}
       {SVGComponent && <SVGComponent />}

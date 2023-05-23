@@ -8,13 +8,19 @@
   border-radius: 20px;
 }
 
+.avatar {
+  width: 182px;
+  height: 182px;
+  // border-radius: 40px;
+}
+
 img {
   display: block;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
-.inputWrapper{
+.inputWrapper {
   position: relative;
 }
 

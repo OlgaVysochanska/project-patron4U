@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-
-import { register, login, current, logout, editCurrent } from './authOperations';
+// import { register, login, current, logout, editCurrent } from './authOperations';
 
 import {
   register,
@@ -10,6 +9,7 @@ import {
   logout,
   addUserPets,
   fetchToggleFavoriteNotice,
+  editCurrent,
 } from './authOperations';
 
 const initialState = {
@@ -121,7 +121,21 @@ const authSlice = createSlice({
       .addCase(fetchToggleFavoriteNotice.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
-      });
+      })
+      .addCase(editCurrent.pending, state => {
+        state.loading = true;
+        state.error = null;
+        
+      })
+      .addCase(editCurrent.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.user = payload;
+        state.isLogin = true;
+      })
+      .addCase(editCurrent.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      })
   },
 });
 
