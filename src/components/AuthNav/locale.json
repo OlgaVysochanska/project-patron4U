@@ -1,0 +1,11 @@
+{
+  "registration": {
+    "eng": "Registration",
+    "ua": "Реєстрація"
+  },
+
+  "login": {
+    "eng": "Log IN",
+    "ua": "Увійти"
+  }
+}
