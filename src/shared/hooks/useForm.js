@@ -8,7 +8,6 @@ const useForm = ({ initialState, onSubmit }) => {
       const { name, value } = target;
       setState(prevState => {
         return { ...prevState, [name]: value };
-        console.log(state)
       });
     },
     [setState]
