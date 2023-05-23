@@ -19,7 +19,12 @@ const useForm = ({ initialState, onSubmit }) => {
     setState({ ...initialState });
   };
 
-  return { state, setState, handleChange, handleSubmit };
+  const handleSubmitSearch = e => {
+    e.preventDefault();
+    onSubmit({ ...state });
+  };
+
+  return { state, setState, handleChange, handleSubmit, handleSubmitSearch };
 };
 
 export default useForm;
