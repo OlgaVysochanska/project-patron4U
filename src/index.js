@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { App } from 'components/App';
 import AuthLayout from 'components/AuthLayout';
 import { store, persistor } from 'redux/store';
-import LangContext from 'langContext';
+import CombinedContextProvider from 'CombinedContextProvider ';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -15,9 +15,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <PersistGate loading={null} persistor={persistor}>
         <AuthLayout>
           <BrowserRouter basename="/">
-            <LangContext>
+            <CombinedContextProvider>
               <App />
-            </LangContext>
+            </CombinedContextProvider>
           </BrowserRouter>
         </AuthLayout>
       </PersistGate>
