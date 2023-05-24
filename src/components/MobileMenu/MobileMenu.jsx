@@ -9,7 +9,9 @@ export default function MobileMenu({ children, onClick, isMobile }) {
   return createPortal(
     <div className={styles.mobileMenu}>
       <div className={styles.head}>
-        <Logo isMobile={isMobile} />
+        <div onClick={onClick}>
+          <Logo isMobile={isMobile} />
+        </div>
         <LanguageSwitcher />
         <ThemeSwitcher />
         <CrossIcon className={styles.closeButton} onClick={onClick} />
