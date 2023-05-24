@@ -1,47 +1,55 @@
 .mainPageTitle {
-    max-width: 280px;
-    margin: 0 auto;
+  max-width: 280px;
+  margin: 0 auto;
 
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 1.375;
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.375;
 
-    color: #000;
+  color: #000;
 
-    @media screen and (min-width: 768px) {
-        max-width: 588px;
-        font-size: 68px;
-        line-height: 1.47;
-        margin: 0 auto 0 0;
-    }
+  @media screen and (min-width: 768px) {
+    max-width: 588px;
+    font-size: 68px;
+    line-height: 1.47;
+    margin: 0 auto 0 0;
+  }
 
-    @media screen and (min-width: 1280px) {
-        max-width: 501px;
-        font-weight: 800;
-        line-height: 1.3;
-        color: #111;
-
-       padding-top: 188px;
-
-        margin-top: auto;
-        margin-right: auto;
-        margin-bottom: auto;
-        margin-left: 0;
-    }
-}
-
-.pageTitle{
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 1.375;   
-    text-align: center;
+  @media screen and (min-width: 1280px) {
+    max-width: 501px;
+    font-weight: 800;
+    line-height: 1.3;
     color: #111;
 
-    @media screen and (min-width: 768px) {
-        font-size: 48px;
-    }
+    padding-top: 188px;
+
+    margin-top: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-left: 0;
+  }
+}
+
+.mainPageTitleDark {
+  color: #fef9f9;
+}
+
+.pageTitle {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.375;
+  text-align: center;
+  color: #111;
+
+  @media screen and (min-width: 768px) {
+    font-size: 48px;
+  }
+}
+
+.pageTitleDark {
+  color: #fef9f9;
 }

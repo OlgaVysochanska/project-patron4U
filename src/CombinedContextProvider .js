@@ -1,4 +1,4 @@
-import { useState, createContext } from 'react';
+import { useState, createContext, useEffect } from 'react';
 
 export const LangContext = createContext('eng');
 export const ThemeContext = createContext('light');
@@ -6,6 +6,10 @@ export const ThemeContext = createContext('light');
 const CombinedContextProvider = ({ children }) => {
   const [lang, setLang] = useState('eng');
   const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
