@@ -2,18 +2,26 @@ import { useDispatch } from 'react-redux';
 
 import Button from 'shared/components/Button/Button';
 import TrashIcon from 'icons/TrashIcon';
+import NotiflixMessage from 'shared/components/NotiflixMessage/NotiflixMessage';
 
 import { fetchDeletePet } from 'redux/pets/petsOperations';
+import { current } from 'redux/auth/authOperations';
 
 import styles from './PetsListItem.module.scss';
 
-const PetsListItem = ({ _id, name, date, breed, petURL, comments }) => {
+const PetsListItem = ({ id, name, date, breed, petURL, comments }) => {
+  
   const dispatch = useDispatch();
 
-  const handleDeletePet = id => {
-    dispatch(fetchDeletePet(id));
+  const handleDeletePet = async id => {
+    try {
+      await dispatch(fetchDeletePet(id));
+      dispatch(current());
+    } catch (error) {
+      NotiflixMessage({ type: 'info', data: error.message });
+    }
   };
-
+  
   return (
     <li className={styles.petCard}>
       <div className={styles.imgThumb}>
@@ -26,7 +34,7 @@ const PetsListItem = ({ _id, name, date, breed, petURL, comments }) => {
       </div>
       <div className={styles.petInfo}>
         <Button
-          onClick={() => handleDeletePet(_id)}
+          onClick={() => handleDeletePet(id)}
           className={styles.deleteBtn}
           SVGComponent={() => <TrashIcon className={styles.trashIcon} />}
         />
