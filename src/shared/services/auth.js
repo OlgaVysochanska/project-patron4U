@@ -1,3 +1,4 @@
+import axios from 'axios';
 import instance from './instance';
 
 const setToken = token => {
@@ -27,6 +28,14 @@ export const getCurrent = async token => {
   } catch (error) {
     setToken();
     throw error;
+  }
+};
+
+export const getGoogleAuth = async () => {
+  try {
+    await axios.get('http://localhost:5000/api/auth/google');
+  } catch (e) {
+    console.log(e);
   }
 };
 

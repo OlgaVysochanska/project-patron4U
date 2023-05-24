@@ -50,7 +50,7 @@ const LoginPage = () => {
             </NavLink>{' '}
             {orUseLang}{' '}
             <a
-              href="https://patron-back.onrender.com/api/auth/google"
+              href="http://localhost:5000/api/auth/google"
               className={styles.navlink}
             >
               {googleLang}
