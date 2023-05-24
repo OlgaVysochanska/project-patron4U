@@ -14,7 +14,7 @@ export default function AuthNav({ onClick }) {
     <nav className={styles.nav}>
       <ul className={styles.list}>
         <li className={styles.item} onClick={onClick}>
-          <NavLink className={styles.link} to="/register">
+          <NavLink className={`${styles.link} ${styles.active}`} to="/register">
             {registerLang}
           </NavLink>
         </li>
