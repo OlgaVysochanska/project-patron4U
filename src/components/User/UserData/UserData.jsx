@@ -2,7 +2,6 @@ import styles from './UserData.module.scss';
 import UserDataItem from './UserDataItem/UserDataItem';
 import { useState } from 'react';
 import defaultAvatar from './default_avatar.svg';
-// import Button from '../../../shared/components/Button/Button';
 import CameraIcon from 'icons/CameraIcon';
 import { nanoid } from 'nanoid';
 // import CheckIcon from 'icons/CheckIcon';
@@ -33,34 +32,24 @@ const CameraIconTuned = () => {
 
 const picSize = '182px';
 
-// const user = {
-//   name: 'Anna',
-//   email: 'anna00@gmail.com',
-//   birthday: '01.01.2001',
-//   phone: '+38000000000',
-//   city: 'Kiev',
-//   avatarURL: false,
-// };
 
 const UserData = () => {
-  // const [items, setItems] = useState([]);
   // const [loading, setLoading] = useState(false);
   // const [error, setError] = useState(null);
   // const [isEditPhoto, setEditPhoto] = useState(false);
   // const [isEditing, setIsEditing] = useState(true);
   const [isBlocked, setIsBlocked] = useState(false);
-  // const [activeItem, setActiveItem] = useState('');
+
 
   const dispatch = useDispatch();
 
   const handleEditUser = data => {
     dispatch(editCurrent(data));
-    console.log(data);
   };
 
   const {
     // state,
-    handleChange,
+    // handleChange,
     handleSubmit,
   } = useForm({
     initialState,
@@ -78,29 +67,9 @@ const UserData = () => {
     setIsBlocked(false);
   };
 
-  // const onEditPhoto = () => {
-  //   setEditPhoto(true);
-  // };
-
-  // const onSavePhoto = () => {
-  //   setEditPhoto(false);
-  // };
-
-  // const onCancel = () => {
-  //   setEditPhoto(false);
-  // };
-
   const handleUserURL = avatarURL => {
-    // console.log(avatarURL);
 const obj = {avatarURL: `${avatarURL}`}
-// console.log(obj)
 handleEditUser(obj)
-    // handleChange({
-    //   target: {
-    //     name: 'avatarURL',
-    //     value: avatarURL,
-    //   },
-    // });
   };
 
   const elements = Object.entries({ name, email, birthday, phone, city }).map(
@@ -135,7 +104,6 @@ handleEditUser(obj)
           name={key}
           value={value}
           defaultValue={value}
-          // activeItem={activeItem === id}
           id={id}
           key={key}
           handleEditUser={handleEditUser}
@@ -148,7 +116,6 @@ handleEditUser(obj)
     }
   );
 
-  // console.log(elements);
 
   return (
     <div>
