@@ -17,18 +17,19 @@ const Input = ({
   readonly,
   aditionalClass,
   labelClass = styles.label,
-    ...props
+  ...props
 }) => {
   const inputStyles = {
     ...inputStyle,
   };
 
-
   return (
     <>
       {/* <div className={styles.wrapper}> */}
 
-      <label className={labelClass} htmlFor={type}>{label}</label>
+      <label className={labelClass} htmlFor={type}>
+        {label}
+      </label>
       <input
         type={type}
         name={type}
@@ -64,7 +65,7 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   pattern: PropTypes.string,
   title: PropTypes.string,
-  value: PropTypes.string.isRequired,
+  // value: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   icon: PropTypes.string,
 };

@@ -7,15 +7,11 @@ import { getUserPets } from 'redux/auth/authSelectors';
 const PetsList = () => {
   const userPets = useSelector(getUserPets);
 
-  const petsItem = userPets.map(({ id, ...props }) => (
-    <PetsListItem key={id} {...props} />
+  const petsItem = userPets.map(({ _id, ...props }) => (
+   <PetsListItem key={_id} id={_id} {...props} />
   ));
 
-  return (
-    <>
-      <ul>{petsItem}</ul>
-    </>
-  );
+  return <ul>{petsItem}</ul>;
 };
 
 export default PetsList;

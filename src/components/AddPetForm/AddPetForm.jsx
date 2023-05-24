@@ -10,9 +10,7 @@ import { fetchAddPet } from '../../redux/pets/petsOperations';
 
 import { getLoadingNotices } from '../../redux/notices/noticesSelecors';
 
-import { getUser } from '../../redux/auth/authSelectors';
-
-import { addUserPets } from '../../redux/auth/authOperations';
+import { current } from '../../redux/auth/authOperations';
 
 import ChooseOption from './ChooseOption/ChooseOption';
 import PersonalDetail from './PersonalDetail/PersonalDetail';
@@ -71,7 +69,6 @@ const AddPetForm = ({ onSubmit }) => {
   const dispatch = useDispatch();
 
   const loading = useSelector(getLoadingNotices);
-  const currentUser = useSelector(getUser);
 
   const validateData = () => {
     let formData = [];
@@ -196,115 +193,117 @@ const AddPetForm = ({ onSubmit }) => {
     setActiveTab(activeTab => activeTab - 1);
   };
 
-  const handleUserDataFetch = async id => {
-    try {
-      await dispatch(addUserPets([...currentUser.myPets, id]));
-    } catch (error) {
-      NotiflixMessage({ type: 'info', data: error.message });
-    }
-  };
-
   const handleDataFetch = async () => {
-    const date = format(birthDate, 'dd.MM.yyyy');
-    const category = categories[activeCategory].category;
-    const invalidObjects = validateData();
+    try {
+      const date = format(birthDate, 'dd.MM.yyyy');
+      const category = categories[activeCategory].category;
+      const invalidObjects = validateData();
 
-    if (!invalidObjects.length && activeCategory === 1) {
-      try {
-        await dispatch(
-          fetchAddNotice({
-            title,
-            name,
-            date,
-            breed,
-            location,
-            petURL,
-            sex,
-            comments,
-            price,
-            category,
-          })
-        );
-      } catch (error) {
-        NotiflixMessage({ type: 'info', data: error.message });
-      }
-    } else if (!invalidObjects.length && activeCategory === 2) {
-      try {
-        await dispatch(
-          fetchAddNotice({
-            title,
-            name,
-            date,
-            breed,
-            location,
-            petURL,
-            sex,
-            comments,
-            category,
-          })
-        );
-      } catch (error) {
-        NotiflixMessage({ type: 'info', data: error.message });
-      }
-    } else if (!invalidObjects.length && activeCategory === 3) {
-      try {
-        await dispatch(
-          fetchAddNotice({
-            title,
-            name,
-            date,
-            breed,
-            location,
-            petURL,
-            sex,
-            comments,
-            category,
-          })
-        );
-      } catch (error) {
-        NotiflixMessage({ type: 'info', data: error.message });
-      }
-    } else if (!invalidObjects.length && activeCategory === 0) {
-      try {
-        const result = await dispatch(
-          fetchAddPet({
-            name,
-            date,
-            breed,
-            petURL,
-            comments,
-            category,
-          })
-        );
-        if (result) {
-          handleUserDataFetch(result.payload._id);
-        } else {
-          NotiflixMessage({
-            type: 'info',
-            data: "your pet wasn't added, repeat please",
-          });
+      if (!invalidObjects.length && activeCategory === 1) {
+        try {
+          await dispatch(
+            fetchAddNotice({
+              title,
+              name,
+              date,
+              breed,
+              location,
+              petURL,
+              sex,
+              comments,
+              price,
+              category,
+            })
+          );
+          return true;
+        } catch (error) {
+          NotiflixMessage({ type: 'info', data: error.message });
         }
-      } catch (error) {
-        NotiflixMessage({ type: 'info', data: error.message });
+      } else if (!invalidObjects.length && activeCategory === 2) {
+        try {
+          await dispatch(
+            fetchAddNotice({
+              title,
+              name,
+              date,
+              breed,
+              location,
+              petURL,
+              sex,
+              comments,
+              category,
+            })
+          );
+          return true;
+        } catch (error) {
+          NotiflixMessage({ type: 'info', data: error.message });
+        }
+      } else if (!invalidObjects.length && activeCategory === 3) {
+        try {
+          await dispatch(
+            fetchAddNotice({
+              title,
+              name,
+              date,
+              breed,
+              location,
+              petURL,
+              sex,
+              comments,
+              category,
+            })
+          );
+          return true;
+        } catch (error) {
+          NotiflixMessage({ type: 'info', data: error.message });
+        }
+      } else if (!invalidObjects.length && activeCategory === 0) {
+        try {
+          const result = await dispatch(
+            fetchAddPet({
+              name,
+              date,
+              breed,
+              petURL,
+              comments,
+              category,
+            })
+          );
+
+          if (result) {
+            dispatch(current());
+          } else {
+            NotiflixMessage({
+              type: 'info',
+              data: "your pet wasn't added, repeat please",
+            });
+          }
+          return true;
+        } catch (error) {
+          NotiflixMessage({ type: 'info', data: error.message });
+        }
       }
+    } catch (error) {
+      return false;
     }
   };
 
   const handleFormTabNvigationDone = async () => {
-    await handleDataFetch();
+    const dataFetchResult = await handleDataFetch();
 
-    if (activeCategory === 0) {
-      navigate('/user');
-    }
-
-    if (activeCategory === 1) {
-      navigate('/notices/sell');
-    }
-    if (activeCategory === 2) {
-      navigate('/notices/lost-found');
-    }
-    if (activeCategory === 3) {
-      navigate('/notices/for-free');
+    if (dataFetchResult) {
+      if (activeCategory === 0) {
+        navigate('/user');
+      }
+      if (activeCategory === 1) {
+        navigate('/notices/sell');
+      }
+      if (activeCategory === 2) {
+        navigate('/notices/lost-found');
+      }
+      if (activeCategory === 3) {
+        navigate('/notices/for-free');
+      }
     }
   };
 

@@ -1,69 +1,43 @@
 .inputWrapper {
   position: relative;
   display: flex;
-  // flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-around;
-margin-bottom: 12px;
-  text-align: center;
-  // background-color: red;
-  font-style: normal;
-  font-family: 'Manrope';
-  margin-left: auto ;
-margin-right: auto ;
-font-weight: 600;
-font-size: 14px;
-line-height: 19px;
-align-items: center;
-letter-spacing: 0.04em;
+  align-items: center;
 }
 
 .form {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  // justify-content: space-between;
-  // margin-left: auto;
-  // margin-right: auto;
-  // background-color: red;
-}
-
-.input {
-  width: 190px;
-  font-style: normal;
-font-weight: 400;
-font-size: 12px;
-line-height: 16px;
-display: flex;
-align-items: center;
-letter-spacing: 0.04em;
-  padding: 4px 12px;
-  width: 190px;
-  margin-right: auto;
+  margin-bottom: 12px;
 }
 
 .label {
-  width: 84px;
+  min-width: 66px;
   text-align: start;
-font-style: normal;
-font-weight: 600;
-font-size: 18px;
-line-height: 25px;
-letter-spacing: 0.04em;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+  margin-right: 8px;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+  padding: 4px 12px;
+  margin-left: auto;
 }
 
 .toggle {
-  display: block;
-  background-color: transparent;
   position: absolute;
-  right: 10px;
   top: 50%;
+  right: 10px;
   transform: translateY(-50%);
-  margin-right: 10px;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  background-color: transparent;
   border: none;
 }
-
-// .button {
-//   background-color: red;
-// }
