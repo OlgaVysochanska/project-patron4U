@@ -63,9 +63,9 @@ export const editCurrent = createAsyncThunk(
 
 export const googleAuth = createAsyncThunk(
   'auth/google',
-  async (_, { rejectWithValue }) => {
+  async (token, { rejectWithValue }) => {
     try {
-      const result = await api.getGoogleAuth();
+      const result = await api.getCurrent(token);
       return result;
     } catch ({ response }) {
       return rejectWithValue(response.data);
