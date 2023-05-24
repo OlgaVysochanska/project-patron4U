@@ -8,6 +8,7 @@ import { isUserLogin } from 'redux/auth/authSelectors';
 import { NavLink } from 'react-router-dom';
 
 import useLang from 'shared/hooks/useLang';
+import useTheme from 'shared/hooks/useTheme';
 import locale from './locale.json';
 
 import Background from 'shared/components/Background/Background';
@@ -18,6 +19,7 @@ import styles from './LoginPage.module.scss';
 
 const LoginPage = () => {
   const { lang } = useLang();
+  const { theme } = useTheme();
   const isLogin = useSelector(isUserLogin);
   const dispatch = useDispatch();
 
@@ -36,14 +38,24 @@ const LoginPage = () => {
     //Необхідно буде вказати замість "/" іншу сторінку на котру треба буде перекидувати користувача
   }
 
+  const container =
+    theme === 'light'
+      ? styles.container
+      : `${styles.container} + ${styles.containerDark}`;
+
+  const redirectLink =
+    theme === 'light'
+      ? styles.redirectLink
+      : `${styles.redirectLink} + ${styles.redirectLinkDark}`;
+
   return (
     <>
       <Background />
-      <div className={styles.container}>
+      <div className={container}>
         <AuthTitle text={loginLang} />
         <LoginForm onSubmit={handleLogin} />
         <div>
-          <p className={styles.redirectLink}>
+          <p className={redirectLink}>
             {dontHaveAccountLang}{' '}
             <NavLink to="/Register" className={styles.navlink}>
               {registerLang}

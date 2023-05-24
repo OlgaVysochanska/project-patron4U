@@ -26,6 +26,10 @@
   }
 }
 
+.containerDark {
+  background-color: #2b3e51;
+}
+
 .redirectLink {
   margin-top: 24px;
   color: #888888;
@@ -50,4 +54,8 @@
   letter-spacing: 0.04em;
   color: #54adff;
   text-decoration-line: underline;
+}
+
+.redirectLinkDark {
+  color: #fef9f9;
 }
