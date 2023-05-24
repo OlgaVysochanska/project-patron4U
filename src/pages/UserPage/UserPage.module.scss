@@ -1,0 +1,22 @@
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 440px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .pageWrapper {
+    max-width: 704px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .pageWrapper {
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 1248px;
+  }
+}
