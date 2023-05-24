@@ -43,15 +43,15 @@ const UserDataItem = ({
   // setActiveItem,
   // setIsEditing,
   type,
-  // handleEditUser,
+  handleEditUser,
 }) => {
   const initialState = value;
   const dispatch = useDispatch();
 
-  const handleEditUser = (data) => {
-    // console.log(data)
-    dispatch(editCurrent(data));
-  };
+  // const handleEditUser = (data) => {
+  //   // console.log(data)
+  //   dispatch(editCurrent(data));
+  // };
 
   const { state, handleChange, handleSubmit } = useForm({
     initialState,
