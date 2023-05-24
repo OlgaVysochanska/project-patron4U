@@ -9,6 +9,7 @@ const CombinedContextProvider = ({ children }) => {
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
+    localStorage.setItem('theme', theme);
   }, [theme]);
 
   return (

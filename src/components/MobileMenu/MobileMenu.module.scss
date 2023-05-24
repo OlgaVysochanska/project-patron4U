@@ -63,9 +63,15 @@
 @keyframes burgerDropOut {
   0% {
     transform: translate(-50%, 0%);
-    
   }
   100% {
     transform: translate(-50%, -100%);
   }
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
