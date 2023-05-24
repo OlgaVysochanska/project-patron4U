@@ -10,7 +10,7 @@ import locale from './locale.json';
 import style from './SearchBar.module.scss';
 
 const SearchBar = ({ onSubmit }) => {
-  const { state, setState, handleChange, handleSubmitSearch } = useForm({
+  const { state, setState, handleChange, handleSubmit } = useForm({
     initialState,
     onSubmit,
   });
@@ -29,7 +29,7 @@ const SearchBar = ({ onSubmit }) => {
   };
 
   return (
-    <form className={style.searchForm} onSubmit={handleSubmitSearch}>
+    <form className={style.searchForm} onSubmit={handleSubmit}>
       <div className={style.container}>
         <label>
           <input

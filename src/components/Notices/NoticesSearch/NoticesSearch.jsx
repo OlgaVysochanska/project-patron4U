@@ -1,29 +1,17 @@
-import { useSearchParams, useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { setFilter } from 'redux/filter/filterSlice';
+import { getFilter } from 'redux/filter/filterSelectors';
 
 import SearchBar from 'shared/components/SearchBar/SearchBar';
 import style from './NoticesSearch.module.scss';
-import { getNoticesBySearch } from 'shared/services/notices';
 
 const NoticeSearch = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const filter = useSelector(getFilter);
   const dispatch = useDispatch();
-  const { category } = useParams();
-  const gender = searchParams.get('search');
-  console.log('useParams;', category);
-  console.log('searchParams.get', gender);
+  console.log('filter:', filter);
 
-  const clickOnSearch = async ({ search }) => {
-    setSearchParams({ search });
-
-    try {
-      const data = await getNoticesBySearch(search, category, gender);
-      dispatch(setFilter(data));
-    } catch (error) {
-      console.error('Error fetching notices:', error);
-    }
-  };
+  const clickOnSearch = ({ search }) => dispatch(setFilter(search));
+  // console.log('search:', search);
 
   return (
     <>

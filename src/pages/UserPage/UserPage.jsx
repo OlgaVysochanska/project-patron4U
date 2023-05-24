@@ -1,31 +1,40 @@
+// import Logout from 'components/User/Logout/Logout';
+// import PetsData from 'components/User/PetsData/PetsData';
+import UserData from 'components/User/UserData/UserData';
 import { useSelector, useDispatch } from 'react-redux';
 
-import UserData from 'components/User/UserData/UserData';
-import PetsData from 'components/User/PetsData/PetsData';
 import ModalCongrats from 'components/ModalCongrats/ModalCongrats';
 
 import { selectIsRegistered } from '../../redux/auth/authSelectors';
 import { setRegistered } from '../../redux/auth/authSlice';
 
-import styles from './UserPage.module.scss';
-
 const UserPage = () => {
-  const dispatch = useDispatch();
-
   const isRegistered = useSelector(selectIsRegistered);
 
+  const dispatch = useDispatch();
   const handleClose = e => {
     dispatch(setRegistered(false));
   };
 
   return (
     <>
-      <div className={styles.pageWrapper}>
-        <UserData />
-        <PetsData />
+      <div>
+        <div className="container">
+          <h2>My information:</h2>
+          <UserData />
+     
+        </div>
+        <h2>My pets:</h2>
+        {/* <PetsData /> */}
+        If components are ready, add them to UserPage. /UserData, UserDataItem,
+        Logout, PetsData, PetsList, PetsItem, ModalCongrats/
       </div>
 
       {isRegistered && <ModalCongrats onClose={handleClose} />}
+      <div>
+        If components are ready, add them to UserPage. /UserData, UserDataItem,
+        Logout, PetsData, PetsList, PetsItem, ModalCongrats/
+      </div>
     </>
   );
 };

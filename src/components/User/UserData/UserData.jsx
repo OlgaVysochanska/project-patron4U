@@ -2,7 +2,7 @@ import styles from './UserData.module.scss';
 import UserDataItem from './UserDataItem/UserDataItem';
 import { useState } from 'react';
 import defaultAvatar from './default_avatar.svg';
-// import Button from '../../../shared/components/Button/Button';
+import Button from '../../../shared/components/Button/Button';
 import CameraIcon from 'icons/CameraIcon';
 import { nanoid } from 'nanoid';
 // import CheckIcon from 'icons/CheckIcon';
@@ -148,37 +148,29 @@ const UserData = () => {
   // console.log(elements);
 
   return (
-    <div>
-      <h2 className={styles.title}>My information:</h2>
-      <div className={styles.container}>
-        <div className={styles.avatarWrapper}>
-          <img
-            className={styles.avatar}
-            src={avatarURL || defaultAvatar}
-            alt="Your look"
-            width={picSize}
-            height={picSize}
-          ></img>
-          <UploadWidget uriI={handleUserURL}>
-            {/* UploadWidget це button, не можна класти бтн в бтн (треба придумати
-             щось інше, поки вставила пшку, щоб не било помилку) */}
-            {/* <Button
-              // onClick={onEditPhoto}
-              type="button"
-              className={styles.btnPhoto}
-              label="Edit photo"
-              SVGComponent={CameraIconTuned}
-              showLabelFirst={false}
-            /> */}
-            <p className={styles.btnPhoto}>
-              <CameraIconTuned />
-              Edit photo
-            </p>
-          </UploadWidget>
-        </div>
-        <div className={styles.inputWrapper}>
-          {elements} <Logout />
-        </div>
+    <div className={styles.container}>
+      <div className={styles.avatarWrapper}>
+        {' '}
+        <img
+          className={styles.avatar}
+          src={avatarURL || defaultAvatar}
+          alt="Your look"
+          width={picSize}
+          height={picSize}
+        ></img>
+        <UploadWidget uriI={handleUserURL}>
+          <Button
+            // onClick={onEditPhoto}
+            type="button"
+            className={styles.btnPhoto}
+            label="Edit photo"
+            SVGComponent={CameraIconTuned}
+            showLabelFirst={false}
+          />
+        </UploadWidget>
+      </div>
+      <div className={styles.inputWrapper}>
+        {elements} <Logout />
       </div>
     </div>
   );

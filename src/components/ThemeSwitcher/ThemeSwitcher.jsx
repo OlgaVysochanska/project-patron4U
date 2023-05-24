@@ -4,11 +4,11 @@ import styles from './ThemeSwitcher.module.scss';
 
 const ThemeSwitcher = () => {
   const [isChecked, setIsChecked] = useState(true);
-  const { setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     setTheme(isChecked ? 'light' : 'dark');
-  }, [isChecked, setTheme]);
+  }, [isChecked, setTheme, theme, setIsChecked]);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);

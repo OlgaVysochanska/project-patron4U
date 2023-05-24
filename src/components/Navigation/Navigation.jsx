@@ -40,11 +40,7 @@ export default function Navigation({ isDesktop, isTablet, isMobile }) {
         </>
       )}
       {showMobileMenu && (
-        <MobileMenu
-          className="test"
-          onClick={toggleMobileMenu}
-          isMobile={isMobile}
-        >
+        <MobileMenu onClick={toggleMobileMenu} isMobile={isMobile}>
           {userLoggedIn && isMobile && (
             <UserNav
               style={{ marginTop: 40, marginBottom: 84 }}

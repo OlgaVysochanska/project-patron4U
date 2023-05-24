@@ -1,22 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Outlet, useParams } from 'react-router-dom';
-import useLang from 'shared/hooks/useLang';
-import Spiner from 'components/Spiner/Spiner';
-import locale from './locale.json';
-import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
-import { getFilter } from 'redux/filter/filterSelectors';
 
+import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
+
+import { getAllNotices } from 'redux/notices/noticesSelecors';
 import {
-  getAllNotices,
-  getLoadingNotices,
-} from 'redux/notices/noticesSelecors';
-import { fetchNoticesByCategory } from '../../redux/notices/noticesOperations';
+  fetchNoticesByCategory,
+  // fetchNoticesByUser,
+  // fetchFavoriteNoticesByUser,
+} from '../../redux/notices/noticesOperations';
 import {
   getUserFavoriteNotices,
   getUserNotices,
 } from 'shared/services/notices';
-
 import NoticesSearch from 'components/Notices/NoticesSearch/NoticesSearch';
 import NoticesCategoriesNav from 'components/Notices/NoticesCategoriesNav/NoticesCategoriesNav';
 import NoticesCategoriesList from '../../components/Notices/NoticesCategoriesList/NoticesCategoriesList';
@@ -24,19 +21,16 @@ import NoticeModal from 'components/NoticeModal/NoticeModal';
 import AddPetButton from 'components/AddPetButton/AddPetButton';
 
 import { getUser } from 'redux/auth/authSelectors';
+
 import NoticesFilters from 'components/Notices/NoticesFilters/NoticesFilters';
 
 import style from './NoticesPage.module.scss';
-import { setFilter } from 'redux/filter/filterSlice';
+
+import { getFilter } from 'redux/filter/filterSelectors';
 
 const NoticesPage = () => {
-  const { lang } = useLang();
-  const title = locale.title[lang];
   const { _id } = useSelector(getUser);
   const { category } = useParams();
-  const loadingNotices = useSelector(getLoadingNotices);
-
-  const filter = useSelector(getFilter);
 
   const allNotices = useSelector(getAllNotices);
 
@@ -44,25 +38,25 @@ const NoticesPage = () => {
   const [dataNotices, setDataNotices] = useState(null);
   const { isModalOpen, openModal, closeModal } = useToggleModalWindow();
 
+  const filter = useSelector(getFilter);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setFilter(''));
     dispatch(fetchNoticesByCategory(category));
   }, [dispatch, category]);
 
   const onClickOwn = async () => {
-    const { data } = await getUserNotices(_id);
+    const data = await getUserNotices(_id);
     setDataNotices(data);
   };
 
   const onClickFavorite = async () => {
-    const { data } = await getUserFavoriteNotices(_id);
+    const data = await getUserFavoriteNotices(_id);
     setDataNotices(data);
   };
 
   const onClearnData = () => {
-    dispatch(setFilter(''));
     setDataNotices(null);
   };
 
@@ -71,14 +65,29 @@ const NoticesPage = () => {
     openModal();
   };
 
-  if (loadingNotices) {
-    return <Spiner />;
-  }
+  const getVisibleNotices = useCallback(() => {
+    if (!filter) {
+      return allNotices;
+    }
+    const normalizedFilter = filter.toLowerCase();
+    const result = allNotices.filter(notice =>
+      notice.comments.toLowerCase().includes(normalizedFilter)
+    );
+    console.log('filteredNotices:', result);
+    return result;
+  }, [allNotices, filter]);
+  console.log('filtered is set :', getVisibleNotices());
+  console.log('allNotices :', allNotices);
+
+  useEffect(() => {
+    if (filter) {
+      getVisibleNotices();
+    }
+  }, [getVisibleNotices, filter]);
 
   return (
     <>
       <div className={style.noticePageContainer}>
-        <h2 className={style.title}>{title}</h2>
         <NoticesSearch />
         <div className={style.wrapper}>
           <NoticesCategoriesNav
@@ -91,15 +100,11 @@ const NoticesPage = () => {
             <AddPetButton />
           </div>
         </div>
-
-        {!dataNotices && !filter && (
+        {!dataNotices && (
           <NoticesCategoriesList notices={allNotices} loadMore={loadMore} />
         )}
-        {dataNotices && !filter && (
+        {dataNotices && (
           <NoticesCategoriesList notices={dataNotices} loadMore={loadMore} />
-        )}
-        {filter && (
-          <NoticesCategoriesList notices={filter} loadMore={loadMore} />
         )}
         {isModalOpen && <NoticeModal notice={notice} closeModal={closeModal} />}
       </div>

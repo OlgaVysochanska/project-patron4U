@@ -3,23 +3,6 @@
   margin-bottom: 40px;
 }
 
-.title {
-  padding-bottom: 10px;
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 1.375;
-  text-align: center;
-  color: #111;
-
-  @media screen and (min-width: 768px) {
-    padding-top: 50px;
-    padding-bottom: 20px;
-    font-size: 48px;
-  }
-}
-
 .wrapper {
   display: flex;
   justify-content: space-between;

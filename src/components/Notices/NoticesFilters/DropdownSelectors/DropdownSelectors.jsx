@@ -3,7 +3,7 @@ import styles from './DropdownSelectors.module.scss';
 import SelectedButtons from '../SelectedButton';
 import AgeFilter from './AgeFilter';
 import GenderFilter from './GenderFilter';
-// import sendRequestToBackend from '../backendApi';
+import sendRequestToBackend from '../backendApi';
 
 const DropdownSelectors = () => {
   const [isOpenAge, setisOpenAge] = useState(false);
@@ -60,16 +60,16 @@ const DropdownSelectors = () => {
     setisOpenGender(!isOpenGender);
   };
 
-  // const handleSendRequest = () => {
-  //   // Відправка запиту на бекенд з обраними параметрами
-  //   const requestParams = {
-  //     ages: selectedAges,
-  //     genders: selectedGenders,
-  //   };
-  //   console.log('Sending request:', requestParams);
-  //   // Виконати логіку відправки запиту на бекенд тут
-  //   sendRequestToBackend(requestParams);
-  // };
+  const handleSendRequest = () => {
+    // Відправка запиту на бекенд з обраними параметрами
+    const requestParams = {
+      ages: selectedAges,
+      genders: selectedGenders,
+    };
+    console.log('Sending request:', requestParams);
+    // Виконати логіку відправки запиту на бекенд тут
+    sendRequestToBackend(requestParams);
+  };
 
   useEffect(() => {
     if (listRefAge.current) {
@@ -97,12 +97,6 @@ const DropdownSelectors = () => {
     }
   }, [isOpenAge, listHeight]);
 
-  const requestParams = {
-    ages: selectedAges,
-    genders: selectedGenders,
-  };
-  console.log('Sending request:', requestParams);
-
   return (
     <>
       <div className={styles.dropdownContainer}>
@@ -122,20 +116,18 @@ const DropdownSelectors = () => {
           listRef={listRefGender}
           marginTop={isOpenAge && `${listHeight}px`}
         />
-        {/* <button className={styles.temporaryButton} onClick={handleSendRequest}>
+        <button className={styles.temporaryButton} onClick={handleSendRequest}>
           Send Request
-        </button> */}
+        </button>
       </div>
-      <div className={styles.selectedWrapper}>
-        <SelectedButtons
-          buttons={selectedAgeButtons}
-          onRemove={handleRemoveSelectedAge}
-        />
-        <SelectedButtons
-          buttons={selectedGenderButtons}
-          onRemove={handleRemoveSelectedGender}
-        />
-      </div>
+      <SelectedButtons
+        buttons={selectedAgeButtons}
+        onRemove={handleRemoveSelectedAge}
+      />
+      <SelectedButtons
+        buttons={selectedGenderButtons}
+        onRemove={handleRemoveSelectedGender}
+      />
     </>
   );
 };

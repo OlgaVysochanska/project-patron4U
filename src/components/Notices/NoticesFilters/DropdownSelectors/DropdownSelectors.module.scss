@@ -1,6 +1,5 @@
 .dropdownContainer {
-  position: absolute;
-  z-index: 1000;
+  position: relative;
   width: 136px;
   height: 102px;
   margin-top: 8px;
@@ -17,24 +16,7 @@
   margin-bottom: 8px;
 }
 
-.selectedWrapper {
-  display: flex;
-  flex-direction: row-reverse;
-  position: absolute;
-  top: 0;
-  right: 100%;
-  // }
-  // .selectedWrapperButton {
-  //   display: flex;
-  //   flex-direction: row-reverse;
-  // position: absolute;
-  // top: 0;
-  // right: 100%;
-}
-
 .dropdownContainerSelector {
-  // position: absolute;
-  // z-index: 1000;
   position: relative;
   margin-bottom: 8px;
 }
@@ -132,7 +114,6 @@
 }
 
 // ================
-
 .selectedButton {
   width: 80px;
   height: 35px;

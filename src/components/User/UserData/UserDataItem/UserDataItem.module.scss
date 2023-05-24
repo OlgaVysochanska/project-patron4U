@@ -1,43 +1,69 @@
 .inputWrapper {
   position: relative;
   display: flex;
-  align-items: center;
+  // flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-around;
+margin-bottom: 12px;
+  text-align: center;
+  // background-color: red;
+  font-style: normal;
+  font-family: 'Manrope';
+  margin-left: auto ;
+margin-right: auto ;
+font-weight: 600;
+font-size: 14px;
+line-height: 19px;
+align-items: center;
+letter-spacing: 0.04em;
 }
 
 .form {
-  margin-bottom: 12px;
-}
-
-.label {
-  min-width: 66px;
-  text-align: start;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 1.35;
-  letter-spacing: 0.04em;
-  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  // justify-content: space-between;
+  // margin-left: auto;
+  // margin-right: auto;
+  // background-color: red;
 }
 
 .input {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 0.04em;
+  width: 190px;
+  font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+display: flex;
+align-items: center;
+letter-spacing: 0.04em;
   padding: 4px 12px;
-  margin-left: auto;
+  width: 190px;
+  margin-right: auto;
+}
+
+.label {
+  width: 84px;
+  text-align: start;
+font-style: normal;
+font-weight: 600;
+font-size: 18px;
+line-height: 25px;
+letter-spacing: 0.04em;
 }
 
 .toggle {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   background-color: transparent;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 10px;
+  align-items: center;
   border: none;
 }
+
+// .button {
+//   background-color: red;
+// }

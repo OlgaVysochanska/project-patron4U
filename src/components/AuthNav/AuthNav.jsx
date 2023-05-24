@@ -14,14 +14,14 @@ export default function AuthNav({ onClick }) {
     <nav className={styles.nav}>
       <ul className={styles.list}>
         <li className={styles.item} onClick={onClick}>
-          <NavLink className={styles.link} to="/register">
-            {registerLang}
+          <NavLink className={`${styles.link} ${styles.login}`} to="/login">
+            {loginLang}
+            <PawprintIcon className={styles.icon} />
           </NavLink>
         </li>
         <li className={styles.item} onClick={onClick}>
-          <NavLink className={styles.link} to="/login">
-            {loginLang}
-            <PawprintIcon className={styles.icon} />
+          <NavLink className={styles.link} to="/register">
+            {registerLang}
           </NavLink>
         </li>
       </ul>

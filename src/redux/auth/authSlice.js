@@ -7,9 +7,9 @@ import {
   login,
   current,
   logout,
+  addUserPets,
   fetchToggleFavoriteNotice,
   editCurrent,
-  googleAuth,
 } from './authOperations';
 
 const initialState = {
@@ -71,22 +71,6 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = payload;
       })
-      .addCase(googleAuth.pending, state => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(googleAuth.fulfilled, (state, { payload }) => {
-        const { user, pets, token } = payload;
-        state.loading = false;
-        state.user = user;
-        state.token = token;
-        state.isLogin = true;
-        state.pets = pets;
-      })
-      .addCase(googleAuth.rejected, (state, { payload }) => {
-        state.loading = false;
-        state.error = payload;
-      })
       .addCase(current.pending, state => {
         state.loading = true;
         state.error = null;
@@ -120,6 +104,19 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = payload;
       })
+      .addCase(addUserPets.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addUserPets.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.user.myPets = payload;
+        state.isLogin = true;
+      })
+      .addCase(addUserPets.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      })
       .addCase(fetchToggleFavoriteNotice.pending, state => {
         state.loading = true;
         state.error = null;
@@ -135,6 +132,7 @@ const authSlice = createSlice({
       .addCase(editCurrent.pending, state => {
         state.loading = true;
         state.error = null;
+        
       })
       .addCase(editCurrent.fulfilled, (state, { payload }) => {
         state.loading = false;
@@ -144,7 +142,7 @@ const authSlice = createSlice({
       .addCase(editCurrent.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
-      });
+      })
   },
 });
 

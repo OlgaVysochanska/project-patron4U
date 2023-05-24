@@ -1,16 +1,18 @@
-import PetsList from './PetsList/PetsList';
 import AddPetButton from 'components/AddPetButton/AddPetButton';
+import PetsList from './PetsList/PetsList';
 
 import styles from './PetsData.module.scss';
 
-const PetsData = () => {
+const { petsDataContainer, petsHeader, petsTitle } = styles;
+
+const PetsData = ({ data }) => {
   return (
-    <div className={styles.petsDataContainer}>
-      <div className={styles.petsHeader}>
-        <h2 className={styles.petsTitle}>My pets:</h2>
+    <div className={petsDataContainer}>
+      <div className={petsHeader}>
+        <h3 className={petsTitle}>My pets:</h3>
         <AddPetButton />
       </div>
-      <PetsList />
+      <PetsList data={data} />
     </div>
   );
 };

@@ -1,50 +1,67 @@
-.title {
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 1.35;
-  margin-bottom: 18px;
-}
-
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 240px;
-  max-width: 440px;
-  margin-bottom: 40px;
-  padding: 20px 8px 24px 8px;
+  width: 280px;
+  padding: 20px 8px 25px 8px;
   text-align: center;
   background: #ffffff;
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
   border-radius: 20px;
-
-  @media screen and (max-width: 480px) {
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding: 20px;
+    width: 704px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
-
-.avatarWrapper {
-  margin-bottom: 21px;
+.awatarWrapper {
+  @media screen and (min-width: 768px) {
+    margin-bottom: 32px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
-
 .avatar {
   width: 182px;
   height: 182px;
   border-radius: 40px;
-  margin-bottom: 14px;
-  margin-left: auto;
-  margin-right: auto;
+  display: block;
+  text-align: center;
+  margin-left: 71px;
+  margin-right: 71px;
+
+  @media screen and (min-width: 1280) {
+    margin-left: 106px;
+    margin-right: 106px;
+  }
 }
 
+// .img {
+
+// }
 .inputWrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 264px;
+  justify-content: space-evenly;
+  width: 280px;
+}
+
+.input {
+  background-color: red;
+}
+
+.div {
+  display: flex;
 }
 
 .btnPhoto {
   display: flex;
   align-items: center;
+  // width: 24px;
+  // height: 10px;
+
   cursor: pointer;
   background-color: transparent;
   color: #888888;
@@ -53,28 +70,7 @@
   & svg {
     width: 16px;
     height: 16px;
-    margin-right: 16px;
+    padding-right: 16px;
     stroke: #54adff;
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1279px) {
-  .container {
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    padding: 20px;
-    padding-right: 76px;
-    max-width: 664px;
-  }
-
-  .avatarWrapper {
-    margin-bottom: 0;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .container {
-    max-width: 390px;
-    padding: 20px 24px 20px 16px;
   }
 }
