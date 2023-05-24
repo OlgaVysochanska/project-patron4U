@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { format } from 'date-fns';
@@ -10,6 +10,7 @@ import { fetchAddPet } from '../../redux/pets/petsOperations';
 
 import { getLoadingNotices } from '../../redux/notices/noticesSelecors';
 
+import { current } from '../../redux/auth/authOperations';
 import { getUser } from '../../redux/auth/authSelectors';
 
 import { addUserPets } from '../../redux/auth/authOperations';
@@ -72,7 +73,7 @@ const AddPetForm = ({ onSubmit }) => {
 
   const loading = useSelector(getLoadingNotices);
   const currentUser = useSelector(getUser);
-
+  
   const validateData = () => {
     let formData = [];
 
