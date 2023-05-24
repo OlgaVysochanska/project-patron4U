@@ -91,9 +91,9 @@ const UserData = () => {
   // };
 
   const handleUserURL = avatarURL => {
-    console.log(avatarURL);
+    // console.log(avatarURL);
 const obj = {avatarURL: `${avatarURL}`}
-console.log(obj)
+// console.log(obj)
 handleEditUser(obj)
     // handleChange({
     //   target: {
