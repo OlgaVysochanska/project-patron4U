@@ -1,4 +1,4 @@
-import { useState} from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { format } from 'date-fns';
@@ -11,9 +11,6 @@ import { fetchAddPet } from '../../redux/pets/petsOperations';
 import { getLoadingNotices } from '../../redux/notices/noticesSelecors';
 
 import { current } from '../../redux/auth/authOperations';
-import { getUser } from '../../redux/auth/authSelectors';
-
-import { addUserPets } from '../../redux/auth/authOperations';
 
 import ChooseOption from './ChooseOption/ChooseOption';
 import PersonalDetail from './PersonalDetail/PersonalDetail';
@@ -72,8 +69,7 @@ const AddPetForm = ({ onSubmit }) => {
   const dispatch = useDispatch();
 
   const loading = useSelector(getLoadingNotices);
-  const currentUser = useSelector(getUser);
-  
+
   const validateData = () => {
     let formData = [];
 
@@ -197,20 +193,12 @@ const AddPetForm = ({ onSubmit }) => {
     setActiveTab(activeTab => activeTab - 1);
   };
 
-  const handleUserDataFetch = async id => {
-    try {
-      await dispatch(addUserPets([...currentUser.myPets, id]));
-    } catch (error) {
-      NotiflixMessage({ type: 'info', data: error.message });
-    }
-  };
-
-   const handleDataFetch = async () => {
+  const handleDataFetch = async () => {
     try {
       const date = format(birthDate, 'dd.MM.yyyy');
       const category = categories[activeCategory].category;
       const invalidObjects = validateData();
-  
+
       if (!invalidObjects.length && activeCategory === 1) {
         try {
           await dispatch(
@@ -281,7 +269,7 @@ const AddPetForm = ({ onSubmit }) => {
               category,
             })
           );
-          
+
           if (result) {
             dispatch(current());
           } else {
@@ -294,15 +282,15 @@ const AddPetForm = ({ onSubmit }) => {
         } catch (error) {
           NotiflixMessage({ type: 'info', data: error.message });
         }
-      }  
+      }
     } catch (error) {
-      return false;  
+      return false;
     }
   };
 
   const handleFormTabNvigationDone = async () => {
     const dataFetchResult = await handleDataFetch();
-  
+
     if (dataFetchResult) {
       if (activeCategory === 0) {
         navigate('/user');
