@@ -55,7 +55,7 @@ const UserData = () => {
 
   const handleEditUser = data => {
     dispatch(editCurrent(data));
-    // console.log(data);
+    console.log(data);
   };
 
   const {
@@ -91,13 +91,16 @@ const UserData = () => {
   // };
 
   const handleUserURL = avatarURL => {
-    console.log(avatarURL);
-    handleChange({
-      target: {
-        name: 'avatarURL',
-        value: avatarURL,
-      },
-    });
+    // console.log(avatarURL);
+const obj = {avatarURL: `${avatarURL}`}
+// console.log(obj)
+handleEditUser(obj)
+    // handleChange({
+    //   target: {
+    //     name: 'avatarURL',
+    //     value: avatarURL,
+    //   },
+    // });
   };
 
   const elements = Object.entries({ name, email, birthday, phone, city }).map(
