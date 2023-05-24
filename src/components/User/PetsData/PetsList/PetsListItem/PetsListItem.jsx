@@ -10,8 +10,13 @@ import styles from './PetsListItem.module.scss';
 const PetsListItem = ({ _id, name, date, breed, petURL, comments }) => {
   const dispatch = useDispatch();
 
-  const handleDeletePet = id => {
-    dispatch(fetchDeletePet(id));
+ const handleDeletePet = async id => {
+    try {
+      await dispatch(fetchDeletePet(id));
+      dispatch(current());
+    } catch (error) {
+      NotiflixMessage({ type: 'info', data: error.message });
+    }
   };
 
   return (
