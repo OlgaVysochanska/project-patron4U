@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import styles from './DropdownSelectors.module.scss';
+import { setRequestParams } from 'redux/filter/requestParamsSlice';
 import SelectedButtons from '../SelectedButton';
 import AgeFilter from './AgeFilter';
 import GenderFilter from './GenderFilter';
-// import sendRequestToBackend from '../backendApi';
 
 const DropdownSelectors = () => {
   const [isOpenAge, setisOpenAge] = useState(false);
@@ -60,16 +61,15 @@ const DropdownSelectors = () => {
     setisOpenGender(!isOpenGender);
   };
 
-  // const handleSendRequest = () => {
-  //   // Відправка запиту на бекенд з обраними параметрами
-  //   const requestParams = {
-  //     ages: selectedAges,
-  //     genders: selectedGenders,
-  //   };
-  //   console.log('Sending request:', requestParams);
-  //   // Виконати логіку відправки запиту на бекенд тут
-  //   sendRequestToBackend(requestParams);
-  // };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const requestParams = {
+      ages: selectedAges,
+      genders: selectedGenders,
+    };
+    console.log('Sending request:', requestParams);
+    dispatch(setRequestParams(requestParams));
+  }, [selectedAges, selectedGenders, dispatch]);
 
   useEffect(() => {
     if (listRefAge.current) {
@@ -97,12 +97,6 @@ const DropdownSelectors = () => {
     }
   }, [isOpenAge, listHeight]);
 
-  const requestParams = {
-    ages: selectedAges,
-    genders: selectedGenders,
-  };
-  console.log('Sending request:', requestParams);
-
   return (
     <>
       <div className={styles.dropdownContainer}>
@@ -126,16 +120,18 @@ const DropdownSelectors = () => {
           Send Request
         </button> */}
       </div>
-      <div className={styles.selectedWrapper}>
-        <SelectedButtons
-          buttons={selectedAgeButtons}
-          onRemove={handleRemoveSelectedAge}
-        />
-        <SelectedButtons
-          buttons={selectedGenderButtons}
-          onRemove={handleRemoveSelectedGender}
-        />
-      </div>
+      {(selectedAgeButtons.length > 0 || selectedGenderButtons.length > 0) && (
+        <div className={styles.selectedWrapper}>
+          <SelectedButtons
+            buttons={selectedAgeButtons}
+            onRemove={handleRemoveSelectedAge}
+          />
+          <SelectedButtons
+            buttons={selectedGenderButtons}
+            onRemove={handleRemoveSelectedGender}
+          />
+        </div>
+      )}
     </>
   );
 };
