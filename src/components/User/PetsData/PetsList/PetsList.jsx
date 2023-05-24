@@ -8,7 +8,7 @@ const PetsList = () => {
   const userPets = useSelector(getUserPets);
 
   const petsItem = userPets.map(({ _id, ...props }) => (
-    <PetsListItem key={_id} {...props} />
+   <PetsListItem key={_id} id={_id} {...props} />
   ));
 
   return <ul>{petsItem}</ul>;
