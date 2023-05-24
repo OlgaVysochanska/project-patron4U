@@ -9,7 +9,7 @@ const PetsData = ({ data }) => {
   return (
     <div className={petsDataContainer}>
       <div className={petsHeader}>
-        <h3 className={petsTitle}>My pets:</h3>
+        <h2 className={petsTitle}>My pets:</h2>
         <AddPetButton />
       </div>
       <PetsList data={data} />
