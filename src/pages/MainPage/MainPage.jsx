@@ -3,7 +3,6 @@ import Background from '../../shared/components/Background/Background';
 import scss from './MainPage.module.scss';
 import Logout from 'components/User/Logout';
 import useLang from 'shared/hooks/useLang';
-import useTheme from 'shared/hooks/useTheme';
 import locale from './locale.json';
 
 import petsMob1x from '../../images/pets_mob_1x.png';
@@ -16,7 +15,6 @@ import petsDes2x from '../../images/pets_des_2x.png';
 const MainPage = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const { lang } = useLang();
-  const { theme } = useTheme();
 
   const title = locale.title[lang];
 
@@ -54,15 +52,13 @@ const MainPage = () => {
     }
   };
 
-  const titleStyle =
-    theme === 'light' ? scss.title : `${scss.title} + ${scss.titleDark}`;
   return (
     <>
       <Background />
       <div className={scss.screen}>
         <Logout />
         <img className={scss.pets} src={getImage()} alt="pets" loading="lazy" />
-        <h1 className={titleStyle}>{title}</h1>
+        <h1 className={scss.title}>{title}</h1>
       </div>
     </>
   );

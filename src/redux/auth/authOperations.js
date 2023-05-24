@@ -61,24 +61,24 @@ export const editCurrent = createAsyncThunk(
   }
 );
 
+export const googleAuth = createAsyncThunk(
+  'auth/google',
+  async (token, { rejectWithValue }) => {
+    try {
+      const result = await api.getCurrent(token);
+      return result;
+    } catch ({ response }) {
+      return rejectWithValue(response.data);
+    }
+  }
+);
+
 export const logout = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
       const data = await api.logout();
       return data;
-    } catch ({ response }) {
-      return rejectWithValue(response);
-    }
-  }
-);
-
-export const addUserPets = createAsyncThunk(
-  'auth/addUserPets',
-  async (data, { rejectWithValue }) => {
-    try {
-      const result = await api.addUserPets(data);
-      return result;
     } catch ({ response }) {
       return rejectWithValue(response);
     }

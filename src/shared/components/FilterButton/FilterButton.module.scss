@@ -1,6 +1,7 @@
 .filterButton {
   width: 129px;
   height: 40px;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,4 +35,22 @@
 
 .label.active {
   color: white;
+}
+
+@media (max-width: 768px) {
+  .filterButton {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    // margin-top: 20px;
+  }
+
+  .filterIcon {
+    margin-left: -8px;
+    padding: 0;
+  }
+
+  .label {
+    display: none;
+  }
 }

@@ -1,11 +1,4 @@
 @import-normalize; /* bring in normalize.css styles */
-:root[data-theme='light'] {
-  --background-color: #fef9f9;
-}
-
-:root[data-theme='dark'] {
-  --background-color: #2b3e51;
-}
 
 body {
   margin: 0 auto;
@@ -15,7 +8,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
-  background-color: var(--background-color);
+  background-color: #fef9f9;
   max-width: 1280px;
   padding-right: 20px;
   padding-left: 20px;

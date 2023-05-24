@@ -7,7 +7,6 @@ import { isUserLogin } from 'redux/auth/authSelectors';
 import { setRegistered } from '../../redux/auth/authSlice';
 
 import useLang from 'shared/hooks/useLang';
-import useTheme from 'shared/hooks/useTheme';
 import locale from './locale.json';
 
 import Background from 'shared/components/Background/Background';
@@ -18,7 +17,6 @@ import styles from './RegisterPage.module.scss';
 
 const RegisterPage = () => {
   const { lang } = useLang();
-  const { theme } = useTheme();
   const isLogin = useSelector(isUserLogin);
 
   const registrationLang = locale.registration[lang];
@@ -41,24 +39,14 @@ const RegisterPage = () => {
     return <Navigate to="/user" />;
   }
 
-  const container =
-    theme === 'light'
-      ? styles.container
-      : `${styles.container} + ${styles.containerDark}`;
-
-  const redirectLink =
-    theme === 'light'
-      ? styles.redirectLink
-      : `${styles.redirectLink} + ${styles.redirectLinkDark}`;
-
   return (
     <>
       <Background />
-      <div className={container}>
+      <div className={styles.container}>
         <AuthTitle text={registrationLang} />
         <RegisterForm onSubmit={handleRegister} />
         <div>
-          <p className={redirectLink}>
+          <p className={styles.redirectLink}>
             {alreadyHaveAccountLang}{' '}
             <NavLink to="/login" className={styles.navlink}>
               {loginLang}{' '}
