@@ -4,6 +4,7 @@ import Navigation from 'components/Navigation/Navigation';
 import styles from './Header.module.scss';
 import LanguageSwitcher from 'components/LanguageSwitcher/LanguageSwitcher';
 import ThemeSwitcher from 'components/ThemeSwitcher/ThemeSwitcher';
+import useTheme from 'shared/hooks/useTheme';
 
 export default function Header() {
   // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -12,6 +13,8 @@ export default function Header() {
     window.innerWidth >= 768 && window.innerWidth < 1280
   );
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  const { theme } = useTheme();
 
   useEffect(() => {
     const handleResize = () => {
@@ -26,8 +29,13 @@ export default function Header() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const container =
+    theme === 'light'
+      ? styles.container
+      : `${styles.container} + ${styles.containerDark}`;
+
   return (
-    <header className={styles.container}>
+    <header className={container}>
       <Logo isMobile={isMobile} />
       {!isMobile && <LanguageSwitcher />}
       {!isMobile && <ThemeSwitcher />}
