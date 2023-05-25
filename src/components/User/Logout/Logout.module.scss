@@ -1,23 +1,60 @@
+.logoutContainer {
+  display: flex;
+  align-items: center;
+}
+
 .btnLog {
   display: flex;
   align-items: center;
-  letter-spacing: 0.04em;
+  justify-content: center;
+  margin-right: 12px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  width: 36px;
+  height: 30px;
+  border-radius: 50%;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover,
+  &:focus {
+    box-shadow: 7px 13px 14px rgba(116, 177, 232, 0.24);
+  }
+}
+
+.btnIcon {
+  stroke: #54adff;
+}
+
+.btnLabel {
   font-weight: 500;
   font-size: 16px;
   line-height: 22px;
-  cursor: pointer;
-  background-color: transparent;
+  letter-spacing: 0.04em;
   color: #888888;
-  border: none;
-
-  & svg {
-    width: 16px;
-    height: 16px;
-    padding-right: 16px;
-    stroke: #54adff;
-  }
 }
 
 .btnLogDark {
   color: #fff;
+}
+
+.modalTitle {
+  margin-bottom: 44px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.37;
+  letter-spacing: 0.04em;
+}
+
+.modalIcon {
+  margin-left: 8px;
+  stroke: #fef9f9;
+}
+
+@media screen and (min-width: 768px) {
+  .modalTitle {
+    margin-bottom: 48px;
+    font-size: 36px;
+    line-height: 1.36;
+  }
 }

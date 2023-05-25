@@ -1,15 +1,24 @@
 import { useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 
+import useLang from 'shared/hooks/useLang';
+
 import Button from '../Button';
 
 import CrossSmallIcon from 'icons/CrossSmallIcon';
+
+import locale from './locale.json';
 
 import styles from './ModalApproveAction.module.scss';
 
 const modalEl = document.querySelector('#modal-root');
 
 function ModalApproveAction({ closeModal, children, fn, icon }) {
+  const { lang } = useLang();
+
+  const cancel = locale.cancel[lang];
+  const yes = locale.yes[lang];
+
   const closeModalOnClick = useCallback(
     ({ key, target, currentTarget }) => {
       if (key === 'Escape' || target === currentTarget) {
@@ -34,12 +43,12 @@ function ModalApproveAction({ closeModal, children, fn, icon }) {
         {children}
         <div className={styles.btnWrapper}>
           <Button
-            label="Cancel"
+            label={cancel}
             className={styles.button}
             onClick={closeModal}
           ></Button>
           <Button
-            label="Yes"
+            label={yes}
             className={styles.button}
             SVGComponent={icon}
             onClick={fn}
