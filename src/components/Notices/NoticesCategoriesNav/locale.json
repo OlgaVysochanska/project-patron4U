@@ -1,0 +1,26 @@
+{
+  "sell": {
+    "eng": "sell",
+    "ua": "продається"
+  },
+
+  "lostFound": {
+    "eng": "lost/found",
+    "ua": "загублено/знайдено"
+  },
+
+  "inGoodHands": {
+    "eng": "in good hands",
+    "ua": "в гарні руки"
+  },
+  
+  "favorite": {
+    "eng": "favorite",
+    "ua": "подобається"
+  },
+
+  "own": {
+    "eng": "own",
+    "ua": "власне оголошення"
+  }
+}

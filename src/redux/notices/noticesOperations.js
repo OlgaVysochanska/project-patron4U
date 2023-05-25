@@ -52,28 +52,27 @@ export const fetchNoticesByCategory = createAsyncThunk(
   }
 );
 
-// export const fetchNoticesByUser = createAsyncThunk(
-//   'notices/own',
-//   async ( id, { rejectWithValue }) => {
-//     try {
-//       const data = await api.getUserNotices(id);
-//       return data;
+export const fetchNoticesByUser = createAsyncThunk(
+  'notices/own',
+  async (id, { rejectWithValue }) => {
+    try {
+      const { data, totalPages, currentPage } = await api.getUserNotices(id);
+      return { data, totalPages, currentPage };
+    } catch ({ response }) {
+      return rejectWithValue(response.data);
+    }
+  }
+);
 
-//     } catch ({ response }) {
-//       return rejectWithValue(response.data);
-//     }
-//   }
-// );
-
-// export const fetchFavoriteNoticesByUser = createAsyncThunk(
-//   'notices/favorite',
-//   async ( id, { rejectWithValue }) => {
-//     try {
-//       const data = await api.getUserFavoriteNotices(id);
-//       return data;
-
-//     } catch ({ response }) {
-//       return rejectWithValue(response.data);
-//     }
-//   }
-// );
+export const fetchFavoriteNoticesByUser = createAsyncThunk(
+  'notices/favorite',
+  async (id, { rejectWithValue }) => {
+    try {
+      const { data, totalPages, currentPage } =
+        await api.getUserFavoriteNotices(id);
+      return { data, totalPages, currentPage };
+    } catch ({ response }) {
+      return rejectWithValue(response.data);
+    }
+  }
+);
