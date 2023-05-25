@@ -7,6 +7,7 @@ import locale from './locale.json';
 import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
 import { getFilter } from 'redux/filter/filterSelectors';
 import Pagination from 'shared/components/Pagination/Pagination';
+import Title from 'shared/components/Title/Title';
 
 import {
   getAllNotices,
@@ -86,7 +87,7 @@ const NoticesPage = () => {
   return (
     <>
       <div className={style.noticePageContainer}>
-        <h2 className={style.title}>{title}</h2>
+        <Title children={title} />
         <NoticesSearch />
         <div className={style.wrapper}>
           <NoticesCategoriesNav
