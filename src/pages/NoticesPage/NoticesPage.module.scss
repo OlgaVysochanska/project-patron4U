@@ -6,8 +6,9 @@
   margin-top: 40px;
 
   margin: 0 auto;
-  @media screen and (max-width: 767px) { 
-  max-width: 440px;
+
+  @media screen and (max-width: 767px) {
+    max-width: 440px;
   }
   @media screen and (min-width: 768px) and (max-width: 959px) {
     width: 704px;
@@ -18,7 +19,7 @@
   @media screen and (min-width: 1280px) {
     width: 1248px;
   }
- 
+
   border: 1px solid red;
 }
 
@@ -47,68 +48,69 @@
   border: 1px solid red;
   max-width: 1248px;
   margin-bottom: 48px;
-  @media screen and (max-width: 767px) { 
+  @media screen and (max-width: 767px) {
     margin-bottom: 32px;
     max-width: 440px;
   }
 }
 
 .categoryFilterWrapper {
-   display: flex;
-   flex-direction: row;
-   align-items: center;
-   justify-content: space-between;
-   flex: 1;
-   border: 1px solid red;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  border: 1px solid red;
 }
 
 .addPetWrapper {
-  margin-left: 16px; 
-   z-index: 100;
-   @media (max-width: 767px) {
+  margin-left: 16px;
+  z-index: 100;
+  @media (max-width: 767px) {
     display: block;
     position: absolute;
     z-index: 100;
     right: 0;
-    top:340px;
-    margin-left: 0px; 
+    top: 340px;
+    margin-left: 0px;
   }
 }
-  .noticePageContainer {
-    width: 704px;
-    margin-bottom: 60px;
-    margin-top: 80px;
-  }
+// .noticePageContainer {
+//   width: 704px;
+//   margin-bottom: 60px;
+//   margin-top: 80px;
+// }
+
 .categoryWrapper {
   align-self: baseline;
   border: 1px solid red;
 }
 
 .filterWrapper {
-   align-self:flex-end;
-   margin-left: 16px; 
+  align-self: flex-end;
+  margin-left: 16px;
 
-   @media (max-width: 1280px) {
-    align-self:flex-start;
-    } 
+  @media (max-width: 1280px) {
+    align-self: flex-start;
+  }
   @media (max-width: 895px) {
-    align-self:baseline;
-    } 
-   
+    align-self: baseline;
+  }
+
   @media (max-width: 887px) {
-  align-self:baseline;
+    align-self: baseline;
   }
 
   @media (max-width: 768px) {
-    align-self:flex-start;
- }
+    align-self: flex-start;
+  }
 }
 
-.searchWrapper{
+.searchWrapper {
   margin-bottom: 20px;
   @media (min-width: 768px) {
     margin-bottom: 40px;
- } 
+  }
 }
 
 // .noticePageContainer {
@@ -171,4 +173,4 @@
 //   .wrapper {
 //     margin-bottom: 42px;
 //   }
-// 
+//
