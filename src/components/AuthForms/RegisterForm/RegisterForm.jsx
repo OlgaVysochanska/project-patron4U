@@ -35,6 +35,7 @@ const RegisterForm = ({ onSubmit }) => {
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidPass, setIsValidPass] = useState(true);
   const [isValidConf, setIsValidConf] = useState(true);
+  const [firstEmailValidation, setFirstEmailValidation] = useState(false);
 
   const registrationLang = locale.registration[lang];
   const emailLang = locale.email[lang];
@@ -46,6 +47,24 @@ const RegisterForm = ({ onSubmit }) => {
 
   //перевірка на встановлення властивості disabled для кнопки
   const [agreed, setAgreed] = useState(true);
+
+  useEffect(() => {
+    //перевіряємо чи співпадають паролі і від цього блокуємо/розблоковуємо кнопку реєстрації:
+    if (password === confirmPassword && firstEmailValidation && isValidEmail) {
+      setAgreed(false);
+    }
+    if (password !== confirmPassword) {
+      setAgreed(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [confirmPassword, setAgreed]);
+
+  const mainEmailValidation = e => {
+    if (!firstEmailValidation && isValidEmail) {
+      return;
+    }
+    setIsValidEmail(e.target.checkValidity());
+  };
 
   const handleConfirmPasswordChange = event => {
     const confirmValue = event.target.value;
@@ -59,16 +78,6 @@ const RegisterForm = ({ onSubmit }) => {
   const toggleShowConfirmPassword = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
-
-  useEffect(() => {
-    //перевіряємо чи співпадають паролі і від цього блокуємо/розблоковуємо кнопку реєстрації:
-    if (password === confirmPassword) {
-      setAgreed(false);
-    }
-    if (password !== confirmPassword) {
-      setAgreed(true);
-    }
-  }, [password, confirmPassword, setAgreed]);
 
   return (
     <form
@@ -84,6 +93,7 @@ const RegisterForm = ({ onSubmit }) => {
           id="email"
           value={email}
           placeholder={emailLang}
+          // ref={emailRef}
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" // Патерн для валідації email
           title={validEmailLang} // Підказка для патерну
           style={{
@@ -94,6 +104,12 @@ const RegisterForm = ({ onSubmit }) => {
           aditionalClass={isValidEmail ? styles.inputCustomSettings : ''}
           handleChange={e => {
             handleChange(e);
+            mainEmailValidation(e);
+            // setIsValidEmail(e.target.checkValidity());
+            // setNextEmailValidations(e.target.checkValidity());
+          }}
+          onBlur={e => {
+            setFirstEmailValidation(true);
             setIsValidEmail(e.target.checkValidity());
           }}
           {...fields.email}
@@ -146,7 +162,7 @@ const RegisterForm = ({ onSubmit }) => {
           }}
           aditionalClass={isValidConf ? styles.inputCustomSettings : ''}
           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$"
-          title={passwordErrorMessage} // Підказка для патерну
+          // title={passwordErrorMessage} // Підказка для патерну
           value={confirmPassword}
           handleChange={e => {
             handleConfirmPasswordChange(e);
@@ -165,7 +181,9 @@ const RegisterForm = ({ onSubmit }) => {
             onClick={toggleShowConfirmPassword}
           />
         )}
-        {agreed && <p className={styles.differentPassords}>{passwordMatch}</p>}
+        {agreed && firstEmailValidation && confirmPassword !== '' && (
+          <p className={styles.differentPassords}>{passwordMatch}</p>
+        )}
       </div>
 
       <AuthButton disabled={agreed}>{registrationLang}</AuthButton>

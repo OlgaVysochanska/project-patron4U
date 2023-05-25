@@ -1,5 +1,6 @@
 import { useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
+import useTheme from 'shared/hooks/useTheme';
 
 import Contact from './Contact';
 import AddToFavorite from './AddToFavorite/AddToFavorite';
@@ -14,7 +15,7 @@ import styles from './NoticeModal.module.scss';
 const NoticeModal = ({ notice, closeModal }) => {
   const { email, phone } = useSelector(getUser);
   const favoriteNotices = useSelector(getFavoriteNotices);
-
+  const { theme } = useTheme();
   const {
     _id,
     category,
@@ -49,10 +50,13 @@ const NoticeModal = ({ notice, closeModal }) => {
     return () => document.removeEventListener('keydown', closeModalOnClick);
   }, [closeModalOnClick]);
 
+  const modal =
+    theme === 'light' ? styles.modal : `${styles.modal} + ${styles.modalDark}`;
+
   return (
     <>
       <div className={styles.backdrop} onClick={closeModalOnClick}>
-        <div className={styles.modal}>
+        <div className={modal}>
           <Button className={styles.closeBtn} onClick={closeModal}>
             <CrossIcon className={styles.closeIcon} />
           </Button>
@@ -68,36 +72,120 @@ const NoticeModal = ({ notice, closeModal }) => {
                 />
               </div>
               <table>
-                <caption className={styles.title}>{title}</caption>
+                <caption
+                  className={`${styles.title} ${
+                    theme === 'dark' && styles.titleDark
+                  }`}
+                >
+                  {title}
+                </caption>
                 <tbody>
                   <tr>
-                    <td className={styles.infoTitle}>Name:</td>
-                    <td className={styles.info}>{name}</td>
+                    <td
+                      className={`${styles.infoTitle} ${
+                        theme === 'dark' && styles.infoTitleDark
+                      }`}
+                    >
+                      Name:
+                    </td>
+                    <td
+                      className={`${styles.info} ${
+                        theme === 'dark' && styles.infoDark
+                      }`}
+                    >
+                      {name}
+                    </td>
                   </tr>
                   <tr>
-                    <td className={styles.infoTitle}>Birthday:</td>
-                    <td className={styles.info}>{date}</td>
+                    <td
+                      className={`${styles.infoTitle} ${
+                        theme === 'dark' && styles.infoTitleDark
+                      }`}
+                    >
+                      Birthday:
+                    </td>
+                    <td
+                      className={`${styles.info} ${
+                        theme === 'dark' && styles.infoDark
+                      }`}
+                    >
+                      {date}
+                    </td>
                   </tr>
                   <tr>
-                    <td className={styles.infoTitle}>Breed:</td>
-                    <td className={styles.info}>{breed}</td>
+                    <td
+                      className={`${styles.infoTitle} ${
+                        theme === 'dark' && styles.infoTitleDark
+                      }`}
+                    >
+                      Breed:
+                    </td>
+                    <td
+                      className={`${styles.info} ${
+                        theme === 'dark' && styles.infoDark
+                      }`}
+                    >
+                      {breed}
+                    </td>
                   </tr>
                   <tr>
-                    <td className={styles.infoTitle}>Place:</td>
-                    <td className={styles.info}>{location}</td>
+                    <td
+                      className={`${styles.infoTitle} ${
+                        theme === 'dark' && styles.infoTitleDark
+                      }`}
+                    >
+                      Place:
+                    </td>
+                    <td
+                      className={`${styles.info} ${
+                        theme === 'dark' && styles.infoDark
+                      }`}
+                    >
+                      {location}
+                    </td>
                   </tr>
                   <tr>
-                    <td className={styles.infoTitle}>The sex:</td>
-                    <td className={styles.info}>{sex}</td>
+                    <td
+                      className={`${styles.infoTitle} ${
+                        theme === 'dark' && styles.infoTitleDark
+                      }`}
+                    >
+                      The sex:
+                    </td>
+                    <td
+                      className={`${styles.info} ${
+                        theme === 'dark' && styles.infoDark
+                      }`}
+                    >
+                      {sex}
+                    </td>
                   </tr>
                   {price && (
                     <tr>
-                      <td className={styles.infoTitle}>Price:</td>
-                      <td className={styles.info}>{price}</td>
+                      <td
+                        className={`${styles.infoTitle} ${
+                          theme === 'dark' && styles.infoTitleDark
+                        }`}
+                      >
+                        Price:
+                      </td>
+                      <td
+                        className={`${styles.info} ${
+                          theme === 'dark' && styles.infoDark
+                        }`}
+                      >
+                        {price}
+                      </td>
                     </tr>
                   )}
                   <tr>
-                    <td className={styles.infoTitle}>Email:</td>
+                    <td
+                      className={`${styles.infoTitle} ${
+                        theme === 'dark' && styles.infoTitleDark
+                      }`}
+                    >
+                      Email:
+                    </td>
                     <td>
                       <a href={`mailto:${email}`} className={styles.contacts}>
                         {email}
@@ -105,14 +193,31 @@ const NoticeModal = ({ notice, closeModal }) => {
                     </td>
                   </tr>
                   <tr>
-                    <td className={styles.infoTitle}>Phone:</td>
+                    <td
+                      className={`${styles.infoTitle} ${
+                        theme === 'dark' && styles.infoTitleDark
+                      }`}
+                    >
+                      Phone:
+                    </td>
                     <td>
                       {phone ? (
-                        <a href={`tel:${phone}`} className={styles.contacts}>
+                        <a
+                          href={`tel:${phone}`}
+                          className={`${styles.contacts} ${
+                            theme === 'dark' && styles.contactsDark
+                          }`}
+                        >
                           {phone}
                         </a>
                       ) : (
-                        <p className={styles.info}>no phone</p>
+                        <p
+                          className={`${styles.info} ${
+                            theme === 'dark' && styles.infoDark
+                          }`}
+                        >
+                          no phone
+                        </p>
                       )}
                     </td>
                   </tr>
@@ -120,8 +225,21 @@ const NoticeModal = ({ notice, closeModal }) => {
               </table>
             </div>
             <p className={styles.commentsInfo}>
-              <span className={styles.commentsTitle}>Comments: </span>
-              {comments}
+              <span
+                className={`${styles.commentsTitle} ${
+                  theme === 'dark' && styles.commentsTitleDark
+                }`}
+              >
+                Comments:{' '}
+              </span>
+              <span
+                className={`${styles.commentsDesc} ${
+                  theme === 'dark' && styles.commentsDescDark
+                }`}
+              >
+                {' '}
+                {comments}
+              </span>
             </p>
             <div className={styles.btnWrapper}>
               <Contact email={email} />

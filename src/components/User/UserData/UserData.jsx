@@ -6,14 +6,9 @@ import CameraIcon from 'icons/CameraIcon';
 import { nanoid } from 'nanoid';
 // import CheckIcon from 'icons/CheckIcon';
 // import CrossIcon from 'icons/CrossIcon';
-import { getUser, getUserEdit } from '../../../redux/auth/authSelectors';
+import { getUser } from '../../../redux/auth/authSelectors';
 import { editCurrent } from '../../../redux/auth/authOperations';
-// import { getUserEdit } from '../../../redux/auth/authSelectors';
 import UploadWidget from '../../../shared/components/UploadWidget/UploadWidget';
-// import {
-//   useDispatch,
-//   useSelector,
-// } from '../../../../node_modules/react-redux/es/exports';
 import useForm from 'shared/hooks/useForm';
 import { useDispatch,useSelector } from '../../../../node_modules/react-redux/es/exports';
 import { initialState } from './initialState';

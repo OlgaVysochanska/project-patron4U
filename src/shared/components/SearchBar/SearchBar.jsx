@@ -12,7 +12,9 @@ import locale from './locale.json';
 import style from './SearchBar.module.scss';
 
 const SearchBar = ({ onSubmit }) => {
+
   const [setSearchParams] = useSearchParams();
+
   const { state, setState, handleChange, handleSubmitSearch } = useForm({
     initialState,
     onSubmit,

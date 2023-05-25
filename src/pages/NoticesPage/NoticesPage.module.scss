@@ -3,7 +3,10 @@
   flex-direction: column;
   justify-content: center;
   margin-bottom: 40px;
+  margin-top: 40px;
+
   margin: 0 auto;
+
   @media screen and (max-width: 767px) {
     max-width: 440px;
   }
@@ -54,7 +57,9 @@
 .categoryFilterWrapper {
   display: flex;
   flex-direction: row;
+
   // align-items: center;
+
   justify-content: space-between;
   flex: 1;
   border: 1px solid red;
@@ -165,4 +170,4 @@
 //   .wrapper {
 //     margin-bottom: 42px;
 //   }
-// }
+//
