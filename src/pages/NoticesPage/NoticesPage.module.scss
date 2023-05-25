@@ -3,6 +3,8 @@
   flex-direction: column;
   justify-content: center;
   margin-bottom: 40px;
+  margin-top: 40px;
+
   margin: 0 auto;
   @media screen and (max-width: 767px) {
     max-width: 440px;
@@ -72,7 +74,11 @@
     margin-left: 0px;
   }
 }
-
+.noticePageContainer {
+  width: 704px;
+  margin-bottom: 60px;
+  margin-top: 80px;
+}
 .categoryWrapper {
   align-self: baseline;
   border: 1px solid red;
@@ -165,4 +171,4 @@
 //   .wrapper {
 //     margin-bottom: 42px;
 //   }
-// }
+//

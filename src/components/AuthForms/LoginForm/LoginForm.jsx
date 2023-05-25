@@ -32,16 +32,26 @@ const LoginForm = ({ onSubmit }) => {
 
   const [showPassword, setShowPassword] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(true);
-  const [isValidPass, setIsValidPass] = useState(true);
+  // const [securePassword, setIsValidPass] = useState(true);
+  const [firstEmailValidation, setFirstEmailValidation] = useState(false);
+  const [securePassword, setSecurePassword] = useState(false);
 
   const emailLang = locale.email[lang];
   const passwordLang = locale.password[lang];
   const validEmailLang = locale.validEmail[lang];
-  const passwordErrorMessage = locale.passwordErrorMessage[lang];
+  // const passwordErrorMessage = locale.passwordErrorMessage[lang];
   const loginLang = locale.login[lang];
+  const secureLang = locale.secure[lang];
 
   //перевірка на встановлення властивості disabled для кнопки
   const [agreed, setAgreed] = useState(true);
+
+  const mainEmailValidation = e => {
+    if (!firstEmailValidation && isValidEmail) {
+      return;
+    }
+    setIsValidEmail(e.target.checkValidity());
+  };
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -50,13 +60,13 @@ const LoginForm = ({ onSubmit }) => {
   useEffect(() => {
     //перевіряємо чи треба блокувати кнопку логінізації:
 
-    if (isValidEmail && isValidPass) {
+    if (isValidEmail && securePassword) {
       setAgreed(false);
     }
-    if (!isValidEmail || !isValidPass) {
+    if (!isValidEmail || !securePassword) {
       setAgreed(true);
     }
-  }, [email, password, isValidEmail, isValidPass, setAgreed]);
+  }, [email, password, isValidEmail, securePassword, setAgreed]);
 
   return (
     <form onSubmit={handleSubmit} autoComplete="off" className={styles.form}>
@@ -75,6 +85,11 @@ const LoginForm = ({ onSubmit }) => {
           aditionalClass={isValidEmail ? styles.inputCustomSettings : ''}
           handleChange={e => {
             handleChange(e);
+            mainEmailValidation(e);
+            // setIsValidEmail(e.target.checkValidity());
+          }}
+          onBlur={e => {
+            setFirstEmailValidation(true);
             setIsValidEmail(e.target.checkValidity());
           }}
           {...fields.email}
@@ -88,20 +103,21 @@ const LoginForm = ({ onSubmit }) => {
           value={password}
           placeholder={passwordLang}
           type={showPassword ? 'text' : 'password'}
-          pattern=".{6,}" // Патерн для мінімальної довжини паролю (6 символів)
-          title={passwordErrorMessage} // Підказка для патерну
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$" // Патерн для мінімальної довжини паролю (6 символів)
+          title={secureLang} // Підказка для патерну
           style={{
-            border: isValidPass ? '1px solid #54adff' : '1px solid #F43F5E',
+            border: !securePassword ? '1px solid #54adff' : '1px solid #00C3AD',
             backgroundColor: theme === 'dark' && '#2b3e51',
             color: theme === 'dark' && '#fef9f9',
           }}
-          aditionalClass={isValidPass ? styles.inputCustomSettings : ''}
+          // aditionalClass={securePassword ? styles.inputCustomSettings : ''}
           handleChange={e => {
             handleChange(e);
-            setIsValidPass(e.target.checkValidity());
+            setSecurePassword(e.target.checkValidity());
           }}
           {...fields.password}
-          isValid={isValidPass}
+          isValid={true}
+          secure={securePassword}
         />
         {showPassword ? (
           <EyeClosedIcon
@@ -115,7 +131,6 @@ const LoginForm = ({ onSubmit }) => {
           />
         )}
       </div>
-
       <AuthButton disabled={agreed}>{loginLang}</AuthButton>
     </form>
   );

@@ -52,11 +52,6 @@ const Pagination = ({ totalPages, onPageChange, page }) => {
       ? style.container
       : `${style.container} + ${style.containerDark}`;
 
-  const listItem =
-    theme === 'light'
-      ? style.listItem
-      : `${style.listItem} + ${style.listItemDark}`;
-
   return (
     <div className={container}>
       <ul className={style.pagination}>

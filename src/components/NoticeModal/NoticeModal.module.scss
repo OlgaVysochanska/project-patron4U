@@ -28,6 +28,10 @@
   }
 }
 
+.modalDark {
+  background-color: #2b3e51;
+}
+
 .closeBtn {
   position: absolute;
   top: 16px;
@@ -125,11 +129,19 @@ table tr {
   margin-bottom: 22px;
 }
 
+.titleDark {
+  color: #fef9f9;
+}
+
 .infoTitle {
   font-weight: 600;
   font-size: 14px;
   line-height: 1.35;
   width: 81px;
+}
+
+.infoTitleDark {
+  color: #fef9f9;
 }
 
 .info {
@@ -138,15 +150,27 @@ table tr {
   line-height: 1.33;
 }
 
+.infoDark {
+  color: #fef9f9;
+}
+
 .contacts {
   composes: info;
   color: #ffc107;
   text-decoration: underline;
 }
 
+.contactsDark {
+  color: #fef9f9;
+}
+
 .commentsTitle {
   composes: infoTitle;
   letter-spacing: 0.04em;
+}
+
+.commentsTitleDark {
+  color: #fef9f9;
 }
 
 .commentsInfo {
@@ -155,6 +179,10 @@ table tr {
   line-height: 1.35;
   letter-spacing: 0.04em;
   margin-bottom: 12px;
+}
+
+.commentsDescDark {
+  color: #fef9f9;
 }
 
 @media screen and (min-width: 768px) {
