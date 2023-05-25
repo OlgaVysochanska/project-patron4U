@@ -18,6 +18,12 @@
   }
 }
 
+.petCardDark {
+  background: transparent;
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  border: 1px solid black;
+}
+
 .deleteBtn {
   position: absolute;
   right: 20px;
@@ -59,6 +65,10 @@
   letter-spacing: 0.04em;
 }
 
+.infoTitleDark {
+  color: #fff;
+}
+
 .infoDesc {
   font-weight: 400;
   font-size: 14px;
@@ -68,6 +78,10 @@
   &:not(:last-child) {
     margin-bottom: 12px;
   }
+}
+
+.infoDescDark {
+  color: #fff;
 }
 
 .modalTitle {

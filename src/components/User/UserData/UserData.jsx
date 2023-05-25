@@ -10,10 +10,14 @@ import { getUser } from '../../../redux/auth/authSelectors';
 import { editCurrent } from '../../../redux/auth/authOperations';
 import UploadWidget from '../../../shared/components/UploadWidget/UploadWidget';
 import useForm from 'shared/hooks/useForm';
-import { useDispatch,useSelector } from '../../../../node_modules/react-redux/es/exports';
+import {
+  useDispatch,
+  useSelector,
+} from '../../../../node_modules/react-redux/es/exports';
 import { initialState } from './initialState';
 import Logout from '../Logout/Logout';
 import Spiner from 'components/Spiner/Spiner';
+import useTheme from 'shared/hooks/useTheme';
 const CameraIconTuned = () => {
   return <CameraIcon width="16" height="16" viewBox="0 0 22 21" />;
 };
@@ -29,31 +33,28 @@ const CameraIconTuned = () => {
 const picSize = '182px';
 
 const UserData = () => {
-
   const [isBlocked, setIsBlocked] = useState(false);
   const [isSubmiting, setIsSubmiting] = useState(false);
-  const [avatarUpdated, setAvatarUpdated] = useState(false)
+  const [avatarUpdated, setAvatarUpdated] = useState(false);
 
-  
   const dispatch = useDispatch();
 
-  let { name, email, birthday, phone, city, avatarURL } =
-  useSelector(getUser);
+  let { name, email, birthday, phone, city, avatarURL } = useSelector(getUser);
 
-let [testAvatar, setTestAvatar ] = useState(avatarURL)
+  let [testAvatar, setTestAvatar] = useState(avatarURL);
 
-  useEffect(()=> {
-    setAvatarUpdated(false)
-  }, [name, email, birthday,phone,city ,avatarURL, isSubmiting])
+  useEffect(() => {
+    setAvatarUpdated(false);
+  }, [name, email, birthday, phone, city, avatarURL, isSubmiting]);
 
   const handleEditUser = async data => {
     setIsSubmiting(true);
     try {
       await dispatch(editCurrent(data));
     } finally {
-      setIsSubmiting(false);   
+      setIsSubmiting(false);
     }
-    setAvatarUpdated(true)
+    setAvatarUpdated(true);
   };
 
   const {
@@ -65,8 +66,6 @@ let [testAvatar, setTestAvatar ] = useState(avatarURL)
     onSubmit: handleEditUser,
   });
 
-
-  
   const blockButtons = () => {
     setIsBlocked(true);
   };
@@ -78,8 +77,15 @@ let [testAvatar, setTestAvatar ] = useState(avatarURL)
   const handleUserURL = avatarURL => {
     const obj = { avatarURL: `${avatarURL}` };
     handleEditUser(obj);
-    setTestAvatar(avatarURL)
+    setTestAvatar(avatarURL);
   };
+
+  const { theme } = useTheme();
+
+  const container =
+    theme === 'light'
+      ? styles.container
+      : `${styles.container} + ${styles.containerDark}`;
 
   const elements = Object.entries({ name, email, birthday, phone, city }).map(
     ([key, value]) => {
@@ -127,8 +133,10 @@ let [testAvatar, setTestAvatar ] = useState(avatarURL)
 
   return (
     <div>
-      <h2 className={styles.title}>My information:</h2>
-      <div className={styles.container}>
+      <h2 className={`${styles.title} ${theme === 'dark' && styles.titleDark}`}>
+        My information:
+      </h2>
+      <div className={container}>
         <div className={styles.avatarWrapper}>
           <img
             className={styles.avatar}
