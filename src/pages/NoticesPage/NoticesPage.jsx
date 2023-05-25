@@ -18,6 +18,7 @@ import { fetchNoticesByCategory } from '../../redux/notices/noticesOperations';
 import {
   getUserFavoriteNotices,
   getUserNotices,
+  getNoticeById,
 } from 'shared/services/notices';
 
 import NoticesSearch from 'components/Notices/NoticesSearch/NoticesSearch';
@@ -44,6 +45,7 @@ const NoticesPage = () => {
   const allNotices = useSelector(getAllNotices);
 
   const [notice, setNotice] = useState(null);
+  const [owner, setOwner] = useState(null);
   const [dataNotices, setDataNotices] = useState(null);
   const { isModalOpen, openModal, closeModal } = useToggleModalWindow();
   const [page, setPage] = useState(1);
@@ -71,8 +73,10 @@ const NoticesPage = () => {
     setDataNotices(null);
   };
 
-  const loadMore = notice => {
-    setNotice(notice);
+  const loadMore = async notice => {
+    const { data, user } = await getNoticeById(notice._id);
+    setNotice(data);
+    setOwner(user);
     openModal();
   };
 
@@ -123,7 +127,9 @@ const NoticesPage = () => {
         {filter && (
           <NoticesCategoriesList notices={filter} loadMore={loadMore} />
         )}
-        {isModalOpen && <NoticeModal notice={notice} closeModal={closeModal} />}
+        {isModalOpen && (
+          <NoticeModal notice={notice} owner={owner} closeModal={closeModal} />
+        )}
       </div>
 
       <Outlet />
