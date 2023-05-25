@@ -14,6 +14,7 @@ import MaleIcon from 'icons/MaleIcon';
 import FemaleIcon from 'icons/FemaleIcon';
 import HeartIcon from 'icons/HeartIcon';
 import TrashIcon from 'icons/TrashIcon';
+import useTheme from 'shared/hooks/useTheme';
 
 import { fetchDeleteNotice } from 'redux/notices/noticesOperations';
 import { getUser } from 'redux/auth/authSelectors';
@@ -26,6 +27,7 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
   const { myFavoriteNotice, setFavNot, handleClickFavoriteBtn } =
     useToggleFavoriteBtn();
   const { isModalOpen, openModal, closeModal } = useToggleModalWindow();
+  const { theme } = useTheme();
 
   useEffect(() => {
     setFavNot(notice._id);
@@ -61,8 +63,18 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
     }
   };
 
+  const noticeCard =
+    theme === 'light'
+      ? styles.noticeCard
+      : `${styles.noticeCard} + ${styles.noticeCardDark}`;
+
+  const noticeTitle =
+    theme === 'light'
+      ? styles.noticeTitle
+      : `${styles.noticeTitle} + ${styles.noticeTitleDark}`;
+
   return (
-    <li className={styles.noticeCard}>
+    <li className={noticeCard}>
       <div className={styles.imgThumb}>
         <img
           className={styles.avatar}
@@ -120,7 +132,7 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
         </div>
       </div>
       <div className={styles.noticeDesc}>
-        <h3 className={styles.noticeTitle}>{title}</h3>
+        <h3 className={noticeTitle}>{title}</h3>
         <Button className={styles.learnBtn} onClick={() => loadMore(notice)}>
           Learn more
         </Button>
