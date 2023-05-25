@@ -6,10 +6,13 @@ import Spiner from 'components/Spiner/Spiner';
 import locale from './locale.json';
 import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
 import { getFilter } from 'redux/filter/filterSelectors';
+import Pagination from 'shared/components/Pagination/Pagination';
+import Title from 'shared/components/Title/Title';
 
 import {
   getAllNotices,
   getLoadingNotices,
+  getTotalPages,
 } from 'redux/notices/noticesSelecors';
 import { fetchNoticesByCategory } from '../../redux/notices/noticesOperations';
 import {
@@ -43,13 +46,15 @@ const NoticesPage = () => {
   const [notice, setNotice] = useState(null);
   const [dataNotices, setDataNotices] = useState(null);
   const { isModalOpen, openModal, closeModal } = useToggleModalWindow();
+  const [page, setPage] = useState(1);
 
   const dispatch = useDispatch();
+  const totalPages = useSelector(getTotalPages);
 
   useEffect(() => {
     dispatch(setFilter(''));
-    dispatch(fetchNoticesByCategory(category));
-  }, [dispatch, category]);
+    dispatch(fetchNoticesByCategory(category, page));
+  }, [dispatch, category, page]);
 
   const onClickOwn = async () => {
     const { data } = await getUserNotices(_id);
@@ -71,34 +76,29 @@ const NoticesPage = () => {
     openModal();
   };
 
+  const handlePageChange = pageNumber => {
+    setPage(pageNumber);
+  };
+
   if (loadingNotices) {
     return <Spiner />;
   }
 
   return (
     <>
-      <div
-        className={style.noticePageContainer}
-        style={{ position: 'relative' }}
-      >
-        <h2 className={style.title}>{title}</h2>
-        <div className={style.searchWrapper}><NoticesSearch /></div>
 
-        <div className={style.contentWrapper}>
-          <div className={style.categoryFilterWrapper}>
-            <div className={style.categoryWrapper}>
-              <NoticesCategoriesNav
-                onClickOwn={onClickOwn}
-                onClearnData={onClearnData}
-                onClickFavorite={onClickFavorite}
-              />
-            </div>
-            <div className={style.filterWrapper}>
-              <NoticesFilters />
-            </div>
-          </div>
+      <div className={style.noticePageContainer}>
+        <Title children={title} />
+        <NoticesSearch />
+        <div className={style.wrapper}>
+          <NoticesCategoriesNav
+            onClickOwn={onClickOwn}
+            onClearnData={onClearnData}
+            onClickFavorite={onClickFavorite}
+          />
+          <div className={style.wrapperRightButton}>
+            <NoticesFilters />
 
-          <div className={style.addPetWrapper}>
             <AddPetButton />
           </div>
         </div>
@@ -114,7 +114,14 @@ const NoticesPage = () => {
         )}
         {isModalOpen && <NoticeModal notice={notice} closeModal={closeModal} />}
       </div>
+
       <Outlet />
+
+      <Pagination
+        totalPages={totalPages}
+        page={page}
+        onPageChange={handlePageChange}
+      />
     </>
   );
 };

@@ -42,8 +42,10 @@ export const fetchNoticesByCategory = createAsyncThunk(
   'notices/category',
   async (category, { rejectWithValue }) => {
     try {
-      const { data } = await api.getNoticesByCategory(category);
-      return data;
+      const { data, totalPages, currentPage } = await api.getNoticesByCategory(
+        category
+      );
+      return { data, totalPages, currentPage };
     } catch ({ response }) {
       return rejectWithValue(response.data);
     }
