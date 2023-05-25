@@ -25,12 +25,18 @@
   margin-top: 12px;
 }
 
+.containerDark {
+  background: #2b3e51;
+  border: 2px solid rgba(136, 198, 253, 0.19);
+}
+
 .image {
   margin-bottom: 16px;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
   border-radius: 20px;
   height: 252px;
-  width: 100%;
+  object-fit: cover;
+  // width: 100%;
 }
 
 .contentWrapper {
@@ -43,9 +49,17 @@
   margin-bottom: 16px;
 }
 
+.titleDark {
+  color: #fef9f9;
+}
+
 .text {
   line-height: 1.38;
   margin-bottom: 40px;
+}
+
+.textDark {
+  color: #fef9f9;
 }
 
 .wrapper {
@@ -58,6 +72,10 @@
 .date {
   color: #888888;
   line-height: 1.38;
+}
+
+.dateDark {
+  color: #fef9f9;
 }
 
 .link {

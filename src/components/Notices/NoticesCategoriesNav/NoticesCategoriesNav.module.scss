@@ -2,11 +2,11 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 20px;
+  //margin-top: 20px;
 }
 @media (min-width: 768px) {
   .navList {
-    margin-top: 40px;
+   // margin-top: 40px;
     gap: 12px;
   }
 }
