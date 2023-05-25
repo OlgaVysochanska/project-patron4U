@@ -17,16 +17,20 @@ export default function Header() {
 
   useEffect(() => {
     const handleResize = () => {
-      // setWindowWidth(window.innerWidth);
       setIsDesktop(window.innerWidth >= 1280);
       setIsTablet(window.innerWidth >= 768 && window.innerWidth < 1280);
       setIsMobile(window.innerWidth < 768);
     };
 
+    console.log('isDesktop', isDesktop);
+    console.log('isTablet', isTablet);
+    console.log('isMobile', isMobile);
+    console.log(window.innerWidth);
+
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [isDesktop, isMobile, isTablet]);
 
   const container =
     theme === 'light'

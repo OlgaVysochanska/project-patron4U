@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styles from './DropdownSelectors.module.scss';
 import { setRequestParams } from 'redux/filter/requestParamsSlice';
-import SelectedButtons from '../SelectedButton';
 import AgeFilter from './AgeFilter';
 import GenderFilter from './GenderFilter';
 
@@ -58,9 +57,15 @@ const DropdownSelectors = () => {
       ageButtons: selectedAgeButtons,
       genderButtons: selectedGenderButtons,
     };
-    console.log('Sending request:', requestParams);
+    // console.log('Sending request:', requestParams);
     dispatch(setRequestParams(requestParams));
-  }, [selectedAges, selectedGenders, selectedGenderButtons, dispatch]);
+  }, [
+    selectedAges,
+    selectedGenders,
+    selectedGenderButtons,
+    selectedAgeButtons,
+    dispatch,
+  ]);
 
   useEffect(() => {
     if (listRefAge.current) {
@@ -88,8 +93,8 @@ const DropdownSelectors = () => {
     }
   }, [isOpenAge, listHeight]);
 
-  console.log('selectedGenderButtons:', selectedGenderButtons);
-  console.log('selectedAgeButtons:', selectedAgeButtons);
+  // console.log('selectedGenderButtons:', selectedGenderButtons);
+  // console.log('selectedAgeButtons:', selectedAgeButtons);
   return (
     <>
       <div className={styles.dropdownContainer}>
