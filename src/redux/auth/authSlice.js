@@ -9,6 +9,7 @@ import {
   logout,
   fetchToggleFavoriteNotice,
   editCurrent,
+  googleAuth,
 } from './authOperations';
 
 const initialState = {
@@ -67,6 +68,22 @@ const authSlice = createSlice({
         state.pets = pets;
       })
       .addCase(login.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      })
+      .addCase(googleAuth.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(googleAuth.fulfilled, (state, { payload }) => {
+        const { user, pets, token } = payload;
+        state.loading = false;
+        state.user = user;
+        state.token = token;
+        state.isLogin = true;
+        state.pets = pets;
+      })
+      .addCase(googleAuth.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
       })

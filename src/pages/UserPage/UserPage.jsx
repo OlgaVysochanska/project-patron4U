@@ -10,9 +10,9 @@ import { setRegistered } from '../../redux/auth/authSlice';
 import styles from './UserPage.module.scss';
 
 const UserPage = () => {
-  const isRegistered = useSelector(selectIsRegistered);
-
   const dispatch = useDispatch();
+
+  const isRegistered = useSelector(selectIsRegistered);
 
   const handleClose = e => {
     dispatch(setRegistered(false));

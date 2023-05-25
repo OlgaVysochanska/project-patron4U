@@ -16,6 +16,8 @@ const OurFriendsPage = lazy(() => import('pages/OurFriendsPage'));
 const UserPage = lazy(() => import('pages/UserPage'));
 const AddPetPage = lazy(() => import('pages/AddPetPage'));
 const NotFound = lazy(() => import('pages/NotFound'));
+const TempAuthPage = lazy(() => import('pages/TempAuthPage'));
+
 export const App = () => {
   return (
     <Suspense fallback={<p>...Loading</p>}>
@@ -26,6 +28,7 @@ export const App = () => {
           <Route element={<PublicRoute />}>
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="temp/" element={<TempAuthPage />} />
           </Route>
           <Route path="/news" element={<NewsPage />} />
           <Route path="/notices/:category" element={<NoticesPage />} />

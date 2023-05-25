@@ -61,6 +61,18 @@ export const editCurrent = createAsyncThunk(
   }
 );
 
+export const googleAuth = createAsyncThunk(
+  'auth/google',
+  async (token, { rejectWithValue }) => {
+    try {
+      const result = await api.getCurrent(token);
+      return result;
+    } catch ({ response }) {
+      return rejectWithValue(response.data);
+    }
+  }
+);
+
 export const logout = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {

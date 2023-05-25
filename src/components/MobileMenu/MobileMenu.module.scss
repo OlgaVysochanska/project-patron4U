@@ -16,6 +16,9 @@
 
   background-color: #fef9f9;
 
+  animation-name: burgerDropDown;
+  animation-duration: 500ms;
+
   @media screen and (min-width: 768px) {
     padding: 24px 32px;
   }
@@ -31,10 +34,38 @@
   align-items: center;
   justify-content: space-between;
   height: 28px;
+
+  @media screen and (min-width: 768px) {
+    height: 35px;
+  }
 }
 
 .closeButton {
   cursor: pointer;
   stroke: #ffc107;
   margin-left: auto;
+}
+
+.closeMobileMenu {
+  animation-name: burgerDropOut;
+  animation-duration: 500ms;
+}
+
+@keyframes burgerDropDown {
+  0% {
+    transform: translate(-50%, -100%);
+  }
+  100% {
+    transform: translate(-50%, 0%);
+  }
+}
+
+@keyframes burgerDropOut {
+  0% {
+    transform: translate(-50%, 0%);
+    
+  }
+  100% {
+    transform: translate(-50%, -100%);
+  }
 }
