@@ -1,3 +1,7 @@
+.nav_wrapper {
+  // overflow: hidden;
+}
+
 .sl_nav {
   display: inline;
 }
@@ -69,8 +73,8 @@
 }
 
 .wrapperIcon {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 28px;
 }
 
 .wrapper {
@@ -98,12 +102,6 @@
 
 @media (min-width: 1280px) {
   .nav_wrapper {
-    margin-left: 10px;
+    margin-left: 5px;
   }
 }
-
-// @media (min-width: 1280px) {
-//   .wrapperIcon {
-//     margin-left: 20px;
-//   }
-// }

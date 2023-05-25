@@ -17,15 +17,15 @@ const NoticeSearch = () => {
   const requestParams = useSelector(getRequestParams);
   const age = requestParams.ages.join(',');
   const gender = requestParams.genders.join(',');
-  console.log('requestParams:', requestParams);
-  console.log('age:', age);
+  // console.log('requestParams:', requestParams);
+  // console.log('age:', age);
 
   const dispatch = useDispatch();
 
   const clickOnSearch = async ({ search }) => {
-    console.log('search, age onClick:', gender, age);
+    // console.log('search, age onClick:', gender, age);
     setSearchParams({ search, gender, age });
-    console.log('search:', search);
+    // console.log('search:', search);
     try {
       const data = await getNoticesBySearch(search, category, gender, age);
       console.log('clickOnSearch:', data);

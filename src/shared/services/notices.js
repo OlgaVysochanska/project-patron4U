@@ -57,22 +57,32 @@ export const getNoticesBySearch = async (
   return data;
 };
 
-export const getUserNotices = async (id, _page = 1) => {
+export const getUserNotices = async (id, page = 1) => {
   const { data } = await instance.get(`/notices/current/`, {
     params: {
       id,
-      _page,
+      page,
     },
   });
   return data;
 };
 
-export const getUserFavoriteNotices = async (id, _page = 1) => {
+export const getUserFavoriteNotices = async (id, page = 1) => {
   const { data } = await instance.get(`/notices/favorite/`, {
     params: {
       id,
-      _page,
+      page,
     },
   });
+  return data;
+};
+
+export const getNoticeById = async _id => {
+  const { data } = await instance.get(`/notices/oneadvertisement/`, {
+    params: {
+      _id,
+    },
+  });
+
   return data;
 };

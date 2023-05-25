@@ -1,5 +1,6 @@
 import { useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
+
 import useTheme from 'shared/hooks/useTheme';
 
 import Contact from './Contact';
@@ -8,32 +9,18 @@ import AddToFavorite from './AddToFavorite/AddToFavorite';
 import Button from 'shared/components/Button/Button';
 import CrossIcon from 'icons/CrossIcon';
 
-import { getUser, getFavoriteNotices } from 'redux/auth/authSelectors';
+import { getFavoriteNotices } from 'redux/auth/authSelectors';
 
 import styles from './NoticeModal.module.scss';
 
-const NoticeModal = ({ notice, closeModal }) => {
-  const { email, phone } = useSelector(getUser);
+const NoticeModal = ({ notice, owner, closeModal }) => {
   const favoriteNotices = useSelector(getFavoriteNotices);
   const { theme } = useTheme();
-  const {
-    _id,
-    category,
-    title,
-    name,
-    date,
-    breed,
-    sex,
-    location,
-    price,
-    comments,
-    petURL,
-  } = notice;
 
   let myFavoriteNotice = false;
 
   if (favoriteNotices) {
-    myFavoriteNotice = favoriteNotices.includes(_id);
+    myFavoriteNotice = favoriteNotices.includes(notice._id);
   }
 
   const closeModalOnClick = useCallback(
@@ -63,10 +50,10 @@ const NoticeModal = ({ notice, closeModal }) => {
           <div className={styles.contentWrapper}>
             <div className={styles.tabletBox}>
               <div className={styles.imgThumb}>
-                <p className={styles.categoryInfo}>{category}</p>
+                <p className={styles.categoryInfo}>{notice.category}</p>
                 <img
                   className={styles.avatar}
-                  src={petURL}
+                  src={notice.petURL}
                   alt="Pet's avatar"
                   width="280"
                 />
@@ -77,7 +64,7 @@ const NoticeModal = ({ notice, closeModal }) => {
                     theme === 'dark' && styles.titleDark
                   }`}
                 >
-                  {title}
+                  {notice.title}
                 </caption>
                 <tbody>
                   <tr>
@@ -93,7 +80,7 @@ const NoticeModal = ({ notice, closeModal }) => {
                         theme === 'dark' && styles.infoDark
                       }`}
                     >
-                      {name}
+                      {notice.name}
                     </td>
                   </tr>
                   <tr>
@@ -109,7 +96,7 @@ const NoticeModal = ({ notice, closeModal }) => {
                         theme === 'dark' && styles.infoDark
                       }`}
                     >
-                      {date}
+                      {notice.date.replaceAll('-', '.')}
                     </td>
                   </tr>
                   <tr>
@@ -125,7 +112,7 @@ const NoticeModal = ({ notice, closeModal }) => {
                         theme === 'dark' && styles.infoDark
                       }`}
                     >
-                      {breed}
+                      {notice.breed}
                     </td>
                   </tr>
                   <tr>
@@ -141,7 +128,7 @@ const NoticeModal = ({ notice, closeModal }) => {
                         theme === 'dark' && styles.infoDark
                       }`}
                     >
-                      {location}
+                      {notice.location}
                     </td>
                   </tr>
                   <tr>
@@ -157,10 +144,10 @@ const NoticeModal = ({ notice, closeModal }) => {
                         theme === 'dark' && styles.infoDark
                       }`}
                     >
-                      {sex}
+                      {notice.sex}
                     </td>
                   </tr>
-                  {price && (
+                  {notice.price && (
                     <tr>
                       <td
                         className={`${styles.infoTitle} ${
@@ -174,10 +161,23 @@ const NoticeModal = ({ notice, closeModal }) => {
                           theme === 'dark' && styles.infoDark
                         }`}
                       >
-                        {price}
+                        {notice.price}
                       </td>
                     </tr>
                   )}
+                  {owner.name && (
+                    <tr>
+                      <td
+                        className={`${styles.infoTitle} ${
+                          theme === 'dark' && styles.infoTitleDark
+                        }`}
+                      >
+                        Owner:
+                      </td>
+                      <td>{owner.name}</td>
+                    </tr>
+                  )}
+
                   <tr>
                     <td
                       className={`${styles.infoTitle} ${
@@ -187,8 +187,11 @@ const NoticeModal = ({ notice, closeModal }) => {
                       Email:
                     </td>
                     <td>
-                      <a href={`mailto:${email}`} className={styles.contacts}>
-                        {email}
+                      <a
+                        href={`mailto:${owner.email}`}
+                        className={styles.contacts}
+                      >
+                        {owner.email}
                       </a>
                     </td>
                   </tr>
@@ -201,14 +204,14 @@ const NoticeModal = ({ notice, closeModal }) => {
                       Phone:
                     </td>
                     <td>
-                      {phone ? (
+                      {owner.phone ? (
                         <a
-                          href={`tel:${phone}`}
+                          href={`tel:${owner.phone}`}
                           className={`${styles.contacts} ${
                             theme === 'dark' && styles.contactsDark
                           }`}
                         >
-                          {phone}
+                          {owner.phone}
                         </a>
                       ) : (
                         <p
@@ -237,13 +240,15 @@ const NoticeModal = ({ notice, closeModal }) => {
                   theme === 'dark' && styles.commentsDescDark
                 }`}
               >
-                {' '}
-                {comments}
+                {notice.comments}
               </span>
             </p>
             <div className={styles.btnWrapper}>
-              <Contact email={email} />
-              <AddToFavorite myFavoriteNotice={myFavoriteNotice} _id={_id} />
+              <Contact phone={owner.phone} />
+              <AddToFavorite
+                myFavoriteNotice={myFavoriteNotice}
+                _id={notice._id}
+              />
             </div>
           </div>
         </div>

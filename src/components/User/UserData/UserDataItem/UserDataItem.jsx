@@ -9,7 +9,7 @@ import { useState, useRef } from 'react';
 import { useSelector } from '../../../../../node_modules/react-redux/es/exports';
 import { getUserEdit } from 'redux/auth/authSelectors';
 import Spiner from 'components/Spiner/Spiner';
-
+import useTheme from 'shared/hooks/useTheme';
 
 const CheckIconTuned = () => {
   return (
@@ -34,7 +34,7 @@ const UserDataItem = ({
   type,
   handleEditUser,
 }) => {
-const loading = useSelector(getUserEdit)
+  const loading = useSelector(getUserEdit);
   const inputRef = useRef(null);
   const initialState = value;
 
@@ -43,11 +43,11 @@ const loading = useSelector(getUserEdit)
     onSubmit: handleEditUser,
   });
   const [isNotEditing, setIsNotEditing] = useState(true);
-  
+
   const clickEdit = () => {
     setIsNotEditing(prevState => !prevState);
     blockButtons();
-    inputRef.current.focus()
+    inputRef.current.focus();
   };
 
   const clickSave = () => {
@@ -56,6 +56,7 @@ const loading = useSelector(getUserEdit)
     handleEditUser(state);
     // handleUser(state);
   };
+  const { theme } = useTheme();
 
   return (
     <form onSubmit={handleSubmit} autoComplete="on" className={styles.form}>
@@ -72,8 +73,10 @@ const loading = useSelector(getUserEdit)
           handleChange={handleChange}
           isValid="true"
           // inputStyles={{padding: "4px 12px"}}
-          aditionalClass={styles.input}
-          labelClass={styles.label}
+          aditionalClass={`${styles.input} ${
+            theme === 'dark' && styles.inputDark
+          }`}
+          labelClass={`${styles.label} ${theme === 'dark' && styles.labelDark}`}
           inputRef={inputRef}
         ></Input>
         {isNotEditing ? (

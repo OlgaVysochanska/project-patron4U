@@ -57,7 +57,7 @@ const DropdownSelectors = () => {
       ageButtons: selectedAgeButtons,
       genderButtons: selectedGenderButtons,
     };
-    console.log('Sending request:', requestParams);
+    // console.log('Sending request:', requestParams);
     dispatch(setRequestParams(requestParams));
   }, [
     selectedAges,
@@ -93,8 +93,8 @@ const DropdownSelectors = () => {
     }
   }, [isOpenAge, listHeight]);
 
-  console.log('selectedGenderButtons:', selectedGenderButtons);
-  console.log('selectedAgeButtons:', selectedAgeButtons);
+  // console.log('selectedGenderButtons:', selectedGenderButtons);
+  // console.log('selectedAgeButtons:', selectedAgeButtons);
   return (
     <>
       <div className={styles.dropdownContainer}>
