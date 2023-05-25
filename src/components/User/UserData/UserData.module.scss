@@ -5,6 +5,10 @@
   margin-bottom: 18px;
 }
 
+.titleDark {
+  color: #ffffff;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -20,6 +24,11 @@
 
   @media screen and (max-width: 480px) {
   }
+}
+
+.containerDark {
+  background: transparent;
+  border: 2px solid rgba(136, 198, 253, 0.19);
 }
 
 .avatarWrapper {
