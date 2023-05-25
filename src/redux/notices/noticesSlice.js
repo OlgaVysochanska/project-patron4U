@@ -5,8 +5,8 @@ import {
   fetchAddNotice,
   fetchDeleteNotice,
   fetchNoticesByCategory,
-  // fetchNoticesByUser,
-  // fetchFavoriteNoticesByUser,
+  fetchNoticesByUser,
+  fetchFavoriteNoticesByUser,
 } from './noticesOperations';
 
 const initialState = {
@@ -72,20 +72,35 @@ const noticesSlice = createSlice({
       .addCase(fetchNoticesByCategory.rejected, (store, { payload }) => {
         store.loading = false;
         store.error = payload;
+      })
+      .addCase(fetchNoticesByUser.pending, store => {
+        store.loading = true;
+        store.items = [];
+      })
+      .addCase(fetchNoticesByUser.fulfilled, (store, { payload }) => {
+        store.loading = false;
+        store.items = [...payload.data];
+        store.totalPages = payload.totalPages;
+        store.currentPage = payload.currentPage;
+      })
+      .addCase(fetchNoticesByUser.rejected, (store, { payload }) => {
+        store.loading = false;
+        store.error = payload;
+      })
+      .addCase(fetchFavoriteNoticesByUser.pending, store => {
+        store.loading = true;
+        store.items = [];
+      })
+      .addCase(fetchFavoriteNoticesByUser.fulfilled, (store, { payload }) => {
+        store.loading = false;
+        store.items = [...payload.data];
+        store.totalPages = payload.totalPages;
+        store.currentPage = payload.currentPage;
+      })
+      .addCase(fetchFavoriteNoticesByUser.rejected, (store, { payload }) => {
+        store.loading = false;
+        store.error = payload;
       });
-    // .addCase(fetchFavoriteNoticesByUser.pending, store => {
-    //   store.loading = true;
-    //   store.items = [];
-    // })
-    // .addCase(fetchFavoriteNoticesByUser.fulfilled, (store, { payload }) => {
-    //   store.loading = false;
-    //   store.items = [payload];
-
-    // })
-    // .addCase(fetchFavoriteNoticesByUser.rejected, (store, { payload }) => {
-    //   store.loading = false;
-    //   store.error = payload;
-    // });
   },
   reducers: {
     addFilteredNotices(state, action) {
