@@ -15,7 +15,7 @@ const initialState = {
   token: '',
   isLogin: false,
   loading: false,
-  pets: {},
+  pets: [],
   isRegistered: false,
   error: null,
 };
