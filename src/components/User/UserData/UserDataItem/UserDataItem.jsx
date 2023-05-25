@@ -11,17 +11,17 @@ import { getUserEdit } from 'redux/auth/authSelectors';
 import Spiner from 'components/Spiner/Spiner';
 
 
-const CheckIconTuned = () => {
-  return (
-    <CheckIcon stroke="#00C3AD" width="16" height="16" viewBox="0 0 22 21" />
-  );
-};
+// const CheckIconTuned = () => {
+//   return (
+//     <CheckIcon stroke="#00C3AD" width="16" height="16" viewBox="0 0 22 21" />
+//   );
+// };
 
-const EditIconTuned = () => {
-  return (
-    <EditIcon stroke="#54ADFF" width="16" height="16" viewBox="0 0 22 21" />
-  );
-};
+// const EditIconTuned = () => {
+//   return (
+//     <EditIcon stroke="#54ADFF" width="16" height="16" viewBox="0 0 22 21" />
+//   );
+// };
 
 const UserDataItem = ({
   label,
@@ -34,6 +34,18 @@ const UserDataItem = ({
   type,
   handleEditUser,
 }) => {
+  
+const CheckIconTuned = () => {
+  return (
+    <CheckIcon stroke="#00C3AD" width="16" height="16" viewBox="0 0 22 21" />
+  );
+};
+
+const EditIconTuned = (isBlocked) => {
+  return (
+    <EditIcon stroke={isBlocked ? "#54ADFF" :"red"} width="16" height="16" viewBox="0 0 22 21" key={isBlocked} />
+  );
+};
 const loading = useSelector(getUserEdit)
   const inputRef = useRef(null);
   const initialState = value;
