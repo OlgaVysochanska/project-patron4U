@@ -1,50 +1,35 @@
 .filterButtonsWrapper {
   position: relative;
   align-self: flex-start;
-  @media screen and (min-width: 768px) {
-    // margin-left: 445px;
-  }
-  @media (min-width: 1280px) {
-    // margin-left: 445px;
-  }
 }
-.selectedButtonsWrapper {
-  position: fixed;
-  z-index: 999;
-  display: flex;
-  flex-direction: column;
-  top: 50%;
-  left: 10%;
-  transform: translate(-50%, -50%);
-  @media screen and (min-width: 768px) {
-    position: absolute;
-    z-index: 1000;
-    right: 100%;
-    display: flex;
-    flex-direction: row-reverse;
-    margin-right: 50px;
-  }
-  @media (min-width: 1280px) {
-    // margin-left: 445px;
-  }
 
-  // @media (max-width: 1024px) {
-  //   position: absolute;
-  //   z-index: 1000;
-  //   top: 0;
-  //   right: 100%;
-  //   display: flex;
-  //   flex-direction: row-reverse;
-  //   margin-right: 8px;
-  // }
+.selectedButtonsWrapper {
+  position: absolute;
+  z-index: 1000;
+  right: 100%;
+  top: 0;
+  display: flex;
+
+  @media screen and (max-width: 1279px) and (min-width: 960px) {
+    flex-wrap: wrap;
+  }
+  @media screen and (max-width: 959px) and (min-width: 768px) {
+    right: 0;
+    top: 100%;
+  }
+  @media screen and (max-width: 767px) {
+    right: 0;
+    top: 78px;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    margin-bottom: 10px;
+  }
 }
 
 .ulSelectedButtons {
   display: flex;
-  flex-direction: column;
-  @media screen and (min-width: 768px) {
-    flex-direction: row-reverse;
-  }
+  flex-direction: row-reverse;
+  margin-top: 5px;
 }
 
 .filterOptions {
