@@ -1,6 +1,9 @@
 import { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+
+import { Outlet, useParams } from 'react-router-dom';
+import NotiflixMessage from 'shared/components/NotiflixMessage/NotiflixMessage';
+
 import useLang from 'shared/hooks/useLang';
 import Spiner from 'components/Spiner/Spiner';
 import locale from './locale.json';
@@ -194,7 +197,12 @@ const NoticesPage = () => {
         {dataNotices && !filter && (
           <NoticesCategoriesList notices={dataNotices} loadMore={loadMore} />
         )}
-        {filter && (
+        {filter && filter.length === 0 ? (
+          NotiflixMessage({
+            type: 'warning',
+            data: 'Sorry, nothing was found for your request',
+          })
+        ) : (
           <NoticesCategoriesList notices={filter} loadMore={loadMore} />
         )}
         {isModalOpen && (

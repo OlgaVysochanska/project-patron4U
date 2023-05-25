@@ -23,7 +23,6 @@
     padding-top: 80px;
     width: 1248px;
   }
-
 }
 
 .title {
@@ -64,6 +63,7 @@
 
   justify-content: space-between;
   flex: 1;
+
 }
 
 .addPetWrapper {
@@ -77,6 +77,12 @@
     top: 340px;
     margin-left: 0px;
   }
+}
+
+.noticePageContainer {
+  width: 704px;
+  margin-bottom: 60px;
+  margin-top: 80px;
 }
 
 .categoryWrapper {

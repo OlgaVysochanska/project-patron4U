@@ -62,8 +62,8 @@ const DropdownSelectors = () => {
   }, [
     selectedAges,
     selectedGenders,
-    selectedGenderButtons,
     selectedAgeButtons,
+    selectedGenderButtons,
     dispatch,
   ]);
 
