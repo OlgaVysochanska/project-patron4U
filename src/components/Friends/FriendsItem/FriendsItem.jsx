@@ -152,7 +152,9 @@ const FriendsItem = ({
               Address:
             </p>
             <a
-              className={s.description}
+              className={`${s.description} ${
+                theme === 'dark' && s.descriptionDark
+              }`}
               href={addressUrl}
               target="_blank"
               rel="noreferrer"
@@ -161,14 +163,36 @@ const FriendsItem = ({
             </a>
           </li>
           <li className={s.descriptionEl}>
-            <p className={s.descriptionTitle}>Email:</p>
-            <a href={`mailto:${email}`} className={s.description}>
+            <p
+              className={`${s.descriptionTitle} ${
+                theme === 'dark' && s.descriptionTitleDark
+              }`}
+            >
+              Email:
+            </p>
+            <a
+              href={`mailto:${email}`}
+              className={`${s.description} ${
+                theme === 'dark' && s.descriptionDark
+              }`}
+            >
               {email}
             </a>
           </li>
           <li className={s.descriptionEl}>
-            <p className={s.descriptionTitle}>Phone:</p>
-            <a href={`tel:${phone}`} className={s.description}>
+            <p
+              className={`${s.descriptionTitle} ${
+                theme === 'dark' && s.descriptionTitleDark
+              }`}
+            >
+              Phone:
+            </p>
+            <a
+              href={`tel:${phone}`}
+              className={`${s.description} ${
+                theme === 'dark' && s.descriptionDark
+              }`}
+            >
               {phone}
             </a>
           </li>
