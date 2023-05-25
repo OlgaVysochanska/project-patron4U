@@ -7,6 +7,8 @@ export const getAuth = ({ auth }) => {
 
 export const getUser = ({ auth }) => auth.user;
 
+export const getUserEdit = ({ auth }) => auth.isLoading;
+
 export const getUserPets = ({ auth }) => auth.pets;
 export const selectIsRegistered =  ({ auth }) => auth.isRegistered;
 

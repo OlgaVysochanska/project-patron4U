@@ -17,6 +17,7 @@ const Input = ({
   readonly,
   aditionalClass,
   labelClass = styles.label,
+  inputRef,
   ...props
 }) => {
   const inputStyles = {
@@ -25,12 +26,11 @@ const Input = ({
 
   return (
     <>
-      {/* <div className={styles.wrapper}> */}
-
       <label className={labelClass} htmlFor={type}>
         {label}
       </label>
       <input
+        ref={inputRef}
         type={type}
         name={type}
         id={id}
@@ -52,8 +52,6 @@ const Input = ({
         </span>
       )}
       {!isValid && <p className={styles.errorMessage}>{title}</p>}
-
-      {/* </div> */}
     </>
   );
 };

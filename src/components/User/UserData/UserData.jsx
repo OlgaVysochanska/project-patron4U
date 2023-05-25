@@ -1,24 +1,24 @@
 import styles from './UserData.module.scss';
 import UserDataItem from './UserDataItem/UserDataItem';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import defaultAvatar from './default_avatar.svg';
-// import Button from '../../../shared/components/Button/Button';
 import CameraIcon from 'icons/CameraIcon';
 import { nanoid } from 'nanoid';
 // import CheckIcon from 'icons/CheckIcon';
 // import CrossIcon from 'icons/CrossIcon';
-import { getUser } from '../../../redux/auth/authSelectors';
+import { getUser, getUserEdit } from '../../../redux/auth/authSelectors';
 import { editCurrent } from '../../../redux/auth/authOperations';
+// import { getUserEdit } from '../../../redux/auth/authSelectors';
 import UploadWidget from '../../../shared/components/UploadWidget/UploadWidget';
-import {
-  useDispatch,
-  useSelector,
-} from '../../../../node_modules/react-redux/es/exports';
+// import {
+//   useDispatch,
+//   useSelector,
+// } from '../../../../node_modules/react-redux/es/exports';
 import useForm from 'shared/hooks/useForm';
-
+import { useDispatch,useSelector } from '../../../../node_modules/react-redux/es/exports';
 import { initialState } from './initialState';
 import Logout from '../Logout/Logout';
-
+import Spiner from 'components/Spiner/Spiner';
 const CameraIconTuned = () => {
   return <CameraIcon width="16" height="16" viewBox="0 0 22 21" />;
 };
@@ -33,43 +33,45 @@ const CameraIconTuned = () => {
 
 const picSize = '182px';
 
-// const user = {
-//   name: 'Anna',
-//   email: 'anna00@gmail.com',
-//   birthday: '01.01.2001',
-//   phone: '+38000000000',
-//   city: 'Kiev',
-//   avatarURL: false,
-// };
-
 const UserData = () => {
-  // const [items, setItems] = useState([]);
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(null);
-  // const [isEditPhoto, setEditPhoto] = useState(false);
-  // const [isEditing, setIsEditing] = useState(true);
-  const [isBlocked, setIsBlocked] = useState(false);
-  // const [activeItem, setActiveItem] = useState('');
 
+  const [isBlocked, setIsBlocked] = useState(false);
+  const [isSubmiting, setIsSubmiting] = useState(false);
+  const [avatarUpdated, setAvatarUpdated] = useState(false)
+
+  
   const dispatch = useDispatch();
 
-  const handleEditUser = data => {
-    dispatch(editCurrent(data));
-    console.log(data);
+  let { name, email, birthday, phone, city, avatarURL } =
+  useSelector(getUser);
+
+let [testAvatar, setTestAvatar ] = useState(avatarURL)
+
+  useEffect(()=> {
+    setAvatarUpdated(false)
+  }, [name, email, birthday,phone,city ,avatarURL, isSubmiting])
+
+  const handleEditUser = async data => {
+    setIsSubmiting(true);
+    try {
+      await dispatch(editCurrent(data));
+    } finally {
+      setIsSubmiting(false);   
+    }
+    setAvatarUpdated(true)
   };
 
   const {
     // state,
-    handleChange,
+    // handleChange,
     handleSubmit,
   } = useForm({
     initialState,
     onSubmit: handleEditUser,
   });
 
-  const { name, email, birthday, phone, city, avatarURL } =
-    useSelector(getUser);
 
+  
   const blockButtons = () => {
     setIsBlocked(true);
   };
@@ -78,29 +80,10 @@ const UserData = () => {
     setIsBlocked(false);
   };
 
-  // const onEditPhoto = () => {
-  //   setEditPhoto(true);
-  // };
-
-  // const onSavePhoto = () => {
-  //   setEditPhoto(false);
-  // };
-
-  // const onCancel = () => {
-  //   setEditPhoto(false);
-  // };
-
   const handleUserURL = avatarURL => {
-    // console.log(avatarURL);
-const obj = {avatarURL: `${avatarURL}`}
-// console.log(obj)
-handleEditUser(obj)
-    // handleChange({
-    //   target: {
-    //     name: 'avatarURL',
-    //     value: avatarURL,
-    //   },
-    // });
+    const obj = { avatarURL: `${avatarURL}` };
+    handleEditUser(obj);
+    setTestAvatar(avatarURL)
   };
 
   const elements = Object.entries({ name, email, birthday, phone, city }).map(
@@ -135,7 +118,6 @@ handleEditUser(obj)
           name={key}
           value={value}
           defaultValue={value}
-          // activeItem={activeItem === id}
           id={id}
           key={key}
           handleEditUser={handleEditUser}
@@ -148,8 +130,6 @@ handleEditUser(obj)
     }
   );
 
-  // console.log(elements);
-
   return (
     <div>
       <h2 className={styles.title}>My information:</h2>
@@ -157,32 +137,26 @@ handleEditUser(obj)
         <div className={styles.avatarWrapper}>
           <img
             className={styles.avatar}
-            src={avatarURL || defaultAvatar}
+            src={`${testAvatar || defaultAvatar}?${Date.now()}`}
             alt="Your look"
             width={picSize}
             height={picSize}
+            key={avatarUpdated ? avatarURL : 'default'}
           ></img>
-          <UploadWidget uriI={handleUserURL}>
-            {/* UploadWidget це button, не можна класти бтн в бтн (треба придумати
-             щось інше, поки вставила пшку, щоб не било помилку) */}
-            {/* <Button
-              // onClick={onEditPhoto}
-              type="button"
-              className={styles.btnPhoto}
-              label="Edit photo"
-              SVGComponent={CameraIconTuned}
-              showLabelFirst={false}
-            /> */}
-            <p className={styles.btnPhoto}>
-              <CameraIconTuned />
-              Edit photo
-            </p>
-          </UploadWidget>
+          <UploadWidget
+            uriI={handleUserURL}
+            btnType="button"
+            btnClassName={styles.btnPhoto}
+            btnLabel="Edit photo"
+            btnSVGComponent={CameraIconTuned}
+            btnShowLabelFirst={false}
+          ></UploadWidget>
         </div>
         <div className={styles.inputWrapper}>
           {elements} <Logout />
         </div>
       </div>
+      {isSubmiting && <Spiner />}
     </div>
   );
 };
