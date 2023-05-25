@@ -1,11 +1,11 @@
-import styles from './SelectedButton.module.scss';
+import styles from '../../NoticesFilters/NoticesFilters.module.scss';
 import Button from 'shared/components/Button';
 import CrossSmallIcon from '../../../../icons/CrossSmallIcon';
 
 const SelectedButtons = ({ buttons, onRemove }) => {
   return (
     <div>
-      <ul className={styles.selectedWrapperButton}>
+      <ul className={styles.ulSelectedButtons}>
         {buttons.map((buttonLabel, index) => (
           <li key={index}>
             <Button

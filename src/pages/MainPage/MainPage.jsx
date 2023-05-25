@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Background from '../../shared/components/Background/Background';
 import scss from './MainPage.module.scss';
-import Logout from 'components/User/Logout';
 import useLang from 'shared/hooks/useLang';
 import useTheme from 'shared/hooks/useTheme';
 import locale from './locale.json';
@@ -61,7 +60,6 @@ const MainPage = () => {
     <>
       <Background />
       <div className={scss.screen}>
-        <Logout />
         <img className={scss.pets} src={getImage()} alt="pets" loading="lazy" />
         <h1 className={titleStyle}>{title}</h1>
       </div>

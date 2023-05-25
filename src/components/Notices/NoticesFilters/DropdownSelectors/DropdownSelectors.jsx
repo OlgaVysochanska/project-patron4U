@@ -41,18 +41,6 @@ const DropdownSelectors = () => {
     }
   };
 
-  const handleRemoveSelectedAge = age => {
-    setSelectedAges(selectedAges.filter(val => val !== age));
-    setSelectedAgeButtons(selectedAgeButtons.filter(btn => btn !== age));
-  };
-
-  const handleRemoveSelectedGender = gender => {
-    setSelectedGenders(selectedGenders.filter(val => val !== gender));
-    setSelectedGenderButtons(
-      selectedGenderButtons.filter(btn => btn !== gender)
-    );
-  };
-
   const handleToggleAge = () => {
     setisOpenAge(!isOpenAge);
   };
@@ -62,14 +50,17 @@ const DropdownSelectors = () => {
   };
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     const requestParams = {
       ages: selectedAges,
       genders: selectedGenders,
+      ageButtons: selectedAgeButtons,
+      genderButtons: selectedGenderButtons,
     };
     console.log('Sending request:', requestParams);
     dispatch(setRequestParams(requestParams));
-  }, [selectedAges, selectedGenders, dispatch]);
+  }, [selectedAges, selectedGenders, selectedGenderButtons, dispatch]);
 
   useEffect(() => {
     if (listRefAge.current) {
@@ -97,6 +88,8 @@ const DropdownSelectors = () => {
     }
   }, [isOpenAge, listHeight]);
 
+  console.log('selectedGenderButtons:', selectedGenderButtons);
+  console.log('selectedAgeButtons:', selectedAgeButtons);
   return (
     <>
       <div className={styles.dropdownContainer}>
@@ -116,22 +109,7 @@ const DropdownSelectors = () => {
           listRef={listRefGender}
           marginTop={isOpenAge && `${listHeight}px`}
         />
-        {/* <button className={styles.temporaryButton} onClick={handleSendRequest}>
-          Send Request
-        </button> */}
       </div>
-      {(selectedAgeButtons.length > 0 || selectedGenderButtons.length > 0) && (
-        <div className={styles.selectedWrapper}>
-          <SelectedButtons
-            buttons={selectedAgeButtons}
-            onRemove={handleRemoveSelectedAge}
-          />
-          <SelectedButtons
-            buttons={selectedGenderButtons}
-            onRemove={handleRemoveSelectedGender}
-          />
-        </div>
-      )}
     </>
   );
 };

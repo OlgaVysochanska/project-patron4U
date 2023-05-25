@@ -30,21 +30,8 @@ export const getCurrent = async token => {
   }
 };
 
-// export const patchCurrent = async (token, data) => {
-//   try {
-//     setToken(token);
-//     console.log("data_auth", data)
-//     const { data: result } = await instance.patch('/auth', data);
-//     return result;
-//   } catch (error) {
-//     setToken();
-//     throw error;
-//   }
-// };
-
 export const patchCurrent = async data => {
   try {
-    // console.log('data_auth', data);
     const { data: result } = await instance.patch('/auth', data);
     return result;
   } catch (error) {

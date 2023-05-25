@@ -1,6 +1,7 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import moment from 'moment';
 
+import useToggleFavoriteBtn from 'shared/hooks/useToggleFavoriteBtn';
 import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
 
 import Button from 'shared/components/Button/Button';
@@ -13,28 +14,36 @@ import MaleIcon from 'icons/MaleIcon';
 import FemaleIcon from 'icons/FemaleIcon';
 import HeartIcon from 'icons/HeartIcon';
 import TrashIcon from 'icons/TrashIcon';
+import useTheme from 'shared/hooks/useTheme';
 
-import { fetchToggleFavoriteNotice } from 'redux/auth/authOperations';
 import { fetchDeleteNotice } from 'redux/notices/noticesOperations';
-import {
-  isUserLogin,
-  getUser,
-  getFavoriteNotices,
-} from 'redux/auth/authSelectors';
+import { getUser } from 'redux/auth/authSelectors';
+
+import { getAge } from 'shared/helpers/getAge';
 
 import styles from './NoticeCategoryItem.module.scss';
 
 const NoticeCategoryItem = ({ notice, loadMore }) => {
-  const currentUser = useSelector(isUserLogin);
-  const user = useSelector(getUser);
-
+  const { myFavoriteNotice, setFavNot, handleClickFavoriteBtn } =
+    useToggleFavoriteBtn();
   const { isModalOpen, openModal, closeModal } = useToggleModalWindow();
+  const { theme } = useTheme();
+
+  useEffect(() => {
+    setFavNot(notice._id);
+  }, [setFavNot, notice._id, myFavoriteNotice]);
+
+  const user = useSelector(getUser);
 
   const dispatch = useDispatch();
 
   const { _id, category, title, date, sex, location, petURL, owner } = notice;
 
-  const favoriteNotices = useSelector(getFavoriteNotices);
+  const categoryForUser = category => {
+    if (category === 'lost-found') return 'lost/found';
+    if (category === 'for-free') return 'in good hands';
+    return category;
+  };
 
   let isMyAds = false;
 
@@ -42,75 +51,30 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
     isMyAds = true;
   }
 
-  let myFavoriteNotice = false;
-
-  if (favoriteNotices) {
-    myFavoriteNotice = favoriteNotices.includes(_id);
-  }
-
   const formattedLocation =
     location.length >= 10 ? location.slice(0, 5) + ' ...' : location;
 
-  const handleClickFavoriteBtn = id => {
-    if (!currentUser) {
-      NotiflixMessage({ type: 'info', data: 'Register or login, please!' });
-      return;
-    }
+  const handleDeleteNotice = async id => {
     try {
-      dispatch(fetchToggleFavoriteNotice(id));
-      NotiflixMessage({
-        type: 'success',
-        data: !myFavoriteNotice
-          ? 'Notice added to favorite successfully!'
-          : 'Notice deleted from favorite successfully!',
-      });
+      await dispatch(fetchDeleteNotice(id));
+      closeModal();
     } catch (error) {
-      NotiflixMessage({
-        type: 'failure',
-        data: error.message,
-      });
+      NotiflixMessage({ type: 'info', data: error.message });
     }
   };
 
-  const getAge = bd => {
-    const birthDate = moment(bd, 'DD-MM-YYYY');
-    const currentDate = moment();
+  const noticeCard =
+    theme === 'light'
+      ? styles.noticeCard
+      : `${styles.noticeCard} + ${styles.noticeCardDark}`;
 
-    const yearsDiff = currentDate.diff(birthDate, 'years');
-    const monthsDiff = currentDate.diff(birthDate, 'month') % 12;
-    const totalMonths = yearsDiff * 12 + monthsDiff;
-    const daysDiff = currentDate.diff(birthDate, 'days') % 31;
-
-    if (totalMonths === 1) {
-      return `${totalMonths} month`;
-    }
-
-    if (totalMonths !== 0 && totalMonths < 12) {
-      return `${totalMonths} months`;
-    }
-
-    if (totalMonths >= 12 && totalMonths < 24) {
-      return `1 year`;
-    }
-
-    if (totalMonths === 0 && daysDiff === 1) {
-      return `1 day`;
-    }
-
-    if (totalMonths === 0 && daysDiff > 1) {
-      return `${daysDiff} days`;
-    }
-
-    return `${yearsDiff} years`;
-  };
-
-  const handleDeleteNotice = id => {
-    dispatch(fetchDeleteNotice(id));
-    closeModal();
-  };
+  const noticeTitle =
+    theme === 'light'
+      ? styles.noticeTitle
+      : `${styles.noticeTitle} + ${styles.noticeTitleDark}`;
 
   return (
-    <li className={styles.noticeCard}>
+    <li className={noticeCard}>
       <div className={styles.imgThumb}>
         <img
           className={styles.avatar}
@@ -119,7 +83,7 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
           width="280"
         />
         <div className={styles.topBlock}>
-          <p className={styles.categoryInfo}>{category}</p>
+          <p className={styles.categoryInfo}>{categoryForUser(category)}</p>
           <div>
             <Button
               onClick={() => handleClickFavoriteBtn(_id)}
@@ -168,7 +132,7 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
         </div>
       </div>
       <div className={styles.noticeDesc}>
-        <h3 className={styles.noticeTitle}>{title}</h3>
+        <h3 className={noticeTitle}>{title}</h3>
         <Button className={styles.learnBtn} onClick={() => loadMore(notice)}>
           Learn more
         </Button>

@@ -1,41 +1,26 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-import NotiflixMessage from 'shared/components/NotiflixMessage/NotiflixMessage';
+import useToggleFavoriteBtn from 'shared/hooks/useToggleFavoriteBtn';
+
 import Button from 'shared/components/Button/Button';
 import HeartIcon from 'icons/HeartIcon';
 
-import { isUserLogin } from 'redux/auth/authSelectors';
-import { fetchToggleFavoriteNotice } from 'redux/auth/authOperations';
-
 import styles from './AddToFavorite.module.scss';
 
-const AddToFavorite = ({ _id, myFavoriteNotice }) => {
-  const [isFavorite, setIsFavorite] = useState(myFavoriteNotice);
-  const dispatch = useDispatch();
-  const currentUser = useSelector(isUserLogin);
+const AddToFavorite = ({ _id }) => {
+  const { myFavoriteNotice, setFavNot, handleClickFavoriteBtn } =
+    useToggleFavoriteBtn();
 
-  const handleClickFavoriteBtn = id => {
-    if (!currentUser) {
-      NotiflixMessage({ type: 'info', data: 'Register or login, please!' });
-      return;
-    }
-    dispatch(fetchToggleFavoriteNotice(id));
-    setIsFavorite(!isFavorite);
-    NotiflixMessage({
-      type: 'success',
-      data: !isFavorite
-        ? 'Notice added to favorite successfully!'
-        : 'Notice deleted from favorite successfully!',
-    });
-  };
+  useEffect(() => {
+    setFavNot(_id);
+  }, [setFavNot, _id, myFavoriteNotice]);
 
   return (
     <Button
       className={styles.addTo}
       onClick={() => handleClickFavoriteBtn(_id)}
     >
-      {!isFavorite ? 'Add to' : 'Delete from'}
+      {!myFavoriteNotice ? 'Add to' : 'Delete from'}
       <HeartIcon className={styles.heartIcon} />
     </Button>
   );

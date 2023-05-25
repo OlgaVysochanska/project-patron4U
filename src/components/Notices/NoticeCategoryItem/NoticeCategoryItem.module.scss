@@ -13,6 +13,11 @@
   }
 }
 
+.noticeCardDark {
+  background: #2b3e51;
+  border: 2px solid rgba(136, 198, 253, 0.19);
+}
+
 .imgThumb {
   position: relative;
   height: 288px;
@@ -179,6 +184,10 @@
   margin-bottom: 20px;
   font-size: 24px;
   line-height: 1.375;
+}
+
+.noticeTitleDark {
+  color: #fef9f9;
 }
 
 .learnBtn {

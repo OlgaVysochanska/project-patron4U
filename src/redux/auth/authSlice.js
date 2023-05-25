@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// import { register, login, current, logout, editCurrent } from './authOperations';
-
 import {
   register,
   login,
@@ -17,7 +15,7 @@ const initialState = {
   token: '',
   isLogin: false,
   loading: false,
-  pets: {},
+  pets: [],
   isRegistered: false,
   error: null,
 };
