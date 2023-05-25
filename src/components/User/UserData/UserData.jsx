@@ -1,21 +1,21 @@
 import styles from './UserData.module.scss';
 import UserDataItem from './UserDataItem/UserDataItem';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import defaultAvatar from './default_avatar.svg';
 import CameraIcon from 'icons/CameraIcon';
 import { nanoid } from 'nanoid';
 // import CheckIcon from 'icons/CheckIcon';
 // import CrossIcon from 'icons/CrossIcon';
-import { getUser } from '../../../redux/auth/authSelectors';
+import { getUser, getUserEdit } from '../../../redux/auth/authSelectors';
 import { editCurrent } from '../../../redux/auth/authOperations';
-import { getUserEdit } from '../../../redux/auth/authSelectors';
+// import { getUserEdit } from '../../../redux/auth/authSelectors';
 import UploadWidget from '../../../shared/components/UploadWidget/UploadWidget';
-import {
-  useDispatch,
-  useSelector,
-} from '../../../../node_modules/react-redux/es/exports';
+// import {
+//   useDispatch,
+//   useSelector,
+// } from '../../../../node_modules/react-redux/es/exports';
 import useForm from 'shared/hooks/useForm';
-
+import { useDispatch,useSelector } from '../../../../node_modules/react-redux/es/exports';
 import { initialState } from './initialState';
 import Logout from '../Logout/Logout';
 import Spiner from 'components/Spiner/Spiner';
@@ -34,18 +34,31 @@ const CameraIconTuned = () => {
 const picSize = '182px';
 
 const UserData = () => {
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(null);
-  // const [isEditPhoto, setEditPhoto] = useState(false);
-  // const [isEditing, setIsEditing] = useState(true);
-  const [isBlocked, setIsBlocked] = useState(false);
 
+  const [isBlocked, setIsBlocked] = useState(false);
+  const [isSubmiting, setIsSubmiting] = useState(false);
+  const [avatarUpdated, setAvatarUpdated] = useState(false)
+
+  
   const dispatch = useDispatch();
 
-  const loading = useSelector(getUserEdit);
+  let { name, email, birthday, phone, city, avatarURL } =
+  useSelector(getUser);
 
-  const handleEditUser = data => {
-    dispatch(editCurrent(data));
+let [testAvatar, setTestAvatar ] = useState(avatarURL)
+
+  useEffect(()=> {
+    setAvatarUpdated(false)
+  }, [name, email, birthday,phone,city ,avatarURL, isSubmiting])
+
+  const handleEditUser = async data => {
+    setIsSubmiting(true);
+    try {
+      await dispatch(editCurrent(data));
+    } finally {
+      setIsSubmiting(false);   
+    }
+    setAvatarUpdated(true)
   };
 
   const {
@@ -57,9 +70,8 @@ const UserData = () => {
     onSubmit: handleEditUser,
   });
 
-  const { name, email, birthday, phone, city, avatarURL } =
-    useSelector(getUser);
 
+  
   const blockButtons = () => {
     setIsBlocked(true);
   };
@@ -71,6 +83,7 @@ const UserData = () => {
   const handleUserURL = avatarURL => {
     const obj = { avatarURL: `${avatarURL}` };
     handleEditUser(obj);
+    setTestAvatar(avatarURL)
   };
 
   const elements = Object.entries({ name, email, birthday, phone, city }).map(
@@ -124,10 +137,11 @@ const UserData = () => {
         <div className={styles.avatarWrapper}>
           <img
             className={styles.avatar}
-            src={avatarURL || defaultAvatar}
+            src={`${testAvatar || defaultAvatar}?${Date.now()}`}
             alt="Your look"
             width={picSize}
             height={picSize}
+            key={avatarUpdated ? avatarURL : 'default'}
           ></img>
           <UploadWidget
             uriI={handleUserURL}
@@ -142,7 +156,7 @@ const UserData = () => {
           {elements} <Logout />
         </div>
       </div>
-      {loading && <Spiner />}
+      {isSubmiting && <Spiner />}
     </div>
   );
 };

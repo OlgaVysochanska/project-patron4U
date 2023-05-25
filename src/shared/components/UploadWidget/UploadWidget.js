@@ -1,25 +1,27 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Button from '../Button/Button';
+import Spiner from 'components/Spiner/Spiner';
 
 const UploadWidget = ({
   uriI,
   children,
-  btnType = "button",
+  btnType = 'button',
   btnClassName,
   btnLabel,
   btnSVGComponent,
   btnShowLabelFirst,
   buttonStyle = {
-        cursor: 'pointer',
-        outline: 'none',
-        border: 'none',
-        backgroundColor: 'inherit',
-        // ...children.props,
-      },
+    cursor: 'pointer',
+    outline: 'none',
+    border: 'none',
+    backgroundColor: 'inherit',
+    // ...children.props,
+  },
   btnDisabled,
 }) => {
   const cloudinaryRef = useRef();
   const widgetRef = useRef();
+  const [isLoading, setIsLOading] = useState(false);
 
   useEffect(() => {
     cloudinaryRef.current = window.cloudinary;
@@ -37,21 +39,28 @@ const UploadWidget = ({
         if (!error && result && result.event === 'success') {
           uriI(result.info.secure_url);
         }
+        setIsLOading(false);
       }
     );
   }, [uriI]);
+
+  const handleOpenWidget = () => {
+    setIsLOading(true);
+    widgetRef.current.open();
+  };
+
   return (
     <Button
-      onClick={() => widgetRef.current.open()}
+      onClick={handleOpenWidget}
       type={btnType}
       className={btnClassName}
       label={btnLabel}
       SVGComponent={btnSVGComponent}
       showLabelFirst={btnShowLabelFirst}
       buttonStyle={buttonStyle}
-      disabled={btnDisabled}
+      disabled={btnDisabled || isLoading}
     >
-      {children}
+      {isLoading ? <Spiner /> : children}
     </Button>
 
     // <p className={styles.btnPhoto}>
