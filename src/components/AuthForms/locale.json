@@ -36,5 +36,9 @@
   "passwordMatch": {
     "eng": "Passwords must match",
     "ua": "Паролі мають співпадати"
+  },
+  "secure": {
+    "eng": "Password is secure",
+    "ua": "Пароль захищений"
   }
 }
