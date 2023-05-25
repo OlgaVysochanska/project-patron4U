@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import useLang from 'shared/hooks/useLang';
 
 import { getRequestParams } from 'redux/filter/filterSelectors';
 import styles from './NoticesFilters.module.scss';
@@ -9,9 +10,14 @@ import DropdownSelectors from './DropdownSelectors';
 import SelectedButtons from './SelectedButton/SelectedButton';
 import { setRequestParams } from 'redux/filter/requestParamsSlice';
 
+import locale from './locale.json';
+
 const NoticesFilters = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
+
+  const { lang } = useLang();
+  const langFilter = locale.langFilter[lang];
 
   const handleFilterClick = () => {
     setIsOpen(!isOpen);
@@ -49,7 +55,7 @@ const NoticesFilters = () => {
 
   return (
     <div className={styles.filterButtonsWrapper}>
-      <FilterButton onClick={handleFilterClick}>Filter</FilterButton>
+      <FilterButton onClick={handleFilterClick}>{langFilter}</FilterButton>
       {isOpen && <DropdownSelectors />}
       <div className={styles.selectedButtonsWrapper}>
         <SelectedButtons

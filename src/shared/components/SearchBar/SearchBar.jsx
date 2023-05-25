@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom';
+// import { useSearchParams } from 'react-router-dom';
 import Button from 'shared/components/Button/Button';
 import SearchIcon from '../../../icons/SearchIcon';
 import CrossIcon from 'icons/CrossIcon';
@@ -12,8 +12,7 @@ import locale from './locale.json';
 import style from './SearchBar.module.scss';
 
 const SearchBar = ({ onSubmit }) => {
-
-  const [setSearchParams] = useSearchParams();
+  // const [setSearchParams] = useSearchParams();
 
   const { state, setState, handleChange, handleSubmitSearch } = useForm({
     initialState,

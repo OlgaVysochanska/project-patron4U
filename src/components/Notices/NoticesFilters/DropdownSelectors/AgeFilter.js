@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './DropdownSelectors.module.scss';
 import Button from 'shared/components/Button';
 import ArrowDownIcon from '../../../../icons/ArrowDownIcon';
+import useLang from 'shared/hooks/useLang';
+import locale from '../locale.json';
 
 const AgeFilter = ({
   isOpen,
@@ -15,14 +17,15 @@ const AgeFilter = ({
     { value: '1year', label: '1 year' },
     { value: '2year', label: '2 year' },
   ];
-
+  const { lang } = useLang();
+  const lAge = locale.langAge[lang];
   return (
     <div className={styles.dropdownContainerSelector} ref={listRef}>
       <Button onClick={handleToggle}>
         <span className={styles.filtersIcon}>
           <ArrowDownIcon />
         </span>
-        <span>By age</span>
+        <span>{lAge}</span>
       </Button>
       {isOpen && (
         <ul>
