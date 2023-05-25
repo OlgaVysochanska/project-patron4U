@@ -1,13 +1,13 @@
 .filterButton {
   width: 129px;
   height: 40px;
-
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 8px 20px 8px 20px;
   border: 2px solid #54adff;
   border-radius: 40px;
+  background-color: transparent;
   stroke: #54adff;
   cursor: pointer;
 }

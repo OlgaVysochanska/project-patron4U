@@ -86,10 +86,9 @@ const NoticesPage = () => {
             onClearnData={onClearnData}
             onClickFavorite={onClickFavorite}
           />
-          <div className={style.wrapperRightButton}>
-            <NoticesFilters />
-            <AddPetButton />
-          </div>
+
+          <NoticesFilters />
+          <AddPetButton />
         </div>
 
         {!dataNotices && !filter && (
