@@ -4,7 +4,8 @@ import styles from './NoticesFilters.module.scss';
 import FilterButton from 'shared/components/FilterButton/FilterButton';
 import DropdownSelectors from './DropdownSelectors';
 
-const NoticesFilters = () => {
+const NoticesFilters = (selectedAgeButtons, selectedGenderButtons) => {
+  console.log('selectedGenderButtons:', selectedGenderButtons);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleFilterClick = () => {
@@ -14,7 +15,11 @@ const NoticesFilters = () => {
   return (
     <div className={styles.filterButton}>
       <FilterButton onClick={handleFilterClick}>Filter</FilterButton>
-      {isOpen && <DropdownSelectors></DropdownSelectors>}
+      {isOpen ||
+      selectedAgeButtons.length > 0 ||
+      selectedGenderButtons.length > 0 ? (
+        <DropdownSelectors />
+      ) : null}
     </div>
   );
 };

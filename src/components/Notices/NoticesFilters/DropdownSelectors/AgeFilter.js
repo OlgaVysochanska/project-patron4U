@@ -11,9 +11,9 @@ const AgeFilter = ({
   listRef,
 }) => {
   const ages = [
-    { value: '3-12 m', label: '3-12 m' },
-    { value: '1 year', label: '1 year' },
-    { value: '2 year', label: '2 year' },
+    { value: '3-12m', label: '3-12 m' },
+    { value: '1year', label: '1 year' },
+    { value: '2year', label: '2 year' },
   ];
 
   return (
