@@ -37,7 +37,7 @@ const LoginForm = ({ onSubmit }) => {
   const emailLang = locale.email[lang];
   const passwordLang = locale.password[lang];
   const validEmailLang = locale.validEmail[lang];
-  const titleLang = locale.title[lang];
+  const passwordErrorMessage = locale.passwordErrorMessage[lang];
   const loginLang = locale.login[lang];
 
   //перевірка на встановлення властивості disabled для кнопки
@@ -89,7 +89,7 @@ const LoginForm = ({ onSubmit }) => {
           placeholder={passwordLang}
           type={showPassword ? 'text' : 'password'}
           pattern=".{6,}" // Патерн для мінімальної довжини паролю (6 символів)
-          title={titleLang} // Підказка для патерну
+          title={passwordErrorMessage} // Підказка для патерну
           style={{
             border: isValidPass ? '1px solid #54adff' : '1px solid #F43F5E',
             backgroundColor: theme === 'dark' && '#2b3e51',
