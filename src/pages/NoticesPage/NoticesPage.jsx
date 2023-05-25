@@ -77,29 +77,30 @@ const NoticesPage = () => {
 
   return (
     <>
-      <div className={style.noticePageContainer} style={{ position: 'relative' }}>
-      <h2 className={style.title}>{title}</h2>
+      <div
+        className={style.noticePageContainer}
+        style={{ position: 'relative' }}
+      >
+        <h2 className={style.title}>{title}</h2>
         <NoticesSearch />
-       
-        <div className={style.contentWrapper}>
 
+        <div className={style.contentWrapper}>
           <div className={style.categoryFilterWrapper}>
             <div className={style.categoryWrapper}>
               <NoticesCategoriesNav
-              onClickOwn={onClickOwn}
-              onClearnData={onClearnData}
-              onClickFavorite={onClickFavorite}
+                onClickOwn={onClickOwn}
+                onClearnData={onClearnData}
+                onClickFavorite={onClickFavorite}
               />
             </div>
             <div className={style.filterWrapper}>
-              <NoticesFilters />  
+              <NoticesFilters />
             </div>
-          </div>  
-          
+          </div>
+
           <div className={style.addPetWrapper}>
             <AddPetButton />
           </div>
-          
         </div>
 
         {!dataNotices && !filter && (

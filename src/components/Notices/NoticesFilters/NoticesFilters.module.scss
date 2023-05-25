@@ -1,5 +1,50 @@
-.filterButton {
+.filterButtonsWrapper {
   position: relative;
+  align-self: flex-start;
+  @media screen and (min-width: 768px) {
+    // margin-left: 445px;
+  }
+  @media (min-width: 1280px) {
+    // margin-left: 445px;
+  }
+}
+.selectedButtonsWrapper {
+  position: fixed;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  top: 50%;
+  left: 10%;
+  transform: translate(-50%, -50%);
+  @media screen and (min-width: 768px) {
+    position: absolute;
+    z-index: 1000;
+    right: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 50px;
+  }
+  @media (min-width: 1280px) {
+    // margin-left: 445px;
+  }
+
+  // @media (max-width: 1024px) {
+  //   position: absolute;
+  //   z-index: 1000;
+  //   top: 0;
+  //   right: 100%;
+  //   display: flex;
+  //   flex-direction: row-reverse;
+  //   margin-right: 8px;
+  // }
+}
+
+.ulSelectedButtons {
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: 768px) {
+    flex-direction: row-reverse;
+  }
 }
 
 .filterOptions {
@@ -10,4 +55,34 @@
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+.selectedButton {
+  width: 80px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border: none;
+  border-radius: 40px;
+  stroke: #54adff;
+  cursor: pointer;
+  background-color: white;
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  @media (min-width: 1023px) {
+    margin-left: 4px;
+  }
+}
+.selectedButton > span {
+  color: #54adff;
+  font-size: 12px;
+  font-style: Bold;
+}
+
+.filterIcon {
+  width: 16px;
+  height: 17px;
+  margin-left: 4px;
+  padding-bottom: 8px;
 }
