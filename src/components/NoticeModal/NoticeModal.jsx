@@ -1,6 +1,7 @@
 import { useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
+import useLang from 'shared/hooks/useLang';
 import useTheme from 'shared/hooks/useTheme';
 
 import Contact from './Contact';
@@ -11,11 +12,27 @@ import CrossIcon from 'icons/CrossIcon';
 
 import { getFavoriteNotices } from 'redux/auth/authSelectors';
 
+import locale from './locale.json';
+
 import styles from './NoticeModal.module.scss';
 
 const NoticeModal = ({ notice, owner, closeModal }) => {
-  const favoriteNotices = useSelector(getFavoriteNotices);
   const { theme } = useTheme();
+
+  const { lang } = useLang();
+  const petName = locale.petName[lang];
+  const birthday = locale.birthday[lang];
+  const breed = locale.breed[lang];
+  const place = locale.place[lang];
+  const sex = locale.sex[lang];
+  const price = locale.price[lang];
+  const ownerName = locale.owner[lang];
+  const email = locale.email[lang];
+  const phone = locale.phone[lang];
+  const noPhone = locale.noPhone[lang];
+  const сomments = locale.сomments[lang];
+
+  const favoriteNotices = useSelector(getFavoriteNotices);
 
   let myFavoriteNotice = false;
 
@@ -73,7 +90,7 @@ const NoticeModal = ({ notice, owner, closeModal }) => {
                         theme === 'dark' && styles.infoTitleDark
                       }`}
                     >
-                      Name:
+                      {petName}
                     </td>
                     <td
                       className={`${styles.info} ${
@@ -89,7 +106,7 @@ const NoticeModal = ({ notice, owner, closeModal }) => {
                         theme === 'dark' && styles.infoTitleDark
                       }`}
                     >
-                      Birthday:
+                      {birthday}
                     </td>
                     <td
                       className={`${styles.info} ${
@@ -105,7 +122,7 @@ const NoticeModal = ({ notice, owner, closeModal }) => {
                         theme === 'dark' && styles.infoTitleDark
                       }`}
                     >
-                      Breed:
+                      {breed}
                     </td>
                     <td
                       className={`${styles.info} ${
@@ -121,7 +138,7 @@ const NoticeModal = ({ notice, owner, closeModal }) => {
                         theme === 'dark' && styles.infoTitleDark
                       }`}
                     >
-                      Place:
+                      {place}
                     </td>
                     <td
                       className={`${styles.info} ${
@@ -137,7 +154,7 @@ const NoticeModal = ({ notice, owner, closeModal }) => {
                         theme === 'dark' && styles.infoTitleDark
                       }`}
                     >
-                      The sex:
+                      {sex}
                     </td>
                     <td
                       className={`${styles.info} ${
@@ -154,7 +171,7 @@ const NoticeModal = ({ notice, owner, closeModal }) => {
                           theme === 'dark' && styles.infoTitleDark
                         }`}
                       >
-                        Price:
+                        {price}
                       </td>
                       <td
                         className={`${styles.info} ${
@@ -172,7 +189,7 @@ const NoticeModal = ({ notice, owner, closeModal }) => {
                           theme === 'dark' && styles.infoTitleDark
                         }`}
                       >
-                        Owner:
+                        {ownerName}
                       </td>
                       <td>{owner.name}</td>
                     </tr>
@@ -184,7 +201,7 @@ const NoticeModal = ({ notice, owner, closeModal }) => {
                         theme === 'dark' && styles.infoTitleDark
                       }`}
                     >
-                      Email:
+                      {email}
                     </td>
                     <td>
                       <a
@@ -201,7 +218,7 @@ const NoticeModal = ({ notice, owner, closeModal }) => {
                         theme === 'dark' && styles.infoTitleDark
                       }`}
                     >
-                      Phone:
+                      {phone}
                     </td>
                     <td>
                       {owner.phone ? (
@@ -219,7 +236,7 @@ const NoticeModal = ({ notice, owner, closeModal }) => {
                             theme === 'dark' && styles.infoDark
                           }`}
                         >
-                          no phone
+                          {noPhone}
                         </p>
                       )}
                     </td>
@@ -233,7 +250,7 @@ const NoticeModal = ({ notice, owner, closeModal }) => {
                   theme === 'dark' && styles.commentsTitleDark
                 }`}
               >
-                Comments:{' '}
+                {сomments}
               </span>
               <span
                 className={`${styles.commentsDesc} ${

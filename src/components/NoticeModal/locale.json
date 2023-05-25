@@ -1,0 +1,46 @@
+{
+  "petName": {
+    "eng": "Name:",
+    "ua": "Ім'я"
+  },
+  "birthday": {
+    "eng": "Birthday:",
+    "ua": "Дата народження:"
+  },
+  "breed": {
+    "eng": "Breed:",
+    "ua": "Порода:"
+  },
+  "place": {
+    "eng": "Place:",
+    "ua": "Місце:"
+  },
+  "sex": {
+    "eng": "The sex:",
+    "ua": "Стать:"
+  },
+  "price": {
+    "eng": "Price:",
+    "ua": "Ціна:"
+  },
+  "owner": {
+    "eng": "Owner:",
+    "ua": "Власник:"
+  },
+  "email": {
+    "eng": "Email:",
+    "ua": "Електронна пошта:"
+  },
+  "phone": {
+    "eng": "Phone:",
+    "ua": "Телефон:"
+  },
+  "noPhone": {
+    "eng": "no phone",
+    "ua": "не зазначено"
+  },
+  "сomments": {
+    "eng": "Comments: ",
+    "ua": "Коментарі: "
+  }
+}
