@@ -4,7 +4,7 @@ import { setFilter } from 'redux/filter/filterSlice';
 import { getRequestParams } from 'redux/filter/filterSelectors';
 
 import SearchBar from 'shared/components/SearchBar/SearchBar';
-import style from './NoticesSearch.module.scss';
+
 import { getNoticesBySearch } from 'shared/services/notices';
 
 const NoticeSearch = () => {
@@ -37,7 +37,7 @@ const NoticeSearch = () => {
 
   return (
     <>
-      <div className={style.wrapper}>
+      <div>
         <SearchBar onSubmit={clickOnSearch} />
       </div>
     </>

@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styles from './DropdownSelectors.module.scss';
 import { setRequestParams } from 'redux/filter/requestParamsSlice';
-import SelectedButtons from '../SelectedButton';
 import AgeFilter from './AgeFilter';
 import GenderFilter from './GenderFilter';
 
@@ -60,7 +59,13 @@ const DropdownSelectors = () => {
     };
     console.log('Sending request:', requestParams);
     dispatch(setRequestParams(requestParams));
-  }, [selectedAges, selectedGenders, selectedGenderButtons, dispatch]);
+  }, [
+    selectedAges,
+    selectedGenders,
+    selectedAgeButtons,
+    selectedGenderButtons,
+    dispatch,
+  ]);
 
   useEffect(() => {
     if (listRefAge.current) {

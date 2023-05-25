@@ -1,0 +1,17 @@
+{
+  "langFilter": {
+    "eng": "Filter",
+    "ua": "Фільтр"
+  },
+
+  "byAge": {
+    "eng": "By age",
+    "ua": "За віком"
+  },
+
+  "byGender": {
+    "eng": "By gender",
+    "ua": "За статтю"
+  }
+  
+}

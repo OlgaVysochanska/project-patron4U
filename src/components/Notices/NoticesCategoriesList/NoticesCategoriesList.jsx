@@ -23,6 +23,9 @@ const NoticesCategoriesList = ({ notices, loadMore }) => {
       ? styles.noticesList
       : `${styles.noticesList} + ${styles.noticesListDark}`;
 
+  if (notices.length === 0) {
+    return <p>Приходьте завтра!</p>;
+  }
   const noticesItem = notices.map(notice => {
     // const myFavoriteNotice = favoriteArr.includes(notice._id);
     return (
