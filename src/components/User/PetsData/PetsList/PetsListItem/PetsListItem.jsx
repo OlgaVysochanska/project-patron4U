@@ -11,10 +11,10 @@ import { fetchDeletePet } from 'redux/pets/petsOperations';
 import { current } from 'redux/auth/authOperations';
 
 import styles from './PetsListItem.module.scss';
-
+import useTheme from 'shared/hooks/useTheme';
 const PetsListItem = ({ id, name, date, breed, petURL, comments }) => {
   const { isModalOpen, openModal, closeModal } = useToggleModalWindow();
-
+  const { theme } = useTheme();
   const dispatch = useDispatch();
 
   const handleDeletePet = async id => {
@@ -27,7 +27,9 @@ const PetsListItem = ({ id, name, date, breed, petURL, comments }) => {
   };
 
   return (
-    <li className={styles.petCard}>
+    <li
+      className={`${styles.petCard} ${theme === 'dark' && styles.petCardDark}`}
+    >
       <div className={styles.imgThumb}>
         <img
           className={styles.avatar}
@@ -42,19 +44,41 @@ const PetsListItem = ({ id, name, date, breed, petURL, comments }) => {
           className={styles.deleteBtn}
           SVGComponent={() => <TrashIcon className={styles.trashIcon} />}
         />
-        <p className={styles.infoDesc}>
-          <span className={styles.infoTitle}>Name: </span>
+        <p
+          className={`${styles.infoDesc} ${
+            theme === 'dark' && styles.infoDescDark
+          }`}
+        >
+          <span
+            className={`${styles.infoTitle} ${
+              theme === 'dark' && styles.infoTitleDark
+            }`}
+          >
+            Name:{' '}
+          </span>
           {name}
         </p>
-        <p className={styles.infoDesc}>
+        <p
+          className={`${styles.infoDesc} ${
+            theme === 'dark' && styles.infoDescDark
+          }`}
+        >
           <span className={styles.infoTitle}>Date of birth: </span>
           {date}
         </p>
-        <p className={styles.infoDesc}>
+        <p
+          className={`${styles.infoDesc} ${
+            theme === 'dark' && styles.infoDescDark
+          }`}
+        >
           <span className={styles.infoTitle}>Breed: </span>
           {breed}
         </p>
-        <p className={styles.infoDesc}>
+        <p
+          className={`${styles.infoDesc} ${
+            theme === 'dark' && styles.infoDescDark
+          }`}
+        >
           <span className={styles.infoTitle}>Comments: </span>
           {comments}
         </p>
