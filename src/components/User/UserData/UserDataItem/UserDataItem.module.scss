@@ -18,6 +18,10 @@
   margin-right: 8px;
 }
 
+.labelDark {
+  color: #fff;
+}
+
 .input {
   display: flex;
   align-items: center;
@@ -28,6 +32,13 @@
   letter-spacing: 0.04em;
   padding: 4px 12px;
   margin-left: auto;
+}
+
+.inputDark {
+  background: transparent;
+  color: #fff;
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  border: 1px solid black;
 }
 
 .toggle {
