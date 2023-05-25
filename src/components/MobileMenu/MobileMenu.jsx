@@ -7,7 +7,8 @@ import ThemeSwitcher from 'components/ThemeSwitcher/ThemeSwitcher';
 import useTheme from 'shared/hooks/useTheme';
 
 export default function MobileMenu({ children, onClick, isMobile }) {
-  const { theme } = useTheme;
+  const { theme } = useTheme();
+  console.log(theme);
 
   const mobileMenu =
     theme === 'light'

@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import Spiner from '../../components/Spiner/Spiner';
 import { getFriends } from '../../shared/services/friends';
 import FriendsItem from './FriendsItem/FriendsItem';
+import useTheme from 'shared/hooks/useTheme';
 import scss from './OurFriendsList.module.scss';
 
 const OurFriendsList = () => {
@@ -20,6 +21,14 @@ const OurFriendsList = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
+  const { theme } = useTheme();
+
+  const item =
+    theme === 'light' ? scss.item : `${scss.item} + ${scss.itemDark}`;
+
+  const list =
+    theme === 'light' ? scss.list : `${scss.list} + ${scss.listDark}`;
+
   const elements = friends.map(
     ({
       _id,
@@ -33,7 +42,7 @@ const OurFriendsList = () => {
       workDays,
     }) => {
       return (
-        <li key={_id} className={scss.item}>
+        <li key={_id} className={item}>
           <FriendsItem
             _id={_id}
             address={address}
@@ -56,7 +65,7 @@ const OurFriendsList = () => {
       {error ? (
         <Navigate to="/not-found" />
       ) : (
-        <ul className={scss.list}>{elements}</ul>
+        <ul className={list}>{elements}</ul>
       )}
     </>
   );
