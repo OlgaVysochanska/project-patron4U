@@ -8,9 +8,9 @@ import SearchBar from 'shared/components/SearchBar/SearchBar';
 import { getNoticesBySearch } from 'shared/services/notices';
 
 const NoticeSearch = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const noticeToSearch = searchParams.get('search');
-  console.log(' noticeToSearch', noticeToSearch);
+  const [, setSearchParams] = useSearchParams();
+  // const noticeToSearch = searchParams.get('search');
+  // console.log(' noticeToSearch', noticeToSearch);
 
   const { category } = useParams();
 
@@ -28,7 +28,7 @@ const NoticeSearch = () => {
     // console.log('search:', search);
     try {
       const data = await getNoticesBySearch(search, category, gender, age);
-      console.log('clickOnSearch:', data);
+      // console.log('clickOnSearch:', data);
       dispatch(setFilter(data));
     } catch (error) {
       console.error('Error fetching notices:', error);

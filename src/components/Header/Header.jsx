@@ -22,10 +22,10 @@ export default function Header() {
       setIsMobile(window.innerWidth < 768);
     };
 
-    console.log('isDesktop', isDesktop);
-    console.log('isTablet', isTablet);
-    console.log('isMobile', isMobile);
-    console.log(window.innerWidth);
+    // console.log('isDesktop', isDesktop);
+    // console.log('isTablet', isTablet);
+    // console.log('isMobile', isMobile);
+    // console.log(window.innerWidth);
 
     window.addEventListener('resize', handleResize);
 

@@ -1,7 +1,7 @@
 import { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Outlet, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import NotiflixMessage from 'shared/components/NotiflixMessage/NotiflixMessage';
 
 import useLang from 'shared/hooks/useLang';
@@ -25,11 +25,7 @@ import {
   fetchNoticesByUser,
 } from '../../redux/notices/noticesOperations';
 
-import {
-  getUserFavoriteNotices,
-  getUserNotices,
-  getNoticeById,
-} from 'shared/services/notices';
+import { getNoticeById } from 'shared/services/notices';
 
 import NoticesSearch from 'components/Notices/NoticesSearch/NoticesSearch';
 import NoticesCategoriesNav from 'components/Notices/NoticesCategoriesNav/NoticesCategoriesNav';
