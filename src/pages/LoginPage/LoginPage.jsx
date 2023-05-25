@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import { login } from '../../redux/auth/authOperations';
-import { isUserLogin } from 'redux/auth/authSelectors';
+import { isUserLogin, getUserEdit } from 'redux/auth/authSelectors';
 
 import { NavLink } from 'react-router-dom';
 
@@ -14,6 +14,7 @@ import locale from './locale.json';
 import Background from 'shared/components/Background/Background';
 import LoginForm from 'components/AuthForms/LoginForm/LoginForm';
 import AuthTitle from 'shared/components/AuthTitle/AuthTitle';
+import Spiner from 'components/Spiner/Spiner';
 
 import styles from './LoginPage.module.scss';
 
@@ -21,6 +22,7 @@ const LoginPage = () => {
   const { lang } = useLang();
   const { theme } = useTheme();
   const isLogin = useSelector(isUserLogin);
+  const isLoading = useSelector(getUserEdit);
   const dispatch = useDispatch();
 
   const loginLang = locale.login[lang];
@@ -51,24 +53,31 @@ const LoginPage = () => {
   return (
     <>
       <Background />
+
       <div className={container}>
-        <AuthTitle text={loginLang} />
-        <LoginForm onSubmit={handleLogin} />
-        <div>
-          <p className={redirectLink}>
-            {dontHaveAccountLang}{' '}
-            <NavLink to="/Register" className={styles.navlink}>
-              {registerLang}
-            </NavLink>{' '}
-            {orUseLang}{' '}
-            <a
-              href="https://patron-back.onrender.com/api/auth/google"
-              className={styles.navlink}
-            >
-              {googleLang}
-            </a>
-          </p>
-        </div>
+        {!isLoading ? (
+          <>
+            <AuthTitle text={loginLang} />
+            <LoginForm onSubmit={handleLogin} />
+            <div>
+              <p className={redirectLink}>
+                {dontHaveAccountLang}{' '}
+                <NavLink to="/Register" className={styles.navlink}>
+                  {registerLang}
+                </NavLink>{' '}
+                {orUseLang}{' '}
+                <a
+                  href="https://patron-back.onrender.com/api/auth/google"
+                  className={styles.navlink}
+                >
+                  {googleLang}
+                </a>
+              </p>
+            </div>
+          </>
+        ) : (
+          <Spiner />
+        )}
       </div>
     </>
   );

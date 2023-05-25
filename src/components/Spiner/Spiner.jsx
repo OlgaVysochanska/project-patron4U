@@ -1,7 +1,5 @@
-import styles from'./spiner.module.scss';
+import styles from './spiner.module.scss';
 import paw from './spiner_paw.svg';
-
-
 
 const Spiner = () => {
   return (

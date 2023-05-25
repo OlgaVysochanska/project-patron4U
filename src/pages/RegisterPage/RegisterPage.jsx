@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import { register } from '../../redux/auth/authOperations';
-import { isUserLogin } from 'redux/auth/authSelectors';
+import { isUserLogin, getUserEdit } from 'redux/auth/authSelectors';
 import { setRegistered } from '../../redux/auth/authSlice';
 
 import useLang from 'shared/hooks/useLang';
@@ -13,6 +13,7 @@ import locale from './locale.json';
 import Background from 'shared/components/Background/Background';
 import RegisterForm from 'components/AuthForms/RegisterForm/RegisterForm';
 import AuthTitle from 'shared/components/AuthTitle/AuthTitle';
+import Spiner from 'components/Spiner/Spiner';
 
 import styles from './RegisterPage.module.scss';
 
@@ -20,6 +21,9 @@ const RegisterPage = () => {
   const { lang } = useLang();
   const { theme } = useTheme();
   const isLogin = useSelector(isUserLogin);
+  const isLoading = useSelector(getUserEdit);
+
+  console.log(isLoading);
 
   const registrationLang = locale.registration[lang];
   const alreadyHaveAccountLang = locale.alreadyHaveAccount[lang];
@@ -54,27 +58,34 @@ const RegisterPage = () => {
   return (
     <>
       <Background />
+
       <div className={container}>
-        <AuthTitle text={registrationLang} />
-        <RegisterForm onSubmit={handleRegister} />
-        <div>
-          <p className={redirectLink}>
-            {alreadyHaveAccountLang}{' '}
-            <NavLink to="/login" className={styles.navlink}>
-              {loginLang}{' '}
-            </NavLink>
-            <NavLink to="/user" className={styles.navlink}>
-              {userLang}
-            </NavLink>{' '}
-            {orUseLang}{' '}
-            <a
-              href="https://patron-back.onrender.com/api/auth/google"
-              className={styles.navlink}
-            >
-              {googleLang}
-            </a>
-          </p>
-        </div>
+        {!isLoading ? (
+          <>
+            <AuthTitle text={registrationLang} />
+            <RegisterForm onSubmit={handleRegister} />
+            <div>
+              <p className={redirectLink}>
+                {alreadyHaveAccountLang}{' '}
+                <NavLink to="/login" className={styles.navlink}>
+                  {loginLang}{' '}
+                </NavLink>
+                <NavLink to="/user" className={styles.navlink}>
+                  {userLang}
+                </NavLink>{' '}
+                {orUseLang}{' '}
+                <a
+                  href="https://patron-back.onrender.com/api/auth/google"
+                  className={styles.navlink}
+                >
+                  {googleLang}
+                </a>
+              </p>
+            </div>
+          </>
+        ) : (
+          <Spiner />
+        )}
       </div>
     </>
   );
