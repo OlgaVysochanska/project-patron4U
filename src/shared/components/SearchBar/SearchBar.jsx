@@ -31,7 +31,7 @@ const SearchBar = ({ onSubmit }) => {
     setState({
       search: '',
     });
-    setSearchParams({});
+    // setSearchParams({});
   };
 
   const searchInput =
