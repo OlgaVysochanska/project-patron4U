@@ -1,6 +1,6 @@
 // import { useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import useTheme from 'shared/hooks/useTheme';
 import NoticeCategoryItem from '../NoticeCategoryItem';
 
 import { isUserLogin } from 'redux/auth/authSelectors';
@@ -16,6 +16,12 @@ const NoticesCategoriesList = ({ notices, loadMore }) => {
   // if (currentUser) {
   //   setFavoriteArr(favoriteNotices);
   // }
+  const { theme } = useTheme();
+
+  const noticesList =
+    theme === 'light'
+      ? styles.noticesList
+      : `${styles.noticesList} + ${styles.noticesListDark}`;
 
   const noticesItem = notices.map(notice => {
     // const myFavoriteNotice = favoriteArr.includes(notice._id);
@@ -30,7 +36,7 @@ const NoticesCategoriesList = ({ notices, loadMore }) => {
     );
   });
 
-  return <ul className={styles.noticesList}>{noticesItem}</ul>;
+  return <ul className={noticesList}>{noticesItem}</ul>;
 };
 
 export default NoticesCategoriesList;
