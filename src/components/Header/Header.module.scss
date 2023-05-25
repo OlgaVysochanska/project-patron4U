@@ -10,6 +10,7 @@
   padding: 20px 0;
 
   background-color: #fef9f9;
+  position: relative;
 
   @media screen and (min-width: 768px) {
     // max-width: 768px;
@@ -26,4 +27,12 @@
 
 .containerDark {
   background-color: #2b3e51;
+}
+
+.wrapper {
+  position: absolute;
+  right: 0;
+  top: 67px;
+  display: flex;
+  z-index: 1000;
 }

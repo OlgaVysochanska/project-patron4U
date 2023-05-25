@@ -12,11 +12,14 @@ export default function MobileMenu({ children, onClick, isMobile }) {
         <div onClick={onClick}>
           <Logo isMobile={isMobile} />
         </div>
-        <LanguageSwitcher />
-        <ThemeSwitcher />
+
         <CrossIcon className={styles.closeButton} onClick={onClick} />
       </div>
       {children}
+      <div className={styles.wrapper}>
+        <LanguageSwitcher />
+        <ThemeSwitcher />
+      </div>
     </div>,
     document.querySelector('#modal-root')
   );

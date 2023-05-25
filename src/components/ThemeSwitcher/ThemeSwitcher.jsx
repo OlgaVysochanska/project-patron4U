@@ -3,11 +3,15 @@ import { useState, useEffect } from 'react';
 import styles from './ThemeSwitcher.module.scss';
 
 const ThemeSwitcher = () => {
-  const [isChecked, setIsChecked] = useState(true);
   const { setTheme } = useTheme();
+  const [isChecked, setIsChecked] = useState(() => {
+    const storedTheme = localStorage.getItem('theme');
+    return storedTheme === 'light';
+  });
 
   useEffect(() => {
     setTheme(isChecked ? 'light' : 'dark');
+    localStorage.setItem('theme', isChecked ? 'light' : 'dark');
   }, [isChecked, setTheme]);
 
   const handleCheckboxChange = () => {
