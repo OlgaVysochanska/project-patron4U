@@ -4,6 +4,7 @@
   left: 50%;
   z-index: 999;
   width: fit-content;
+  transform: translate(-50%, -50%);
   animation-name: spin;
   animation-delay: 0s;
   animation-duration: 1.5s;
@@ -13,6 +14,6 @@
 
 @keyframes spin {
   to {
-    transform: rotate(360deg);
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }

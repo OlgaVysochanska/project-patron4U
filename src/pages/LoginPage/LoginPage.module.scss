@@ -1,9 +1,11 @@
 .container {
   width: 280px;
+  min-height: 441px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
   box-sizing: border-box;
   background-color: #ffffff;
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
@@ -17,12 +19,13 @@
 
   @media screen and (min-width: 768px) {
     width: 608px;
+    min-height: 481px;
     padding: 60px 75px;
     margin-bottom: 564px;
   }
 
   @media screen and (min-width: 1280px) {
-    margin-bottom: 140px;
+     margin-bottom: 140px;
   }
 }
 
