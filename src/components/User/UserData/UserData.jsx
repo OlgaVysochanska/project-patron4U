@@ -81,6 +81,22 @@ let [testAvatar, setTestAvatar ] = useState(avatarURL)
     setTestAvatar(avatarURL)
   };
 
+  const handleDateChange = birthday => {
+
+    const obj = { birthday: `${birthday}` };
+    handleEditUser(obj);
+    setTestBirthday(birthday)
+
+
+    handleChange({
+      target: {
+        name: 'birthDate',
+        value: birthDate,
+      },
+    });
+  };
+
+
   const elements = Object.entries({ name, email, birthday, phone, city }).map(
     ([key, value]) => {
       const id = nanoid();
@@ -88,12 +104,14 @@ let [testAvatar, setTestAvatar ] = useState(avatarURL)
       switch (key) {
         case 'name':
           type = 'text';
+          // petern= 
           break;
         case 'email':
           type = 'email';
           break;
         case 'birthday':
           type = 'date';
+          birthday = true
           break;
         case 'phone':
           type = 'tel';
@@ -113,6 +131,7 @@ let [testAvatar, setTestAvatar ] = useState(avatarURL)
           name={key}
           value={value}
           defaultValue={value}
+          // pattern={pattern}
           id={id}
           key={key}
           handleEditUser={handleEditUser}
@@ -120,6 +139,7 @@ let [testAvatar, setTestAvatar ] = useState(avatarURL)
           blockButtons={blockButtons}
           unblockButtons={unblockButtons}
           handleSubmit={handleSubmit}
+          // birthday={birthday}
         />
       );
     }
