@@ -1,0 +1,10 @@
+{
+  "add": {
+    "eng": "Add to",
+    "ua": "Додати до"
+  },
+  "delete": {
+    "eng": "Delete from",
+    "ua": "Видалити з"
+  }
+}

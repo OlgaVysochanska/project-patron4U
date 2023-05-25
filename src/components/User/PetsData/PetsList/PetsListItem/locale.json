@@ -1,0 +1,30 @@
+{
+  "name": {
+    "eng": "Name: ",
+    "ua": "Ім'я: "
+  },
+  "date": {
+    "eng": "Date of birth: ",
+    "ua": "Дата народження: "
+  },
+  "breed": {
+    "eng": "Breed: ",
+    "ua": "Порода: "
+  },
+  "comments": {
+    "eng": "Comments: ",
+    "ua": "Коментарі: "
+  },
+  "modalTitle": {
+    "eng": "Delete your pet?",
+    "ua": "Видалити Вашого улюбленця?"
+  },
+  "modalText1": {
+    "eng": "Are you sure you want to delete",
+    "ua": "Ви впевнені, що хочете видалити"
+  },
+  "modalText2": {
+    "eng": "You can't undo this action!",
+    "ua": "Ви не зможете скасувати цю дію!"
+  }
+}

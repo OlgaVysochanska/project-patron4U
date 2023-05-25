@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import useLang from 'shared/hooks/useLang';
 import useToggleFavoriteBtn from 'shared/hooks/useToggleFavoriteBtn';
 import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
 
@@ -21,9 +22,17 @@ import { getUser } from 'redux/auth/authSelectors';
 
 import { getAge } from 'shared/helpers/getAge';
 
+import locale from './locale.json';
+
 import styles from './NoticeCategoryItem.module.scss';
 
 const NoticeCategoryItem = ({ notice, loadMore }) => {
+  const { lang } = useLang();
+  const learnMore = locale.learnMore[lang];
+  const modalTitle = locale.modalTitle[lang];
+  const modalText1 = locale.modalText1[lang];
+  const modalText2 = locale.modalText2[lang];
+
   const { myFavoriteNotice, setFavNot, handleClickFavoriteBtn } =
     useToggleFavoriteBtn();
   const { isModalOpen, openModal, closeModal } = useToggleModalWindow();
@@ -134,7 +143,7 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
       <div className={styles.noticeDesc}>
         <h3 className={noticeTitle}>{title}</h3>
         <Button className={styles.learnBtn} onClick={() => loadMore(notice)}>
-          Learn more
+          {learnMore}
         </Button>
       </div>
       {isModalOpen && (
@@ -143,11 +152,11 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
           closeModal={closeModal}
           icon={() => <TrashIcon className={styles.modalIcon} />}
         >
-          <h3 className={styles.modalTitle}>Delete adverstiment?</h3>
+          <h3 className={styles.modalTitle}>{modalTitle}</h3>
           <p className={styles.modalText}>
-            Are you sure you want to delete
-            <span className={styles.modalTextSpan}> “{title}”</span>? <br /> You
-            can't undo this action.
+            {modalText1}
+            <span className={styles.modalTextSpan}> “{title}”</span>? <br />
+            {modalText2}
           </p>
         </ModalApproveAction>
       )}
