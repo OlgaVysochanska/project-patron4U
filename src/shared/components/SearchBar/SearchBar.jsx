@@ -6,6 +6,7 @@ import useForm from 'shared/hooks/useForm';
 import PropTypes from 'prop-types';
 import initialState from './initialState';
 import useLang from 'shared/hooks/useLang';
+import useTheme from 'shared/hooks/useTheme';
 import locale from './locale.json';
 
 import style from './SearchBar.module.scss';
@@ -16,7 +17,7 @@ const SearchBar = ({ onSubmit }) => {
     initialState,
     onSubmit,
   });
-
+  const { theme } = useTheme();
   const { lang } = useLang();
   const title = locale.title[lang];
 
@@ -31,12 +32,17 @@ const SearchBar = ({ onSubmit }) => {
     setSearchParams({});
   };
 
+  const searchInput =
+    theme === 'light'
+      ? style.searchInput
+      : `${style.searchInput} + ${style.searchInputDark}`;
+
   return (
     <form className={style.searchForm} onSubmit={handleSubmitSearch}>
       <div className={style.container}>
         <label>
           <input
-            className={style.searchInput}
+            className={searchInput}
             type="text"
             name="search"
             value={search}

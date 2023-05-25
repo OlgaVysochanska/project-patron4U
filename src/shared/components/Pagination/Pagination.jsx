@@ -2,9 +2,12 @@ import React, { useState, useEffect, useCallback } from 'react';
 import style from './Pagination.module.scss';
 import ArrowLeftIcon from 'icons/ArrowLeftIcon';
 import PropTypes from 'prop-types';
+import useTheme from 'shared/hooks/useTheme';
 
 const Pagination = ({ totalPages, onPageChange, page }) => {
   const [visiblePages, setVisiblePages] = useState([]);
+
+  const { theme } = useTheme();
 
   const updateVisiblePages = useCallback(
     currentPage => {
@@ -44,12 +47,22 @@ const Pagination = ({ totalPages, onPageChange, page }) => {
     }
   };
 
+  const container =
+    theme === 'light'
+      ? style.container
+      : `${style.container} + ${style.containerDark}`;
+
+  const listItem =
+    theme === 'light'
+      ? style.listItem
+      : `${style.listItem} + ${style.listItemDark}`;
+
   return (
-    <div className={style.container}>
+    <div className={container}>
       <ul className={style.pagination}>
         <li
           onClick={handlePrevPage}
-          className={`${style.listItem} ${page === 1 ? style.disabled : ''}`}
+          className={`${style.listItem} ${page === 1 ? style.disabled : ''} `}
         >
           <span
             className={
