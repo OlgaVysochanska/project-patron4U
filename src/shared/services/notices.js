@@ -76,3 +76,13 @@ export const getUserFavoriteNotices = async (id, _page = 1) => {
   });
   return data;
 };
+
+export const getNoticeById = async _id => {
+  const { data } = await instance.get(`/notices/oneadvertisement/`, {
+    params: {
+      _id,
+    },
+  });
+
+  return data;
+};
