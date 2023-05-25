@@ -41,7 +41,8 @@ const RegisterForm = ({ onSubmit }) => {
   const passwordLang = locale.password[lang];
   const confirmPasswordLang = locale.confirmPassword[lang];
   const validEmailLang = locale.validEmail[lang];
-  const titleLang = locale.title[lang];
+  const passwordErrorMessage = locale.passwordErrorMessage[lang];
+  const passwordMatch = locale.passwordMatch[lang];
 
   //перевірка на встановлення властивості disabled для кнопки
   const [agreed, setAgreed] = useState(true);
@@ -104,8 +105,8 @@ const RegisterForm = ({ onSubmit }) => {
           id="password"
           type={showPassword ? 'text' : 'password'}
           placeholder={passwordLang}
-          pattern=".{6,}" // Патерн для мінімальної довжини паролю (6 символів)
-          title={titleLang} // Підказка для патерну
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$"
+          title={passwordErrorMessage} // Підказка для патерну
           style={{
             border: isValidPass ? '1px solid #54adff' : '1px solid #F43F5E',
             backgroundColor: theme === 'dark' && '#2b3e51',
@@ -144,8 +145,8 @@ const RegisterForm = ({ onSubmit }) => {
             color: theme === 'dark' && '#fef9f9',
           }}
           aditionalClass={isValidConf ? styles.inputCustomSettings : ''}
-          pattern=".{6,}" // Патерн для мінімальної довжини паролю (6 символів)
-          title="Password must be at least 6 characters long" // Підказка для патерну
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$"
+          title={passwordErrorMessage} // Підказка для патерну
           value={confirmPassword}
           handleChange={e => {
             handleConfirmPasswordChange(e);
@@ -164,9 +165,7 @@ const RegisterForm = ({ onSubmit }) => {
             onClick={toggleShowConfirmPassword}
           />
         )}
-        {agreed && (
-          <p className={styles.differentPassords}>Passwords must match</p>
-        )}
+        {agreed && <p className={styles.differentPassords}>{passwordMatch}</p>}
       </div>
 
       <AuthButton disabled={agreed}>{registrationLang}</AuthButton>
