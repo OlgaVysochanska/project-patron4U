@@ -82,7 +82,7 @@ const NoticesPage = () => {
         style={{ position: 'relative' }}
       >
         <h2 className={style.title}>{title}</h2>
-        <NoticesSearch />
+        <div className={style.searchWrapper}><NoticesSearch /></div>
 
         <div className={style.contentWrapper}>
           <div className={style.categoryFilterWrapper}>
