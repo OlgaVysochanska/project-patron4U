@@ -6,10 +6,12 @@ import Spiner from 'components/Spiner/Spiner';
 import locale from './locale.json';
 import useToggleModalWindow from 'shared/hooks/useToggleModalWindow';
 import { getFilter } from 'redux/filter/filterSelectors';
+import Pagination from 'shared/components/Pagination/Pagination';
 
 import {
   getAllNotices,
   getLoadingNotices,
+  getTotalPages,
 } from 'redux/notices/noticesSelecors';
 import { fetchNoticesByCategory } from '../../redux/notices/noticesOperations';
 import {
@@ -43,13 +45,15 @@ const NoticesPage = () => {
   const [notice, setNotice] = useState(null);
   const [dataNotices, setDataNotices] = useState(null);
   const { isModalOpen, openModal, closeModal } = useToggleModalWindow();
+  const [page, setPage] = useState(1);
 
   const dispatch = useDispatch();
+  const totalPages = useSelector(getTotalPages);
 
   useEffect(() => {
     dispatch(setFilter(''));
-    dispatch(fetchNoticesByCategory(category));
-  }, [dispatch, category]);
+    dispatch(fetchNoticesByCategory(category, page));
+  }, [dispatch, category, page]);
 
   const onClickOwn = async () => {
     const { data } = await getUserNotices(_id);
@@ -69,6 +73,10 @@ const NoticesPage = () => {
   const loadMore = notice => {
     setNotice(notice);
     openModal();
+  };
+
+  const handlePageChange = pageNumber => {
+    setPage(pageNumber);
   };
 
   if (loadingNotices) {
@@ -103,7 +111,14 @@ const NoticesPage = () => {
         )}
         {isModalOpen && <NoticeModal notice={notice} closeModal={closeModal} />}
       </div>
+
       <Outlet />
+
+      <Pagination
+        totalPages={totalPages}
+        page={page}
+        onPageChange={handlePageChange}
+      />
     </>
   );
 };
