@@ -4,7 +4,6 @@ import { ThemeContext } from 'CombinedContextProvider ';
 
 const useTheme = () => {
   const context = useContext(ThemeContext);
-
   return context;
 };
 

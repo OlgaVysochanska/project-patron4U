@@ -4,7 +4,6 @@ import { LangContext } from 'CombinedContextProvider ';
 
 const useLang = () => {
   const context = useContext(LangContext);
-
   return context;
 };
 

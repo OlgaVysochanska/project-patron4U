@@ -62,24 +62,6 @@ const UploadWidget = ({
     >
       {isLoading ? <Spiner /> : children}
     </Button>
-
-    // <p className={styles.btnPhoto}>
-    //   <CameraIconTuned />
-
-    // </p>
-    // <button
-    //   type="button"
-    //   style={{
-    //     cursor: 'pointer',
-    //     outline: 'none',
-    //     border: 'none',
-    //     backgroundColor: 'inherit',
-    //     ...children.props,
-    //   }}
-    //   onClick={() => widgetRef.current.open()}
-    // >
-
-    // </button>
   );
 };
 
