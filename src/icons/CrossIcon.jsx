@@ -7,13 +7,13 @@ function CrossIcon(props) {
     <svg
       width={24}
       height={24}
-      fill="none"
+      // fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <path
         d="M19 5L5 19M5 5l14 14"
-        stroke="#54ADFF"
+        // stroke="#54ADFF"
         strokeWidth={1.5}
         strokeLinecap="round"
         strokeLinejoin="round"

@@ -38,7 +38,6 @@ export default function Header() {
     <header className={container}>
       <Logo isMobile={isMobile} />
 
-      {/* {!isTablet && isMobile && <ThemeSwitcher />} */}
       <Navigation
         isDesktop={isDesktop}
         isTablet={isTablet}
