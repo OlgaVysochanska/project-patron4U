@@ -1,15 +1,20 @@
 .filterButton {
-  width: 129px;
+  width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 8px 20px 8px 20px;
   border: 2px solid #54adff;
-  border-radius: 40px;
   background-color: transparent;
+  border-radius: 40px;
   stroke: #54adff;
   cursor: pointer;
+  padding: 0;
+  @media screen and (min-width: 768px) {
+    width: 129px;
+    height: 40px;
+  }
 }
 
 .filterButton.active {
@@ -19,8 +24,12 @@
 .filterIcon {
   width: 16px;
   height: 17px;
-  margin-left: 8px;
-  padding-bottom: 8px;
+  margin-left: -1vw;
+
+  @media screen and (min-width: 768px) {
+    margin-left: 8px;
+    padding-bottom: 8px;
+  }
 }
 
 .filterIcon.active {
@@ -29,28 +38,32 @@
 }
 
 .label {
+  display: none;
   color: #54adff;
   font-style: Bold;
+  @media screen and (min-width: 768px) {
+    display: contents;
+  }
 }
 
 .label.active {
   color: white;
 }
+// *************************
+@media (max-width: 767px) {
+  // .filterButton {
+  //   width: 40px;
+  //   height: 40px;
+  //   padding: 0;
+  //   // margin-top: 20px;
+  // }
 
-@media (max-width: 768px) {
-  .filterButton {
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    // margin-top: 20px;
-  }
+  // .filterIcon {
+  //   margin-left: -8px;
+  //   padding: 0;
+  // }
 
-  .filterIcon {
-    margin-left: -8px;
-    padding: 0;
-  }
-
-  .label {
-    display: none;
-  }
+  // .label {
+  //   display: none;
+  // }
 }

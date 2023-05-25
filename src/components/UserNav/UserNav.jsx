@@ -7,7 +7,7 @@ import styles from './UserNav.module.scss';
 
 export default function UserNav({ isMobile, style, onClick }) {
   const user = useSelector(getUser);
-  console.log(user);
+  // console.log(user.avatarURL);
 
   return (
     <div className={styles.container} style={style}>

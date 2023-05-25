@@ -37,14 +37,16 @@ export default function Header() {
   return (
     <header className={container}>
       <Logo isMobile={isMobile} />
-      {!isMobile && <LanguageSwitcher />}
-      {!isMobile && <ThemeSwitcher />}
-      {/* {!isTablet && isMobile && <ThemeSwitcher />} */}
+
       <Navigation
         isDesktop={isDesktop}
         isTablet={isTablet}
         isMobile={isMobile}
       />
+      <div className={styles.wrapper}>
+        {!isMobile && !isTablet && <LanguageSwitcher />}
+        {!isMobile && !isTablet && <ThemeSwitcher />}
+      </div>
     </header>
   );
 }

@@ -29,8 +29,12 @@
     "ua": "Введіть валідну адресу електронної пошти"
   },
 
-  "title": {
-    "eng": "Password must be at least 6 characters long",
-    "ua": "Пароль повинен містити щонайменше 6 симолів"
+  "passwordErrorMessage": {
+    "eng": "Password must contain at least 1 uppercase letter, 1 lowercase letter and 1 number",
+    "ua": "Пароль повинен містити  мінімум 1 літеру верхнього регістру, 1 літеру нижнього регістру та 1 цифру"
+  },
+  "passwordMatch": {
+    "eng": "Passwords must match",
+    "ua": "Паролі мають співпадати"
   }
 }

@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: baseline;
   border-radius: 40px;
-  border: none;
+  border: 2px solid #54adff;
   font: inherit;
   font-size: 16px;
   font-weight: 700;
@@ -23,7 +23,7 @@
     padding-top: 1px;
   }
 
-  @media (max-width: 320px) {
+  @media (max-width: 767px) {
     & svg {
       margin-left: 0px;
       margin-bottom: 4px;
@@ -43,15 +43,12 @@
   align-content: center;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 767px) {
   .addBtn {
     display: flex;
     flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    top: 460px;
-    right: 20px;
     width: 80px;
     height: 80px;
     border-radius: 50%;

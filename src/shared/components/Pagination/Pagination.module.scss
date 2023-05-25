@@ -1,3 +1,7 @@
+ul {
+  padding: 0;
+}
+
 .listItem {
   width: 35px;
   height: 35px;
@@ -10,8 +14,8 @@
   cursor: pointer;
 }
 
-ul {
-  padding: 0;
+.listItemDark {
+  border: none;
 }
 
 .active {
@@ -23,7 +27,7 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #fef9f9;
+  background: transparent;
   /* Shadow default */
 
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
@@ -32,6 +36,11 @@ ul {
   height: 52px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.containerDark {
+  border: 1px solid black;
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
 }
 
 .pagination {

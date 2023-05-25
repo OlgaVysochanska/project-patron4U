@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import * as api from '../../shared/services/auth';
+
+import NotiflixMessage from 'shared/components/NotiflixMessage/NotiflixMessage';
 
 export const register = createAsyncThunk(
   'auth/register',
@@ -9,7 +10,7 @@ export const register = createAsyncThunk(
       const result = await api.register(data);
       return result;
     } catch ({ response }) {
-      Notify.failure(response.data.message);
+      NotiflixMessage({ type: 'failure', data: response.data.message });
       return rejectWithValue(response);
     }
   }
@@ -22,11 +23,14 @@ export const login = createAsyncThunk(
       const result = await api.login(data);
       return result;
     } catch ({ response }) {
-      Notify.failure(response.data.message);
+      NotiflixMessage({ type: 'failure', data: response.data.message });
+      console.log(response.data.message);
       return rejectWithValue(response);
     }
   }
 );
+
+// /^(?=(?:[^A-Z]*[A-Z]){1,}[^A-Z]*$)(?=(?:[^a-z]*[a-z]){1,}[^a-z]*$)(?=(?:\\D*\\d){1,}\\D*$)[A-Za-z\\d]+/
 
 export const current = createAsyncThunk(
   'auth/current',
