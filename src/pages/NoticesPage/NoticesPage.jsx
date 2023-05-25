@@ -93,7 +93,7 @@ const NoticesPage = () => {
                 onClickFavorite={onClickFavorite}
               />
             </div>
-            <div className={style.filterWrapper}>
+            <div>
               <NoticesFilters />
             </div>
           </div>
