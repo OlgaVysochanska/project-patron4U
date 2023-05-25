@@ -6,6 +6,9 @@ import CheckIcon from 'icons/CheckIcon';
 import EditIcon from 'icons/EditIcon';
 import useForm from '../../../../shared/hooks/useForm';
 import { useState, useRef } from 'react';
+import { useSelector } from '../../../../../node_modules/react-redux/es/exports';
+import { getUserEdit } from 'redux/auth/authSelectors';
+import Spiner from 'components/Spiner/Spiner';
 
 
 const CheckIconTuned = () => {
@@ -31,6 +34,7 @@ const UserDataItem = ({
   type,
   handleEditUser,
 }) => {
+const loading = useSelector(getUserEdit)
   const inputRef = useRef(null);
   const initialState = value;
 
@@ -89,6 +93,7 @@ const UserDataItem = ({
           />
         )}
       </div>
+      {loading && <Spiner />}
     </form>
   );
 };

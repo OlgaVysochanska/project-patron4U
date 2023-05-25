@@ -1,6 +1,23 @@
 import { useEffect, useRef } from 'react';
+import Button from '../Button/Button';
 
-const UploadWidget = ({ uriI, children }) => {
+const UploadWidget = ({
+  uriI,
+  children,
+  btnType = "button",
+  btnClassName,
+  btnLabel,
+  btnSVGComponent,
+  btnShowLabelFirst,
+  buttonStyle = {
+        cursor: 'pointer',
+        outline: 'none',
+        border: 'none',
+        backgroundColor: 'inherit',
+        // ...children.props,
+      },
+  btnDisabled,
+}) => {
   const cloudinaryRef = useRef();
   const widgetRef = useRef();
 
@@ -24,19 +41,36 @@ const UploadWidget = ({ uriI, children }) => {
     );
   }, [uriI]);
   return (
-    <button
-      type="button"
-      style={{
-        cursor: 'pointer',
-        outline: 'none',
-        border: 'none',
-        backgroundColor: 'inherit',
-        ...children.props,
-      }}
+    <Button
       onClick={() => widgetRef.current.open()}
+      type={btnType}
+      className={btnClassName}
+      label={btnLabel}
+      SVGComponent={btnSVGComponent}
+      showLabelFirst={btnShowLabelFirst}
+      buttonStyle={buttonStyle}
+      disabled={btnDisabled}
     >
       {children}
-    </button>
+    </Button>
+
+    // <p className={styles.btnPhoto}>
+    //   <CameraIconTuned />
+
+    // </p>
+    // <button
+    //   type="button"
+    //   style={{
+    //     cursor: 'pointer',
+    //     outline: 'none',
+    //     border: 'none',
+    //     backgroundColor: 'inherit',
+    //     ...children.props,
+    //   }}
+    //   onClick={() => widgetRef.current.open()}
+    // >
+
+    // </button>
   );
 };
 

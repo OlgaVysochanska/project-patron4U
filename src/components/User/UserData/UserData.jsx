@@ -8,6 +8,7 @@ import { nanoid } from 'nanoid';
 // import CrossIcon from 'icons/CrossIcon';
 import { getUser } from '../../../redux/auth/authSelectors';
 import { editCurrent } from '../../../redux/auth/authOperations';
+import { getUserEdit } from '../../../redux/auth/authSelectors';
 import UploadWidget from '../../../shared/components/UploadWidget/UploadWidget';
 import {
   useDispatch,
@@ -17,7 +18,7 @@ import useForm from 'shared/hooks/useForm';
 
 import { initialState } from './initialState';
 import Logout from '../Logout/Logout';
-
+import Spiner from 'components/Spiner/Spiner';
 const CameraIconTuned = () => {
   return <CameraIcon width="16" height="16" viewBox="0 0 22 21" />;
 };
@@ -32,7 +33,6 @@ const CameraIconTuned = () => {
 
 const picSize = '182px';
 
-
 const UserData = () => {
   // const [loading, setLoading] = useState(false);
   // const [error, setError] = useState(null);
@@ -40,8 +40,9 @@ const UserData = () => {
   // const [isEditing, setIsEditing] = useState(true);
   const [isBlocked, setIsBlocked] = useState(false);
 
-
   const dispatch = useDispatch();
+
+  const loading = useSelector(getUserEdit);
 
   const handleEditUser = data => {
     dispatch(editCurrent(data));
@@ -68,8 +69,8 @@ const UserData = () => {
   };
 
   const handleUserURL = avatarURL => {
-const obj = {avatarURL: `${avatarURL}`}
-handleEditUser(obj)
+    const obj = { avatarURL: `${avatarURL}` };
+    handleEditUser(obj);
   };
 
   const elements = Object.entries({ name, email, birthday, phone, city }).map(
@@ -116,7 +117,6 @@ handleEditUser(obj)
     }
   );
 
-
   return (
     <div>
       <h2 className={styles.title}>My information:</h2>
@@ -129,27 +129,20 @@ handleEditUser(obj)
             width={picSize}
             height={picSize}
           ></img>
-          <UploadWidget uriI={handleUserURL}>
-            {/* UploadWidget це button, не можна класти бтн в бтн (треба придумати
-             щось інше, поки вставила пшку, щоб не било помилку) */}
-            {/* <Button
-              // onClick={onEditPhoto}
-              type="button"
-              className={styles.btnPhoto}
-              label="Edit photo"
-              SVGComponent={CameraIconTuned}
-              showLabelFirst={false}
-            /> */}
-            <p className={styles.btnPhoto}>
-              <CameraIconTuned />
-              Edit photo
-            </p>
-          </UploadWidget>
+          <UploadWidget
+            uriI={handleUserURL}
+            btnType="button"
+            btnClassName={styles.btnPhoto}
+            btnLabel="Edit photo"
+            btnSVGComponent={CameraIconTuned}
+            btnShowLabelFirst={false}
+          ></UploadWidget>
         </div>
         <div className={styles.inputWrapper}>
           {elements} <Logout />
         </div>
       </div>
+      {loading && <Spiner />}
     </div>
   );
 };
