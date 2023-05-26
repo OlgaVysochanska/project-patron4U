@@ -220,16 +220,16 @@ const NoticeModal = ({ notice, owner, closeModal }) => {
                       </a>
                     </td>
                   </tr>
-                  <tr>
-                    <td
-                      className={`${styles.infoTitle} ${
-                        theme === 'dark' && styles.infoTitleDark
-                      }`}
-                    >
-                      {phone}
-                    </td>
-                    <td>
-                      {owner.phone ? (
+                  {owner.phone && (
+                    <tr>
+                      <td
+                        className={`${styles.infoTitle} ${
+                          theme === 'dark' && styles.infoTitleDark
+                        }`}
+                      >
+                        {phone}
+                      </td>
+                      <td>
                         <a
                           href={`tel:${owner.phone}`}
                           className={`${styles.contacts} ${
@@ -238,17 +238,9 @@ const NoticeModal = ({ notice, owner, closeModal }) => {
                         >
                           {owner.phone}
                         </a>
-                      ) : (
-                        <p
-                          className={`${styles.info} ${
-                            theme === 'dark' && styles.infoDark
-                          }`}
-                        >
-                          {noPhone}
-                        </p>
-                      )}
-                    </td>
-                  </tr>
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>

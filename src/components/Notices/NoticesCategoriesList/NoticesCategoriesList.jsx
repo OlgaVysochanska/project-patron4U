@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 
 import useTheme from 'shared/hooks/useTheme';
 
+import EmptyList from '../EmptyList/EmptyList';
 import NoticeCategoryItem from '../NoticeCategoryItem';
 
 import { isUserLogin } from 'redux/auth/authSelectors';
@@ -32,7 +33,15 @@ const NoticesCategoriesList = ({ notices, loadMore }) => {
     );
   });
 
-  return <ul className={noticesList}>{noticesItem}</ul>;
+  return (
+    <>
+      {notices.length ? (
+        <ul className={noticesList}>{noticesItem}</ul>
+      ) : (
+        <EmptyList />
+      )}
+    </>
+  );
 };
 
 export default NoticesCategoriesList;
