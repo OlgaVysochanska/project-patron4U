@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { LangContext } from 'CombinedContextProvider ';
+import { LangContext } from 'CombinedContextProvider';
 
 const useLang = () => {
   const context = useContext(LangContext);

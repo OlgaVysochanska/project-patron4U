@@ -11,6 +11,7 @@ const Input = ({
   value,
   handleChange,
   isValid,
+  secure,
   icon,
   onIconClick,
   inputStyle,
@@ -52,6 +53,7 @@ const Input = ({
         </span>
       )}
       {!isValid && <p className={styles.errorMessage}>{title}</p>}
+      {/* {secure && <p className={styles.secure}>{title}</p>} */}
     </>
   );
 };

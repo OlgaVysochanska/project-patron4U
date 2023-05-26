@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { ThemeContext } from 'CombinedContextProvider ';
+import { ThemeContext } from 'CombinedContextProvider';
 
 const useTheme = () => {
   const context = useContext(ThemeContext);

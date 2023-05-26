@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import s from './FriendsItem.module.scss';
 import noImage from '../../../images/no-image.png';
-
+import useTheme from 'shared/hooks/useTheme';
 const FriendsItem = ({
   address,
   addressUrl,
@@ -22,6 +22,13 @@ const FriendsItem = ({
     setTime(null);
   };
 
+  const { theme } = useTheme();
+
+  const timeDescription =
+    theme === 'light'
+      ? s.timeDescription
+      : `${s.timeDescription} + ${s.timeDescriptionDark}`;
+
   return (
     <div className={s.card}>
       <a className={s.cardTitle} href={url} target="_blank" rel="noreferrer">
@@ -40,73 +47,95 @@ const FriendsItem = ({
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
-              <p className={s.descriptionTitle}>Time:</p>
+              <p
+                className={`${s.descriptionTitle} ${
+                  theme === 'dark' && s.descriptionTitleDark
+                }`}
+              >
+                Time:
+              </p>
               {workDays ? (
-                <p className={s.description}>schedule</p>
+                <p
+                  className={`${s.description} ${
+                    theme === 'dark' && s.descriptionDark
+                  }`}
+                >
+                  schedule
+                </p>
               ) : (
-                <p className={s.description}>online</p>
+                <p
+                  className={`${s.description} ${
+                    theme === 'dark' && s.descriptionDark
+                  }`}
+                >
+                  online
+                </p>
               )}
 
               {time && time.length > 0 && (
-                <div className={s.timeOverlay}>
+                <div
+                  className={`${s.timeOverlay} ${
+                    theme === 'dark' && s.timeOverlayDark
+                  }`}
+                >
                   <ul>
-                    <li className={s.timeDescription}>MN:</li>
-                    <li className={s.timeDescription}>TU:</li>
-                    <li className={s.timeDescription}>WE:</li>
-                    <li className={s.timeDescription}>TH:</li>
-                    <li className={s.timeDescription}>FR:</li>
-                    <li className={s.timeDescription}>SA:</li>
-                    <li className={s.timeDescription}>SU:</li>
+                    <li className={timeDescription}>MN:</li>
+                    <li className={timeDescription}>TU:</li>
+                    <li className={timeDescription}>WE:</li>
+                    <li className={timeDescription}>TH:</li>
+                    <li className={timeDescription}>FR:</li>
+                    <li className={timeDescription}>SA:</li>
+                    <li className={timeDescription}>SU:</li>
                   </ul>
                   <ul>
                     {workDays[0].from && workDays[0].to ? (
-                      <li className={s.timeDescription}>
+                      <li className={timeDescription}>
                         {workDays[0].from}-{workDays[0].to}
                       </li>
                     ) : (
-                      <li className={s.timeDescription}>day off</li>
+                      <li className={timeDescription}>day off</li>
                     )}
                     {workDays[1].from && workDays[1].to ? (
-                      <li className={s.timeDescription}>
+                      <li className={timeDescription}>
                         {workDays[1].from}-{workDays[1].to}
                       </li>
                     ) : (
-                      <li className={s.timeDescription}>day off</li>
+                      <li className={timeDescription}>day off</li>
                     )}
                     {workDays[2].from && workDays[2].to ? (
-                      <li className={s.timeDescription}>
+                      <li className={timeDescription}>
                         {workDays[2].from}-{workDays[2].to}
                       </li>
                     ) : (
-                      <li className={s.timeDescription}>day off</li>
+                      <li className={timeDescription}>day off</li>
                     )}
                     {workDays[3].from && workDays[3].to ? (
-                      <li className={s.timeDescription}>
+                      <li className={timeDescription}>
                         {workDays[3].from}-{workDays[3].to}
                       </li>
                     ) : (
-                      <li className={s.timeDescription}>day off</li>
+                      <li className={timeDescription}>day off</li>
                     )}
                     {workDays[4].from && workDays[4].to ? (
-                      <li className={s.timeDescription}>
+                      <li className={timeDescription}>
                         {workDays[4].from}-{workDays[4].to}
                       </li>
                     ) : (
-                      <li className={s.timeDescription}>day off</li>
+                      <li className={timeDescription}>day off</li>
                     )}
                     {workDays[5].from && workDays[5].to ? (
-                      <li className={s.timeDescription}>
+                      <li className={timeDescription}>
                         {workDays[5].from}-{workDays[5].to}
                       </li>
                     ) : (
-                      <li className={s.timeDescription}>day off</li>
+                      <li className={timeDescription}>day off</li>
                     )}
                     {workDays[6].from && workDays[6].to ? (
-                      <li className={s.timeDescription}>
+                      <li className={timeDescription}>
                         {workDays[6].from}-{workDays[6].to}
                       </li>
                     ) : (
-                      <li className={s.timeDescription}>day off</li>
+                      <li className={timeDescription}>day off</li>
                     )}
                   </ul>
                 </div>
@@ -114,10 +143,18 @@ const FriendsItem = ({
             </div>
           </li>
 
-          <li className={s.descriptionEl}>
-            <p className={s.descriptionTitle}>Address:</p>
+          <li className={s.descriptionTitle}>
+            <p
+              className={`${s.descriptionTitle} ${
+                theme === 'dark' && s.descriptionTitleDark
+              }`}
+            >
+              Address:
+            </p>
             <a
-              className={s.description}
+              className={`${s.description} ${
+                theme === 'dark' && s.descriptionDark
+              }`}
               href={addressUrl}
               target="_blank"
               rel="noreferrer"
@@ -126,14 +163,36 @@ const FriendsItem = ({
             </a>
           </li>
           <li className={s.descriptionEl}>
-            <p className={s.descriptionTitle}>Email:</p>
-            <a href={`mailto:${email}`} className={s.description}>
+            <p
+              className={`${s.descriptionTitle} ${
+                theme === 'dark' && s.descriptionTitleDark
+              }`}
+            >
+              Email:
+            </p>
+            <a
+              href={`mailto:${email}`}
+              className={`${s.description} ${
+                theme === 'dark' && s.descriptionDark
+              }`}
+            >
               {email}
             </a>
           </li>
           <li className={s.descriptionEl}>
-            <p className={s.descriptionTitle}>Phone:</p>
-            <a href={`tel:${phone}`} className={s.description}>
+            <p
+              className={`${s.descriptionTitle} ${
+                theme === 'dark' && s.descriptionTitleDark
+              }`}
+            >
+              Phone:
+            </p>
+            <a
+              href={`tel:${phone}`}
+              className={`${s.description} ${
+                theme === 'dark' && s.descriptionDark
+              }`}
+            >
               {phone}
             </a>
           </li>

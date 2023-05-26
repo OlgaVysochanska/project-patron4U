@@ -10,9 +10,8 @@ import { useSelector } from '../../../../../node_modules/react-redux/es/exports'
 import { getUserEdit } from 'redux/auth/authSelectors';
 import Spiner from 'components/Spiner/Spiner';
 
-// import useLang from 'shared/hooks/useLang';
-// import useTheme from 'shared/hooks/useTheme';
-// import locale from '../locale.json';
+
+
 
 const CheckIconTuned = () => {
   return (
@@ -43,9 +42,6 @@ const UserDataItem = ({
   placeholder,
   pattern
 }) => {
-// const {lang} = useLang()
-// const {theme} = useTheme()
-
 
   const loading = useSelector(getUserEdit);
   const inputRef = useRef(null);
@@ -56,14 +52,6 @@ const UserDataItem = ({
     onSubmit: handleEditUser,
   });
   const [isNotEditing, setIsNotEditing] = useState(true);
-
-  // const emailLang = locale.email[lang];
-  // const passwordLang = locale.password[lang];
-  // const validEmailLang = locale.validEmail[lang];
-  // const passwordErrorMessage = locale.passwordErrorMessage[lang];
-  // const loginLang = locale.login[lang];
-
-
 
   const clickEdit = () => {
     setIsNotEditing(prevState => !prevState);
@@ -77,6 +65,7 @@ const UserDataItem = ({
     handleEditUser(state);
     // handleUser(state);
   };
+  const { theme } = useTheme();
 
 const validaatePattern = (defaultValue, pattern) => {
 if(!pattern) {
@@ -103,8 +92,10 @@ const isValid = validaatePattern(state[name], pattern)
           handleChange={handleChange}
           isValid={isValid}
           // inputStyles={{padding: "4px 12px"}}
-          aditionalClass={styles.input}
-          labelClass={styles.label}
+          aditionalClass={`${styles.input} ${
+            theme === 'dark' && styles.inputDark
+          }`}
+          labelClass={`${styles.label} ${theme === 'dark' && styles.labelDark}`}
           inputRef={inputRef}
           pattern={pattern}
         ></Input>

@@ -1,0 +1,18 @@
+{
+  "learnMore": {
+    "eng": "Learn more",
+    "ua": "Детальніше"
+  },
+  "modalTitle": {
+    "eng": "Delete adverstiment?",
+    "ua": "Видалити оголошення?"
+  },
+  "modalText1": {
+    "eng": "Are you sure you want to delete",
+    "ua": "Ви впевнені, що хочете видалити"
+  },
+  "modalText2": {
+    "eng": "You can't undo this action!",
+    "ua": "Ви не зможете скасувати цю дію!"
+  }
+}

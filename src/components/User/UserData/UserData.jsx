@@ -20,6 +20,7 @@ import {
 import { initialState } from './initialState';
 import Logout from '../Logout/Logout';
 import Spiner from 'components/Spiner/Spiner';
+import useTheme from 'shared/hooks/useTheme';
 const CameraIconTuned = () => {
   return <CameraIcon width="16" height="16" viewBox="0 0 22 21" />;
 };
@@ -100,6 +101,13 @@ const nameLang = locale.name[lang];
     setTestAvatar(avatarURL);
   };
 
+  const { theme } = useTheme();
+
+  const container =
+    theme === 'light'
+      ? styles.container
+      : `${styles.container} + ${styles.containerDark}`;
+
   const elements = Object.entries({ name, email, birthday, phone, city }).map(
     ([key, value]) => {
       const id = nanoid();
@@ -159,8 +167,10 @@ let label= ''
 
   return (
     <div>
-      <h2 className={styles.title}>{mInfoLang}</h2>
-      <div className={styles.container}>
+      <h2 className={`${styles.title} ${theme === 'dark' && styles.titleDark}`}>
+      {mInfoLang}
+      </h2>
+      <div className={container}>
         <div className={styles.avatarWrapper}>
           <img
             className={styles.avatar}

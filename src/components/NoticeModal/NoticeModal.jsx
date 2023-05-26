@@ -1,38 +1,43 @@
 import { useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
+import useLang from 'shared/hooks/useLang';
+import useTheme from 'shared/hooks/useTheme';
+
 import Contact from './Contact';
 import AddToFavorite from './AddToFavorite/AddToFavorite';
 
 import Button from 'shared/components/Button/Button';
 import CrossIcon from 'icons/CrossIcon';
 
-import { getUser, getFavoriteNotices } from 'redux/auth/authSelectors';
+import { getFavoriteNotices } from 'redux/auth/authSelectors';
+
+import locale from './locale.json';
 
 import styles from './NoticeModal.module.scss';
 
-const NoticeModal = ({ notice, closeModal }) => {
-  const { email, phone } = useSelector(getUser);
-  const favoriteNotices = useSelector(getFavoriteNotices);
+const NoticeModal = ({ notice, owner, closeModal }) => {
+  const { theme } = useTheme();
 
-  const {
-    _id,
-    category,
-    title,
-    name,
-    date,
-    breed,
-    sex,
-    location,
-    price,
-    comments,
-    petURL,
-  } = notice;
+  const { lang } = useLang();
+  const petName = locale.petName[lang];
+  const birthday = locale.birthday[lang];
+  const breed = locale.breed[lang];
+  const place = locale.place[lang];
+  const sex = locale.sex[lang];
+  const price = locale.price[lang];
+  const ownerName = locale.owner[lang];
+  const email = locale.email[lang];
+  const phone = locale.phone[lang];
+  const noPhone = locale.noPhone[lang];
+  const сomments = locale.сomments[lang];
+
+  const favoriteNotices = useSelector(getFavoriteNotices);
 
   let myFavoriteNotice = false;
 
   if (favoriteNotices) {
-    myFavoriteNotice = favoriteNotices.includes(_id);
+    myFavoriteNotice = favoriteNotices.includes(notice._id);
   }
 
   const closeModalOnClick = useCallback(
@@ -49,70 +54,190 @@ const NoticeModal = ({ notice, closeModal }) => {
     return () => document.removeEventListener('keydown', closeModalOnClick);
   }, [closeModalOnClick]);
 
+  const modal =
+    theme === 'light' ? styles.modal : `${styles.modal} + ${styles.modalDark}`;
+
   return (
     <>
       <div className={styles.backdrop} onClick={closeModalOnClick}>
-        <div className={styles.modal}>
+        <div className={modal}>
           <Button className={styles.closeBtn} onClick={closeModal}>
             <CrossIcon className={styles.closeIcon} />
           </Button>
           <div className={styles.contentWrapper}>
             <div className={styles.tabletBox}>
               <div className={styles.imgThumb}>
-                <p className={styles.categoryInfo}>{category}</p>
+                <p className={styles.categoryInfo}>{notice.category}</p>
                 <img
                   className={styles.avatar}
-                  src={petURL}
+                  src={notice.petURL}
                   alt="Pet's avatar"
                   width="280"
                 />
               </div>
               <table>
-                <caption className={styles.title}>{title}</caption>
+                <caption
+                  className={`${styles.title} ${
+                    theme === 'dark' && styles.titleDark
+                  }`}
+                >
+                  {notice.title}
+                </caption>
                 <tbody>
                   <tr>
-                    <td className={styles.infoTitle}>Name:</td>
-                    <td className={styles.info}>{name}</td>
+                    <td
+                      className={`${styles.infoTitle} ${
+                        theme === 'dark' && styles.infoTitleDark
+                      }`}
+                    >
+                      {petName}
+                    </td>
+                    <td
+                      className={`${styles.info} ${
+                        theme === 'dark' && styles.infoDark
+                      }`}
+                    >
+                      {notice.name}
+                    </td>
                   </tr>
                   <tr>
-                    <td className={styles.infoTitle}>Birthday:</td>
-                    <td className={styles.info}>{date}</td>
+                    <td
+                      className={`${styles.infoTitle} ${
+                        theme === 'dark' && styles.infoTitleDark
+                      }`}
+                    >
+                      {birthday}
+                    </td>
+                    <td
+                      className={`${styles.info} ${
+                        theme === 'dark' && styles.infoDark
+                      }`}
+                    >
+                      {notice.date.replaceAll('-', '.')}
+                    </td>
                   </tr>
                   <tr>
-                    <td className={styles.infoTitle}>Breed:</td>
-                    <td className={styles.info}>{breed}</td>
+                    <td
+                      className={`${styles.infoTitle} ${
+                        theme === 'dark' && styles.infoTitleDark
+                      }`}
+                    >
+                      {breed}
+                    </td>
+                    <td
+                      className={`${styles.info} ${
+                        theme === 'dark' && styles.infoDark
+                      }`}
+                    >
+                      {notice.breed}
+                    </td>
                   </tr>
                   <tr>
-                    <td className={styles.infoTitle}>Place:</td>
-                    <td className={styles.info}>{location}</td>
+                    <td
+                      className={`${styles.infoTitle} ${
+                        theme === 'dark' && styles.infoTitleDark
+                      }`}
+                    >
+                      {place}
+                    </td>
+                    <td
+                      className={`${styles.info} ${
+                        theme === 'dark' && styles.infoDark
+                      }`}
+                    >
+                      {notice.location}
+                    </td>
                   </tr>
                   <tr>
-                    <td className={styles.infoTitle}>The sex:</td>
-                    <td className={styles.info}>{sex}</td>
+                    <td
+                      className={`${styles.infoTitle} ${
+                        theme === 'dark' && styles.infoTitleDark
+                      }`}
+                    >
+                      {sex}
+                    </td>
+                    <td
+                      className={`${styles.info} ${
+                        theme === 'dark' && styles.infoDark
+                      }`}
+                    >
+                      {notice.sex}
+                    </td>
                   </tr>
-                  {price && (
+                  {notice.price && (
                     <tr>
-                      <td className={styles.infoTitle}>Price:</td>
-                      <td className={styles.info}>{price}</td>
+                      <td
+                        className={`${styles.infoTitle} ${
+                          theme === 'dark' && styles.infoTitleDark
+                        }`}
+                      >
+                        {price}
+                      </td>
+                      <td
+                        className={`${styles.info} ${
+                          theme === 'dark' && styles.infoDark
+                        }`}
+                      >
+                        {notice.price}
+                      </td>
                     </tr>
                   )}
+                  {owner.name && (
+                    <tr>
+                      <td
+                        className={`${styles.infoTitle} ${
+                          theme === 'dark' && styles.infoTitleDark
+                        }`}
+                      >
+                        {ownerName}
+                      </td>
+                      <td>{owner.name}</td>
+                    </tr>
+                  )}
+
                   <tr>
-                    <td className={styles.infoTitle}>Email:</td>
+                    <td
+                      className={`${styles.infoTitle} ${
+                        theme === 'dark' && styles.infoTitleDark
+                      }`}
+                    >
+                      {email}
+                    </td>
                     <td>
-                      <a href={`mailto:${email}`} className={styles.contacts}>
-                        {email}
+                      <a
+                        href={`mailto:${owner.email}`}
+                        className={styles.contacts}
+                      >
+                        {owner.email}
                       </a>
                     </td>
                   </tr>
                   <tr>
-                    <td className={styles.infoTitle}>Phone:</td>
+                    <td
+                      className={`${styles.infoTitle} ${
+                        theme === 'dark' && styles.infoTitleDark
+                      }`}
+                    >
+                      {phone}
+                    </td>
                     <td>
-                      {phone ? (
-                        <a href={`tel:${phone}`} className={styles.contacts}>
-                          {phone}
+                      {owner.phone ? (
+                        <a
+                          href={`tel:${owner.phone}`}
+                          className={`${styles.contacts} ${
+                            theme === 'dark' && styles.contactsDark
+                          }`}
+                        >
+                          {owner.phone}
                         </a>
                       ) : (
-                        <p className={styles.info}>no phone</p>
+                        <p
+                          className={`${styles.info} ${
+                            theme === 'dark' && styles.infoDark
+                          }`}
+                        >
+                          {noPhone}
+                        </p>
                       )}
                     </td>
                   </tr>
@@ -120,12 +245,27 @@ const NoticeModal = ({ notice, closeModal }) => {
               </table>
             </div>
             <p className={styles.commentsInfo}>
-              <span className={styles.commentsTitle}>Comments: </span>
-              {comments}
+              <span
+                className={`${styles.commentsTitle} ${
+                  theme === 'dark' && styles.commentsTitleDark
+                }`}
+              >
+                {сomments}
+              </span>
+              <span
+                className={`${styles.commentsDesc} ${
+                  theme === 'dark' && styles.commentsDescDark
+                }`}
+              >
+                {notice.comments}
+              </span>
             </p>
             <div className={styles.btnWrapper}>
-              <Contact email={email} />
-              <AddToFavorite myFavoriteNotice={myFavoriteNotice} _id={_id} />
+              <Contact phone={owner.phone} />
+              <AddToFavorite
+                myFavoriteNotice={myFavoriteNotice}
+                _id={notice._id}
+              />
             </div>
           </div>
         </div>

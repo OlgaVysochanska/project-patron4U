@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { App } from 'components/App';
 import AuthLayout from 'components/AuthLayout';
 import { store, persistor } from 'redux/store';
-import CombinedContextProvider from 'CombinedContextProvider ';
+import CombinedContextProvider from 'CombinedContextProvider';
 
 import './index.css';
 
