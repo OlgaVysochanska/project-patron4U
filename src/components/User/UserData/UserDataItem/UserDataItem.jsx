@@ -9,7 +9,7 @@ import { useState, useRef } from 'react';
 import { useSelector } from '../../../../../node_modules/react-redux/es/exports';
 import { getUserEdit } from 'redux/auth/authSelectors';
 import Spiner from 'components/Spiner/Spiner';
-
+import useTheme from 'shared/hooks/useTheme';
 
 
 
