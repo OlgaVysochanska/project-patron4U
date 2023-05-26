@@ -47,8 +47,9 @@
 }
 
 .closeIcon {
-  color: #54adff;
+  stroke: #54adff;
   cursor: pointer;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   .closeBtn:hover &,
   .closeBtn:focus & {
