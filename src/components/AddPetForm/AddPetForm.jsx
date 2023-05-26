@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import useLang from 'shared/hooks/useLang';
+// import useTheme from 'shared/hooks/useTheme';
+import locale from './locale.json'; import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { format } from 'date-fns';
@@ -32,6 +34,8 @@ import {
 import styles from './AddPetForm.module.scss';
 
 const AddPetForm = ({ onSubmit }) => {
+  const {lang} = useLang()
+  // const {theme} = useTheme()
   const [activeCategory, setActiveCategory] = useState(0);
   const [activeTab, setActiveTab] = useState(0);
   const [activeGender, setActiveGender] = useState(null);
@@ -40,6 +44,8 @@ const AddPetForm = ({ onSubmit }) => {
     initialState,
     onSubmit,
   });
+
+
 
   const [invalidname, setInvalidname] = useState('');
   const [invalidPetBreed, setInvalidBreed] = useState('');
@@ -50,6 +56,16 @@ const AddPetForm = ({ onSubmit }) => {
   const [invalidLocation, setInvalidLocation] = useState('');
   const [invalidPrice, setInvalidPrice] = useState('');
   const [invalidpetURL, setInvalidpetURL] = useState('');
+
+  const infoMessageLang = locale.infoMessage[lang];
+  const Add_petLang = locale.Add_pet[lang];
+  const Add_pet_saleLang = locale.Add_pet_sale[lang]
+  const Add_pet_lostLang = locale.Add_pet_lost[lang];
+  const Add_pet_in_goodLang = locale.Add_pet_in_good[lang]
+  const btn_BackLang = locale.btn_Back[lang]
+  const btn_NextLang = locale.btn_Next[lang];
+  const btn_DoneLang = locale.btn_Done[lang];
+  const btn_CancelLang = locale.btn_Cancel[lang]
 
   const {
     category,
@@ -275,7 +291,7 @@ const AddPetForm = ({ onSubmit }) => {
           } else {
             NotiflixMessage({
               type: 'info',
-              data: "your pet wasn't added, repeat please",
+              data: `${infoMessageLang}`,
             });
           }
           return true;
@@ -324,21 +340,21 @@ const AddPetForm = ({ onSubmit }) => {
   const titleEl = () => {
     switch (activeCategory) {
       case 0:
-        return <h2>Add pet</h2>;
+        return <h2>{Add_petLang}</h2>;
       case 1:
-        return <h2>Add pet for sale</h2>;
+        return <h2>{Add_pet_saleLang}</h2>;
       case 2:
-        return <h2>Add lost pet</h2>;
+          return <h2>{Add_pet_lostLang}</h2>;
       case 3:
-        return <h2>Add in good hands pet</h2>;
+        return <h2>{Add_pet_in_goodLang}</h2>;
       default:
-        return <h2>Add pet</h2>;
+        return <h2>{Add_petLang}</h2>;
     }
   };
 
   const backBtnEl = (
     <Button
-      label="Back"
+      label={btn_BackLang}
       showLabelFirst={false}
       SVGComponent={() => <ArrowLeftIcon stroke="#54ADFF" />}
       onClick={handleFormTabNvigationPrev}
@@ -349,7 +365,7 @@ const AddPetForm = ({ onSubmit }) => {
 
   const nextBtnEl = (
     <Button
-      label="Next"
+      label={btn_NextLang}
       SVGComponent={() => <PawprintIcon fill="#FEF9F9" />}
       onClick={handleFormTabNvigationNext}
       className={styles.navigationButtonNext}
@@ -359,7 +375,7 @@ const AddPetForm = ({ onSubmit }) => {
 
   const doneBtnEl = (
     <Button
-      label="Done"
+      label={btn_DoneLang}
       SVGComponent={() => <PawprintIcon fill="#FEF9F9" />}
       className={styles.navigationButtonNext}
       onClick={handleFormTabNvigationDone}
@@ -369,7 +385,7 @@ const AddPetForm = ({ onSubmit }) => {
 
   const cancelBtnEl = (
     <Button
-      label="Cancel"
+    label={btn_CancelLang}
       showLabelFirst={false}
       SVGComponent={() => <ArrowLeftIcon stroke="#54ADFF" />}
       onClick={handleFormTabNvigationCancel}

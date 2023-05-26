@@ -1,0 +1,22 @@
+{
+  "Add_photo": {
+    "eng": "Add photo",
+    "ua": "Додати фото"
+  },
+
+  "Location": {
+    "eng": "Location",
+    "ua": "Місцезнаходження"
+  },
+
+  "Price": {
+    "eng": "Price",
+    "ua": "Ціна"
+  },
+
+  "Comments": {
+    "eng": "Comments",
+    "ua": "Коментарі"
+  }
+ 
+}

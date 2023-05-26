@@ -1,0 +1,44 @@
+{
+  "infoMessage": {
+    "eng": "your pet wasn't added, repeat please",
+    "ua": "вашого вихованця не додано, повторіть, будь ласка"
+  },
+
+  "Add_pet": {
+    "eng": "Add pet",
+    "ua": "Додати домашнього улюбленця"
+  },
+
+  "Add_pet_sale": {
+    "eng": "Add pet for sale",
+    "ua": "Додайте домашню тварину на продаж"
+  },
+
+  "Add_pet_lost": {
+    "eng": "Add lost pet",
+    "ua": "Додайте втрачену тварину"
+  },
+
+  "Add_pet_in_good": {
+    "eng": "Add in good hands pet",
+    "ua": "Додайте в добрі руки вихованця"
+  },
+
+  "btn_Back": {
+    "eng": "Back",
+    "ua": "Попередній"
+  },
+
+  "btn_Next": {
+    "eng": "Next",
+    "ua": "Наступний"
+  },
+  "btn_Done": {
+    "eng": "Done",
+    "ua": "Готово"
+  },
+  "btn_Cancel": {
+    "eng": "Cancel",
+    "ua": "Відмінити"
+  }
+}
