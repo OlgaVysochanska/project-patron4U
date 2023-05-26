@@ -1,7 +1,7 @@
 {
   "Title_of_add": {
     "eng": "Title of add",
-    "ua": "Назва додаваного"
+    "ua": "Назва доданого"
   },
 
   "Name_pet": {
@@ -40,5 +40,25 @@
   "btn_Cancel": {
     "eng": "Cancel",
     "ua": "Відмінити"
+  },
+
+  "inputTitleAdd": {
+    "eng": "Type title of add",
+    "ua": "Введіть назву"
+  },
+
+  "inputName": {
+    "eng": "Type name pet",
+    "ua": "Введіть назву улюбленця"
+  },
+
+  "inputBirth": {
+    "eng": "Type date of birth",
+    "ua": "Введіть дату народження"
+  },
+
+  "inputBreed": {
+    "eng": "Type breed",
+    "ua": "Введіть породу"
   }
 }

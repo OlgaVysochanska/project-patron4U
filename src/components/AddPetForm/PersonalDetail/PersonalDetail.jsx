@@ -22,7 +22,7 @@ const PersonalDetail = ({
   invalidPetBreed,
   handleChange,
 }) => {
-  const {lang} = useLang()
+  const { lang } = useLang();
   // const {theme} = useTheme()
 
   const inputNameRef = useRef(null);
@@ -33,11 +33,15 @@ const PersonalDetail = ({
   const Name_petLang = locale.Name_pet[lang];
   // const validEmailLang = locale.validEmail[lang]
   const Date_of_birthLang = locale.Date_of_birth[lang];
-  const BreedLang = locale.Breed[lang]
+  const BreedLang = locale.Breed[lang];
   // const cityLang = locale.city[lang]
   // const mInfoLang = locale.mInfoLang[lang];
   // const btnUWLang = locale.btnUWLang[lang];
   // const avaAltLang = locale.avaAltLang[lang]
+  const inputTitleAdd = locale.inputTitleAdd[lang];
+  const inputName = locale.inputName[lang];
+  const inputBirth = locale.inputBirth[lang];
+  const inputBreed = locale.inputBreed[lang];
 
   useEffect(() => {
     if (activeTab === 1) {
@@ -75,7 +79,7 @@ const PersonalDetail = ({
           name="title"
           value={title}
           onChange={handleChange}
-          placeholder="Type title of add"
+          placeholder={inputTitleAdd}
           required
         />
       </label>
@@ -102,7 +106,7 @@ const PersonalDetail = ({
           name="name"
           value={name}
           onChange={handleChange}
-          placeholder="Type name pet"
+          placeholder={inputName}
           required
         />
       </label>
@@ -122,7 +126,7 @@ const PersonalDetail = ({
         <DatePicker
           selected={birthDate}
           onChange={handleDateChange}
-          placeholderText="Type date of birth"
+          placeholderText={inputBirth}
           showYearDropdown
           scrollableYearDropdown
           className={[
@@ -160,7 +164,7 @@ const PersonalDetail = ({
           name="breed"
           value={breed}
           onChange={handleChange}
-          placeholder="Type breed"
+          placeholder={inputBreed}
           required
         />
       </label>
