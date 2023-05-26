@@ -125,19 +125,20 @@ const UserData = () => {
           break;
         case 'email':
           type = 'text';
-          pattern = '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$';
+          // pattern = '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$';
           label = emailLang;
           placeholder = inputEmailLang;
 
           break;
         case 'birthday':
           type = 'date';
-          label = birthdayLang;          placeholder = inputBirthdayLang;
+          label = birthdayLang;
+          placeholder = inputBirthdayLang;
 
           break;
         case 'phone':
           type = 'text';
-          pattern = '/^(\\+)?\\d{1,}$/';
+          // pattern = '/^(\\+)?\\d{1,}$/';
           label = phoneLang;
           placeholder = inputPhoneLang;
 
