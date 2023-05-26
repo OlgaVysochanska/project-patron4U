@@ -61,6 +61,7 @@ const UserDataItem = ({
   };
 
   const clickSave = () => {
+    setIsValidValue(isValid)
     setIsNotEditing(true);
     unblockButtons();
     handleEditUser(state);
@@ -77,8 +78,8 @@ return new RegExp(pattern).test(defaultValue)
 }
 
 const isValid = validaatePattern(state[name], pattern)
-setIsValidValue(isValid)
- 
+// setIsValidValue(isValid)
+ console.log(isValid)
   return (
     <form onSubmit={handleSubmit} autoComplete="on" className={styles.form}>
       <div className={styles.inputWrapper}>
