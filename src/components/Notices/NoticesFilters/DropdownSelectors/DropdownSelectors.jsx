@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './DropdownSelectors.module.scss';
 import { setRequestParams } from 'redux/filter/requestParamsSlice';
 import AgeFilter from './AgeFilter';
 import GenderFilter from './GenderFilter';
+import { getRequestParams } from 'redux/filter/filterSelectors';
 
 const DropdownSelectors = () => {
   const [isOpenAge, setisOpenAge] = useState(false);
@@ -16,6 +17,18 @@ const DropdownSelectors = () => {
 
   const listRefAge = useRef(null);
   const listRefGender = useRef(null);
+
+  const requestParams1 = useSelector(getRequestParams);
+
+  const ageButtons = requestParams1.ageButtons;
+  const genderButtons = requestParams1.genderButtons;
+
+  useEffect(() => {
+    setSelectedAges(ageButtons);
+    setSelectedGenders(genderButtons);
+    setSelectedAgeButtons(ageButtons);
+    setSelectedGenderButtons(genderButtons);
+  }, [ageButtons, genderButtons]);
 
   const handleOptionSelect = (value, type) => {
     // Обробка вибору опції
@@ -57,7 +70,7 @@ const DropdownSelectors = () => {
       ageButtons: selectedAgeButtons,
       genderButtons: selectedGenderButtons,
     };
-    // console.log('Sending request:', requestParams);
+
     dispatch(setRequestParams(requestParams));
   }, [
     selectedAges,
@@ -93,8 +106,6 @@ const DropdownSelectors = () => {
     }
   }, [isOpenAge, listHeight]);
 
-  // console.log('selectedGenderButtons:', selectedGenderButtons);
-  // console.log('selectedAgeButtons:', selectedAgeButtons);
   return (
     <>
       <div className={styles.dropdownContainer}>
