@@ -196,6 +196,7 @@ const AddPetForm = ({ onSubmit }) => {
   const handleDataFetch = async () => {
     try {
       const date = format(birthDate, 'dd.MM.yyyy');
+      const createdAt= Date.now();
       const category = categories[activeCategory].category;
       const invalidObjects = validateData();
 
@@ -203,6 +204,7 @@ const AddPetForm = ({ onSubmit }) => {
         try {
           await dispatch(
             fetchAddNotice({
+              createdAt,
               title,
               name,
               date,
@@ -223,6 +225,7 @@ const AddPetForm = ({ onSubmit }) => {
         try {
           await dispatch(
             fetchAddNotice({
+              createdAt,
               title,
               name,
               date,
@@ -242,6 +245,7 @@ const AddPetForm = ({ onSubmit }) => {
         try {
           await dispatch(
             fetchAddNotice({
+              createdAt,
               title,
               name,
               date,
@@ -261,6 +265,7 @@ const AddPetForm = ({ onSubmit }) => {
         try {
           const result = await dispatch(
             fetchAddPet({
+              createdAt,
               name,
               date,
               breed,
