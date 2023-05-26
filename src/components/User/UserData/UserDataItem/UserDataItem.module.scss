@@ -28,7 +28,11 @@
   letter-spacing: 0.04em;
   padding: 4px 12px;
   margin-left: auto;
+  padding-right: 35px;
+  
 }
+
+
 
 .toggle {
   position: absolute;
@@ -40,4 +44,8 @@
   justify-content: center;
   background-color: transparent;
   border: none;
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  margin-right: 25px;
 }

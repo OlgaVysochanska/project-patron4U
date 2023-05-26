@@ -10,18 +10,25 @@ import { useSelector } from '../../../../../node_modules/react-redux/es/exports'
 import { getUserEdit } from 'redux/auth/authSelectors';
 import Spiner from 'components/Spiner/Spiner';
 
+// import useLang from 'shared/hooks/useLang';
+// import useTheme from 'shared/hooks/useTheme';
+// import locale from '../locale.json';
 
-// const CheckIconTuned = () => {
-//   return (
-//     <CheckIcon stroke="#00C3AD" width="16" height="16" viewBox="0 0 22 21" />
-//   );
-// };
+const CheckIconTuned = () => {
+  return (
+    <CheckIcon stroke="#00C3AD" width="16" height="16" viewBox="0 0 22 21" />
+  );
+};
 
-// const EditIconTuned = () => {
-//   return (
-//     <EditIcon stroke="#54ADFF" width="16" height="16" viewBox="0 0 22 21" />
-//   );
-// };
+const EditIconTuned = () => {
+  return (
+    <EditIcon stroke="#54ADFF" width="16" height="16" viewBox="0 0 22 21" />
+  );
+};
+
+const EditIconBlockedTuned = () => {
+  return <EditIcon stroke="grey" width="16" height="16" viewBox="0 0 22 21" />;
+};
 
 const UserDataItem = ({
   label,
@@ -33,20 +40,14 @@ const UserDataItem = ({
   unblockButtons,
   type,
   handleEditUser,
+  placeholder,
+  pattern
 }) => {
-  
-const CheckIconTuned = () => {
-  return (
-    <CheckIcon stroke="#00C3AD" width="16" height="16" viewBox="0 0 22 21" />
-  );
-};
+// const {lang} = useLang()
+// const {theme} = useTheme()
 
-const EditIconTuned = (isBlocked) => {
-  return (
-    <EditIcon stroke={isBlocked ? "#54ADFF" :"red"} width="16" height="16" viewBox="0 0 22 21" key={isBlocked} />
-  );
-};
-const loading = useSelector(getUserEdit)
+
+  const loading = useSelector(getUserEdit);
   const inputRef = useRef(null);
   const initialState = value;
 
@@ -55,11 +56,19 @@ const loading = useSelector(getUserEdit)
     onSubmit: handleEditUser,
   });
   const [isNotEditing, setIsNotEditing] = useState(true);
-  
+
+  // const emailLang = locale.email[lang];
+  // const passwordLang = locale.password[lang];
+  // const validEmailLang = locale.validEmail[lang];
+  // const passwordErrorMessage = locale.passwordErrorMessage[lang];
+  // const loginLang = locale.login[lang];
+
+
+
   const clickEdit = () => {
     setIsNotEditing(prevState => !prevState);
     blockButtons();
-    inputRef.current.focus()
+    inputRef.current.focus();
   };
 
   const clickSave = () => {
@@ -68,6 +77,16 @@ const loading = useSelector(getUserEdit)
     handleEditUser(state);
     // handleUser(state);
   };
+
+const validaatePattern = (defaultValue, pattern) => {
+if(!pattern) {
+  return true
+}
+return new RegExp(pattern).test(defaultValue)
+
+}
+
+const isValid = validaatePattern(state[name], pattern)
 
   return (
     <form onSubmit={handleSubmit} autoComplete="on" className={styles.form}>
@@ -82,11 +101,12 @@ const loading = useSelector(getUserEdit)
           defaultValue={defaultValue}
           readonly={isNotEditing}
           handleChange={handleChange}
-          isValid="true"
+          isValid={isValid}
           // inputStyles={{padding: "4px 12px"}}
           aditionalClass={styles.input}
           labelClass={styles.label}
           inputRef={inputRef}
+          pattern={pattern}
         ></Input>
         {isNotEditing ? (
           <Button
@@ -94,7 +114,7 @@ const loading = useSelector(getUserEdit)
             onClick={clickEdit}
             disabled={isBlocked}
             className={styles.toggle}
-            SVGComponent={EditIconTuned}
+            SVGComponent={!isBlocked ? EditIconTuned : EditIconBlockedTuned }
           />
         ) : (
           <Button
