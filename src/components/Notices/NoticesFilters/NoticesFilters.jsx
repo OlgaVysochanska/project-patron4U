@@ -52,7 +52,6 @@ const NoticesFilters = () => {
       })
     );
   };
-  console.log('AGE___BUTTONS:', ageButtons);
 
   return (
     <div className={styles.filterButtonsWrapper}>

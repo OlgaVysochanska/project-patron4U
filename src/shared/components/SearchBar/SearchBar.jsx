@@ -55,7 +55,7 @@ const SearchBar = ({ onSubmit }) => {
             value={search}
             onChange={handleChange}
             placeholder={title}
-            required
+            // required
           />
         </label>
         <Button

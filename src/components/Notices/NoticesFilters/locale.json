@@ -4,14 +4,46 @@
     "ua": "Фільтр"
   },
 
+  "langFilters": {
+    "eng": "Filters",
+    "ua": "Фільтри"
+  },
+
   "langAge": {
     "eng": "By age",
     "ua": "За віком"
   },
 
-  "byGender": {
+  "langGender": {
     "eng": "By gender",
     "ua": "За статтю"
+  },
+
+  "lang3m": {
+    "eng": "3-12 m",
+    "ua": "3-12 м"
+  },
+
+  "lang1y": {
+    "eng": "1 year",
+    "ua": "1 рік"
+  },
+
+  "lang2y": {
+    "eng": "2 year",
+    "ua": "2 роки"
+  }, 
+
+  "langMale": {
+    "eng": "male",
+    "ua": "хлопчик"
+  },
+
+  "langFemale": {
+    "eng": "female",
+    "ua": "дівчинка"
   }
+
+  
   
 }

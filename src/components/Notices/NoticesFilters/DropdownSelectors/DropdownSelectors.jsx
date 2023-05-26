@@ -5,6 +5,8 @@ import { setRequestParams } from 'redux/filter/requestParamsSlice';
 import AgeFilter from './AgeFilter';
 import GenderFilter from './GenderFilter';
 import { getRequestParams } from 'redux/filter/filterSelectors';
+import useLang from 'shared/hooks/useLang';
+import locale from '../locale.json';
 
 const DropdownSelectors = () => {
   const [isOpenAge, setisOpenAge] = useState(false);
@@ -17,6 +19,9 @@ const DropdownSelectors = () => {
 
   const listRefAge = useRef(null);
   const listRefGender = useRef(null);
+
+  const { lang } = useLang();
+  const lFilters = locale.langFilters[lang];
 
   const requestParams1 = useSelector(getRequestParams);
 
@@ -109,7 +114,7 @@ const DropdownSelectors = () => {
   return (
     <>
       <div className={styles.dropdownContainer}>
-        <p>Filters</p>
+        <p>{lFilters}</p>
         <AgeFilter
           isOpen={isOpenAge}
           selectedAges={selectedAges}
