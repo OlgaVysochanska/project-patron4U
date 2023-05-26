@@ -83,7 +83,9 @@ const News = () => {
       <>
         <SearchBar onSubmit={onSearchNews} />
         <NewsPageList items={items} />
-        {!loading && <LoadMore onClick={handleLoadMore} loading={loading} />}
+        {!loading && items.length !== 0 && (
+          <LoadMore onClick={handleLoadMore} loading={loading} />
+        )}
       </>
     );
   }
@@ -92,7 +94,7 @@ const News = () => {
     <>
       <SearchBar onSubmit={onSearchNews} />
       {loading ? <Spiner /> : <NewsPageList items={items} loading={loading} />}
-      {!loading && (
+      {!loading && items.length !== 0 && (
         <Pagination
           totalPages={totalPages}
           onPageChange={handlePageChange}

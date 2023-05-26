@@ -8,12 +8,13 @@ import initialState from './initialState';
 import useLang from 'shared/hooks/useLang';
 import useTheme from 'shared/hooks/useTheme';
 import locale from './locale.json';
+import { useRef } from 'react';
 
 import style from './SearchBar.module.scss';
 
 const SearchBar = ({ onSubmit }) => {
   // const [setSearchParams] = useSearchParams();
-
+  const formRef = useRef(null);
   const { state, setState, handleChange, handleSubmitSearch } = useForm({
     initialState,
     onSubmit,
@@ -31,6 +32,7 @@ const SearchBar = ({ onSubmit }) => {
       search: '',
     });
     // setSearchParams({});
+    formRef.current.submit();
   };
 
   const searchInput =
@@ -39,7 +41,11 @@ const SearchBar = ({ onSubmit }) => {
       : `${style.searchInput} + ${style.searchInputDark}`;
 
   return (
-    <form className={style.searchForm} onSubmit={handleSubmitSearch}>
+    <form
+      ref={formRef}
+      className={style.searchForm}
+      onSubmit={handleSubmitSearch}
+    >
       <div className={style.container}>
         <label>
           <input
