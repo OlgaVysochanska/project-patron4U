@@ -1,0 +1,44 @@
+{
+  "name": {
+    "eng": "Name",
+    "ua": "І'мя"
+  },
+
+  "email": {
+    "eng": "Email",
+    "ua": " Електронна пошта"
+  },
+
+  "validEmail": {
+    "eng": "Enter a valid Email",
+    "ua": "Введіть валідну адресу електронної пошти"
+  },
+
+  "birthday": {
+    "eng": "Birthday",
+    "ua": "День народження"
+  },
+
+  "phone": {
+    "eng": "Phone",
+    "ua": "Телефон"
+  },
+
+  "city": {
+    "eng": "City",
+    "ua": "Місто"
+  },
+
+  "mInfoLang": {
+    "eng": "My information:",
+    "ua": "Моя інформація:"
+  },
+  "btnUWLang": {
+    "eng": "Edit photo",
+    "ua": "Редагувати фото"
+  },
+  "avaAltLang": {
+    "eng": "Your look",
+    "ua": "Твій фейс"
+  }
+}

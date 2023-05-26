@@ -1,0 +1,44 @@
+{
+  "Title_of_add": {
+    "eng": "Title of add",
+    "ua": "Назва додаваного"
+  },
+
+  "Name_pet": {
+    "eng": "Name pet",
+    "ua": "Кличка улюбленця"
+  },
+
+  "Date_of_birth": {
+    "eng": "Date of birth",
+    "ua": "Дата нароження"
+  },
+
+  "Breed": {
+    "eng": "Breed",
+    "ua": "Порода"
+  },
+
+  "Add_pet_in_good": {
+    "eng": "Add in good hands pet",
+    "ua": "Додайте в добрі руки вихованця"
+  },
+
+  "btn_Back": {
+    "eng": "Back",
+    "ua": "Попередній"
+  },
+
+  "btn_Next": {
+    "eng": "Next",
+    "ua": "Наступний"
+  },
+  "btn_Done": {
+    "eng": "Done",
+    "ua": "Готово"
+  },
+  "btn_Cancel": {
+    "eng": "Cancel",
+    "ua": "Відмінити"
+  }
+}

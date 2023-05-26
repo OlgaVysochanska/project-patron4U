@@ -1,3 +1,7 @@
+import useLang from 'shared/hooks/useLang';
+// import useTheme from 'shared/hooks/useTheme';
+import locale from './locale.json';
+
 import { useRef, useEffect } from 'react';
 
 import DatePicker from 'react-datepicker';
@@ -18,9 +22,22 @@ const PersonalDetail = ({
   invalidPetBreed,
   handleChange,
 }) => {
+  const {lang} = useLang()
+  // const {theme} = useTheme()
+
   const inputNameRef = useRef(null);
   const inputTitleRef = useRef(null);
   const currentDate = new Date();
+
+  const Title_of_addLang = locale.Title_of_add[lang];
+  const Name_petLang = locale.Name_pet[lang];
+  // const validEmailLang = locale.validEmail[lang]
+  const Date_of_birthLang = locale.Date_of_birth[lang];
+  const BreedLang = locale.Breed[lang]
+  // const cityLang = locale.city[lang]
+  // const mInfoLang = locale.mInfoLang[lang];
+  // const btnUWLang = locale.btnUWLang[lang];
+  // const avaAltLang = locale.avaAltLang[lang]
 
   useEffect(() => {
     if (activeTab === 1) {
@@ -47,7 +64,7 @@ const PersonalDetail = ({
           invalidtitle ? styles['inputContainerInvalid'] : '',
         ].join(' ')}
       >
-        <p className={styles.label}>Title of add</p>
+        <p className={styles.label}>{Title_of_addLang}</p>
         <input
           ref={inputTitleRef}
           className={[
@@ -74,7 +91,7 @@ const PersonalDetail = ({
           invalidname ? styles['inputContainerInvalid'] : '',
         ].join(' ')}
       >
-        <p className={styles.label}>Name pet</p>
+        <p className={styles.label}>{Name_petLang}</p>
         <input
           ref={inputNameRef}
           className={[
@@ -101,7 +118,7 @@ const PersonalDetail = ({
           invalidBirthDate ? styles['inputContainerInvalid'] : '',
         ].join(' ')}
       >
-        <p className={styles.label}>Date of birth</p>
+        <p className={styles.label}>{Date_of_birthLang}</p>
         <DatePicker
           selected={birthDate}
           onChange={handleDateChange}
@@ -133,7 +150,7 @@ const PersonalDetail = ({
           invalidPetBreed ? styles['inputContainerInvalid'] : '',
         ].join(' ')}
       >
-        <p className={styles.label}> Breed</p>
+        <p className={styles.label}> {BreedLang}</p>
         <input
           className={[
             styles.input,

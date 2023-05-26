@@ -11,6 +11,8 @@ import { getUserEdit } from 'redux/auth/authSelectors';
 import Spiner from 'components/Spiner/Spiner';
 import useTheme from 'shared/hooks/useTheme';
 
+
+
 const CheckIconTuned = () => {
   return (
     <CheckIcon stroke="#00C3AD" width="16" height="16" viewBox="0 0 22 21" />
@@ -23,6 +25,10 @@ const EditIconTuned = () => {
   );
 };
 
+const EditIconBlockedTuned = () => {
+  return <EditIcon stroke="grey" width="16" height="16" viewBox="0 0 22 21" />;
+};
+
 const UserDataItem = ({
   label,
   name,
@@ -33,7 +39,10 @@ const UserDataItem = ({
   unblockButtons,
   type,
   handleEditUser,
+  placeholder,
+  pattern
 }) => {
+
   const loading = useSelector(getUserEdit);
   const inputRef = useRef(null);
   const initialState = value;
@@ -58,6 +67,16 @@ const UserDataItem = ({
   };
   const { theme } = useTheme();
 
+const validaatePattern = (defaultValue, pattern) => {
+if(!pattern) {
+  return true
+}
+return new RegExp(pattern).test(defaultValue)
+
+}
+
+const isValid = validaatePattern(state[name], pattern)
+
   return (
     <form onSubmit={handleSubmit} autoComplete="on" className={styles.form}>
       <div className={styles.inputWrapper}>
@@ -71,13 +90,14 @@ const UserDataItem = ({
           defaultValue={defaultValue}
           readonly={isNotEditing}
           handleChange={handleChange}
-          isValid="true"
+          isValid={isValid}
           // inputStyles={{padding: "4px 12px"}}
           aditionalClass={`${styles.input} ${
             theme === 'dark' && styles.inputDark
           }`}
           labelClass={`${styles.label} ${theme === 'dark' && styles.labelDark}`}
           inputRef={inputRef}
+          pattern={pattern}
         ></Input>
         {isNotEditing ? (
           <Button
@@ -85,7 +105,7 @@ const UserDataItem = ({
             onClick={clickEdit}
             disabled={isBlocked}
             className={styles.toggle}
-            SVGComponent={EditIconTuned}
+            SVGComponent={!isBlocked ? EditIconTuned : EditIconBlockedTuned }
           />
         ) : (
           <Button
