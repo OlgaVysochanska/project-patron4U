@@ -39,6 +39,7 @@ import NoticesFilters from 'components/Notices/NoticesFilters/NoticesFilters';
 import style from './NoticesPage.module.scss';
 import { setFilter } from 'redux/filter/filterSlice';
 
+
 const NoticesPage = () => {
   const { lang } = useLang();
   const title = locale.title[lang];
@@ -59,6 +60,8 @@ const NoticesPage = () => {
   const dispatch = useDispatch();
   const totalPages = useSelector(getTotalPages);
   const [isMobile, setIsMobile] = useState(false);
+
+
 
   useEffect(() => {
     dispatch(setFilter(''));
@@ -148,7 +151,7 @@ const NoticesPage = () => {
           {isModalOpen && (
             <NoticeModal notice={notice} closeModal={closeModal} />
           )}
-          {!loading && totalPages > 1 && (
+          {filter.length > 12 || !loading && totalPages > 1 (
             <LoadMore onClick={handleLoadMore} loading={loading} />
           )}
         </div>
@@ -206,7 +209,7 @@ const NoticesPage = () => {
         )}
       </div>
 
-      {!loading && totalPages > 1 && (
+      {filter.length > 12 || !loading  && totalPages > 1 && (
         <Pagination
           totalPages={totalPages}
           page={page}
