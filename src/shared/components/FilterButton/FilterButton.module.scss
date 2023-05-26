@@ -21,7 +21,7 @@
   &:hover,
   &:focus {
     border: none;
-    background-image: linear-gradient(290.46deg, #419EF1 0%, #9BD0FF 107.89%);
+    background-image: linear-gradient(290.46deg, #419ef1 0%, #9bd0ff 107.89%);
   }
 }
 
@@ -33,16 +33,16 @@
   width: 16px;
   height: 17px;
   margin-left: -1vw;
+  // padding-bottom: 8px;
 
   @media screen and (min-width: 768px) {
     margin-left: 8px;
-    padding-bottom: 8px;
   }
 
   display: flex;
   justify-self: center;
   align-items: center;
-  // 
+  //
   width: 25px;
   height: 24px;
   margin-left: 8px;
@@ -75,21 +75,21 @@
 }
 // *************************
 
-  // .filterButton {
-  //   width: 40px;
-  //   height: 40px;
-  //   padding: 0;
-  //   // margin-top: 20px;
-  // }
+// .filterButton {
+//   width: 40px;
+//   height: 40px;
+//   padding: 0;
+//   // margin-top: 20px;
+// }
 
-  // .filterIcon {
-  //   margin-left: -8px;
-  //   padding: 0;
-  // }
+// .filterIcon {
+//   margin-left: -8px;
+//   padding: 0;
+// }
 
-  // .label {
-  //   display: none;
-  // }
+// .label {
+//   display: none;
+// }
 
 @media (max-width: 768px) {
   .filterButton {
