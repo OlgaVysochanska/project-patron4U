@@ -19,7 +19,7 @@ const NoticesCategoriesList = ({ notices, loadMore }) => {
       : `${styles.noticesList} + ${styles.noticesListDark}`;
 
   if (notices.length === 0) {
-    return <p>.</p>;
+    return <p style={{ opacity: 0 }}>.</p>;
   }
   const noticesItem = notices.map(notice => {
     return (
