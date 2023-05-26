@@ -59,11 +59,29 @@ const NoticesPage = () => {
   const dispatch = useDispatch();
   const totalPages = useSelector(getTotalPages);
   const [isMobile, setIsMobile] = useState(false);
+  const [load, setLoad] = useState(false);
+  const [lastCategory, setLastCategory] = useState(category);
+
+  const fetchData = useCallback(async () => {
+    try {
+      setLoad(true);
+
+      dispatch(setFilter(''));
+      dispatch(fetchNoticesByCategory({ category, page }));
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setLoad(false);
+    }
+  }, [category, dispatch, page]);
 
   useEffect(() => {
-    dispatch(setFilter(''));
-    dispatch(fetchNoticesByCategory(category, page));
-  }, [dispatch, category, page]);
+    if (lastCategory !== category) {
+      setPage(1); // Скидаємо значення `page` до 1 при зміні категорії
+      setLastCategory(category); // Оновлюємо останню категорію
+    }
+    fetchData();
+  }, [fetchData, category, lastCategory]);
 
   const onClickOwn = async () => {
     dispatch(fetchNoticesByUser(_id, page));
