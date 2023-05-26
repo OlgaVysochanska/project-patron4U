@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './DropdownSelectors.module.scss';
 import Button from 'shared/components/Button';
 import ArrowDownIcon from '../../../../icons/ArrowDownIcon';
+import useLang from 'shared/hooks/useLang';
+import locale from '../locale.json';
 
 const GenderFilter = ({
   isOpen,
@@ -11,9 +13,14 @@ const GenderFilter = ({
   listRef,
   marginTop,
 }) => {
+  const { lang } = useLang();
+  const lGender = locale.langGender[lang];
+  const lMale = locale.langMale[lang];
+  const lFemale = locale.langFemale[lang];
+
   const genders = [
-    { value: 'male', label: 'male' },
-    { value: 'female', label: 'female' },
+    { value: 'male', label: `${lMale}` },
+    { value: 'female', label: `${lFemale}` },
   ];
 
   return (
@@ -26,7 +33,7 @@ const GenderFilter = ({
         <span className={styles.filtersIcon}>
           <ArrowDownIcon />
         </span>
-        <span>By gender</span>
+        <span>{lGender}</span>
       </Button>
       {isOpen && (
         <ul>

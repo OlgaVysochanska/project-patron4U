@@ -41,7 +41,6 @@ export const getNoticesBySearch = async (
   age = '3-12m,1year,2year',
   page = 1
 ) => {
-  console.log('gender, age by API: ', gender, age);
   const { data } = await instance.get(`/notices`, {
     params: {
       search,
@@ -52,8 +51,6 @@ export const getNoticesBySearch = async (
     },
   });
   //search=superstar&category=sell&sex=male&age=3-12m,1year,2year
-
-  console.log('data:', data);
   return data;
 };
 

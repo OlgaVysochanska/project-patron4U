@@ -27,7 +27,13 @@ const NoticeSearch = () => {
     setSearchParams({ search, gender, age });
     // console.log('search:', search);
     try {
-      const data = await getNoticesBySearch(search, category, gender, age);
+      let data;
+      if (search) {
+        data = await getNoticesBySearch(search, category, gender, age);
+      } else {
+        data = await getNoticesBySearch('', category, gender, age);
+      }
+      // const data = await getNoticesBySearch(search, category, gender, age);
       // console.log('clickOnSearch:', data);
       dispatch(setFilter(data));
     } catch (error) {

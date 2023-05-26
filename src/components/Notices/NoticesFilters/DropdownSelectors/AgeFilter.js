@@ -12,13 +12,18 @@ const AgeFilter = ({
   handleToggle,
   listRef,
 }) => {
-  const ages = [
-    { value: '3-12m', label: '3-12 m' },
-    { value: '1year', label: '1 year' },
-    { value: '2year', label: '2 year' },
-  ];
   const { lang } = useLang();
   const lAge = locale.langAge[lang];
+  const l3_12m = locale.lang3m[lang];
+  const l1y = locale.lang1y[lang];
+  const l2y = locale.lang2y[lang];
+
+  const ages = [
+    { value: '3-12m', label: `${l3_12m}` },
+    { value: '1year', label: `${l1y}` },
+    { value: '2year', label: `${l2y}` },
+  ];
+
   return (
     <div className={styles.dropdownContainerSelector} ref={listRef}>
       <Button onClick={handleToggle}>
