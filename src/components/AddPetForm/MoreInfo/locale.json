@@ -1,4 +1,9 @@
 {
+  "theSex": {
+    "eng": "The Sex",
+    "ua": "Стать"
+  },
+
   "Add_photo": {
     "eng": "Add photo",
     "ua": "Додати фото"
@@ -16,7 +21,21 @@
 
   "Comments": {
     "eng": "Comments",
+    "ua": "Коментарії"
+  },
+
+  "inputLocation": {
+    "eng": "Location",
+    "ua": "Місцевість"
+  },
+
+  "inputPrice": {
+    "eng": "Price",
     "ua": "Коментарі"
+  },
+
+  "inputComments": {
+    "eng": "Comments",
+    "ua": "Коментарії"
   }
- 
 }

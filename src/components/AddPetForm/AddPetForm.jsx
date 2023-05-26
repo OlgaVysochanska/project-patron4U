@@ -1,6 +1,7 @@
 import useLang from 'shared/hooks/useLang';
 // import useTheme from 'shared/hooks/useTheme';
-import locale from './locale.json'; import { useState } from 'react';
+import locale from './locale.json';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { format } from 'date-fns';
@@ -34,7 +35,7 @@ import {
 import styles from './AddPetForm.module.scss';
 
 const AddPetForm = ({ onSubmit }) => {
-  const {lang} = useLang()
+  const { lang } = useLang();
   // const {theme} = useTheme()
   const [activeCategory, setActiveCategory] = useState(0);
   const [activeTab, setActiveTab] = useState(0);
@@ -44,8 +45,6 @@ const AddPetForm = ({ onSubmit }) => {
     initialState,
     onSubmit,
   });
-
-
 
   const [invalidname, setInvalidname] = useState('');
   const [invalidPetBreed, setInvalidBreed] = useState('');
@@ -59,13 +58,13 @@ const AddPetForm = ({ onSubmit }) => {
 
   const infoMessageLang = locale.infoMessage[lang];
   const Add_petLang = locale.Add_pet[lang];
-  const Add_pet_saleLang = locale.Add_pet_sale[lang]
+  const Add_pet_saleLang = locale.Add_pet_sale[lang];
   const Add_pet_lostLang = locale.Add_pet_lost[lang];
-  const Add_pet_in_goodLang = locale.Add_pet_in_good[lang]
-  const btn_BackLang = locale.btn_Back[lang]
+  const Add_pet_in_goodLang = locale.Add_pet_in_good[lang];
+  const btn_BackLang = locale.btn_Back[lang];
   const btn_NextLang = locale.btn_Next[lang];
   const btn_DoneLang = locale.btn_Done[lang];
-  const btn_CancelLang = locale.btn_Cancel[lang]
+  const btn_CancelLang = locale.btn_Cancel[lang];
 
   const {
     category,
@@ -344,7 +343,7 @@ const AddPetForm = ({ onSubmit }) => {
       case 1:
         return <h2>{Add_pet_saleLang}</h2>;
       case 2:
-          return <h2>{Add_pet_lostLang}</h2>;
+        return <h2>{Add_pet_lostLang}</h2>;
       case 3:
         return <h2>{Add_pet_in_goodLang}</h2>;
       default:
@@ -385,7 +384,7 @@ const AddPetForm = ({ onSubmit }) => {
 
   const cancelBtnEl = (
     <Button
-    label={btn_CancelLang}
+      label={btn_CancelLang}
       showLabelFirst={false}
       SVGComponent={() => <ArrowLeftIcon stroke="#54ADFF" />}
       onClick={handleFormTabNvigationCancel}

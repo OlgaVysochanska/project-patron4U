@@ -6,7 +6,7 @@
 
   "email": {
     "eng": "Email",
-    "ua": " Електронна пошта"
+    "ua": " Ел. пошта"
   },
 
   "validEmail": {
@@ -16,7 +16,7 @@
 
   "birthday": {
     "eng": "Birthday",
-    "ua": "День народження"
+    "ua": "Д/Н"
   },
 
   "phone": {
