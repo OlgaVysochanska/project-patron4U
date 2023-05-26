@@ -42,14 +42,18 @@
 }
 
 .contentWrapper {
+  // position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   max-width: 1248px;
   margin-bottom: 48px;
+  // margin-top: 20px;
   @media screen and (max-width: 767px) {
+    height: 40px;
     margin-bottom: 32px;
+    margin-top: 20px;
     max-width: 440px;
   }
 }
@@ -67,14 +71,21 @@
 
 .addPetWrapper {
   margin-left: 16px;
-  z-index: 100;
-  @media (max-width: 767px) {
-    display: block;
-    position: absolute;
-    z-index: 100;
-    right: 0;
-    top: 340px;
-    margin-left: 0px;
+  z-index: 1100;
+  position: fixed;
+  top: 460px;
+  right: 20px;
+
+  
+  @media screen and (min-width: 768px) {
+    display: flex;
+    align-items: flex-end;
+    position: static;
+    // position: absolute;
+    // z-index: 100;
+    // right: 0;
+    // top: 340px;
+    margin-left: 16px;
   }
 }
 
