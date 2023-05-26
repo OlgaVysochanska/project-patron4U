@@ -40,6 +40,12 @@ const NoticeModal = ({ notice, owner, closeModal }) => {
     myFavoriteNotice = favoriteNotices.includes(notice._id);
   }
 
+  const categoryForUser = category => {
+    if (notice.category === 'lost-found') return 'lost/found';
+    if (notice.category === 'for-free') return 'in good hands';
+    return notice.category;
+  };
+
   const closeModalOnClick = useCallback(
     ({ key, target, currentTarget }) => {
       if (key === 'Escape' || target === currentTarget) {
@@ -67,7 +73,9 @@ const NoticeModal = ({ notice, owner, closeModal }) => {
           <div className={styles.contentWrapper}>
             <div className={styles.tabletBox}>
               <div className={styles.imgThumb}>
-                <p className={styles.categoryInfo}>{notice.category}</p>
+                <p className={styles.categoryInfo}>
+                  {categoryForUser(notice.category)}
+                </p>
                 <img
                   className={styles.avatar}
                   src={notice.petURL}
