@@ -148,9 +148,10 @@ const NoticesPage = () => {
           {isModalOpen && (
             <NoticeModal notice={notice} closeModal={closeModal} />
           )}
-          {!loading && totalPages > 1 && (
-            <LoadMore onClick={handleLoadMore} loading={loading} />
-          )}
+          {filter.length > 12 &&
+            !loading &&
+            totalPages >
+              1(<LoadMore onClick={handleLoadMore} loading={loading} />)}
         </div>
       </>
     );
@@ -206,13 +207,14 @@ const NoticesPage = () => {
         )}
       </div>
 
-      {!loading && totalPages > 1 && (
-        <Pagination
-          totalPages={totalPages}
-          page={page}
-          onPageChange={handlePageChange}
-        />
-      )}
+      {filter.length > 12 ||
+        (!loading && totalPages > 1 && (
+          <Pagination
+            totalPages={totalPages}
+            page={page}
+            onPageChange={handlePageChange}
+          />
+        ))}
     </>
   );
 };

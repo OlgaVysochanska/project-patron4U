@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import useLang from 'shared/hooks/useLang';
@@ -33,6 +34,8 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
   const modalText1 = locale.modalText1[lang];
   const modalText2 = locale.modalText2[lang];
 
+  const [searchParams] = useSearchParams();
+
   const { myFavoriteNotice, setFavNot, handleClickFavoriteBtn } =
     useToggleFavoriteBtn();
   const { isModalOpen, openModal, closeModal } = useToggleModalWindow();
@@ -61,7 +64,7 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
   }
 
   const formattedLocation =
-    location.length >= 10 ? location.slice(0, 5) + ' ...' : location;
+    location.length >= 8 ? location.slice(0, 5) + ' ...' : location;
 
   const handleDeleteNotice = async id => {
     try {
@@ -118,23 +121,60 @@ const NoticeCategoryItem = ({ notice, loadMore }) => {
         </div>
 
         <div className={styles.noticeInfoBlock}>
-          <div className={styles.tooltip}>
-            <span className={styles.tooltiptext}>{location}</span>
-            <p className={styles.locationInfo}>
-              <LocationIcon className={styles.locationIcon} />
+          {formattedLocation.length >= 8 ? (
+            <div className={styles.tooltip}>
+              <span className={styles.tooltiptext}>{location}</span>
+              <p className={styles.noticeInfo}>
+                <LocationIcon className={styles.infoIcons} />
+                {formattedLocation}
+              </p>
+            </div>
+          ) : (
+            <p className={styles.noticeInfo}>
+              <LocationIcon className={styles.infoIcons} />
               {formattedLocation}
             </p>
-          </div>
-          <p className={styles.noticeInfo}>
-            <ClockIcon className={styles.infoIcons} />
+          )}
+          <p
+            className={
+              searchParams.get('age')
+                ? styles.activeInfoBlock
+                : styles.noticeInfo
+            }
+          >
+            <ClockIcon
+              className={
+                searchParams.get('age')
+                  ? styles.activeInfoIcon
+                  : styles.infoIcons
+              }
+            />
             {getAge(date)}
           </p>
-          <p className={styles.noticeInfo}>
+          <p
+            className={
+              searchParams.get('gender')
+                ? styles.activeInfoBlock
+                : styles.noticeInfo
+            }
+          >
             {sex.toLowerCase() === 'male' && (
-              <MaleIcon className={styles.infoIcons} />
+              <MaleIcon
+                className={
+                  searchParams.get('gender')
+                    ? styles.activeInfoIcon
+                    : styles.infoIcons
+                }
+              />
             )}
             {sex.toLowerCase() === 'female' && (
-              <FemaleIcon className={styles.infoIcons} />
+              <FemaleIcon
+                className={
+                  searchParams.get('gender')
+                    ? styles.activeInfoIcon
+                    : styles.infoIcons
+                }
+              />
             )}
             {sex}
           </p>
