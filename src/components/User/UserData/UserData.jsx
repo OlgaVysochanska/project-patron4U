@@ -21,17 +21,13 @@ import { initialState } from './initialState';
 import Logout from '../Logout/Logout';
 import Spiner from 'components/Spiner/Spiner';
 import useTheme from 'shared/hooks/useTheme';
+import NotiflixMessage from 'shared/components/NotiflixMessage/NotiflixMessage';
+
+
 const CameraIconTuned = () => {
   return <CameraIcon width="16" height="16" viewBox="0 0 22 21" />;
 };
 
-// const CheckIconTuned = () => {
-//   return <CheckIcon width="16" height="16" viewBox="0 0 22 21" />;
-// };
-
-// const CrossIconTuned = () => {
-//   return <CrossIcon width="16" height="16" viewBox="0 0 22 21" />;
-// };
 
 const picSize = '182px';
 
@@ -42,6 +38,7 @@ const UserData = () => {
   const [isBlocked, setIsBlocked] = useState(false);
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [avatarUpdated, setAvatarUpdated] = useState(false);
+  const [isValidValue, setIsValidValue] = useState(true)
 
   const dispatch = useDispatch();
 
@@ -63,6 +60,8 @@ const UserData = () => {
   const inputBirthdayLang = locale.inputBirthday[lang];
   const inputPhoneLang = locale.inputPhone[lang];
   const inputCytiLang = locale.inputCyti[lang];
+  // const infoMessageLang = locale.infoMessage[lang];
+  
   // const loginLang = locale.login[lang];
 
   useEffect(() => {
@@ -70,12 +69,13 @@ const UserData = () => {
   }, [name, email, birthday, phone, city, avatarURL, isSubmiting]);
 
   const handleEditUser = async data => {
-    setIsSubmiting(true);
+    if(!isValidValue) {  NotiflixMessage({ type: 'info', data: "invalid value " })} else
+    {setIsSubmiting(true);
     try {
       await dispatch(editCurrent(data));
     } finally {
       setIsSubmiting(false);
-    }
+    }}
     setAvatarUpdated(true);
   };
 
@@ -171,6 +171,8 @@ const UserData = () => {
           handleSubmit={handleSubmit}
           pattern={pattern}
           placeholder={placeholder}
+ setIsValidValue = {setIsValidValue}
+
         />
       );
     }

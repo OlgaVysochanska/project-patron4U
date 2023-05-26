@@ -40,7 +40,8 @@ const UserDataItem = ({
   type,
   handleEditUser,
   placeholder,
-  pattern
+  pattern,
+  setIsValidValue
 }) => {
 
   const loading = useSelector(getUserEdit);
@@ -69,14 +70,15 @@ const UserDataItem = ({
 
 const validaatePattern = (defaultValue, pattern) => {
 if(!pattern) {
-  return true
+  return true 
 }
 return new RegExp(pattern).test(defaultValue)
 
 }
 
 const isValid = validaatePattern(state[name], pattern)
-
+setIsValidValue(isValid)
+ 
   return (
     <form onSubmit={handleSubmit} autoComplete="on" className={styles.form}>
       <div className={styles.inputWrapper}>
