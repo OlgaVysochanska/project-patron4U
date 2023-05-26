@@ -25,8 +25,6 @@ const CameraIconTuned = () => {
   return <CameraIcon width="16" height="16" viewBox="0 0 22 21" />;
 };
 
-
-
 // const CheckIconTuned = () => {
 //   return <CheckIcon width="16" height="16" viewBox="0 0 22 21" />;
 // };
@@ -38,9 +36,8 @@ const CameraIconTuned = () => {
 const picSize = '182px';
 
 const UserData = () => {
-  const {lang} = useLang()
+  const { lang } = useLang();
   // const {theme} = useTheme()
-  
 
   const [isBlocked, setIsBlocked] = useState(false);
   const [isSubmiting, setIsSubmiting] = useState(false);
@@ -51,17 +48,21 @@ const UserData = () => {
   let { name, email, birthday, phone, city, avatarURL } = useSelector(getUser);
 
   let [testAvatar, setTestAvatar] = useState(avatarURL);
-const nameLang = locale.name[lang];
+  const nameLang = locale.name[lang];
   const emailLang = locale.email[lang];
   // const validEmailLang = locale.validEmail[lang]
   const birthdayLang = locale.birthday[lang];
-  const phoneLang = locale.phone[lang]
-  const cityLang = locale.city[lang]
+  const phoneLang = locale.phone[lang];
+  const cityLang = locale.city[lang];
   const mInfoLang = locale.mInfoLang[lang];
   const btnUWLang = locale.btnUWLang[lang];
-  const avaAltLang = locale.avaAltLang[lang]
+  const avaAltLang = locale.avaAltLang[lang];
 
-  // const passwordErrorMessage = locale.passwordErrorMessage[lang];
+  const inputNameLang = locale.inputName[lang];
+  const inputEmailLang = locale.inputEmail[lang];
+  const inputBirthdayLang = locale.inputBirthday[lang];
+  const inputPhoneLang = locale.inputPhone[lang];
+  const inputCytiLang = locale.inputCyti[lang];
   // const loginLang = locale.login[lang];
 
   useEffect(() => {
@@ -113,31 +114,40 @@ const nameLang = locale.name[lang];
       const id = nanoid();
       let type = '';
       let pattern = '';
-let label= ''
+      let placeholder = '';
+      let label = '';
       switch (key) {
         case 'name':
           type = 'text';
           pattern = '^[A-Za-zА-Яа-яЁёs]+$';
-          label=nameLang
+          label = nameLang;
+          placeholder = inputNameLang;
           break;
         case 'email':
           type = 'text';
-          pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$";
-          label=emailLang
+          pattern = '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$';
+          label = emailLang;
+          placeholder = inputEmailLang;
+
           break;
         case 'birthday':
           type = 'date';
-          label=birthdayLang
+          label = birthdayLang;          placeholder = inputBirthdayLang;
+
           break;
         case 'phone':
           type = 'text';
-          pattern ="/^(\\+)?\\d{1,}$/";
-          label=phoneLang
+          pattern = '/^(\\+)?\\d{1,}$/';
+          label = phoneLang;
+          placeholder = inputPhoneLang;
+
           break;
         case 'city':
           type = 'text';
           // pattern = '^[A-Za-zА-Яа-яЁёs-]+$';
-          label=cityLang
+          label = cityLang;
+          placeholder = inputCytiLang;
+
           break;
         default:
           type = 'text';
@@ -160,6 +170,7 @@ let label= ''
           unblockButtons={unblockButtons}
           handleSubmit={handleSubmit}
           pattern={pattern}
+          placeholder={placeholder}
         />
       );
     }
@@ -168,7 +179,7 @@ let label= ''
   return (
     <div>
       <h2 className={`${styles.title} ${theme === 'dark' && styles.titleDark}`}>
-      {mInfoLang}
+        {mInfoLang}
       </h2>
       <div className={container}>
         <div className={styles.avatarWrapper}>
