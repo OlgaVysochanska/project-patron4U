@@ -1,6 +1,6 @@
 import useLang from 'shared/hooks/useLang';
 // import useTheme from 'shared/hooks/useTheme';
-import locale from './locale.json'; 
+import locale from './locale.json';
 import UploadWidget from 'shared/components/UploadWidget/UploadWidget';
 import Button from 'shared/components/Button';
 import PlusIcon from 'icons/PlusIcon';
@@ -26,15 +26,17 @@ const MoreInfo = ({
   handleGenderChange,
   handleChange,
 }) => {
-  const {lang} = useLang()
+  const { lang } = useLang();
   // const {theme} = useTheme()
 
   const Add_photoLang = locale.Add_photo[lang];
   const LocationLang = locale.Location[lang];
-  const PriceLang = locale.Price[lang]
+  const PriceLang = locale.Price[lang];
   const CommentsLang = locale.Comments[lang];
-
-
+  const theSex = locale.theSex[lang];
+  const inputLocation = locale.inputLocation[lang];
+  const inputPrice = locale.inputLocation[lang];
+  const inputComments = locale.inputLocation[lang];
   const handlepetURL = petURL => {
     handleChange({
       target: {
@@ -49,10 +51,10 @@ const MoreInfo = ({
       label={item.gender}
       key={index}
       onClick={() => handleGenderChange(index)}
-      SVGComponent={() => item.svg} 
+      SVGComponent={() => item.svg}
       className={[
         activeGender === index ? styles.genderAct : styles.gender,
-       (activeTab === 2 && activeCategory !==0) ? styles['genderRow'] : '',
+        activeTab === 2 && activeCategory !== 0 ? styles['genderRow'] : '',
       ].join(' ')}
       showLabelFirst={false}
       type="button"
@@ -61,12 +63,14 @@ const MoreInfo = ({
 
   const genderGroupEl = (
     <>
-      <p className={styles.label}>The sex</p>
+      <p className={styles.label}>{theSex}</p>
       <div
         className={[
           styles.genderContainerValid,
           invalidSex ? styles['genderContainerInvalid'] : '',
-          (activeTab===2 && activeCategory!==0) ? styles['genderContainerRow'] : '',
+          activeTab === 2 && activeCategory !== 0
+            ? styles['genderContainerRow']
+            : '',
         ].join(' ')}
       >
         {genderEl}
@@ -129,7 +133,7 @@ const MoreInfo = ({
           name="location"
           value={location}
           onChange={handleChange}
-          placeholder="location"
+          placeholder={inputLocation}
           required
         />
       </label>
@@ -157,7 +161,7 @@ const MoreInfo = ({
           name="price"
           value={price}
           onChange={handleChange}
-          placeholder="Price"
+          placeholder={inputPrice}
           required
         />
       </label>
@@ -183,7 +187,7 @@ const MoreInfo = ({
           name="comments"
           value={comments}
           onChange={handleChange}
-          placeholder="Comments"
+          placeholder={inputComments}
           required
           rows={4}
         />
@@ -208,18 +212,28 @@ const MoreInfo = ({
       category: 1,
       content: (
         <>
-          <div className={[
+          <div
+            className={[
               activeCategory !== 0 ? styles['moreInfoSubContaiter'] : '',
-            ].join(' ')}>
-            <div className={[
-              activeCategory !== 0 ? styles['moreInfoSubContaiterColum1'] : '',
-            ].join(' ')}>
+            ].join(' ')}
+          >
+            <div
+              className={[
+                activeCategory !== 0
+                  ? styles['moreInfoSubContaiterColum1']
+                  : '',
+              ].join(' ')}
+            >
               {genderGroupEl}
               {addPhotoEl}
             </div>
-            <div className={[
-              activeCategory !== 0 ? styles['moreInfoSubContaiterColum2'] : '',
-            ].join(' ')}>
+            <div
+              className={[
+                activeCategory !== 0
+                  ? styles['moreInfoSubContaiterColum2']
+                  : '',
+              ].join(' ')}
+            >
               {locationEl}
               {priceEl}
               {commentsEl}
@@ -237,15 +251,23 @@ const MoreInfo = ({
               activeCategory !== 0 ? styles['moreInfoSubContaiter'] : '',
             ].join(' ')}
           >
-           <div className={[
-              activeCategory !== 0 ? styles['moreInfoSubContaiterColum1'] : '',
-            ].join(' ')}>
+            <div
+              className={[
+                activeCategory !== 0
+                  ? styles['moreInfoSubContaiterColum1']
+                  : '',
+              ].join(' ')}
+            >
               {genderGroupEl}
               {addPhotoEl}
             </div>
-            <div className={[
-              activeCategory !== 0 ? styles['moreInfoSubContaiterColum2'] : '',
-            ].join(' ')}>
+            <div
+              className={[
+                activeCategory !== 0
+                  ? styles['moreInfoSubContaiterColum2']
+                  : '',
+              ].join(' ')}
+            >
               {locationEl}
               {commentsEl}
             </div>
@@ -262,15 +284,23 @@ const MoreInfo = ({
               activeCategory !== 0 ? styles['moreInfoSubContaiter'] : '',
             ].join(' ')}
           >
-           <div className={[
-              activeCategory !== 0 ? styles['moreInfoSubContaiterColum1'] : '',
-            ].join(' ')}>
+            <div
+              className={[
+                activeCategory !== 0
+                  ? styles['moreInfoSubContaiterColum1']
+                  : '',
+              ].join(' ')}
+            >
               {genderGroupEl}
               {addPhotoEl}
             </div>
-            <div className={[
-              activeCategory !== 0 ? styles['moreInfoSubContaiterColum2'] : '',
-            ].join(' ')}>
+            <div
+              className={[
+                activeCategory !== 0
+                  ? styles['moreInfoSubContaiterColum2']
+                  : '',
+              ].join(' ')}
+            >
               {locationEl}
               {commentsEl}
             </div>
