@@ -98,6 +98,7 @@ const isValid = validaatePattern(state[name], pattern)
           labelClass={`${styles.label} ${theme === 'dark' && styles.labelDark}`}
           inputRef={inputRef}
           pattern={pattern}
+          placeholder={placeholder}
         ></Input>
         {isNotEditing ? (
           <Button

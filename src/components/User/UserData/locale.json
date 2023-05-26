@@ -40,5 +40,25 @@
   "avaAltLang": {
     "eng": "Your look",
     "ua": "Твій фейс"
+  },
+  "inputName": { 
+    "eng": "input name", 
+   "ua": "введи і'мя" 
+  },
+  "inputEmail": { 
+    "eng": "input email", 
+   "ua": "введи електронну адресу" 
+  },
+  "inputBirthday": { 
+    "eng": "input birthday", 
+   "ua": "введи дату народження" 
+  },
+  "inputPhone": { 
+    "eng": "input phone", 
+   "ua": "введи номер телефону" 
+  },
+  "inputCyti": { 
+    "eng": "input cyti", 
+   "ua": "введи місто" 
   }
 }
