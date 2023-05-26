@@ -1,3 +1,7 @@
+import useLang from 'shared/hooks/useLang';
+// import useTheme from 'shared/hooks/useTheme';
+import locale from './locale.json';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -12,6 +16,10 @@ import NotiflixMessage from '../../shared/components/NotiflixMessage/NotiflixMes
 import styles from './AddPetButton.module.scss';
 
 const AddPetButton = () => {
+  const {lang} = useLang()
+
+ const Add_PetLang = locale.Add_Pet[lang]
+
   const dispatch = useDispatch();
   let currentUser = useSelector(isUserLogin);
 
@@ -33,7 +41,7 @@ const AddPetButton = () => {
       SVGComponent={() => (
         <PlusIcon width="16" height="16" viewBox="4 4 16 16" />
       )}
-      label="Add Pet"
+      label={Add_PetLang}
     />
   );
 

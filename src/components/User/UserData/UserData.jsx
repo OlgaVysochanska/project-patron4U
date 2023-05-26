@@ -1,3 +1,6 @@
+import useLang from 'shared/hooks/useLang';
+// import useTheme from 'shared/hooks/useTheme';
+import locale from './locale.json';
 import styles from './UserData.module.scss';
 import UserDataItem from './UserDataItem/UserDataItem';
 import { useEffect, useState } from 'react';
@@ -22,6 +25,8 @@ const CameraIconTuned = () => {
   return <CameraIcon width="16" height="16" viewBox="0 0 22 21" />;
 };
 
+
+
 // const CheckIconTuned = () => {
 //   return <CheckIcon width="16" height="16" viewBox="0 0 22 21" />;
 // };
@@ -33,6 +38,10 @@ const CameraIconTuned = () => {
 const picSize = '182px';
 
 const UserData = () => {
+  const {lang} = useLang()
+  // const {theme} = useTheme()
+  
+
   const [isBlocked, setIsBlocked] = useState(false);
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [avatarUpdated, setAvatarUpdated] = useState(false);
@@ -42,6 +51,18 @@ const UserData = () => {
   let { name, email, birthday, phone, city, avatarURL } = useSelector(getUser);
 
   let [testAvatar, setTestAvatar] = useState(avatarURL);
+const nameLang = locale.name[lang];
+  const emailLang = locale.email[lang];
+  // const validEmailLang = locale.validEmail[lang]
+  const birthdayLang = locale.birthday[lang];
+  const phoneLang = locale.phone[lang]
+  const cityLang = locale.city[lang]
+  const mInfoLang = locale.mInfoLang[lang];
+  const btnUWLang = locale.btnUWLang[lang];
+  const avaAltLang = locale.avaAltLang[lang]
+
+  // const passwordErrorMessage = locale.passwordErrorMessage[lang];
+  // const loginLang = locale.login[lang];
 
   useEffect(() => {
     setAvatarUpdated(false);
@@ -91,21 +112,32 @@ const UserData = () => {
     ([key, value]) => {
       const id = nanoid();
       let type = '';
+      let pattern = '';
+let label= ''
       switch (key) {
         case 'name':
           type = 'text';
+          pattern = '^[A-Za-zА-Яа-яЁёs]+$';
+          label=nameLang
           break;
         case 'email':
-          type = 'email';
+          type = 'text';
+          pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$";
+          label=emailLang
           break;
         case 'birthday':
           type = 'date';
+          label=birthdayLang
           break;
         case 'phone':
-          type = 'tel';
+          type = 'text';
+          pattern ="/^(\\+)?\\d{1,}$/";
+          label=phoneLang
           break;
         case 'city':
           type = 'text';
+          // pattern = '^[A-Za-zА-Яа-яЁёs-]+$';
+          label=cityLang
           break;
         default:
           type = 'text';
@@ -115,9 +147,10 @@ const UserData = () => {
       return (
         <UserDataItem
           type={type}
-          label={key.charAt(0).toUpperCase() + key.slice(1) + ':'}
+          // label={key.charAt(0).toUpperCase() + key.slice(1) + ':'}
+          label={label}
           name={key}
-          value={value}
+          // value={value}
           defaultValue={value}
           id={id}
           key={key}
@@ -126,6 +159,7 @@ const UserData = () => {
           blockButtons={blockButtons}
           unblockButtons={unblockButtons}
           handleSubmit={handleSubmit}
+          pattern={pattern}
         />
       );
     }
@@ -134,14 +168,14 @@ const UserData = () => {
   return (
     <div>
       <h2 className={`${styles.title} ${theme === 'dark' && styles.titleDark}`}>
-        My information:
+      {mInfoLang}
       </h2>
       <div className={container}>
         <div className={styles.avatarWrapper}>
           <img
             className={styles.avatar}
             src={`${testAvatar || defaultAvatar}?${Date.now()}`}
-            alt="Your look"
+            alt={avaAltLang}
             width={picSize}
             height={picSize}
             key={avatarUpdated ? avatarURL : 'default'}
@@ -150,7 +184,7 @@ const UserData = () => {
             uriI={handleUserURL}
             btnType="button"
             btnClassName={styles.btnPhoto}
-            btnLabel="Edit photo"
+            btnLabel={btnUWLang}
             btnSVGComponent={CameraIconTuned}
             btnShowLabelFirst={false}
           ></UploadWidget>

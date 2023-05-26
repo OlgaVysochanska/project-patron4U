@@ -1,3 +1,6 @@
+import useLang from 'shared/hooks/useLang';
+// import useTheme from 'shared/hooks/useTheme';
+import locale from './locale.json'; 
 import UploadWidget from 'shared/components/UploadWidget/UploadWidget';
 import Button from 'shared/components/Button';
 import PlusIcon from 'icons/PlusIcon';
@@ -23,6 +26,14 @@ const MoreInfo = ({
   handleGenderChange,
   handleChange,
 }) => {
+  const {lang} = useLang()
+  // const {theme} = useTheme()
+
+  const Add_photoLang = locale.Add_photo[lang];
+  const LocationLang = locale.Location[lang];
+  const PriceLang = locale.Price[lang]
+  const CommentsLang = locale.Comments[lang];
+
 
   const handlepetURL = petURL => {
     handleChange({
@@ -79,7 +90,7 @@ const MoreInfo = ({
             activeCategory !== 0 ? styles['loadPhotoGroupOwnContainer'] : '',
           ].join(' ')}
         >
-          <p className={styles.label}>Add photo</p>
+          <p className={styles.label}>{Add_photoLang}</p>
           <div className={styles.photoContainer}>
             <img src={petURL ? petURL : defaultImage} alt="" />
             <UploadWidget uriI={handlepetURL}>
@@ -108,7 +119,7 @@ const MoreInfo = ({
           invalidLocation ? styles['inputContainerInvalid'] : '',
         ].join(' ')}
       >
-        <span className={styles.label}>Location</span>
+        <span className={styles.label}>{LocationLang}</span>
         <input
           className={[
             styles.input,
@@ -136,7 +147,7 @@ const MoreInfo = ({
           invalidPrice ? styles['inputContainerInvalid'] : '',
         ].join(' ')}
       >
-        <p className={styles.label}>Price</p>
+        <p className={styles.label}>{PriceLang}</p>
         <input
           className={[
             styles.input,
@@ -162,7 +173,7 @@ const MoreInfo = ({
           invalidComments ? styles['inputContainerInvalid'] : '',
         ].join(' ')}
       >
-        <p className={styles.label}>Comments</p>
+        <p className={styles.label}>{CommentsLang}</p>
         <textarea
           className={[
             styles.textarea,

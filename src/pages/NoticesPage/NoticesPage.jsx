@@ -226,7 +226,7 @@ const NoticesPage = () => {
       </div>
 
       {filter.length > 12 ||
-        (!loading && totalPages > 1 && (
+        (!loading && totalPages > 1 && !filter && (
           <Pagination
             totalPages={totalPages}
             page={page}
