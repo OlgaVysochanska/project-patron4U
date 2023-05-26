@@ -25,5 +25,5 @@ export default LoadMore;
 
 LoadMore.propTypes = {
   onClick: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
+  loading: PropTypes.bool,
 };
