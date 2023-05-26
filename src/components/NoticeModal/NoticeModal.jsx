@@ -202,7 +202,6 @@ const NoticeModal = ({ notice, owner, closeModal }) => {
                       <td>{owner.name}</td>
                     </tr>
                   )}
-
                   <tr>
                     <td
                       className={`${styles.infoTitle} ${
@@ -220,16 +219,16 @@ const NoticeModal = ({ notice, owner, closeModal }) => {
                       </a>
                     </td>
                   </tr>
-                  {owner.phone && (
-                    <tr>
-                      <td
-                        className={`${styles.infoTitle} ${
-                          theme === 'dark' && styles.infoTitleDark
-                        }`}
-                      >
-                        {phone}
-                      </td>
-                      <td>
+                  <tr>
+                    <td
+                      className={`${styles.infoTitle} ${
+                        theme === 'dark' && styles.infoTitleDark
+                      }`}
+                    >
+                      {phone}
+                    </td>
+                    <td>
+                      {owner.phone ? (
                         <a
                           href={`tel:${owner.phone}`}
                           className={`${styles.contacts} ${
@@ -238,9 +237,17 @@ const NoticeModal = ({ notice, owner, closeModal }) => {
                         >
                           {owner.phone}
                         </a>
-                      </td>
-                    </tr>
-                  )}
+                      ) : (
+                        <p
+                          className={`${styles.info} ${
+                            theme === 'dark' && styles.infoDark
+                          }`}
+                        >
+                          {noPhone}
+                        </p>
+                      )}
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -261,7 +268,7 @@ const NoticeModal = ({ notice, owner, closeModal }) => {
               </span>
             </p>
             <div className={styles.btnWrapper}>
-              <Contact phone={owner.phone} />
+              {owner.phone && <Contact phone={owner.phone} />}
               <AddToFavorite
                 myFavoriteNotice={myFavoriteNotice}
                 _id={notice._id}
