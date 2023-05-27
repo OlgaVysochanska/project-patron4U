@@ -34,21 +34,27 @@ const MainPage = () => {
       return petsMob1x;
     } else if (screenWidth < 768 && window.devicePixelRatio === 2) {
       return petsMob2x;
+    } else if (screenWidth < 768) {
+      return petsMob2x;
     } else if (
       screenWidth >= 768 &&
-      screenWidth < 1200 &&
+      screenWidth < 1280 &&
       window.devicePixelRatio === 1
     ) {
       return petsTab1x;
     } else if (
       screenWidth >= 768 &&
-      screenWidth < 1200 &&
+      screenWidth < 1280 &&
       window.devicePixelRatio === 2
     ) {
+      return petsTab2x;
+    } else if (screenWidth >= 768 && screenWidth < 1280) {
       return petsTab2x;
     } else if (window.devicePixelRatio === 1) {
       return petsDes1x;
     } else if (window.devicePixelRatio === 2) {
+      return petsDes2x;
+    } else {
       return petsDes2x;
     }
   };
