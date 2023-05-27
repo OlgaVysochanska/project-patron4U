@@ -68,6 +68,8 @@
 - [Diana Akhmedova](https://www.linkedin.com/in/diana-akhmedova-9a137425a)
 - [Galyna Dindorogo](https://www.linkedin.com/in/galyna-dindorogo)
 - [Ivan Panin](https://www.linkedin.com/in/ivan-panin)
+- [Valentina Dei](https://www.linkedin.com/in/valentina-dei)
+- [Maryna Hlushak](https://www.linkedin.com/in/maryna-hlushak)
 
 ### Термін виконання 
 
