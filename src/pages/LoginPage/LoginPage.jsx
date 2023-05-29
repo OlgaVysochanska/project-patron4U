@@ -15,6 +15,7 @@ import Background from 'shared/components/Background/Background';
 import LoginForm from 'components/AuthForms/LoginForm/LoginForm';
 import AuthTitle from 'shared/components/AuthTitle/AuthTitle';
 import Spiner from 'components/Spiner/Spiner';
+import GoogleIcon from 'icons/GoogleIcon';
 
 import styles from './LoginPage.module.scss';
 
@@ -59,19 +60,20 @@ const LoginPage = () => {
           <>
             <AuthTitle text={loginLang} />
             <LoginForm onSubmit={handleLogin} />
+            <p className={styles.text}>{orUseLang}</p>
+            <a
+              href="https://patron-back.onrender.com/api/auth/google"
+              className={styles.navLink}
+            >
+              <GoogleIcon className={styles.googleIcon} />
+              {googleLang}
+            </a>
             <div>
               <p className={redirectLink}>
                 {dontHaveAccountLang}{' '}
                 <NavLink to="/Register" className={styles.navlink}>
                   {registerLang}
-                </NavLink>{' '}
-                {orUseLang}{' '}
-                <a
-                  href="https://patron-back.onrender.com/api/auth/google"
-                  className={styles.navlink}
-                >
-                  {googleLang}
-                </a>
+                </NavLink>
               </p>
             </div>
           </>

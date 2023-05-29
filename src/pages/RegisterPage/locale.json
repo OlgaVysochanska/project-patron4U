@@ -6,7 +6,7 @@
 
   "alreadyHaveAccount": {
     "eng": "Already have an account?",
-    "ua": "Вже маєте аккаунт ?"
+    "ua": "Вже маєте аккаунт?"
   },
 
   "login": {
@@ -20,12 +20,12 @@
   },
 
   "orUse": {
-    "eng": "or use",
-    "ua": "або скористайтесь"
+    "eng": "or",
+    "ua": "або"
   },
 
   "google": {
-    "eng": "Google authenticate",
-    "ua": "автентифікацією Google"
+    "eng": "Sign up with Google",
+    "ua": "Продовжити з Google"
   }
 }

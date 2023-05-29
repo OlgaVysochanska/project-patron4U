@@ -6,7 +6,7 @@
 
   "dontHaveAccount": {
     "eng": "Don't have an account?",
-    "ua": "Ще не маєте аккаунту ?"
+    "ua": "Ще не маєте аккаунту?"
   },
 
   "register": {
@@ -15,12 +15,12 @@
   },
 
   "orUse": {
-    "eng": "or use",
-    "ua": "або скористайтесь"
+    "eng": "or",
+    "ua": "або"
   },
 
   "google": {
-    "eng": "Google authenticate",
-    "ua": "автентифікацією Google"
+    "eng": "Sign in with Google",
+    "ua": "Продовжити з Google"
   }
 }
