@@ -14,6 +14,7 @@ import Background from 'shared/components/Background/Background';
 import RegisterForm from 'components/AuthForms/RegisterForm/RegisterForm';
 import AuthTitle from 'shared/components/AuthTitle/AuthTitle';
 import Spiner from 'components/Spiner/Spiner';
+import GoogleIcon from 'icons/GoogleIcon';
 
 import styles from './RegisterPage.module.scss';
 
@@ -23,12 +24,9 @@ const RegisterPage = () => {
   const isLogin = useSelector(isUserLogin);
   const isLoading = useSelector(getUserEdit);
 
-  console.log(isLoading);
-
   const registrationLang = locale.registration[lang];
   const alreadyHaveAccountLang = locale.alreadyHaveAccount[lang];
   const loginLang = locale.login[lang];
-  const userLang = locale.user[lang];
   const orUseLang = locale.orUse[lang];
   const googleLang = locale.google[lang];
 
@@ -64,22 +62,20 @@ const RegisterPage = () => {
           <>
             <AuthTitle text={registrationLang} />
             <RegisterForm onSubmit={handleRegister} />
+            <p className={styles.text}>{orUseLang}</p>
+            <a
+              href="https://patron-back.onrender.com/api/auth/google"
+              className={styles.navLink}
+            >
+              <GoogleIcon className={styles.googleIcon} />
+              {googleLang}
+            </a>
             <div>
               <p className={redirectLink}>
                 {alreadyHaveAccountLang}{' '}
                 <NavLink to="/login" className={styles.navlink}>
-                  {loginLang}{' '}
+                  {loginLang}
                 </NavLink>
-                <NavLink to="/user" className={styles.navlink}>
-                  {userLang}
-                </NavLink>{' '}
-                {orUseLang}{' '}
-                <a
-                  href="https://patron-back.onrender.com/api/auth/google"
-                  className={styles.navlink}
-                >
-                  {googleLang}
-                </a>
               </p>
             </div>
           </>

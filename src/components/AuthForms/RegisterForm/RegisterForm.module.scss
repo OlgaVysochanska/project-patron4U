@@ -1,11 +1,16 @@
 .form {
   width: 100%;
+  margin-bottom: 24px;
 }
 
 .inputWrapper {
   position: relative;
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 24px;
+  &:last-of-type {
+    margin-bottom: 40px;
+  }
 }
 
 .eyeIcon {
@@ -20,14 +25,6 @@
   }
 }
 
-.inputCustomSettings {
-  margin-bottom: 24px;
-
-  @media screen and (min-width: 768px) {
-    margin-bottom: 32px;
-  }
-}
-
 .differentPassords {
   display: block;
   width: 100%;
@@ -36,4 +33,10 @@
   margin-left: 16px;
   color: #f43f5e;
   font-size: 0.8rem;
+}
+
+@media screen and (min-width: 768px) {
+  .inputWrapper {
+    margin-bottom: 32px;
+  }
 }
